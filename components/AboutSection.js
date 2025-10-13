@@ -85,7 +85,7 @@ export default function AboutSection() {
           </ScrollView>
           <ScrollView delay={0.1}>
             <p className="text-white/90">
-              Lume Studio was born from a simple idea—great design should do
+              BizLeap was born from a simple idea—great design should do
               more than just look good; it should make an impact. What started
               as a passion for creativity turned into a full-fledged design
               agency dedicated to helping brands tell their stories, connect
@@ -95,14 +95,14 @@ export default function AboutSection() {
         </div>
 
         <ScrollView delay={0.2}>
-          <Image
-            className="rounded-lg object-cover aspect-[16/9] w-full"
-            src="/images/office.webp"
-            alt="team image"
-            height={480}
-            width={720}
-            loading="lazy"
-          />
+          <video
+    className="rounded-lg object-cover aspect-[16/9] w-full"
+    src="/significareel.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
         </ScrollView>
 
         <ScrollView delay={0.3}>
