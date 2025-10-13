@@ -244,6 +244,7 @@ function DesktopServices() {
 }
 
 // Service Card Component for Desktop
+// Service Card Component for Desktop
 const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -255,26 +256,51 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.8, 1]);
 
   return (
-    <div ref={container} className="h-screen flex items-center justify-center sticky top-0">
+    <div
+      ref={container}
+      className="h-screen flex items-center justify-center sticky top-0"
+    >
       <motion.div
         style={{ scale, top: `calc(-5vh + ${i * 25}px)` }}
-        className={`flex flex-col lg:flex-row relative -top-[25%] w-full lg:w-[90%] h-[450px] rounded-xl overflow-hidden`}
+        className={`flex flex-col lg:flex-row relative -top-[25%] 
+          w-full h-[450px] overflow-hidden rounded-none lg:rounded-none`}
       >
+        {/* Left Image Section */}
         <div className="lg:w-1/2 w-full h-64 lg:h-auto relative">
           <motion.div style={{ scale: imageScale }} className="w-full h-full">
-            <Image fill src={service.img} alt={service.name} className="object-cover" />
+            <Image
+              fill
+              src={service.img}
+              alt={service.name}
+              className="object-cover"
+            />
           </motion.div>
         </div>
 
-        <div className={`lg:w-1/2 w-full p-6 lg:p-10 flex flex-col justify-center gap-4 ${bgColor === 'white' ? 'bg-white text-black' : 'bg-yellow-400 text-black'}`}>
-          <h2 className="text-2xl sm:text-3xl font-semibold">{service.name}</h2>
-          <p className="text-sm sm:text-base leading-relaxed">{service.description}</p>
+        {/* Right Content Section */}
+        <div
+          className={`lg:w-1/2 w-full p-6 lg:p-16 flex flex-col justify-center gap-4 
+          ${bgColor === 'white' ? 'bg-white text-black' : 'bg-yellow-400 text-black'}`}
+        >
+          <h2 className="text-3xl font-semibold">{service.name}</h2>
+          <p className="text-base leading-relaxed">{service.description}</p>
+
           <div className="flex flex-wrap gap-2">
             {service.tags.map((tag, idx) => (
-              <span key={idx} className="bg-black/10 text-black px-2 py-1 rounded text-xs">{tag}</span>
+              <span
+                key={idx}
+                className="bg-black/10 text-black px-2 py-1 rounded text-xs"
+              >
+                {tag}
+              </span>
             ))}
           </div>
-          <a href={service.url} target="_blank" className="mt-2 inline-block underline text-sm">
+
+          <a
+            href={service.url}
+            target="_blank"
+            className="mt-2 inline-block underline text-sm"
+          >
             See more
           </a>
         </div>
@@ -282,3 +308,4 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
     </div>
   );
 };
+
