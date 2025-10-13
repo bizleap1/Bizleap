@@ -9,8 +9,7 @@ export default function About() {
           <span className="font-semibold"> Tailwind CSS</span>.
         </p>
         <p className="text-gray-600 mt-4">
-          This boilerplate is designed to help developers start faster with a solid and 
-          stable foundation. Modify it, expand it, and make it your own!
+          
         </p>
       </div>
     </main>
