@@ -1,8 +1,8 @@
-'use client';
+"use client";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Logo from "./Logo";
-import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
+import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 
 export default function Hero() {
   const heroRef = useRef();
@@ -30,10 +30,17 @@ export default function Hero() {
       gsap.fromTo(
         ".hero-button",
         { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 1, delay: 1, stagger: 0.2, ease: "power3.out" }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 1,
+          stagger: 0.2,
+          ease: "power3.out",
+        }
       );
 
-      // Optional subtle background movement
+      // Subtle background movement
       gsap.to(".shader-gradient-bg", {
         scale: 1.05,
         duration: 10,
@@ -54,7 +61,7 @@ export default function Hero() {
       {/* Shader Gradient Background */}
       <div className="absolute inset-0 w-full h-full shader-gradient-bg pointer-events-none z-0">
         <ShaderGradientCanvas
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: "100%", height: "100%" }}
           pixelDensity={1}
           pointerEvents="none"
         >
@@ -96,7 +103,12 @@ export default function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="max-w-4xl space-y-6 relative z-20">
+      <div
+        className="
+          max-w-4xl space-y-6 relative z-20 
+          mt-20 md:mt-0
+        "
+      >
         <h1 className="headline text-5xl md:text-7xl font-semibold leading-tight text-white">
           Designs That <br /> Captivate, Brands That Shine.
         </h1>
@@ -117,6 +129,7 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Logo stays fixed below */}
       <Logo />
     </section>
   );
