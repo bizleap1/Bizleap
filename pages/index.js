@@ -10,9 +10,10 @@ export default function Home() {
     <section>
       <Hero/>
       <AboutSection/>
+      <Stats/>
       <ServicesSection2/>
       <Work/>
-      <Stats/>
+      
     
     </section>
   )

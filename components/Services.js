@@ -296,13 +296,7 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
             ))}
           </div>
 
-          <a
-            href={service.url}
-            target="_blank"
-            className="mt-2 inline-block underline text-sm"
-          >
-            See more
-          </a>
+          
         </div>
       </motion.div>
     </div>
