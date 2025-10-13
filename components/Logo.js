@@ -6,29 +6,29 @@ import { useEffect, useState } from "react";
 const brands = [
   {
     name: "Nike",
-    logo: "/images/logo2.avif"
+    logo: "/images/Logo2.avif"
   },
   {
     name: "Adidas",
-    logo: "/images/logo3.avif"
+    logo: "/images/Logo3.avif"
   },
   {
     name: "Puma",
-    logo: "/images/logo9.avif" },
+    logo: "/images/Logo9.avif" },
   {
     name: "Nike",
-    logo: "/images/logo5.avif"
+    logo: "/images/Logo5.avif"
   },
   {
     name: "Adidas",
-    logo: "/images/logo6.avif"
+    logo: "/images/Logo6.avif"
   },
   {
     name: "Puma",
-    logo: "/images/logo4.webp" },
+    logo: "/images/Logo4.webp" },
     {
     name: "Nike",
-    logo: "/images/logo8.avif"
+    logo: "/images/Logo8.avif"
   },
 ];
 
