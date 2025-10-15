@@ -5,30 +5,48 @@ import { useEffect, useState } from "react";
 
 const brands = [
   {
-    name: "Nike",
-    logo: "/images/Logo2.avif"
+    name: "Ayrak",
+    logo: "/images/Logo1.png"
+  },
+  
+  {
+    name: "Marvel FItness",
+    logo: "/images/Logo3.png" },
+  {
+    name: "Elite India",
+    logo: "/images/Logo4.PNG"
   },
   {
-    name: "Adidas",
-    logo: "/images/Logo3.avif"
+    name: "Tanvi Bhandari",
+    logo: "/images/Logo5.PNG"
   },
   {
-    name: "Puma",
-    logo: "/images/Logo9.avif" },
-  {
-    name: "Nike",
-    logo: "/images/Logo5.avif"
-  },
-  {
-    name: "Adidas",
-    logo: "/images/Logo6.avif"
-  },
-  {
-    name: "Puma",
-    logo: "/images/Logo4.webp" },
+    name: "snuggle",
+    logo: "/images/Logo6.PNG" },
     {
+    name: "udaan",
+    logo: "/images/Logo7.PNG"
+  },
+  {
+    name: "metro",
+    logo: "/images/Logo8.PNG"
+  },
+  
+  {
     name: "Nike",
-    logo: "/images/Logo8.avif"
+    logo: "/images/Logo10.png"
+  },
+  {
+    name: "ntsw",
+    logo: "/images/Logo11.png"
+  },
+  {
+    name: "ntx",
+    logo: "/images/Logo12.png"
+  },
+  {
+    name: "oxigreen",
+    logo: "/images/Logo13.png"
   },
 ];
 
@@ -61,7 +79,7 @@ export default function BrandSlider() {
           {brands.map((brand, idx) => (
             <div 
               key={idx} 
-              className="flex-shrink-0 mx-8 md:mx-12 w-20 h-20 md:w-28 md:h-28 relative"
+              className="flex-shrink-0 mx-8 md:mx-12 w-28 h-28 md:w-32 md:h-32 relative"
             >
               <Image
                 src={brand.logo}
