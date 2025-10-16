@@ -103,55 +103,67 @@ const CLIENT_CATEGORIES = [
 // ------------------- Infinite Logo Slider -------------------
 function InfiniteLogoSlider({ clients }) {
   const sliderRef = useRef(null);
-  const total = [...clients, ...clients, ...clients];
+
+  // Clone logos twice for smooth looping
+  const total = [...clients, ...clients];
 
   useEffect(() => {
     const slider = sliderRef.current;
-    let animationFrame;
-    let offset = 0;
+    if (!slider) return;
 
-    const animate = () => {
-      offset -= 0.8;
-      if (slider) {
-        slider.style.transform = `translateX(${offset}px)`;
-        if (Math.abs(offset) >= slider.scrollWidth / 3) offset = 0;
+    let x = 0;
+    const speed = 0.7; // adjust scroll speed
+    let animationId;
+
+    const scroll = () => {
+      x -= speed;
+      const totalWidth = slider.scrollWidth / 2; // total visible loop width
+
+      if (Math.abs(x) >= totalWidth) {
+        // reset exactly when half width passed
+        x = 0;
       }
-      animationFrame = requestAnimationFrame(animate);
+
+      slider.style.transform = `translateX(${x}px)`;
+      animationId = requestAnimationFrame(scroll);
     };
 
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
+    animationId = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(animationId);
   }, []);
 
   return (
-    <div className="overflow-hidden relative w-screen left-1/2 right-1/2 -translate-x-1/2">
+    <div className="relative w-full overflow-hidden">
       <div
         ref={sliderRef}
-        className="flex gap-16 items-center justify-center px-0"
+        className="flex items-center gap-10 md:gap-16 will-change-transform"
+        style={{
+          whiteSpace: "nowrap",
+          width: "max-content",
+        }}
       >
-        {total.map((client, idx) => (
+        {total.map((client, i) => (
           <div
-            key={idx}
-            className="flex flex-col items-center text-center w-60 sm:w-72 lg:w-80 flex-shrink-0"
+            key={i}
+            className="flex flex-col items-center justify-center text-center flex-shrink-0"
           >
-            <div className="w-56 h-40 sm:w-64 sm:h-44 lg:w-72 lg:h-48 flex items-center justify-center bg-zinc-900 rounded-2xl shadow-md p-4">
+            <div className="w-[140px] h-[90px] sm:w-[180px] sm:h-[120px] lg:w-[220px] lg:h-[140px] flex items-center justify-center bg-zinc-900 rounded-2xl shadow-md p-4 mx-2">
               <Image
                 src={client.logo}
                 alt={client.name}
-                width={400}
-                height={250}
-                className="object-contain w-full h-full transition-transform duration-500 hover:scale-110"
+                width={300}
+                height={200}
+                className="object-contain w-full h-full hover:scale-110 transition-transform duration-300"
               />
             </div>
-            <p className="text-gray-300 text-sm sm:text-base mt-4 font-medium">
-              {client.name}
-            </p>
+            <p className="text-gray-400 text-sm mt-3">{client.name}</p>
           </div>
         ))}
       </div>
     </div>
   );
 }
+
 
 // ------------------- Clients Section -------------------
 export default function ClientsSection() {
