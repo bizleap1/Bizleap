@@ -5,10 +5,13 @@ import { FaInstagram, FaYoutube, FaXTwitter, FaLinkedin } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md';
 
 const navLinks = [
+  { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Work", href: "/work" },
   { name: "Creators", href: "/creators" },
   { name: "About", href: "/about" },
+  { name: "Team", href: "/team" },
+ 
 ];
 
 const Footer = () => {
@@ -38,10 +41,10 @@ const Footer = () => {
 
           {/* Social Icons */}
           <div className="flex gap-4 text-xl mt-2">
-            <a href="#" className="hover:text-yellow-400"><FaInstagram /></a>
-            <a href="#" className="hover:text-yellow-400"><FaYoutube /></a>
-            <a href="#" className="hover:text-yellow-400"><FaXTwitter /></a>
-            <a href="#" className="hover:text-yellow-400"><FaLinkedin /></a>
+            <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiWmO2ay6iQAxVGyjgGHQiECDMQFnoECBkQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fbizleap.in%2Freels%2F&usg=AOvVaw0jRIrcPXrA0On4EjUwe1Ec&opi=89978449" 
+            className="hover:text-yellow-400"><FaInstagram /></a>
+            
+            <a href="https://www.linkedin.com/company/bizleapinc" className="hover:text-yellow-400"><FaLinkedin /></a>
           </div>
 
           {/* Privacy Policy */}
@@ -75,12 +78,7 @@ const Footer = () => {
       </div>
 
       {/* Back to Top Button */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="absolute right-6 bottom-6 bg-gray-900 hover:bg-yellow-400 hover:text-black text-white text-sm px-4 py-2 rounded-full transition-all"
-      >
-        Page Top ↑
-      </button>
+      
     </footer>
   );
 };
