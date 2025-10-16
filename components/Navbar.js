@@ -3,17 +3,21 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image";
+
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   const navLinks = [
-    { name: "Services", href: "/services" },
-    { name: "Work", href: "/work" },
-    { name: "Creators", href: "/creators" },
-    { name: "About", href: "/about" },
-  ]
+  { name: "Services", href: "/services" },
+  { name: "Work", href: "/work" },
+  { name: "Creators", href: "/creators" },
+  { name: "Team", href: "/team" },
+  { name: "About", href: "/about" },
+];
+
 
   // Handle scroll to toggle background
   useEffect(() => {
@@ -33,9 +37,17 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <Link href="/" className="font-bold text-2xl cursor-pointer">
-            Biz<span className="text-yellow-500">leap</span>
-          </Link>
+          {/* Logo */}
+<Link href="/" className="cursor-pointer flex items-center gap-2">
+  <Image
+    src="/2.png"
+    alt="Bizleap Logo"
+    width={140}  // adjust width as needed
+    height={50}  // adjust height as needed
+    priority
+  />
+</Link>
+
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-8 items-center">

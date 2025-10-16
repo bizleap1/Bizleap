@@ -1,6 +1,7 @@
 // pages/work.js
 import { useState } from "react";
 import Image from "next/image";
+import PortfolioSection from "../components/PortfolioCard";
 
 export default function Work() {
   const [activeProject, setActiveProject] = useState(null);
@@ -168,6 +169,7 @@ export default function Work() {
           </button>
         </div>
       )}
+      <PortfolioSection/>
     </div>
   );
 }

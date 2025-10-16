@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,24 +6,37 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "XOOM PATROL",
-    brand: "HERO MOTOCORP",
-    published: "16 DEC 2024",
+    title: "Lord Of the Drinks - Brand Revival",
+    brand: "Lord Of the Drinks",
     description:
-      "India's first-ever scooter-driven travel & adventure series. This 6 episode journey is all about the thrill of exploring new destinations and the excitement of adventure...",
-    img: "/images/abstract-3.webp",
-    logo: "/images/Hero.svg",
+      "Once trending in Nagpur, Lord of the Drinks faced declining sales. Bizleap revived the brand with a six-month social media strategy, creative content, food photography, and high-impact events. The result: renewed buzz, higher footfall, and a strong comeback as one of Nagpur’s top F&B brands.",
+    img: "/Casestudy/LOD.png",
+    logo: "/clients/15.jpg",
   },
   {
-    title: "PRAGATI KE RANG",
-    brand: "ASIAN PAINTS",
-    published: "19 SEP 2024",
+    title: "Rasoi Express - Food Delivery for Small Towns",
+    brand: "Rasoi Express",
     description:
-      "India's First Rural Content IP featuring Regional YouTube Creators... Each episode shows how these creators along with Asian Paints have transformed a community space...",
-    img: "/images/abstract-1.webp",
-    logo: "/images/Hero.svg",
+      "Bizleap launched Rasoi Express in Pandharkawda, giving 50,000+ residents their first food delivery app. It brings hot meals home, supports local restaurants, and creates jobs—proving small towns deserve big-city convenience.",
+    img: "/Casestudy/Rasoi.png",
+    logo: "/clients/66.png",
   },
-  // add more projects here
+  {
+    title: "Hotel Anantara - New Year Party",
+    brand: "Hotel Anantara",
+    description:
+      "Bizleap transformed Nagpur’s biggest New Year party at Hotel Anantara into a record-breaking success — with impactful Instagram promotions, lead-driven campaigns, and flawless execution that made it the city’s most talked-about celebration.",
+    img: "/Casestudy/Anantara.png",
+    logo: "/clients/20.png",
+  },
+  {
+    title: "Tuli The Grand - Brand Launch",
+    brand: "Tuli The Grand",
+    description:
+      "We launched Tuli The Grand, a flagship venture of the Tuli Group of Hotels in Nagpur, creating its complete brand identity from logo to strategy. The inauguration was graced by Hon. Nitin Gadkari as chief guest.",
+    img: "/Casestudy/tuli.png",
+    logo: "/clients/14.jpg",
+  },
 ];
 
 export default function Work() {
@@ -34,10 +47,11 @@ export default function Work() {
     setCurrent((prev) => (prev - 1 + projects.length) % projects.length);
 
   return (
-    <section className="w-full min-h-screen bg-black text-white py-10 px-4">
+    <section className="w-full min-h-screen bg-black text-white py-16 px-4">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Our Work</h2>
+        {/* ===== Section Header ===== */}
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-4xl font-bold text-yellow-400">Case Study</h2>
           <div className="flex gap-4">
             <button
               onClick={prevProject}
@@ -54,44 +68,52 @@ export default function Work() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 overflow-hidden">
-          <AnimatePresence initial={false}>
+        {/* ===== Project Content ===== */}
+        <div className="flex flex-col md:flex-row gap-10 overflow-hidden">
+          <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={current}
               initial={{ x: 300, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-col md:flex-row w-full gap-8 items-start md:items-center"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="flex flex-col md:flex-row w-full gap-10 items-start md:items-center"
             >
+              {/* ===== Left Side (Text + Logo) ===== */}
               <div className="flex-1">
+                {/* Title above logo */}
+                <h3 className="text-2xl font-semibold mb-4 text-white">
+                  {projects[current].title}
+                </h3>
+
                 <div className="mb-6">
                   <Image
                     src={projects[current].logo}
                     alt={projects[current].brand}
-                    width={200}
+                    width={180}
                     height={60}
                     className="object-contain"
                   />
                 </div>
-                <p className="mb-6 text-white">{projects[current].description}</p>
-                <div className="grid grid-cols-2 gap-2 text-gray-300">
-                  <div>TITLE</div>
-                  <div>{projects[current].title}</div>
-                  <div>BRAND</div>
-                  <div>{projects[current].brand}</div>
-                  <div>PUBLISHED</div>
-                  <div>{projects[current].published}</div>
+
+                <p className="mb-6 text-gray-300 leading-relaxed">
+                  {projects[current].description}
+                </p>
+
+                <div className="text-sm text-gray-400 uppercase tracking-wide">
+                  <span className="font-semibold text-white">Brand:</span>{" "}
+                  {projects[current].brand}
                 </div>
               </div>
 
+              {/* ===== Right Side (Image) ===== */}
               <div className="flex-1">
                 <Image
                   src={projects[current].img}
                   alt={projects[current].title}
                   width={600}
                   height={400}
-                  className="object-cover rounded-lg"
+                  className="object-cover rounded-lg shadow-lg"
                 />
               </div>
             </motion.div>

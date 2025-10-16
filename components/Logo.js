@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const brands = [
-  { name: "Ayrak", logo: "/images/Logo1.png" },
-  { name: "Marvel Fitness", logo: "/images/Logo3.png" },
+  { name: "Ayrak", logo: "/clients/50.png" },
+  { name: "Yofobo", logo: "/clients/16.png" },
   { name: "Elite India", logo: "/images/Logo4.PNG" },
   { name: "Tanvi Bhandari", logo: "/images/Logo5.PNG" },
   { name: "Snuggle", logo: "/images/Logo6.PNG" },
@@ -14,7 +14,7 @@ const brands = [
   { name: "Nike", logo: "/images/Logo10.png" },
   { name: "NTSW", logo: "/images/Logo11.png" },
   { name: "NTX", logo: "/images/Logo12.png" },
-  { name: "Oxigreen", logo: "/images/Logo13.png" },
+  { name: "amity", logo: "/clients/22.png" },
 ];
 
 export default function BrandSlider() {
