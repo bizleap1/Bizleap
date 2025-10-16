@@ -34,7 +34,7 @@ const Footer = () => {
           {/* Email */}
           <div className="flex items-center gap-3 text-lg font-semibold text-white">
             <MdEmail size={26} />
-            <a href="mailto:bizleapinc@gmail.com" className="hover:text-yellow-400">
+            <a href="" className="hover:text-yellow-400">
               bizleapinc@gmail.com
             </a>
           </div>
