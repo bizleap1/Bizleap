@@ -233,12 +233,11 @@ function MobileServices() {
         {/* Header Section */}
         <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
           <ScrollView>
-            <h2 className="text-4xl font-medium lg:text-5xl">Design That Works for You</h2>
+            <h2 className="text-4xl font-medium lg:text-5xl">Services</h2>
           </ScrollView>
           <ScrollView delay={0.2}>
             <p className="text-gray-300">
-              At Lume Studio, we create designs that are more than just visually appealing.
-              They're built to solve problems, connect with audience, and drive results.
+              Experience Our Digital Solutions
             </p>
           </ScrollView>
         </div>

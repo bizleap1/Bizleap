@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Logo from "./Logo";
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import Link from "next/link";
+
 
 export default function Hero() {
   const heroRef = useRef();
@@ -120,13 +122,18 @@ export default function Hero() {
         </p>
 
         <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center">
-          <button className="hero-button bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
-            Get Started
-          </button>
-          <button className="hero-button border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition">
-            Learn More
-          </button>
-        </div>
+  <Link href="/contact">
+    <button className="hero-button bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
+      Get Started
+    </button>
+  </Link>
+
+  <Link href="/about">
+    <button className="hero-button border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition">
+      Learn More
+    </button>
+  </Link>
+</div>
       </div>
 
       {/* Logo stays fixed below */}
