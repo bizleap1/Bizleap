@@ -275,7 +275,7 @@ function MobileServices() {
                     filter: "blur(0px)",
                     transition: { duration: 0.5, ease: "easeOut" }
                   }}
-                  className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300"
+                  className="bg-black rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300"
                 >
                   {/* Image Section - FIXED */}
                   <div className="relative h-48 w-full overflow-hidden">
