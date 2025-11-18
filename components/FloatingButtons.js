@@ -31,7 +31,7 @@ export default function FloatingButtons() {
 
       {/* WhatsApp Button */}
       <motion.a
-        href="https://wa.me/919876543210" // 🔁 replace with your number
+        href="https://wa.me/917097095152" // 🔁 replace with your number
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}
