@@ -96,7 +96,7 @@ const SERVICES_LIST = [
     tags: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory"],
     img: "/images/abstract-2.webp",
     url: "#",
-    description: "Comprehensive branding packages including logos, style guides, and asset kits. We craft cohesive visual identities that communicate your brand’s essence across all touchpoints.",
+    description: "Comprehensive branding packages including logos, style guides, and asset kits. We craft cohesive visual identities that communicate your brand's essence across all touchpoints.",
   },
   {
     name: "SEO & Website Audits",
@@ -126,84 +126,243 @@ function useIsMobile(breakpoint = 1024) {
   return isMobile;
 }
 
-// ------------------- Services Section -------------------
-export default function ServicesSection() {
-  const isMobile = useIsMobile();
+// ------------------- Navigation Buttons -------------------
+function NavigationButtons({ currentIndex, totalItems, onPrevious, onNext }) {
+  return (
+    <div className="flex items-center justify-center gap-4 mb-8">
+      <button
+        onClick={onPrevious}
+        disabled={currentIndex === 0}
+        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+          currentIndex === 0 
+            ? 'border-gray-600 text-gray-600 cursor-not-allowed' 
+            : 'border-white text-white hover:bg-white hover:text-black'
+        }`}
+        aria-label="Previous service"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <div className="flex items-center gap-2">
+        <span className="text-white text-sm font-medium">
+          {String(currentIndex + 1).padStart(2, '0')}
+        </span>
+        <span className="text-gray-400 text-sm">/</span>
+        <span className="text-gray-400 text-sm">
+          {String(totalItems).padStart(2, '0')}
+        </span>
+      </div>
 
-  if (isMobile) {
-    // Mobile Version (Scroll Reveal)
-    return (
-      <section className="py-16 md:py-32 bg-black text-white" id="services">
-        <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
-          <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-            <ScrollView>
-              <h2 className="text-4xl font-medium lg:text-5xl">Design That Works for You</h2>
-            </ScrollView>
-            <ScrollView delay={0.2}>
-              <p>
-                At Lume Studio, we create designs that are more than just visually appealing.
-                They&apos;re built to solve problems, connect with audience, and drive results. <br /> 
-                Whether you’re starting fresh or refining your existing identity, <br /> we’ve got you covered.
-              </p>
-            </ScrollView>
-          </div>
+      <button
+        onClick={onNext}
+        disabled={currentIndex === totalItems - 1}
+        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+          currentIndex === totalItems - 1
+            ? 'border-gray-600 text-gray-600 cursor-not-allowed'
+            : 'border-white text-white hover:bg-white hover:text-black'
+        }`}
+        aria-label="Next service"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  );
+}
 
-          <div className="mt-12 md:mt-24 space-y-10">
+// ------------------- Mobile Services Section -------------------
+function MobileServices() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef(null);
+
+  const nextService = () => {
+    const newIndex = Math.min(currentIndex + 1, SERVICES_LIST.length - 1);
+    setCurrentIndex(newIndex);
+    scrollToIndex(newIndex);
+  };
+
+  const previousService = () => {
+    const newIndex = Math.max(currentIndex - 1, 0);
+    setCurrentIndex(newIndex);
+    scrollToIndex(newIndex);
+  };
+
+  const scrollToIndex = (index) => {
+    if (scrollContainerRef.current) {
+      const scrollContainer = scrollContainerRef.current;
+      const serviceElement = scrollContainer.children[index];
+      if (serviceElement) {
+        serviceElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+  };
+
+  // Handle scroll events to update current index
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const handleScroll = () => {
+      const scrollLeft = scrollContainer.scrollLeft;
+      const containerWidth = scrollContainer.clientWidth;
+      const newIndex = Math.round(scrollLeft / containerWidth);
+      
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < SERVICES_LIST.length) {
+        setCurrentIndex(newIndex);
+      }
+    };
+
+    // Add scroll event listener
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentIndex]);
+
+  return (
+    <section className="py-16 bg-black text-white" id="services">
+      <div className="mx-auto max-w-5xl space-y-8 px-6">
+        {/* Header Section */}
+        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
+          <ScrollView>
+            <h2 className="text-4xl font-medium lg:text-5xl">Design That Works for You</h2>
+          </ScrollView>
+          <ScrollView delay={0.2}>
+            <p className="text-gray-300">
+              At Lume Studio, we create designs that are more than just visually appealing.
+              They're built to solve problems, connect with audience, and drive results.
+            </p>
+          </ScrollView>
+        </div>
+
+        {/* Navigation Buttons */}
+        <NavigationButtons
+          currentIndex={currentIndex}
+          totalItems={SERVICES_LIST.length}
+          onPrevious={previousService}
+          onNext={nextService}
+        />
+
+        {/* Horizontal Scroll Services */}
+        <div className="relative">
+          <div 
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 scrollbar-hide"
+            style={{ 
+              scrollBehavior: 'smooth',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
             {SERVICES_LIST.map((service, index) => (
-              <div key={service.name} className="group overflow-hidden border-b border-gray-700 py-10">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-                  <div className="self-end lg:col-span-2 flex flex-col gap-8">
-                    <div className="space-y-4">
+              <div
+                key={service.name}
+                className="flex-shrink-0 w-[85vw] snap-center px-3"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0, 
+                    filter: "blur(0px)",
+                    transition: { duration: 0.5, ease: "easeOut" }
+                  }}
+                  className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300"
+                >
+                  {/* Image Section - FIXED */}
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <CustomCursorElement>
+                      <InView
+                        variants={{
+                          hidden: { opacity: 0, scale: 0.8, filter: "blur(14px)" },
+                          visible: { 
+                            opacity: 1, 
+                            scale: 1, 
+                            filter: "blur(0px)", 
+                            transition: { duration: 0.6, ease: "easeOut" } 
+                          },
+                        }}
+                        viewOptions={{ margin: "0px 0px -100px 0px", once: true }}
+                      >
+                        <Link href={service.url} className="block relative w-full h-48">
+                          <Image
+                            src={service.img}
+                            alt={service.name}
+                            fill
+                            sizes="(max-width: 768px) 85vw, 400px"
+                            loading="lazy"
+                            className="object-cover object-top transition-all duration-500 hover:scale-105"
+                          />
+                        </Link>
+                      </InView>
+                    </CustomCursorElement>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-6 space-y-4">
+                    <div className="space-y-3">
                       <ScrollView>
-                        <h3 className="text-2xl font-medium">{service.name}</h3>
+                        <h3 className="text-xl font-semibold text-white">{service.name}</h3>
                       </ScrollView>
                       <ScrollView stagger delay={0.04}>
-                        <div>
+                        <div className="flex flex-wrap gap-2">
                           {service.tags.map((tag, idx) => (
                             <Badge key={idx} variant="secondary">{tag}</Badge>
                           ))}
                         </div>
                       </ScrollView>
                     </div>
-                    <ScrollView delay={0.04}>
-                      <p className="text-gray-300">{service.description}</p>
+                    
+                    <ScrollView delay={0.08}>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        {service.description}
+                      </p>
                     </ScrollView>
                   </div>
-
-                  <div className="lg:col-span-3">
-                    <CustomCursorElement>
-                      <InView
-                        variants={{
-                          hidden: { opacity: 0, y: 20, filter: "blur(14px)", scale: 0.5, originX: 0, originY: 0 },
-                          visible: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { delay: 0.01, duration: 0.5 } },
-                        }}
-                        viewOptions={{ margin: "0px 0px -250px 0px", once: true }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                      >
-                        <Link href={service.url}>
-                          <Image
-                            src={service.img}
-                            alt={service.name}
-                            height={480}
-                            width={720}
-                            loading="lazy"
-                            className="object-cover object-top transition-all duration-500 w-full aspect-[16/9]"
-                          />
-                        </Link>
-                      </InView>
-                    </CustomCursorElement>
-                  </div>
-                </div>
+                </motion.div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-    );
-  }
 
-  // Desktop Version (Lenis + Stacking Cards)
-  return <DesktopServices />;
+          {/* Progress Indicator */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {SERVICES_LIST.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentIndex(index);
+                  scrollToIndex(index);
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? 'bg-white w-6' : 'bg-gray-600'
+                }`}
+                aria-label={`Go to service ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Hide scrollbar globally for this section */}
+      <style jsx>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+    </section>
+  );
 }
 
 // ------------------- Desktop Version -------------------
@@ -244,7 +403,6 @@ function DesktopServices() {
 }
 
 // Service Card Component for Desktop
-// Service Card Component for Desktop
 const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -267,12 +425,13 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
       >
         {/* Left Image Section */}
         <div className="lg:w-1/2 w-full h-64 lg:h-auto relative">
-          <motion.div style={{ scale: imageScale }} className="w-full h-full">
+          <motion.div style={{ scale: imageScale }} className="w-full h-full relative">
             <Image
               fill
               src={service.img}
               alt={service.name}
               className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>
         </div>
@@ -295,11 +454,19 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
               </span>
             ))}
           </div>
-
-          
         </div>
       </motion.div>
     </div>
   );
 };
 
+// ------------------- Main Services Section -------------------
+export default function ServicesSection() {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return <MobileServices />;
+  }
+
+  return <DesktopServices />;
+}

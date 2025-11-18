@@ -12,7 +12,7 @@ export default function Stats() {
 
   const stats = [
     {
-      value: 120,
+      value: 200,
       suffix: "+",
       label: "Projects Launched",
     },
@@ -22,17 +22,15 @@ export default function Stats() {
       label: "Average Client Growth",
     },
     {
-      value: 5,
+      value: 6,
       suffix: "+",
       label: "Years in the Game",
     },
   ];
 
   return (
-    <section
-      ref={ref}
-      className="py-20 px-6 md:px-12 bg-black text-white"
-    >
+    <section ref={ref} className="py-20 px-6 md:px-12 bg-black text-white">
+      
       {/* Heading */}
       <motion.div
         initial={{ filter: "blur(8px)", opacity: 0, y: 20 }}
@@ -45,28 +43,59 @@ export default function Stats() {
         </h2>
         <p className="text-base md:text-lg leading-relaxed">
           At <span className="font-extrabold text-white">Biz</span>
-          <span className="font-extrabold text-yellow-400">Leap</span>, we don’t just make things look good — we create thoughtful design experiences that help businesses grow, connect with their audience, and stand out in a crowded digital world.
+          <span className="font-extrabold text-yellow-400">Leap</span>, we don’t just make things look good — 
+          we create thoughtful design experiences that help businesses grow.
         </p>
       </motion.div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16 border-t border-gray-800 pt-10">
+      {/* STATS */}
+      <div className="
+        grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto 
+        mt-16 border-t border-gray-800 pt-10
+      ">
+
         {stats.map((stat, i) => (
           <motion.div
             key={i}
             initial={{ filter: "blur(10px)", opacity: 0, y: 30 }}
             animate={inView ? { filter: "blur(0px)", opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: i * 0.2 }}
-            className={`text-center ${
-              i < stats.length - 1 ? "border-r border-gray-800" : ""
-            } px-6`}
+            className={`
+              text-center px-6 
+              relative overflow-hidden
+              rounded-2xl shadow-lg md:shadow-none
+              bg-zinc-900/40 md:bg-transparent
+              backdrop-blur-xl md:backdrop-blur-0
+              border border-zinc-800 md:border-none
+              py-8 md:py-0
+              ${i < stats.length - 1 ? "md:border-r md:border-gray-800" : ""}
+            `}
           >
-            <div className="text-4xl md:text-5xl font-extrabold">
-              {inView && <CountUp start={0} end={stat.value} duration={4} suffix={stat.suffix} />}
+
+            {/* Mobile gradient glow ring */}
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-40 md:hidden" />
+
+            {/* MOBILE hover/tap scale */}
+            <div className="md:scale-100 active:scale-[0.97] transition-transform">
+
+              <div className="text-5xl md:text-5xl font-extrabold relative z-10">
+                {inView && (
+                  <CountUp
+                    start={0}
+                    end={stat.value}
+                    duration={4}
+                    suffix={stat.suffix}
+                  />
+                )}
+              </div>
+
+              <p className="mt-3 text-lg md:text-lg font-semibold relative z-10">
+                {stat.label}
+              </p>
             </div>
-            <p className="mt-2 text-lg font-semibold">{stat.label}</p>
           </motion.div>
         ))}
+
       </div>
     </section>
   );

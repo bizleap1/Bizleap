@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import Image from "next/image";
-
+import Image from "next/image"
+import { FiDownload } from "react-icons/fi"
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,19 +12,16 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Work", href: "/work" },
-  { name: "Creators", href: "/creators" },
-  { name: "Team", href: "/team" },
-  { name: "About", href: "/about" },
-];
-
+    { name: "Services", href: "/services" },
+    { name: "Work", href: "/work" },
+    { name: "Creators", href: "/creators" },
+    { name: "Team", href: "/team" },
+    { name: "About", href: "/about" },
+  ]
 
   // Handle scroll to toggle background
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -37,21 +34,20 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
-          {/* Logo */}
-<Link href="/" className="cursor-pointer flex items-center gap-2">
-  <Image
-    src="/2.png"
-    alt="Bizleap Logo"
-    width={140}  // adjust width as needed
-    height={50}  // adjust height as needed
-    priority
-  />
-</Link>
 
+          {/* Logo */}
+          <Link href="/" className="cursor-pointer flex items-center gap-2">
+            <Image
+              src="/2.png"
+              alt="Bizleap Logo"
+              width={140}
+              height={50}
+              priority
+            />
+          </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex space-x-6 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -68,9 +64,21 @@ export default function Navbar() {
                 />
               </Link>
             ))}
+
+            {/* Brochure Button */}
+            <a
+              href="https://drive.google.com/your-brochure-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 px-4 py-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400 transition"
+            >
+              Brochure <FiDownload />
+            </a>
+
+            {/* Contact Button */}
             <Link
               href="/contact"
-              className="ml-4 px-4 py-2 bg-white text-black rounded hover:bg-gray-100 font-medium transition-transform duration-200"
+              className="ml-2 px-4 py-2 bg-white text-black rounded hover:bg-gray-100 font-medium transition-transform duration-200"
             >
               Contact Us →
             </Link>
@@ -106,8 +114,8 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className={`md:hidden px-2 pt-2 pb-4 space-y-2 ${
-              scrolled ? "bg-black text-white" : "bg-black/80 text-white"
+            className={`md:hidden px-4 pt-2 pb-4 space-y-2 ${
+              scrolled ? "bg-black text-white" : "bg-black/90 text-white"
             }`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -124,6 +132,19 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {/* Brochure Mobile */}
+            <a
+              href="https://drive.google.com/your-brochure-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-4 py-2 mt-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400"
+              onClick={() => setMenuOpen(false)}
+            >
+              Brochure <FiDownload />
+            </a>
+
+            {/* Contact Mobile */}
             <Link
               href="/contact"
               className="block px-4 py-2 mt-2 bg-white text-black rounded font-medium hover:bg-gray-100"

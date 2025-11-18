@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { FaInstagram, FaYoutube, FaXTwitter, FaLinkedin } from 'react-icons/fa6';
+import { FaInstagram, FaLinkedin } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
 const navLinks = [
@@ -11,7 +11,6 @@ const navLinks = [
   { name: "Creators", href: "/creators" },
   { name: "About", href: "/about" },
   { name: "Team", href: "/team" },
- 
 ];
 
 const Footer = () => {
@@ -34,16 +33,14 @@ const Footer = () => {
           {/* Email */}
           <div className="flex items-center gap-3 text-lg font-semibold text-white">
             <MdEmail size={26} />
-            <a href="" className="hover:text-yellow-400">
+            <a href="mailto:bizleapinc@gmail.com" className="hover:text-yellow-400">
               bizleapinc@gmail.com
             </a>
           </div>
 
           {/* Social Icons */}
           <div className="flex gap-4 text-xl mt-2">
-            <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiWmO2ay6iQAxVGyjgGHQiECDMQFnoECBkQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fbizleap.in%2Freels%2F&usg=AOvVaw0jRIrcPXrA0On4EjUwe1Ec&opi=89978449" 
-            className="hover:text-yellow-400"><FaInstagram /></a>
-            
+            <a href="https://www.instagram.com/bizleap.in/reels/" className="hover:text-yellow-400"><FaInstagram /></a>
             <a href="https://www.linkedin.com/company/bizleapinc" className="hover:text-yellow-400"><FaLinkedin /></a>
           </div>
 
@@ -53,8 +50,8 @@ const Footer = () => {
           </Link>
         </div>
 
-        {/* Right Section */}
-        <div className="flex flex-col md:items-end gap-5 text-lg">
+        {/* Right Section - Horizontal Nav */}
+        <div className="flex flex-wrap justify-start md:justify-end gap-6 text-lg">
           {navLinks.map((link, index) => (
             <Link
               key={index}
@@ -76,9 +73,6 @@ const Footer = () => {
         Copyright © BizLeap 2025. All Rights Reserved —{' '}
         <span className="text-yellow-400">Website by BizLeap</span>
       </div>
-
-      {/* Back to Top Button */}
-      
     </footer>
   );
 };

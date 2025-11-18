@@ -92,7 +92,7 @@ export default function Hero() {
             cameraZoom={15.1}
             lightType="env"
             brightness={0.8}
-            envPreset="city"
+            
             grain="on"
             toggleAxis={false}
             zoomOut={false}
@@ -109,7 +109,7 @@ export default function Hero() {
           mt-20 md:mt-0
         "
       >
-        <h1 className="headline text-5xl md:text-7xl font-semibold leading-tight text-white">
+        <h1 className="headline mt-5 md:mt-20 text-5xl md:text-7xl font-semibold leading-tight text-white">
           Designs That <br /> Captivate, Brands That Shine.
         </h1>
 

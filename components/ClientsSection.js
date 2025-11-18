@@ -103,8 +103,6 @@ const CLIENT_CATEGORIES = [
 // ------------------- Infinite Logo Slider -------------------
 function InfiniteLogoSlider({ clients }) {
   const sliderRef = useRef(null);
-
-  // Clone logos twice for smooth looping
   const total = [...clients, ...clients];
 
   useEffect(() => {
@@ -112,17 +110,14 @@ function InfiniteLogoSlider({ clients }) {
     if (!slider) return;
 
     let x = 0;
-    const speed = 0.7; // adjust scroll speed
+    const speed = 0.7;
     let animationId;
 
     const scroll = () => {
       x -= speed;
-      const totalWidth = slider.scrollWidth / 2; // total visible loop width
+      const totalWidth = slider.scrollWidth / 2;
 
-      if (Math.abs(x) >= totalWidth) {
-        // reset exactly when half width passed
-        x = 0;
-      }
+      if (Math.abs(x) >= totalWidth) x = 0;
 
       slider.style.transform = `translateX(${x}px)`;
       animationId = requestAnimationFrame(scroll);
@@ -136,7 +131,7 @@ function InfiniteLogoSlider({ clients }) {
     <div className="relative w-full overflow-hidden">
       <div
         ref={sliderRef}
-        className="flex items-center gap-10 md:gap-16 will-change-transform"
+        className="flex items-center gap-8 md:gap-12 will-change-transform"
         style={{
           whiteSpace: "nowrap",
           width: "max-content",
@@ -147,7 +142,7 @@ function InfiniteLogoSlider({ clients }) {
             key={i}
             className="flex flex-col items-center justify-center text-center flex-shrink-0"
           >
-            <div className="w-[140px] h-[90px] sm:w-[180px] sm:h-[120px] lg:w-[220px] lg:h-[140px] flex items-center justify-center bg-zinc-900 rounded-2xl shadow-md p-4 mx-2">
+            <div className="w-[130px] h-[80px] sm:w-[170px] sm:h-[110px] lg:w-[210px] lg:h-[130px] flex items-center justify-center bg-zinc-900 rounded-xl shadow-md p-3 mx-1.5">
               <Image
                 src={client.logo}
                 alt={client.name}
@@ -156,7 +151,7 @@ function InfiniteLogoSlider({ clients }) {
                 className="object-contain w-full h-full hover:scale-110 transition-transform duration-300"
               />
             </div>
-            <p className="text-gray-400 text-sm mt-3">{client.name}</p>
+            <p className="text-gray-400 text-sm mt-2">{client.name}</p>
           </div>
         ))}
       </div>
@@ -164,27 +159,29 @@ function InfiniteLogoSlider({ clients }) {
   );
 }
 
-
-// ------------------- Clients Section -------------------
+// ------------------- Clients Section (COMPACT VERSION) -------------------
 export default function ClientsSection() {
   return (
-    <section className="py-24 md:py-40 bg-black text-white text-center" id="clients">
-      <div className="max-w-7xl mx-auto px-6 space-y-24">
+    <section className="py-10 md:py-14 bg-black text-white text-center" id="clients">
+      <div className="max-w-7xl mx-auto px-4 space-y-12">
+
         <ScrollView>
           <h2 className="text-4xl md:text-6xl font-bold">Our Clients</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto mt-4 text-lg md:text-xl">
+          <p className="text-gray-400 max-w-2xl mx-auto mt-3 text-lg md:text-xl">
             Trusted by leading brands across industries — built on creativity, innovation, and growth.
           </p>
         </ScrollView>
 
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-14 md:space-y-16">
           {CLIENT_CATEGORIES.map((category, index) => (
-            <div key={index} className="space-y-10 md:space-y-12">
+            <div key={index} className="space-y-6 md:space-y-8">
+
               <ScrollView delay={index * 0.1}>
                 <h3 className="text-2xl md:text-3xl font-semibold text-center text-white">
                   {category.title}
                 </h3>
               </ScrollView>
+
               <InfiniteLogoSlider clients={category.clients} />
             </div>
           ))}
