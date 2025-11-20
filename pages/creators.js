@@ -22,6 +22,13 @@ const ExternalIcon = () => (
   </svg>
 );
 
+const LocationIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+    <circle cx="12" cy="10" r="3"></circle>
+  </svg>
+);
+
 // ------------------- Scroll Reveal -------------------
 function ScrollReveal({ children, delay = 0 }) {
   const ref = useRef(null);
@@ -52,16 +59,18 @@ function SafeImage({ src, alt, width, height, className = "" }) {
   const [error, setError] = useState(false);
   const isExternal = typeof src === "string" && (src.startsWith("http://") || src.startsWith("https://"));
 
-  if (error) {
+  if (error || src === "-" || !src) {
     return (
-      <div className={`flex items-center justify-center bg-gray-800 text-gray-400 ${className}`} style={{ width, height }}>
-        ⚠️
+      <div className={`flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 text-gray-400 ${className}`} style={{ width, height }}>
+        <div className="text-center">
+          <div className="text-2xl mb-1">📷</div>
+          <div className="text-xs">No Image</div>
+        </div>
       </div>
     );
   }
 
   if (isExternal) {
-    // use plain img tag so next/image domain restrictions won't crash
     return <img src={src} alt={alt} width={width} height={height} className={className} onError={() => setError(true)} />;
   }
 
@@ -78,7 +87,49 @@ function Badge({ children }) {
   );
 }
 
-// ------------------- Dropdown Filter (per-instance open state) -------------------
+// ------------------- New Filter Components for Influencers -------------------
+function FilterPill({ active, onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+        active
+          ? "bg-yellow-500 text-black shadow-lg shadow-yellow-500/25"
+          : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SearchFilter({ value, onChange, placeholder = "Search..." }) {
+  return (
+    <div className="relative w-full max-w-md">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 pl-10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300"
+      />
+      <svg
+        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </svg>
+    </div>
+  );
+}
+
+// ------------------- Dropdown Filter (for magazines, newspapers, digital) -------------------
 function DropdownFilter({ id, title, options = [], isRange = false, selected = [], onToggleOption, onApplyRange }) {
   const [open, setOpen] = useState(false);
   const [minVal, setMinVal] = useState("");
@@ -131,50 +182,116 @@ function DropdownFilter({ id, title, options = [], isRange = false, selected = [
   );
 }
 
-// ------------------- Card components with default info per section -------------------
+// ------------------- NEW INFLUENCER CARD (Updated for new data) -------------------
 function InfluencerCard({ item, onClick }) {
-  const format = (n) => {
-    if (!n && n !== 0) return "-";
-    if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
-    if (n >= 1000) return (n / 1000).toFixed(0) + "K";
-    return String(n);
+  const getInitials = (name) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const getGenderColor = (gender) => {
+    return gender === 'female' ? 'bg-pink-500/20 text-pink-400 border-pink-500/30' : 
+           gender === 'male' ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' : 
+           'bg-purple-500/20 text-purple-400 border-purple-500/30';
   };
 
   return (
-    <motion.div whileHover={{ scale: 1.02, y: -4 }} onClick={() => onClick(item, "influencer")} className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-lg transition-all duration-400 cursor-pointer group">
-      <div className="relative h-44 w-full overflow-hidden">
-        <SafeImage src={item.image} alt={item.name} width={700} height={420} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-      </div>
-      <div className="p-4">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <h3 className="text-lg font-semibold text-white">{item.name}</h3>
-            <p className="text-sm text-gray-400">{item.category}</p>
+    <motion.div whileHover={{ scale: 1.03, y: -6 }} onClick={() => onClick(item, "influencer")} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-2xl transition-all duration-400 cursor-pointer group hover:border-yellow-500/50 relative">
+      
+
+      {/* Image/Avatar Section */}
+      <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+        {item.image && item.image !== "-" ? (
+          <SafeImage 
+            src={item.image} 
+            alt={item.name} 
+            width={700} 
+            height={420} 
+            className="w-full h-full group-hover:scale-110 transition-transform duration-700"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-2 shadow-lg">
+                {getInitials(item.name)}
+              </div>
+              <div className="text-white font-semibold text-sm">{item.name}</div>
+            </div>
           </div>
-          <a href={item.instagramLink} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="p-2 bg-gray-800 rounded-full hover:bg-yellow-500/10 transition-colors">
+        )}
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
+      </div>
+
+      {/* Content Section */}
+      <div className="p-5 relative">
+        {/* Name and Instagram */}
+        <div className="flex items-start justify-between mb-3">
+          <div className="flex-1">
+            <h3 className="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors duration-300 line-clamp-1">
+              {item.name}
+            </h3>
+            <div className="flex items-center gap-2 mt-1">
+              <LocationIcon />
+              <span className="text-xs text-gray-400 line-clamp-1">
+                {item.location || "Location not specified"}
+              </span>
+            </div>
+          </div>
+          <a 
+            href={item.instagramLink} 
+            target="_blank" 
+            rel="noreferrer" 
+            onClick={(e) => e.stopPropagation()}
+            className="flex-shrink-0 p-2 bg-gray-800 rounded-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all duration-300 group/insta shadow-lg"
+          >
             <InstaIcon />
           </a>
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-3 text-center">
-          <div>
-            <div className="text-sm text-yellow-400 font-semibold">{format(item.followers)}</div>
-            <div className="text-xs text-gray-400">Followers</div>
+        {/* Gender Badge */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getGenderColor(item.gender)}`}>
+            {item.gender === 'female' ? '♀ Female' : item.gender === 'male' ? '♂ Male' : 'Other'}
+          </span>
+          {item.contentStyle && item.contentStyle !== "-" && (
+            <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-700/50 text-gray-300 border border-gray-600">
+              {item.contentStyle}
+            </span>
+          )}
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 gap-3 text-center">
+          <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700/50 group-hover:border-gray-600 transition-colors">
+            <div className="text-lg font-bold text-yellow-400">
+              {item.followers && item.followers !== "-" ? item.followers : "N/A"}
+            </div>
+            <div className="text-xs text-gray-400 mt-1">Followers</div>
           </div>
-          <div>
-            <div className="text-sm text-yellow-400 font-semibold">{item.engagement || "-"}</div>
-            <div className="text-xs text-gray-400">Engagement</div>
-          </div>
-          <div>
-            <div className="text-sm text-yellow-400 font-semibold">{item.avgViews || "-"}</div>
-            <div className="text-xs text-gray-400">Avg Views</div>
+          <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700/50 group-hover:border-gray-600 transition-colors">
+            <div className="text-lg font-bold text-green-400">
+              {item.engagement && item.engagement !== "-" ? item.engagement : "N/A"}
+            </div>
+            <div className="text-xs text-gray-400 mt-1">Engagement</div>
           </div>
         </div>
+
+        {/* CTA Button */}
+        <button className="w-full mt-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-yellow-500 hover:to-orange-500 text-gray-300 hover:text-black font-medium py-2.5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg group-hover:shadow-yellow-500/25">
+          View Profile
+        </button>
       </div>
     </motion.div>
   );
 }
 
+// ------------------- REST OF THE CARD COMPONENTS (UNCHANGED) -------------------
 function MagazineCard({ item, onClick }) {
   const fmt = (n) => {
     if (!n && n !== 0) return "-";
@@ -315,7 +432,7 @@ function InfoModal({ open, item, type, onClose }) {
             <div className="flex-1 text-white">
               <h2 className="text-2xl font-bold text-yellow-400">{item.name}</h2>
               <p className="text-gray-300 mt-2">
-                {type === "influencer" && item.category}
+                {type === "influencer" && `${item.category || 'Influencer'} • ${item.location || 'Location not specified'}`}
                 {type === "magazine" && `${item.genre} • ${item.frequency}`}
                 {type === "newspaper" && `${item.genre} • ${item.language}`}
                 {type === "digital" && (item.platformType || item.formats?.join(", "))}
@@ -333,12 +450,12 @@ function InfoModal({ open, item, type, onClose }) {
                       <div className="text-xs text-gray-400">Engagement</div>
                     </div>
                     <div>
-                      <div className="text-yellow-400 font-semibold">{item.avgViews || "-"}</div>
-                      <div className="text-xs text-gray-400">Avg Views</div>
+                      <div className="text-yellow-400 font-semibold capitalize">{item.gender || "-"}</div>
+                      <div className="text-xs text-gray-400">Gender</div>
                     </div>
                     <div>
-                      <div className="text-yellow-400 font-semibold">₹{Number(item.minBudget || 0).toLocaleString()}</div>
-                      <div className="text-xs text-gray-400">Min Budget</div>
+                      <div className="text-yellow-400 font-semibold">{item.location || "-"}</div>
+                      <div className="text-xs text-gray-400">Location</div>
                     </div>
                     <div className="col-span-full mt-2">
                       <a href={item.instagramLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-yellow-500 text-black px-4 py-2 rounded-lg font-medium">
@@ -433,6 +550,11 @@ export default function CreatorsSection() {
   const [selectedType, setSelectedType] = useState(null);
   const [activeFilters, setActiveFilters] = useState({}); // { key: [values] or ["min-max"] }
 
+  // NEW STATE FOR INFLUENCER FILTERS
+  const [influencerSearch, setInfluencerSearch] = useState("");
+  const [influencerGenderFilter, setInfluencerGenderFilter] = useState([]);
+  const [influencerLocationFilter, setInfluencerLocationFilter] = useState([]);
+
   const sections = [
     { label: "Influencers", key: "influencer", data: influencersData },
     { label: "Magazines", key: "magazine", data: magazinesData },
@@ -482,39 +604,56 @@ export default function CreatorsSection() {
     setActiveFilters(prev => ({ ...prev, [filterKey]: [`${min || 0}-${max || 0}`] }));
   };
 
-  const clearFilters = () => setActiveFilters({});
+  const clearFilters = () => {
+    setActiveFilters({});
+    setInfluencerSearch("");
+    setInfluencerGenderFilter([]);
+    setInfluencerLocationFilter([]);
+  };
 
-  // simple filtering logic — extend as needed:
+  // NEW: Filter logic for influencers with search and pill filters
+  const filteredInfluencers = influencersData.filter(influencer => {
+    // Search filter
+    const matchesSearch = influencerSearch === "" || 
+                         influencer.name.toLowerCase().includes(influencerSearch.toLowerCase()) ||
+                         influencer.location?.toLowerCase().includes(influencerSearch.toLowerCase());
+
+    // Gender filter
+    const matchesGender = influencerGenderFilter.length === 0 || 
+                         influencerGenderFilter.includes(influencer.gender);
+
+    // Location filter
+    const matchesLocation = influencerLocationFilter.length === 0 || 
+                           influencerLocationFilter.some(loc => 
+                             influencer.location?.includes(loc)
+                           );
+
+    return matchesSearch && matchesGender && matchesLocation;
+  });
+
+  // Available filter options for influencers
+  const genderOptions = ['male', 'female'];
+  const locationOptions = ['Mumbai', 'Delhi', 'Chembur', 'Navi Mumbai', 'New Delhi', 'Bombay', 'Lucknow', 'Mangalore'];
+
+  const toggleInfluencerFilter = (filterType, value) => {
+    if (filterType === 'gender') {
+      setInfluencerGenderFilter(prev => 
+        prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
+      );
+    } else if (filterType === 'location') {
+      setInfluencerLocationFilter(prev => 
+        prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
+      );
+    }
+  };
+
+  // simple filtering logic for other sections — extend as needed:
   function passesFilters(item, sectionKey) {
     const active = activeFilters;
-    // Category / genre filter
+    
     if (sectionKey === "influencer") {
-      if (active.category && active.category.length) {
-        if (!active.category.includes(item.category)) return false;
-      }
-      if (active.platform && active.platform.length) {
-        const has = item.platforms?.some(p => active.platform.includes(capitalize(p))) || false;
-        // item.platforms stored lowercase in your data; we accept either
-        if (!has) return false;
-      }
-      if (active.gender && active.gender.length) {
-        if (!active.gender.includes(item.gender)) return false;
-      }
-      if (active.followers && active.followers.length) {
-        // check ranges
-        const matches = active.followers.some(r => {
-          if (r === "Micro (1K-100K)" && item.followers >= 1000 && item.followers <= 100000) return true;
-          if (r === "Macro (100K-1M)" && item.followers > 100000 && item.followers <= 1000000) return true;
-          if (r === "Mega (1M+)" && item.followers > 1000000) return true;
-          return false;
-        });
-        if (!matches) return false;
-      }
-      if (active.budget && active.budget.length) {
-        const v = active.budget[0].split("-").map(Number);
-        const min = v[0], max = v[1];
-        if (item.minBudget && (item.minBudget < min || item.minBudget > max)) return false;
-      }
+      // Use the new influencer filtering logic
+      return true; // This is handled separately above
     }
 
     if (sectionKey === "magazine") {
@@ -561,8 +700,15 @@ export default function CreatorsSection() {
 
   // Render cards per section
   const cardsForSection = (section) => {
-    return section.data.filter(item => passesFilters(item, section.key)).map(item => {
-      if (section.key === "influencer") return <InfluencerCard key={item.id} item={item} onClick={(i,t)=>{ setSelected(i); setSelectedType(t); }} />;
+    if (section.key === "influencer") {
+      return filteredInfluencers.map(item => (
+        <InfluencerCard key={item.id} item={item} onClick={(i,t)=>{ setSelected(i); setSelectedType(t); }} />
+      ));
+    }
+
+    const dataToUse = section.data.filter(item => passesFilters(item, section.key));
+    
+    return dataToUse.map(item => {
       if (section.key === "magazine") return <MagazineCard key={item.id} item={item} onClick={(i,t)=>{ setSelected(i); setSelectedType(t); }} />;
       if (section.key === "newspaper") return <NewspaperCard key={item.id} item={item} onClick={(i,t)=>{ setSelected(i); setSelectedType(t); }} />;
       if (section.key === "digital") return <DigitalCard key={item.id} item={item} onClick={(i,t)=>{ setSelected(i); setSelectedType(t); }} />;
@@ -570,63 +716,141 @@ export default function CreatorsSection() {
     });
   };
 
+  const hasActiveInfluencerFilters = influencerSearch || influencerGenderFilter.length > 0 || influencerLocationFilter.length > 0;
+  const hasActiveOtherFilters = Object.keys(activeFilters).length > 0;
+  const showClearFilters = hasActiveInfluencerFilters || hasActiveOtherFilters;
+
   return (
     <section className="py-20 bg-black text-white" id="creators">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-6 mt-12">
-  <h2 className="text-4xl md:text-5xl font-semibold text-white">
-    Our Creators & Media Partners
-  </h2>
-  <p className="text-gray-400 max-w-2xl mx-auto mt-2">
-    Tap any card to view detailed info. Use filters to narrow results.
-  </p>
-</div>
-
-
-       {/* Tabs */}
-<div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 mb-8">
-  {sections.map((s) => (
-    <button
-      key={s.key}
-      onClick={() => {
-        setFilter(s.key);
-        setActiveFilters({});
-      }}
-      className={`px-3 py-2 rounded-full text-xs sm:text-sm font-medium border transition-all duration-300 ${
-        filter === s.key
-          ? "bg-yellow-500 text-black border-yellow-500 shadow-lg"
-          : "border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-600"
-      }`}
-    >
-      {s.label}
-    </button>
-  ))}
-</div>
-
-
-        {/* Filters row for active section */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {filterMenus[filter].map(menu => (
-            <DropdownFilter
-              key={menu.key}
-              id={menu.key}
-              title={menu.title}
-              options={menu.options}
-              isRange={menu.isRange}
-              selected={activeFilters[menu.key] || []}
-              onToggleOption={(opt) => toggleOption(menu.key, opt)}
-              onApplyRange={(min, max) => applyRange(menu.key, min, max)}
-            />
-          ))}
-          {Object.keys(activeFilters).length > 0 && (
-            <button onClick={clearFilters} className="px-4 py-2 rounded-md bg-yellow-500 text-black text-sm font-medium">Clear Filters</button>
-          )}
+          <h2 className="text-4xl md:text-5xl font-semibold text-white">
+            Our Creators & Media Partners
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto mt-2">
+            Tap any card to view detailed info. Use filters to narrow results.
+          </p>
         </div>
+
+        {/* Tabs */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 mb-8">
+          {sections.map((s) => (
+            <button
+              key={s.key}
+              onClick={() => {
+                setFilter(s.key);
+                setActiveFilters({});
+                setInfluencerSearch("");
+                setInfluencerGenderFilter([]);
+                setInfluencerLocationFilter([]);
+              }}
+              className={`px-3 py-2 rounded-full text-xs sm:text-sm font-medium border transition-all duration-300 ${
+                filter === s.key
+                  ? "bg-yellow-500 text-black border-yellow-500 shadow-lg"
+                  : "border-gray-700 text-gray-300 hover:bg-gray-800 hover:border-gray-600"
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        {/* SIMPLIFIED FILTERS FOR INFLUENCERS */}
+{filter === "influencer" && (
+  <div className="mb-8 space-y-4">
+    {/* Simple Search Only */}
+    <div className="flex justify-center">
+      <div className="relative w-full max-w-md">
+        <input
+          type="text"
+          value={influencerSearch}
+          onChange={(e) => setInfluencerSearch(e.target.value)}
+          placeholder="Search influencers by name or location..."
+          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-transparent text-sm"
+        />
+      </div>
+    </div>
+
+    {/* Simple Filter Row */}
+    <div className="flex flex-wrap justify-center gap-2">
+      <select 
+        value={influencerGenderFilter[0] || ""}
+        onChange={(e) => setInfluencerGenderFilter(e.target.value ? [e.target.value] : [])}
+        className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1 text-white text-sm focus:outline-none focus:ring-1 focus:ring-yellow-500"
+      >
+        <option value="">All Genders</option>
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+      </select>
+
+      <select 
+        value={influencerLocationFilter[0] || ""}
+        onChange={(e) => setInfluencerLocationFilter(e.target.value ? [e.target.value] : [])}
+        className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1 text-white text-sm focus:outline-none focus:ring-1 focus:ring-yellow-500"
+      >
+        <option value="">All Locations</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+      </select>
+    </div>
+
+    {/* Simple Results Count */}
+    <div className="text-center">
+      <p className="text-gray-400 text-sm">
+        Showing {filteredInfluencers.length} of {influencersData.length} influencers
+      </p>
+    </div>
+  </div>
+)}
+
+        {/* ORIGINAL FILTERS FOR OTHER SECTIONS */}
+        {filter !== "influencer" && (
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            {filterMenus[filter].map(menu => (
+              <DropdownFilter
+                key={menu.key}
+                id={menu.key}
+                title={menu.title}
+                options={menu.options}
+                isRange={menu.isRange}
+                selected={activeFilters[menu.key] || []}
+                onToggleOption={(opt) => toggleOption(menu.key, opt)}
+                onApplyRange={(min, max) => applyRange(menu.key, min, max)}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Clear Filters Button */}
+        {showClearFilters && (
+          <div className="flex justify-center mb-6">
+            <button onClick={clearFilters} className="px-4 py-2 rounded-md bg-yellow-500 text-black text-sm font-medium hover:bg-yellow-400 transition-colors">
+              Clear All Filters
+            </button>
+          </div>
+        )}
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {cardsForSection(sections.find(s => s.key === filter))}
         </div>
+
+        {/* Empty State for Influencers */}
+        {filter === "influencer" && filteredInfluencers.length === 0 && (
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="text-2xl font-bold text-white mb-2">No influencers found</h3>
+            <p className="text-gray-400 mb-6">
+              Try adjusting your search or filters to see more results.
+            </p>
+            <button
+              onClick={clearFilters}
+              className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-400 transition-all duration-300"
+            >
+              Clear All Filters
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modal */}
@@ -635,64 +859,80 @@ export default function CreatorsSection() {
   );
 }
 
-/* ------------------- Your data (unchanged) ------------------- */
+/* ------------------- YOUR UPDATED INFLUENCER DATA ------------------- */
 const influencersData = [
-            { id: 1, name: "academypath.in", instagramLink: "https://www.instagram.com/academypath.in/", category: "Education", followers: 14, engagement: "1%", avgViews: "1,614", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/image_da3e27.png"},
-       
-            { id: 2, name: "ntskatesworld", instagramLink: "https://www.instagram.com/ntskatesworld/", category: "Health & Fitness", followers: 20100, engagement: " 1.59%", avgViews: "8,500", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: true, image: "images/Nt Skates world.jpeg" },
-            { id: 3, name: "playcreative.in", instagramLink: "https://www.instagram.com/playcreative.in/", category: "Jewellery", followers: 33500, engagement: " 1.44%", avgViews: "4,500", budget: "On Request", minBudget:  1000000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: true, image: "images/playcreative.in.jpg"},
-            { id: 4, name: "marvelfitnessjaitala", instagramLink: "https://www.instagram.com/marvelfitnessjaitala/", category: "Health & Fitness", followers: 4654, engagement: "1,14%", avgViews: "1,614", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: true, image: "images/marvelfitnessjaitala.jpg" },
-            { id: 5, name: "ntx_brand", instagramLink: "https://www.instagram.com/ntx_brand/", category: "Education", followers: 4659, engagement: "1%", avgViews: "1,614", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: true, image: "images/ntx_brand.jpg" },
-            { id: 6, name: "kpmakeoverbykajal", instagramLink: "https://www.instagram.com/kpmakeoverbykajal/", category: "Makeup & Nailart", followers: 6845, engagement: "1.20%", avgViews: "1,614", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/kp make over .png"},
-            { id: 7, name: "bizleap.in", instagramLink: "https://www.instagram.com/bizleap.in/", category: "Bussiness", followers: 871, engagement: "1%", avgViews: "1,614", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: true, image: "images/bizleap.jpg"},
-            { id: 8, name: "ssitnagpur.in", instagramLink: "https://www.instagram.com/ssitnagpur.in/", category: "Education", followers: 183, engagement: "-", avgViews: "-", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/SSIT.PNG" },
-            { id: 9, name: "taubys", instagramLink: "https://www.instagram.com/taubys/", category: "Food & Restaurant", followers: 829, engagement: "1%", avgViews: "1,614", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/taubys.jpg"},
-            { id: 10, name: "barcode.ytl", instagramLink: "https://www.instagram.com/barcode.ytl/", category: "Food & Restaurant", followers: 150, engagement: "-", avgViews: "-", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/barcode.ytl.jpg"},
-            { id: 11, name: "tanvibhandari.artistry", instagramLink: "https://www.instagram.com/tanvibhandari.artistry/", category: "Makeup & Nailart", followers: 639, engagement: "-", avgViews: "-", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/artistry.jpg"},
-            { id: 12, name: "tulithegrand", instagramLink: "https://www.instagram.com/tulithegrand/", category: "Food & Restaurant", followers: 264, engagement: "-", avgViews: "-", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/tulithegrand.jpg"},
-            { id: 13, name: "tunwal_emotors", instagramLink: "https://www.instagram.com/tunwal_emotors/", category: "bussiness", followers: 6313, engagement: "-", avgViews: "-", budget: "On Request", minBudget: 500000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/tunwal_emotors.jpg"},
-            { id: 14, name: "meherinfrasolutions", instagramLink: "https://www.instagram.com/meherinfrasolutions/", category: "Real Estate", followers: 291, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/meherinfrasolutions.jpg" },
-            { id: 15, name: "kathmandujholmomo", instagramLink: "https://www.instagram.com/kathmandujholmomo/", category: "Food & Restaurant", followers: 369, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/kathmandujholmomo.jpg" },
-            { id: 16, name: "quik_fizzy", instagramLink: "https://www.instagram.com/quik_fizzy/", category: "Food & Restaurant", followers: 484, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/quik_fizzy.jpg" },
-            { id: 17, name: "oswaljewellers_", instagramLink: "https://www.instagram.com/oswaljewellers_/", category: "Jewellery", followers: 1223, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/oswaljewellers_.PNG" },
-            { id: 18, name: "chefjeets_bakesncakes", instagramLink: "https://www.instagram.com/chefjeets_bakesncakes/", category: "Food & Restaurant", followers: 344, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/chefjeets_bakesncakes.jpg" },
-            { id: 19, name: "amitypune_udaan", instagramLink: "https://www.instagram.com/amitypune_udaan/", category: "Education", followers: 78, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 400000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/amitypune_udaan.jpg" },
-            { id: 20, name: "scsdedfoundation", instagramLink: "https://www.instagram.com/scsdedfoundation/", category: "Education", followers: 61, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 20000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/scsdedfoundation.jpg"},
-            { id: 21, name: "seouluxe_nails", instagramLink: "https://www.instagram.com/seouluxe_nails/", category: "Makeup & Nailart", followers: 45, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/seouluxe_nails.jpg" },
-            { id: 22, name: "nilkanthachemicals", instagramLink: "https://www.instagram.com/nilkanthachemicals/", category: "Education", followers: 28, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/nilkanthachemicals.PNG" },
-            { id: 23, name: "essencehouse.india", instagramLink: "https://www.instagram.com/essencehouse.india/", category: "Real Estate", followers: 40, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/IMG_0663.jpeg" },
-            { id: 24, name: "ayrakcare", instagramLink: "https://www.instagram.com/ayrakcare/", category: "Food & Restaurant", followers: 20, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/ayrakcare.jpg" },
-            { id: 25, name: "metrodentalcarenagpur", instagramLink: "https://www.instagram.com/metrodentalcarenagpur/", category: "Health & Fitness", followers: 136, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/metrodentalcarenagpur.jpg" },
-            { id: 26, name: "spizy_tadkaa", instagramLink: "https://www.instagram.com/spizy_tadkaa/", category: "Food & Restaurant", followers: 1, engagement: " -", avgViews: "-", budget: "On Request", minBudget: 1200000, location: "Nagpur", platforms: ["instagram", "facebook"], gender: "male", recommended: false, image: "images/spizy_tadkaa.jpg" },
-]; 
+  { id: 1, name: "Himika Bose", location: "Delhi - Mumbai", instagramLink: "https://www.instagram.com/himika_bose/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 2, name: "Natasha Patel", location: "-", instagramLink: "https://www.instagram.com/natasshapatel/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 3, name: "Saanchi Gilani", location: "Mumbai", instagramLink: "https://www.instagram.com/saanchigilani/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 4, name: "Isha Sutaria", location: "Mumbai", instagramLink: "https://www.instagram.com/isha.sutaria/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 5, name: "Alisha Pekha", location: "Delhi - Mumbai", instagramLink: "https://www.instagram.com/theallyedit/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 6, name: "Vitallian Angel", location: "-", instagramLink: "https://www.instagram.com/vitallianangel/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 7, name: "Prasad", location: "Mumbai", instagramLink: "https://www.instagram.com/kaccha.limboo/", gender: "male", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 8, name: "Sonam Babani", location: "Mumbai", instagramLink: "https://www.instagram.com/fashioneiress/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 9, name: "Shyrin Anicka", location: "Delhi - Mumbai", instagramLink: "https://www.instagram.com/shyrinn_anicka?igsh=eW0wb2VmYjNidG9x", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 10, name: "Sahil Khattar", location: "Mumbai", instagramLink: "https://www.instagram.com/sahilkhattar/", gender: "male", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 11, name: "Vedika Pinto", location: "Mumbai", instagramLink: "https://www.instagram.com/vedikapinto/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 12, name: "Nakul Mehta", location: "Mumbai", instagramLink: "https://www.instagram.com/nakuulmehta/", gender: "male", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 13, name: "Visha Vira", location: "Mumbai", instagramLink: "https://www.instagram.com/vishaviraaa?igsh=MTluaXl4eDNwa3RreA==", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 14, name: "Kajal Paigwar", location: "Chembur", instagramLink: "https://www.instagram.com/kajal_paigwar14._/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 15, name: "Yuvika Abrol", location: "Mumbai - Delhi", instagramLink: "https://www.instagram.com/yuvika.abrol/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 16, name: "Kishwer Merchantt", location: "Mumbai", instagramLink: "https://www.instagram.com/kishwersmerchantt/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 17, name: "Sheen Rawat", location: "New Delhi | Mumbai", instagramLink: "https://www.instagram.com/sheenrawat", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 18, name: "Hitakshi Tewari", location: "Bombay | Lucknow", instagramLink: "https://www.instagram.com/hitakkshi", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 19, name: "Shruthi G Rao", location: "Mumbai / Mangalore", instagramLink: "https://www.instagram.com/ishruthigrao_", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 20, name: "Jya Mishra", location: "Mumbai", instagramLink: "https://www.instagram.com/jyamishra1", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 21, name: "Jyoti Rolla", location: "Mumbai", instagramLink: "https://www.instagram.com/jyotirolla", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 22, name: "Paulo Mishital", location: "Mumbai", instagramLink: "https://www.instagram.com/paulomishital", gender: "male", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 23, name: "Priyanka Negi", location: "Mumbai", instagramLink: "https://www.instagram.com/_priyankanegi_", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 24, name: "Ria Pednekar", location: "-", instagramLink: "https://www.instagram.com/riapednekar03", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 25, name: "Aachal Punjabi", location: "Mumbai", instagramLink: "https://www.instagram.com/aanchpunjabi", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 26, name: "Mansi Vanage", location: "Mumbai", instagramLink: "https://www.instagram.com/mansivanage", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 27, name: "Nidhi Shetty", location: "Mumbai", instagramLink: "https://www.instagram.com/nidhi_shetty13", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 28, name: "Rivya Rai", location: "Mumbai", instagramLink: "https://www.instagram.com/rivyarai_27", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 29, name: "Aavya Gupta", location: "Mumbai", instagramLink: "https://www.instagram.com/aavyagupta_/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 30, name: "Sneha Malviya", location: "Mumbai", instagramLink: "https://www.instagram.com/theactual_sneha", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 31, name: "Ranjana Godara", location: "Mumbai", instagramLink: "https://www.instagram.com/ranjanagodaraofficial/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 32, name: "Anukriti Bhatia", location: "Navi Mumbai", instagramLink: "https://www.instagram.com/anukritibhatia/profilecard", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 33, name: "Deeksha Suryawanshi", location: "Mumbai", instagramLink: "https://www.instagram.com/deeksha01_", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 34, name: "Miss Singh", location: "Mumbai", instagramLink: "https://www.instagram.com/miss_singhww", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 35, name: "Divya Dhoke", location: "-", instagramLink: "https://www.instagram.com/divya_dhoke", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 36, name: "Helly Shah", location: "Mumbai", instagramLink: "https://www.instagram.com/hellyshahofficial", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 37, name: "Krati Saini", location: "Mumbai", instagramLink: "https://www.instagram.com/kratisaini_", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 38, name: "Kritika Dagar", location: "Mumbai", instagramLink: "https://www.instagram.com/kritikadagar21", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 39, name: "Sakkshi Mhadolkar", location: "Mumbai", instagramLink: "https://www.instagram.com/sakkshi_mhadolkar", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 40, name: "Nita Shilimkar", location: "Mumbai", instagramLink: "https://www.instagram.com/nita_shilimkar", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 41, name: "Rits Badiani", location: "Mumbai", instagramLink: "https://www.instagram.com/rits_badiani", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 42, name: "Navika Kotia", location: "Mumbai", instagramLink: "https://www.instagram.com/navika_kotia", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+];
 
+/* ------------------- REST OF YOUR ORIGINAL DATA (UNCHANGED) ------------------- */
 const magazinesData = [
   { id: 1, name: "Vogue India", websiteLink: "https://www.vogue.in/", genre: "Fashion", readership: 1200000, frequency: "Monthly", adRate: "₹3,50,000/page", minBudget: 350000, language: "English", recommended: true, image: "images/Vogue India.jpg" },
-            { id: 2, name: "Filmfare", websiteLink: "https://www.filmfare.com/", genre: "Lifestyle", readership: 1400000, frequency: "Monthly", adRate: "₹4,00,000/page", minBudget: 400000, language: "English", recommended: true, image: "images/filmfare.jpg" },
-            { id: 3, name: "Business Today", websiteLink: "https://www.businesstoday.in/", genre: "Business", readership: 800000, frequency: "Weekly", adRate: "₹2,75,000/page", minBudget: 275000, language: "English", recommended: true, image: "images/business today.jpg" },
-            { id: 4, name: "Femina", websiteLink: "https://www.femina.in/", genre: "Lifestyle", readership: 1100000, frequency: "Monthly", adRate: "₹3,00,000/page", minBudget: 300000, language: "English", recommended: false, image: "images/femina.jpg" },
-            { id: 5, name: "Digit", websiteLink: "https://www.digit.in/", genre: "Technology", readership: 300000, frequency: "Monthly", adRate: "₹1,50,000/page", minBudget: 150000, language: "English", recommended: false, image: "images/digit.jpg" },
-            { id: 6, name: "Outlook Traveller", websiteLink: "https://www.outlookindia.com/traveller/", genre: "Travel", readership: 450000, frequency: "Monthly", adRate: "₹2,00,000/page", minBudget: 200000, language: "English", recommended: false, image: "images/Outlook Traveller.jpg" },
-            { id: 7, name: "Grihshobha", websiteLink: "#", genre: "Lifestyle", readership: 5000000, frequency: "Monthly", adRate: "₹1,80,000/page", minBudget: 180000, language: "Hindi", recommended: true, image: "images/grihshobha.jpg" },
-            { id: 8, name: "Forbes India", websiteLink: "https://www.forbesindia.com/", genre: "Business", readership: 500000, frequency: "Monthly", adRate: "₹5,00,000/page", minBudget: 500000, language: "English", recommended: false, image: "images/Forbes India.jpg" }
-        ];
+  { id: 2, name: "Filmfare", websiteLink: "https://www.filmfare.com/", genre: "Lifestyle", readership: 1400000, frequency: "Monthly", adRate: "₹4,00,000/page", minBudget: 400000, language: "English", recommended: true, image: "images/filmfare.jpg" },
+  { id: 3, name: "Business Today", websiteLink: "https://www.businesstoday.in/", genre: "Business", readership: 800000, frequency: "Weekly", adRate: "₹2,75,000/page", minBudget: 275000, language: "English", recommended: true, image: "images/business today.jpg" },
+  { id: 4, name: "Femina", websiteLink: "https://www.femina.in/", genre: "Lifestyle", readership: 1100000, frequency: "Monthly", adRate: "₹3,00,000/page", minBudget: 300000, language: "English", recommended: false, image: "images/femina.jpg" },
+  { id: 5, name: "Digit", websiteLink: "https://www.digit.in/", genre: "Technology", readership: 300000, frequency: "Monthly", adRate: "₹1,50,000/page", minBudget: 150000, language: "English", recommended: false, image: "images/digit.jpg" },
+  { id: 6, name: "Outlook Traveller", websiteLink: "https://www.outlookindia.com/traveller/", genre: "Travel", readership: 450000, frequency: "Monthly", adRate: "₹2,00,000/page", minBudget: 200000, language: "English", recommended: false, image: "images/Outlook Traveller.jpg" },
+  { id: 7, name: "Grihshobha", websiteLink: "#", genre: "Lifestyle", readership: 5000000, frequency: "Monthly", adRate: "₹1,80,000/page", minBudget: 180000, language: "Hindi", recommended: true, image: "images/grihshobha.jpg" },
+  { id: 8, name: "Forbes India", websiteLink: "https://www.forbesindia.com/", genre: "Business", readership: 500000, frequency: "Monthly", adRate: "₹5,00,000/page", minBudget: 500000, language: "English", recommended: false, image: "images/Forbes India.jpg" }
+];
 
 const newspapersData = [
   { id: 1, name: "The Times of India", websiteLink: "https://timesofindia.indiatimes.com/", genre: "National", circulation: 2800000, readership: "7.6M", adRate: "₹2,500/sq.cm", minBudget: 25000, location: "National", language: "English", recommended: true, image: "images/The Times of India.jpg" },
-            { id: 2, name: "Hindustan Times", websiteLink: "https://www.hindustantimes.com/", genre: "National", circulation: 1400000, readership: "4.5M", adRate: "₹1,800/sq.cm", minBudget: 18000, location: "National", language: "English", recommended: true, image: "images/Hindustan Times.jpg" },
-            { id: 3, name: "The Hindu", websiteLink: "https://www.thehindu.com/", genre: "National", circulation: 1200000, readership: "4.1M", adRate: "₹1,600/sq.cm", minBudget: 16000, location: "National", language: "English", recommended: false, image: "images/The Hindu.jpg" },
-            { id: 4, name: "Dainik Jagran", websiteLink: "https://www.jagran.com/", genre: "National", circulation: 3600000, readership: "16.4M", adRate: "₹2,800/sq.cm", minBudget: 28000, location: "National", language: "Hindi", recommended: true, image: "images/Dainik Jagran.jpg" },
-            { id: 5, name: "Lokmat", websiteLink: "https://www.lokmat.com/", genre: "Regional", circulation: 1300000, readership: "18M", adRate: "₹1,500/sq.cm", minBudget: 15000, location: "Maharashtra", language: "Marathi", recommended: true, image: "images/Lokmat.jpg" },
-            { id: 6, name: "The Economic Times", websiteLink: "https://economictimes.indiatimes.com/", genre: "Business", circulation: 800000, readership: "2.5M", adRate: "₹2,200/sq.cm", minBudget: 22000, location: "National", language: "English", recommended: false, image:"images/The Economic Times.jpg" },
-            { id: 7, name: "Nagpur Today", websiteLink: "#", genre: "Local", circulation: 45000, readership: "150K", adRate: "₹300/sq.cm", minBudget: 3000, location: "Nagpur", language: "English", recommended: false, image: "images/Nagpur Today.jpg" },
-            { id: 8, name: "Mumbai Mirror", websiteLink: "#", genre: "Tabloid", circulation: 400000, readership: "1.2M", adRate: "₹900/sq.cm", minBudget: 9000, location: "Mumbai", language: "English", recommended: false, image: "images/Mumbai Mirror.jpg" }
-       ];
+  { id: 2, name: "Hindustan Times", websiteLink: "https://www.hindustantimes.com/", genre: "National", circulation: 1400000, readership: "4.5M", adRate: "₹1,800/sq.cm", minBudget: 18000, location: "National", language: "English", recommended: true, image: "images/Hindustan Times.jpg" },
+  { id: 3, name: "The Hindu", websiteLink: "https://www.thehindu.com/", genre: "National", circulation: 1200000, readership: "4.1M", adRate: "₹1,600/sq.cm", minBudget: 16000, location: "National", language: "English", recommended: false, image: "images/The Hindu.jpg" },
+  { id: 4, name: "Dainik Jagran", websiteLink: "https://www.jagran.com/", genre: "National", circulation: 3600000, readership: "16.4M", adRate: "₹2,800/sq.cm", minBudget: 28000, location: "National", language: "Hindi", recommended: true, image: "images/Dainik Jagran.jpg" },
+  { id: 5, name: "Lokmat", websiteLink: "https://www.lokmat.com/", genre: "Regional", circulation: 1300000, readership: "18M", adRate: "₹1,500/sq.cm", minBudget: 15000, location: "Maharashtra", language: "Marathi", recommended: true, image: "images/Lokmat.jpg" },
+  { id: 6, name: "The Economic Times", websiteLink: "https://economictimes.indiatimes.com/", genre: "Business", circulation: 800000, readership: "2.5M", adRate: "₹2,200/sq.cm", minBudget: 22000, location: "National", language: "English", recommended: false, image:"images/The Economic Times.jpg" },
+  { id: 7, name: "Nagpur Today", websiteLink: "#", genre: "Local", circulation: 45000, readership: "150K", adRate: "₹300/sq.cm", minBudget: 3000, location: "Nagpur", language: "English", recommended: false, image: "images/Nagpur Today.jpg" },
+  { id: 8, name: "Mumbai Mirror", websiteLink: "#", genre: "Tabloid", circulation: 400000, readership: "1.2M", adRate: "₹900/sq.cm", minBudget: 9000, location: "Mumbai", language: "English", recommended: false, image: "images/Mumbai Mirror.jpg" }
+];
 
 const digitalPlatformsData = [
   { id: 1, name: "Google Ads", websiteLink: "https://ads.google.com/", platformType: "Google", reach: "90% of Internet Users", reachVal: 90, formats: ["Search", "Display", "Video"], adRate: "Pay-Per-Click", minBudget: 25000, recommended: true, image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg" },
-            { id: 2, name: "Meta Ads", websiteLink: "https://www.facebook.com/business/ads", platformType: "Meta", reach: "3.0B+ Monthly Users", reachVal: 80, formats: ["Social", "Video", "Display"], adRate: "Pay-Per-Impression", minBudget: 20000, recommended: true, image: "images/meta.jpg" },
-            { id: 3, name: "LinkedIn Ads", websiteLink: "https://www.linkedin.com/business/marketing/ads", platformType: "LinkedIn", reach: "1B+ Professionals", reachVal: 50, formats: ["Social", "Display"], adRate: "Pay-Per-Click", minBudget: 35000, recommended: false, image: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" },
-            { id: 4, name: "YouTube Ads", websiteLink: "https://www.youtube.com/ads/", platformType: "Google", reach: "2.5B+ Monthly Users", reachVal: 75, formats: ["Video"], adRate: "Pay-Per-View", minBudget: 30000, recommended: true, image: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" },
-            { id: 5, name: "Amazon Ads", websiteLink: "https://advertising.amazon.com/", platformType: "E-commerce", reach: "300M+ Customers", reachVal: 60, formats: ["Display", "Search"], adRate: "Pay-Per-Click", minBudget: 40000, recommended: false, image: "images/Amazon.jpg" },
-            { id: 6, name: "Programmatic Display", websiteLink: "#", platformType: "Programmatic", reach: "Vast Ad Exchanges", reachVal: 85, formats: ["Display", "Video"], adRate: "CPM Bidding", minBudget: 50000, recommended: false, image: "https://i.imgur.com/8aP2B3y.png" }
-        ];
+  { id: 2, name: "Meta Ads", websiteLink: "https://www.facebook.com/business/ads", platformType: "Meta", reach: "3.0B+ Monthly Users", reachVal: 80, formats: ["Social", "Video", "Display"], adRate: "Pay-Per-Impression", minBudget: 20000, recommended: true, image: "images/meta.jpg" },
+  { id: 3, name: "LinkedIn Ads", websiteLink: "https://www.linkedin.com/business/marketing/ads", platformType: "LinkedIn", reach: "1B+ Professionals", reachVal: 50, formats: ["Social", "Display"], adRate: "Pay-Per-Click", minBudget: 35000, recommended: false, image: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" },
+  { id: 4, name: "YouTube Ads", websiteLink: "https://www.youtube.com/ads/", platformType: "Google", reach: "2.5B+ Monthly Users", reachVal: 75, formats: ["Video"], adRate: "Pay-Per-View", minBudget: 30000, recommended: true, image: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" },
+  { id: 5, name: "Amazon Ads", websiteLink: "https://advertising.amazon.com/", platformType: "E-commerce", reach: "300M+ Customers", reachVal: 60, formats: ["Display", "Search"], adRate: "Pay-Per-Click", minBudget: 40000, recommended: false, image: "images/Amazon.jpg" },
+  { id: 6, name: "Programmatic Display", websiteLink: "#", platformType: "Programmatic", reach: "Vast Ad Exchanges", reachVal: 85, formats: ["Display", "Video"], adRate: "CPM Bidding", minBudget: 50000, recommended: false, image: "https://i.imgur.com/8aP2B3y.png" }
+];

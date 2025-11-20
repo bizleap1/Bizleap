@@ -31,7 +31,7 @@ export default function About() {
   return (
     <div className="bg-black text-white min-h-screen px-6 md:px-16 lg:px-32 py-20">
 
-      {/* ===== TOP IMAGE GALLERY WITH ARROWS ===== */}
+      {/* ===== TOP IMAGE GALLERY WITH ARROWS ===== 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export default function About() {
         viewport={{ once: true }}
         className="max-w-6xl mx-auto flex flex-col items-center text-center mb-24"
       >
-        {/* Main Image Carousel */}
+        
         <div className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
           <AnimatePresence mode="wait">
             <motion.div
@@ -59,7 +59,7 @@ export default function About() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Arrows */}
+          
           <button
             onClick={prevImage}
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-white/20"
@@ -73,18 +73,18 @@ export default function About() {
             →
           </button>
 
-          {/* Image Counter */}
+          
           <div className="absolute bottom-4 right-4 bg-black/60 px-3 py-1 rounded-full text-sm">
             {currentIndex + 1} / {galleryImages.length}
           </div>
         </div>
 
-        {/* Caption */}
+        
         <p className="text-gray-300 text-lg mt-8 max-w-2xl">
           A full service talent management, influencer marketing, and video production company.
         </p>
 
-        {/* Thumbnail Row */}
+        
         <div className="flex justify-center gap-4 mt-8 flex-wrap">
           {galleryImages.map((src, i) => (
             <div
@@ -98,7 +98,7 @@ export default function About() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* ===== ABOUT US SECTION ===== */}
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
