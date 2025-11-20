@@ -184,34 +184,36 @@ function DropdownFilter({ id, title, options = [], isRange = false, selected = [
 
 // ------------------- NEW INFLUENCER CARD (Updated for new data) -------------------
 function InfluencerCard({ item, onClick }) {
-  const getInitials = (name) => {
-    return name
-      .split(' ')
-      .map(word => word[0])
-      .join('')
+  const getInitials = (name) =>
+    name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
       .toUpperCase()
       .slice(0, 2);
-  };
 
-  const getGenderColor = (gender) => {
-    return gender === 'female' ? 'bg-pink-500/20 text-pink-400 border-pink-500/30' : 
-           gender === 'male' ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' : 
-           'bg-purple-500/20 text-purple-400 border-purple-500/30';
-  };
+  const getGenderColor = (gender) =>
+    gender === "female"
+      ? "bg-pink-500/20 text-pink-400 border-pink-500/30"
+      : gender === "male"
+      ? "bg-blue-500/20 text-blue-400 border-blue-500/30"
+      : "bg-purple-500/20 text-purple-400 border-purple-500/30";
 
   return (
-    <motion.div whileHover={{ scale: 1.03, y: -6 }} onClick={() => onClick(item, "influencer")} className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-2xl transition-all duration-400 cursor-pointer group hover:border-yellow-500/50 relative">
-      
-
-      {/* Image/Avatar Section */}
-      <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
+    <motion.div
+      whileHover={{ scale: 1.03, y: -6 }}
+      onClick={() => onClick(item, "influencer")}
+      className="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-2xl overflow-hidden shadow-xl transition-all duration-400 cursor-pointer group hover:border-yellow-500/50"
+    >
+      {/* Image Section (Perfect Sizing) */}
+      <div className="relative w-full h-60 overflow-hidden bg-gray-900">
         {item.image && item.image !== "-" ? (
-          <SafeImage 
-            src={item.image} 
-            alt={item.name} 
-            width={700} 
-            height={420} 
-            className="w-full h-full group-hover:scale-110 transition-transform duration-700"
+          <SafeImage
+            src={item.image}
+            alt={item.name}
+            width={1200}
+            height={800}
+            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -223,19 +225,19 @@ function InfluencerCard({ item, onClick }) {
             </div>
           </div>
         )}
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
-      {/* Content Section */}
-      <div className="p-5 relative">
-        {/* Name and Instagram */}
+      {/* Content */}
+      <div className="p-5">
+        {/* Name + IG */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1">
             <h3 className="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors duration-300 line-clamp-1">
               {item.name}
             </h3>
+
             <div className="flex items-center gap-2 mt-1">
               <LocationIcon />
               <span className="text-xs text-gray-400 line-clamp-1">
@@ -243,22 +245,32 @@ function InfluencerCard({ item, onClick }) {
               </span>
             </div>
           </div>
-          <a 
-            href={item.instagramLink} 
-            target="_blank" 
-            rel="noreferrer" 
+
+          <a
+            href={item.instagramLink}
+            target="_blank"
+            rel="noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="flex-shrink-0 p-2 bg-gray-800 rounded-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all duration-300 group/insta shadow-lg"
+            className="flex-shrink-0 p-2 bg-gray-800 rounded-xl hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg"
           >
             <InstaIcon />
           </a>
         </div>
 
-        {/* Gender Badge */}
+        {/* Gender + Style */}
         <div className="flex flex-wrap gap-2 mb-4">
-          <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getGenderColor(item.gender)}`}>
-            {item.gender === 'female' ? '♀ Female' : item.gender === 'male' ? '♂ Male' : 'Other'}
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-medium border ${getGenderColor(
+              item.gender
+            )}`}
+          >
+            {item.gender === "female"
+              ? "♀ Female"
+              : item.gender === "male"
+              ? "♂ Male"
+              : "Other"}
           </span>
+
           {item.contentStyle && item.contentStyle !== "-" && (
             <span className="px-3 py-1 rounded-full text-xs font-medium bg-gray-700/50 text-gray-300 border border-gray-600">
               {item.contentStyle}
@@ -266,15 +278,16 @@ function InfluencerCard({ item, onClick }) {
           )}
         </div>
 
-        {/* Stats Grid */}
+        {/* Stats */}
         <div className="grid grid-cols-2 gap-3 text-center">
-          <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700/50 group-hover:border-gray-600 transition-colors">
+          <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700/50 transition-colors group-hover:border-gray-600">
             <div className="text-lg font-bold text-yellow-400">
               {item.followers && item.followers !== "-" ? item.followers : "N/A"}
             </div>
             <div className="text-xs text-gray-400 mt-1">Followers</div>
           </div>
-          <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700/50 group-hover:border-gray-600 transition-colors">
+
+          <div className="bg-gray-800/50 rounded-xl p-3 border border-gray-700/50 transition-colors group-hover:border-gray-600">
             <div className="text-lg font-bold text-green-400">
               {item.engagement && item.engagement !== "-" ? item.engagement : "N/A"}
             </div>
@@ -282,14 +295,17 @@ function InfluencerCard({ item, onClick }) {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <button className="w-full mt-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-yellow-500 hover:to-orange-500 text-gray-300 hover:text-black font-medium py-2.5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg group-hover:shadow-yellow-500/25">
+        {/* CTA */}
+        <button className="w-full mt-4 bg-gradient-to-r from-gray-800 to-gray-700 hover:from-yellow-500 hover:to-orange-500 text-gray-300 hover:text-black font-medium py-2.5 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
           View Profile
         </button>
       </div>
     </motion.div>
   );
 }
+
+
+
 
 // ------------------- REST OF THE CARD COMPONENTS (UNCHANGED) -------------------
 function MagazineCard({ item, onClick }) {
@@ -861,9 +877,9 @@ export default function CreatorsSection() {
 
 /* ------------------- YOUR UPDATED INFLUENCER DATA ------------------- */
 const influencersData = [
-  { id: 1, name: "Himika Bose", location: "Delhi - Mumbai", instagramLink: "https://www.instagram.com/himika_bose/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
-  { id: 2, name: "Natasha Patel", location: "-", instagramLink: "https://www.instagram.com/natasshapatel/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
-  { id: 3, name: "Saanchi Gilani", location: "Mumbai", instagramLink: "https://www.instagram.com/saanchigilani/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 1, name: "Himika Bose", location: "Delhi - Mumbai", instagramLink: "https://www.instagram.com/himika_bose/", gender: "female", contentStyle: "Lifestyle", followers: "102K", engagement: "0.37%", image: "Creators/himika.webp" },
+  { id: 2, name: "Natasha Patel", location: "-", instagramLink: "https://www.instagram.com/natasshapatel/", gender: "female", contentStyle: "Lifestyle", followers: "146K", engagement: "1.05%", image: "Creators/Natasha.jpeg" },
+  { id: 3, name: "Saanchi Gilani", location: "Mumbai", instagramLink: "https://www.instagram.com/saanchigilani/", gender: "female", contentStyle: "Fashion", followers: "98K", engagement: "5.36%", image: "Creators/Saanchi.jpg" },
   { id: 4, name: "Isha Sutaria", location: "Mumbai", instagramLink: "https://www.instagram.com/isha.sutaria/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 5, name: "Alisha Pekha", location: "Delhi - Mumbai", instagramLink: "https://www.instagram.com/theallyedit/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 6, name: "Vitallian Angel", location: "-", instagramLink: "https://www.instagram.com/vitallianangel/", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
@@ -882,7 +898,7 @@ const influencersData = [
   { id: 19, name: "Shruthi G Rao", location: "Mumbai / Mangalore", instagramLink: "https://www.instagram.com/ishruthigrao_", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 20, name: "Jya Mishra", location: "Mumbai", instagramLink: "https://www.instagram.com/jyamishra1", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 21, name: "Jyoti Rolla", location: "Mumbai", instagramLink: "https://www.instagram.com/jyotirolla", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
-  { id: 22, name: "Paulo Mishital", location: "Mumbai", instagramLink: "https://www.instagram.com/paulomishital", gender: "male", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
+  { id: 22, name: "Paulomi Shital", location: "Mumbai", instagramLink: "https://www.instagram.com/paulomishital", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 23, name: "Priyanka Negi", location: "Mumbai", instagramLink: "https://www.instagram.com/_priyankanegi_", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 24, name: "Ria Pednekar", location: "-", instagramLink: "https://www.instagram.com/riapednekar03", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
   { id: 25, name: "Aachal Punjabi", location: "Mumbai", instagramLink: "https://www.instagram.com/aanchpunjabi", gender: "female", contentStyle: "-", followers: "-", engagement: "-", image: "-" },
