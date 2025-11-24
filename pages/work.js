@@ -1,175 +1,261 @@
-// pages/work.js
-import { useState } from "react";
+"use client";
+
 import Image from "next/image";
-import PortfolioSection from "../components/PortfolioCard";
+import { useState, useRef } from "react";
+import Link from "next/link";
+import { motion, useInView } from "motion/react";
+
+// ------------------- Scroll Reveal -------------------
+function ScrollReveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "0px 0px -20% 0px", once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+      animate={
+        inView
+          ? {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { delay, duration: 0.5 },
+            }
+          : {}
+      }
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function Work() {
-  const [activeProject, setActiveProject] = useState(null);
-  const [fullscreenImage, setFullscreenImage] = useState(null);
+  const categories = [
+    "All Projects",
+    "Branding",
+    "Production",
+    "Social Media",
+    "Ad Campaigns",
+  ];
 
-  const projects = [
+  const [active, setActive] = useState("All Projects");
+const [showMobileFilter, setShowMobileFilter] = useState(false);
+
+  const items = [
     {
       id: 1,
       title: "Solar Ark",
-      thumb: "/images/Solar.png",
-      images: ["/images/Solar2.png", "/images/Solar3.png"],
-      description:
-        "Solar Ark is a smart solar initiative blending innovation and sustainability through next-gen energy systems.",
+      subtitle: "Branding",
+      image: "/images/Solar.png",
+      link: "/solarark",
     },
     {
       id: 2,
       title: "Masato",
-      thumb: "/images/Masato.png",
-      images: ["/images/Masato2.png"],
-      description:
-        "Masato delivers authentic culinary experiences wrapped in tradition and taste with modern aesthetics.",
+      subtitle: "Branding",
+      image: "/images/Masato.png",
+      link: "/masato",
     },
     {
       id: 3,
       title: "Meher Infra Solutions",
-      thumb: "/images/Meher.png",
-      images: ["/images/Meher2.png"],
-      description:
-        "Meher Infra Solutions focuses on sustainable infrastructure development with futuristic design approaches.",
+      subtitle: "Branding",
+      image: "/images/Meher.png",
+      link: "/meher",
     },
     {
       id: 4,
       title: "Tuli Restro",
-      thumb: "/images/Tuii.png",
-      images: ["/images/Tuii2.png"],
-      description:
-        "Tuli Restro combines fine dining and vibrant ambiance to redefine culinary luxury and experience.",
+      subtitle: "Branding",
+      image: "/images/Tuii.png",
+      link: "/tulirestro",
     },
   ];
 
+  const filtered =
+    active === "All Projects"
+      ? items
+      : items.filter((item) => item.subtitle === active);
+
   return (
-    <div className="bg-black min-h-screen text-white px-6 md:px-16 lg:px-24 py-20">
-      {/* Inline animation styles */}
-      <style jsx>{`
-        @keyframes fadeBlur {
-          from {
-            opacity: 0;
-            filter: blur(8px);
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0);
-          }
-        }
-        @keyframes expand {
-          from {
-            opacity: 0;
-            max-height: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            max-height: 2000px;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeBlur {
-          animation: fadeBlur 0.6s ease-in-out both;
-        }
-        .animate-expand {
-          animation: expand 0.5s ease-in-out both;
-        }
-      `}</style>
+    <div className="min-h-screen w-full bg-white text-black">
 
-      {/* Heading */}
-      <h1 className="text-5xl md:text-7xl font-extrabold leading-tight animate-fadeBlur">
-        Explore our <br />
-        <span className="text-yellow-400">Work</span>
-      </h1>
+      {/* ------------------ HERO ------------------ */}
+      <section
+  className="bg-black text-white px-6 md:px-20 h-[40vh] md:h-[55vh] flex flex-col justify-end pb-5 md:pb-10"
+>
+  {/* ---- TOP LINE ---- */}
+  <div className="w-16 h-[2px] bg-white/40 mb-3 md:mb-4"></div>
 
-      {/* Projects Grid */}
-      <div className="grid md:grid-cols-2 gap-10 mt-16 animate-fadeBlur">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className={`cursor-pointer border border-gray-700 rounded-2xl bg-gradient-to-b from-gray-900/60 to-black hover:border-yellow-400 transition-all hover:shadow-[0_0_25px_rgba(255,255,0,0.15)] ${
-              activeProject === project.id ? "scale-[1.01]" : ""
-            } animate-fadeBlur`}
-            onClick={() =>
-              setActiveProject(activeProject === project.id ? null : project.id)
+  <ScrollReveal>
+    <h1
+      className="text-4xl md:text-6xl leading-tight"
+      style={{
+        fontFamily: '"Noto Sans", sans-serif',
+        fontWeight: 700,
+        color: "white",
+      }}
+    >
+      A Showcase of Our <br /> Finest Work.
+    </h1>
+  </ScrollReveal>
+
+  <ScrollReveal delay={0.2}>
+    <p
+      className="mt-3 md:mt-4 text-base md:text-xl max-w-xl"
+      style={{
+        fontFamily: '"Noto Sans", sans-serif',
+        fontWeight: 400,
+        color: "rgb(180,180,180)",
+        lineHeight: "22px md:26px",
+      }}
+    >
+      Dive into the creative solutions that brought these bespoke brands to life.
+    </p>
+  </ScrollReveal>
+
+  {/* ---- BOTTOM LINE ---- */}
+  <div className="w-20 h-[2px] bg-white/30 mt-4 md:mt-5"></div>
+</section>
+
+
+
+      {/* ------------------ CATEGORY FILTER (Mobile Fixed) ------------------ */}
+      {/* MOBILE FILTER (dropdown) */}
+<div className="w-full px-4 mt-5  sm:hidden">
+  <button
+    onClick={() => setShowMobileFilter(!showMobileFilter)}
+    className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[#F6FF00] text-black font-semibold shadow-sm active:scale-[0.98] transition"
+    style={{ fontFamily: '"Noto Sans", sans-serif' }}
+  >
+    {active}
+    <span className="text-lg">▾</span>
+  </button>
+
+  {showMobileFilter && (
+    <div
+      className="mt-2 rounded-xl bg-white shadow-lg border border-gray-200 overflow-hidden"
+      style={{
+        animation: "fadeSlide 0.25s ease-out",
+        fontFamily: '"Noto Sans", sans-serif',
+      }}
+    >
+      {categories.map((cat) => (
+        <button
+          key={cat}
+          onClick={() => {
+            setActive(cat)
+            setShowMobileFilter(false)
+          }}
+          className={`w-full text-left px-4 py-3 text-sm transition
+            ${
+              active === cat
+                ? "bg-[#F6FF00] text-black font-semibold"
+                : "text-gray-700 hover:bg-gray-100"
             }
-          >
-            {/* Thumbnail */}
-            <div className="w-full h-64 relative overflow-hidden rounded-t-2xl">
-              <Image
-                src={project.thumb}
-                alt={project.title}
-                fill
-                className="object-contain bg-black transition-transform duration-500 hover:scale-105"
-              />
-            </div>
-
-            {/* Title and Desc */}
-            <div className="p-6 transition-all duration-500 hover:brightness-110">
-              <h2 className="text-2xl font-semibold mb-2 text-yellow-400">
-                {project.title}
-              </h2>
-              <p className="text-gray-300 text-sm md:text-base">
-                {activeProject === project.id
-                  ? project.description
-                  : "Click to explore more..."}
-              </p>
-            </div>
-
-            {/* Expanded Section */}
-            {activeProject === project.id && (
-              <div className="p-6 border-t border-gray-700 animate-expand">
-                <div className="grid md:grid-cols-3 gap-4 mb-6">
-                  {project.images.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="relative cursor-pointer group overflow-hidden rounded-lg"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setFullscreenImage(img);
-                      }}
-                    >
-                      <Image
-                        src={img}
-                        alt={project.title}
-                        width={400}
-                        height={250}
-                        className="object-contain bg-black transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <p className="text-gray-300">{project.description}</p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Fullscreen Image Viewer */}
-      {fullscreenImage && (
-        <div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 backdrop-blur-sm animate-fadeBlur"
-          onClick={() => setFullscreenImage(null)}
+          `}
         >
+          {cat}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+{/* DESKTOP FILTER (original, untouched) */}
+<div className="w-full flex justify-center mt-9 px-4 hidden sm:flex">
+  <div
+    className="flex items-center gap-0 overflow-x-auto no-scrollbar border border-gray-300 rounded-full px-4 py-2 bg-white"
+    style={{ fontFamily: '"Noto Sans", sans-serif' }}
+  >
+    {categories.map((cat, idx) => (
+      <div key={cat} className="flex items-center">
+        <button
+          onClick={() => setActive(cat)}
+          className={`
+            whitespace-nowrap px-6 py-2 text-sm font-semibold transition rounded-full
+            ${
+              active === cat
+                ? "bg-[#F6FF00] text-black"
+                : "text-black bg-transparent"
+            }
+          `}
+        >
+          {cat}
+        </button>
+
+        {idx !== categories.length - 1 && (
+          <div className="h-5 w-[1px] bg-gray-300 mx-3"></div>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* INLINE ANIMATION */}
+<style>
+  {`
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(-6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  `}
+</style>
+
+
+
+      {/* ------------------ PROJECT GRID ------------------ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-6 md:px-20 py-5 md:py-12">
+  {filtered.map((item, idx) => (
+    <ScrollReveal key={idx} delay={idx * 0.1}>
+      <Link href={item.link} className="group cursor-pointer block">
+
+        {/* IMAGE (Full image visible – object-contain) */}
+        <div className="w-full h-64 relative overflow-hidden rounded-lg shadow-sm bg-white">
           <Image
-            src={fullscreenImage}
-            alt="Fullscreen"
-            width={1200}
-            height={800}
-            className="object-contain max-h-[90vh] rounded-lg"
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-contain"
           />
-          <button
-            className="absolute top-6 right-8 text-white text-3xl font-bold hover:text-yellow-400"
-            onClick={() => setFullscreenImage(null)}
-          >
-            ✕
-          </button>
         </div>
-      )}
-      <PortfolioSection/>
+
+        <h3
+          className="text-xl font-semibold mt-4"
+          style={{ fontFamily: '"Noto Sans", sans-serif' }}
+        >
+          {item.title}
+        </h3>
+
+        <p
+          className="text-gray-600 text-lg"
+          style={{ fontFamily: '"Noto Sans", sans-serif' }}
+        >
+          {item.subtitle}
+        </p>
+
+        <div className="w-full h-[1px] bg-gray-200 mt-3" />
+
+        {/* VIEW MORE BUTTON */}
+        <div className="mt-4 inline-block relative group">
+          <span
+            className="absolute -bottom-1 -right-1 w-full h-full bg-black transition-all duration-200 group-hover:-bottom-2 group-hover:-right-2"
+          ></span>
+
+          <span
+            className="border border-black px-5 py-2 bg-white font-semibold text-sm relative z-10 block"
+            style={{ fontFamily: '"Noto Sans", sans-serif' }}
+          >
+            VIEW MORE
+          </span>
+        </div>
+
+      </Link>
+    </ScrollReveal>
+  ))}
+</div>
+
     </div>
   );
 }

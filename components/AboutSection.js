@@ -85,11 +85,7 @@ export default function AboutSection() {
           </ScrollView>
           <ScrollView delay={0.1}>
             <p className="text-white/90">
-              BizLeap was born from a simple idea—great design should do
-              more than just look good; it should make an impact. What started
-              as a passion for creativity turned into a full-fledged design
-              agency dedicated to helping brands tell their stories, connect
-              with audiences, and stand out in a crowded world.
+              At Bizleap, we’re proud of our journey from humble beginnings to becoming a leading digital marketing company. We started from scratch, with no initial investments or external help, just sheer hard work and determination. Our founders, with over 6 years of combined industry experience, brought their expertise in various fields to the table. Their unique blend of skills and passion for innovation has enabled us to deliver exceptional results for our clients. We offer a range of services, including SEO, website development, social media management, content marketing, and PPC advertising. 
             </p>
           </ScrollView>
         </div>

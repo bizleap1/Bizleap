@@ -101,7 +101,7 @@ export default function About() {
       </motion.div> */}
 
       {/* ===== ABOUT US SECTION ===== */}
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 py-10 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -109,22 +109,18 @@ export default function About() {
           className="flex-1"
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-8">About Us</h1>
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            BizLeap is a next-generation business solutions company empowering
-            brands and creators through strategy, technology, and creative media.
-            We specialize in talent management, influencer marketing, and content
-            production — driving authentic growth in the digital landscape.
+          <p className="text-gray-300 text-lg font-bold leading-relaxed mb-6">
+            Started with a spark, and now we’re on fire! Bizleap’s 6+ years in the game make us your go-to digital gurus
           </p>
           <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            Our advantage lies in our integrated approach. From managing digital
-            creators to executing full-scale marketing campaigns, we build
-            strategies that connect with audiences and amplify brand presence.
+            At Bizleap, we’re proud of our journey from humble beginnings to becoming a leading digital marketing company. We started from scratch, with no initial investments or external help, just sheer hard work and determination. Our founders, with over 6 years of combined industry experience, brought their expertise in various fields to the table. Their unique blend of skills and passion for innovation has enabled us to deliver exceptional results for our clients. We offer a range of services, including SEO, website development, social media management, content marketing, and PPC advertising. 
           </p>
-          <p className="text-gray-300 text-lg leading-relaxed">
-            With a team of experts across domains, we ensure every collaboration
-            drives measurable results and long-term success in a rapidly evolving
-            digital world.
+          <p className="text-gray-300 text-lg leading-relaxed mb-6">
+           With having a diverse team of over 30 talented individuals with expertise in various fields. Our team includes seasoned digital marketers, creative designers, expert developers, and skilled writers, all working together to deliver exceptional results for our clients. With a range of specializations, from SEO and PPC to social media management and content creation, our team members bring their unique skills and perspectives to the table.
           </p>
+<p className="text-gray-300 text-lg leading-relaxed">
+          We’ve come a long way since our humble beginnings. Today, we’re a leading digital marketing company, handling a diverse portfolio of clients across various industries. We’re proud of our journey and look forward to helping businesses succeed online.
+        </p>
         </motion.div>
 
         <motion.div
