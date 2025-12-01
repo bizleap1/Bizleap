@@ -11,7 +11,7 @@ const projects = [
     description:
       "Once trending in Nagpur, Lord of the Drinks faced declining sales. Bizleap revived the brand with a six-month social media strategy, creative content, food photography, and high-impact events. The result: renewed buzz, higher footfall, and a strong comeback as one of Nagpur’s top F&B brands.",
     img: "/Casestudy/LOD.png",
-    logo: "/clients/15.jpg",
+    logo: "/clients/15.png",
   },
   {
     title: "Rasoi Express - Food Delivery for Small Towns",
@@ -35,7 +35,7 @@ const projects = [
     description:
       "We launched Tuli The Grand, a flagship venture of the Tuli Group of Hotels in Nagpur, creating its complete brand identity from logo to strategy. The inauguration was graced by Hon. Nitin Gadkari as chief guest.",
     img: "/Casestudy/tuli.png",
-    logo: "/clients/14.jpg",
+    logo: "/clients/14.png",
   },
   {
     title: "Bizleap x SolarArk: Website Revamp",
