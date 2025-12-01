@@ -89,29 +89,26 @@ const SERVICES_LIST = [
     tags: ["Figma", "Wireframing", "Prototyping", "Responsive Design", "User Testing"],
     img: "/images/abstract-1.webp",
     url: "#",
-    description: "End-to-end digital design from wireframes to polished interfaces. We create intuitive, visually appealing experiences for websites and apps, backed by user research and iterative testing.",
-  },
+    description: "We don’t just design screens we design moments.The kind your audience remembers without knowing why"  },
   {
-    name: "Brand Identity Design",
+    name: "Brand Identity",
     tags: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory"],
     img: "/images/abstract-2.webp",
     url: "#",
-    description: "Comprehensive branding packages including logos, style guides, and asset kits. We craft cohesive visual identities that communicate your brand's essence across all touchpoints.",
-  },
-  {
-    name: "SEO & Website Audits",
-    tags: ["Technical SEO", "Keyword Strategy", "On-Page Optimization", "Analytics", "Performance Tuning"],
-    img: "/images/abstract-3.webp",
-    url: "#",
-    description: "Data-driven SEO audits and optimizations to improve rankings. We analyze technical health, content gaps, and backlink profiles to drive organic growth.",
-  },
+    description: "Your brand is a story waiting to be heard.We shape the colors, words, and visuals that make people feel like… Yeah, this brand gets me.”" },
   {
     name: "Social Media Marketing",
     tags: ["Meta Ads", "Instagram Reels", "Content Strategy", "Community Management", "Performance Tracking"],
     img: "/images/abstract-5.webp",
     url: "#",
-    description: "Full-service social media management—from organic content creation to paid campaigns. We build engaging narratives and measurable strategies tailored to each platform.",
-  },
+    description: "Not content for the sake of posting.We create content that hits reach and engagement.The kind that builds communities, not just followers."},
+    {
+    name: "SEO & Website Audits",
+    tags: ["Technical SEO", "Keyword Strategy", "On-Page Optimization", "Analytics", "Performance Tuning"],
+    img: "/images/abstract-3.webp",
+    url: "#",
+    description: "We fix what's broken, polish what’s dull, and bring your brand to the front where it deserves to be seen, chosen, and remembered."},
+  
 ];
 
 // ------------------- Responsive Hook -------------------

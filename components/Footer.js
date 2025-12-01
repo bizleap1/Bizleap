@@ -33,7 +33,7 @@ const Footer = () => {
           {/* Email */}
           <div className="flex items-center gap-3 text-lg font-semibold text-white">
             <MdEmail size={26} />
-            <a href="mailto:bizleapinc@gmail.com" className="hover:text-yellow-400">
+            <a href="" className="hover:text-yellow-400">
               bizleapinc@gmail.com
             </a>
           </div>
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           {/* Privacy Policy */}
-          <Link href="/privacy" className="text-sm text-gray-500 hover:text-yellow-400 mt-4">
+          <Link href="" className="text-sm text-gray-500 hover:text-yellow-400 mt-4">
             Privacy Policy
           </Link>
         </div>

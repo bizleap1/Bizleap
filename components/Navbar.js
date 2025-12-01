@@ -67,12 +67,12 @@ export default function Navbar() {
 
             {/* Brochure Button */}
             <a
-              href="https://drive.google.com/your-brochure-link"
+              href="https://drive.google.com/file/d/1eB4x3ZbY5z8QTx5q9AGrC3XajmAHNdMq/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-4 px-4 py-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400 transition"
             >
-              Brochure <FiDownload />
+              Portfolio <FiDownload />
             </a>
 
             {/* Contact Button */}
@@ -135,7 +135,7 @@ export default function Navbar() {
 
             {/* Brochure Mobile */}
             <a
-              href="https://drive.google.com/your-brochure-link"
+              href="https://drive.google.com/file/d/1eB4x3ZbY5z8QTx5q9AGrC3XajmAHNdMq/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="block px-4 py-2 mt-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400"

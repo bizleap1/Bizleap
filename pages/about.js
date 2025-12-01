@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import MediaSection from "../components/MediaSection";
 
 export default function About() {
   const galleryImages = [
@@ -143,56 +144,7 @@ export default function About() {
 
       {/* ===== BOTTOM SECTION (MEDIA GRID) ===== */}
       {/* ===== BOTTOM SECTION (MEDIA GRID - FULL WIDTH MASONRY) ===== */}
-<motion.div
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.9, ease: "easeOut" }}
-  viewport={{ once: true }}
-  className="w-full mt-24 px-4 md:px-10"
->
-  <div className="text-center max-w-5xl mx-auto mb-12">
-    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-      India’s Leading Creator Business
-    </h2>
-    <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-      We collaborate with top creators, influencers, and brands to craft
-      meaningful campaigns that inspire, engage, and deliver impact at scale.
-    </p>
-  </div>
-
-  {/* Masonry Layout */}
-  <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 max-w-7xl mx-auto">
-    {bottomMedia.map((item, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: i * 0.1 }}
-        viewport={{ once: true }}
-        className="relative overflow-hidden rounded-2xl shadow-xl border border-gray-800 cursor-pointer hover:scale-[1.02] transition-transform duration-300 break-inside-avoid"
-        onClick={() => setSelectedMedia(item.src)}
-      >
-        {item.type === "image" ? (
-          <Image
-            src={item.src}
-            alt="Media"
-            width={800}
-            height={600}
-            className="object-cover w-full h-auto"
-          />
-        ) : (
-          <video
-            src={item.src}
-            className="object-cover w-full h-auto"
-            muted
-            autoPlay
-            loop
-          />
-        )}
-      </motion.div>
-    ))}
-  </div>
-</motion.div>
+<MediaSection/>
 
 
       {/* ===== FULLSCREEN MEDIA MODAL ===== */}

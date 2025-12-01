@@ -14,7 +14,7 @@ export default function ContactPage() {
         {/* Left Section */}
         <div className="md:w-1/2 space-y-8">
           <h2 className="text-[2.5rem] md:text-[3rem] font-bold leading-snug">
-            Let’s Build <br /> Something Great <br /> Together
+            Tell Us What You’re Dreaming Of. We’ll Build It. <br />
           </h2>
 
           <div className="space-y-4 text-gray-300 text-lg">
@@ -29,7 +29,7 @@ export default function ContactPage() {
             <div className="flex items-center gap-3">
               <FaEnvelope className="text-yellow-400 text-xl" />
               <a
-                href="mailto:bizleapinc@gmail.com"
+                href=""
                 className="hover:text-yellow-400 transition-colors duration-200"
               >
                 bizleapinc@gmail.com

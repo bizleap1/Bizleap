@@ -112,13 +112,15 @@ export default function Hero() {
         "
       >
         <h1 className="headline mt-0 md:mt-20 text-5xl md:text-7xl font-semibold leading-tight text-white">
-          Designs That <br /> Captivate, Brands That Shine.
+          We Design What People Feel. <br />Not What They Skip.
+
         </h1>
 
         <p className="subtext mx-auto max-w-2xl text-lg text-white/90">
-          At BizLeap, we blend creativity and strategy to craft stunning
-          websites, striking visuals, and unforgettable brand experiences that
-          set you apart.
+          Every brand has a heartbeat most just never learn how to make people hear it. At
+BizLeap, we craft stories, designs, and digital experiences that actually converts… the
+kind that make them stop, remember, and come back.
+
         </p>
 
         <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center">

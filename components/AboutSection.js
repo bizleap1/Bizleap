@@ -78,17 +78,27 @@ const ourPrinciples = [
 export default function AboutSection() {
   return (
     <section className="py-16 md:py-32 bg-black text-white" id="about">
-      <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-12">
-        <div className="mx-auto max-w-xl space-y-6 text-center md:space-y-12">
-          <ScrollView>
-            <h2 className="text-4xl font-medium lg:text-5xl">About Us</h2>
-          </ScrollView>
-          <ScrollView delay={0.1}>
-            <p className="text-white/90">
-              At Bizleap, we’re proud of our journey from humble beginnings to becoming a leading digital marketing company. We started from scratch, with no initial investments or external help, just sheer hard work and determination. Our founders, with over 6 years of combined industry experience, brought their expertise in various fields to the table. Their unique blend of skills and passion for innovation has enabled us to deliver exceptional results for our clients. We offer a range of services, including SEO, website development, social media management, content marketing, and PPC advertising. 
-            </p>
-          </ScrollView>
-        </div>
+<div className="mx-auto max-w-5xl px-6 space-y-12">
+<div className="mx-auto max-w-2xl text-center space-y-8">
+<ScrollView>
+<h2 className="text-4xl lg:text-5xl font-semibold">About Us</h2>
+</ScrollView>
+
+
+<ScrollView delay={0.1}>
+<p className="text-white/90 leading-relaxed space-y-4">
+<span className="block font-semibold mt-4">Made with hard work. Built with purpose.</span>
+<span className="block">BizLeap wasn’t built in a boardroom. It was built from late nights, messy drafts, too many coffees, and a stubborn belief that design should make people feel something.</span>
+<span className="block">We don’t create for “clients.” We create for the dreamers, the builders, the ones who wake up wanting to leave a mark.</span>
+<span className="block">And if you’re here, you’re probably one of them.</span>
+
+
+<span className="block font-semibold mt-4">What we stand for:</span>
+<span className="block">• Honest Work — no shortcuts, no fake promises.</span>
+<span className="block">• Purpose in Every Pixel — everything we make has meaning.</span>
+</p>
+</ScrollView>
+</div>
 
         <ScrollView delay={0.2}>
           <video
