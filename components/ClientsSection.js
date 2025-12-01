@@ -36,9 +36,9 @@ const CLIENT_CATEGORIES = [
   {
     title: "Food & Beverages",
     clients: [
-      { name: "Barcode", logo: "/clients/13.jpg" },
-      { name: "Tuli", logo: "/clients/14.jpg" },
-      { name: "Lord Of The Drinks", logo: "/clients/15.jpg" },
+      { name: "Barcode", logo: "/clients/13.png" },
+      { name: "Tuli", logo: "/clients/14.png" },
+      { name: "Lord Of The Drinks", logo: "/clients/15.png" },
       { name: "YO FO BO", logo: "/clients/16.png" },
       { name: "Crispy Crowns", logo: "/clients/17.png" },
       { name: "Masato", logo: "/clients/18.png" },
