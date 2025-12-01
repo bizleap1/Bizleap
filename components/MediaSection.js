@@ -4,10 +4,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const REELS = [
-  { src: "/reel4.mp4" },
+  { src: "/reel4.Mp4" },
   { src: "/reel5.mp4" },
-  { src: "/reel3.mp4" },
-  { src: "/reel1.mp4" },
   { src: "/reel6.mp4" },
   { src: "/reel7.mp4" },
   { src: "/reel8.mp4" },
