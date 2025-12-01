@@ -37,6 +37,14 @@ const projects = [
     img: "/Casestudy/tuli.png",
     logo: "/clients/14.jpg",
   },
+  {
+    title: "Bizleap x SolarArk: Website Revamp",
+    brand: "SOLAR ARK",
+    description:
+      "Bizleap redesigned Solar Ark’s website with fresh content, on-site shoots, and client stories—creating a platform that highlights their solar expertise and strengthens brand credibility.",
+    img: "/Casestudy/solar.webp",
+    logo: "/clients/52.png",
+  },
 ];
 
 export default function Work() {
@@ -82,11 +90,11 @@ export default function Work() {
               {/* ===== Left Side (Text + Logo) ===== */}
               <div className="flex-1">
                 {/* Title above logo */}
-                <h3 className="text-2xl font-semibold mb-4 text-white">
+                <h3 className="text-2xl font-semibold mb-1 text-white">
                   {projects[current].title}
                 </h3>
 
-                <div className="mb-6">
+                <div className="mb-1">
                   <Image
                     src={projects[current].logo}
                     alt={projects[current].brand}
