@@ -141,7 +141,7 @@ export default function Navbar() {
               className="block px-4 py-2 mt-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400"
               onClick={() => setMenuOpen(false)}
             >
-              Brochure <FiDownload />
+              Portfolio <FiDownload />
             </a>
 
             {/* Contact Mobile */}
