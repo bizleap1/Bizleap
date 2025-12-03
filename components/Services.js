@@ -373,7 +373,7 @@ function DesktopServices() {
     <ReactLenis root>
       <main className="bg-black" ref={containerRef}>
         <section className="w-full h-[10vh] flex items-center justify-center bg-black">
-          <h1 className="text-4xl md:text-5xl font-bold text-white m-0">Services</h1>
+          <h2 className="text-4xl md:text-5xl font-bold text-white m-0">Services</h2>
         </section>
 
         <section className="w-full bg-black">

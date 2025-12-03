@@ -83,15 +83,15 @@ export default function ServicesSection() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto space-y-6">
           <ScrollReveal>
-            <h2 className="text-4xl md:text-5xl font-semibold">Our Services</h2>
+            <h1 className="text-4xl md:text-5xl font-semibold">Our Services</h1>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed">
+            <h2 className="text-gray-300 text-base md:text-lg leading-relaxed">
               At BizLeap Studio, we create designs that do more than look good —
               they solve problems, connect with people, and drive measurable
               results. Whether you’re starting fresh or refining your brand, we’ve
               got you covered.
-            </p>
+            </h2>
           </ScrollReveal>
         </div>
 

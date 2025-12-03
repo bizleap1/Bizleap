@@ -102,7 +102,7 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
   </ScrollReveal>
 
   <ScrollReveal delay={0.2}>
-    <p
+    <h2
       className="mt-3 md:mt-4 text-base md:text-xl max-w-xl"
       style={{
         fontFamily: '"Noto Sans", sans-serif',
@@ -112,7 +112,7 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
       }}
     >
       Dive into the creative solutions that brought these bespoke brands to life.
-    </p>
+    </h2>
   </ScrollReveal>
 
   {/* ---- BOTTOM LINE ---- */}

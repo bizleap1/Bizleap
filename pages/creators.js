@@ -740,12 +740,12 @@ export default function CreatorsSection() {
     <section className="py-20 bg-black text-white" id="creators">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-6 mt-12">
-          <h2 className="text-4xl md:text-5xl font-semibold text-white">
+          <h1 className="text-4xl md:text-5xl font-semibold text-white">
             Our Creators & Media Partners
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto mt-2">
+          </h1>
+          <h2 className="text-gray-400 max-w-2xl mx-auto mt-2">
             Tap any card to view detailed info. Use filters to narrow results.
-          </p>
+          </h2>
         </div>
 
         {/* Tabs */}
