@@ -4,7 +4,7 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { FiCheck, FiArrowRight, FiPalette, FiFileText, FiGrid, FiGlobe, FiStar } from "react-icons/fi"
+import { FiCheck, FiArrowRight, FiFileText, FiGrid, FiGlobe, FiStar } from "react-icons/fi"
 
 // ------------------- Badge Component -------------------
 function Badge({ children, variant = "secondary", className = "" }) {
