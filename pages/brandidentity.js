@@ -58,7 +58,7 @@ export default function BrandIdentityService() {
       description: "Primary, secondary, and submark logos in multiple formats"
     },
     {
-      icon: FiPalette,
+      icon: FiGlobe,
       title: "Color Palette",
       description: "Primary, secondary, and accent colors with usage guidelines"
     },
