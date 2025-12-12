@@ -112,7 +112,7 @@ export default function Hero() {
         "
       >
         <h1 className="headline mt-0 md:mt-20 text-5xl md:text-7xl font-semibold leading-tight text-white">
-          We Design What People Feel. <br />Not What They Skip.
+          Bizleap – Where Brands Leap Forward
 
         </h1>
 
