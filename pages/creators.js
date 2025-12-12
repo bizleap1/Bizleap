@@ -211,9 +211,11 @@ function InfluencerCard({ item, onClick }) {
           <SafeImage
             src={item.image}
             alt={item.name}
-            width={1200}
-            height={800}
-            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            width={600}  // Adjusted for better aspect ratio
+            height={600} // Square aspect ratio
+            className="w-full h-full object-contain object-center transition-transform duration-700 group-hover:scale-105"
+            // OR use this for better control:
+            // className="w-auto h-full mx-auto object-contain transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -880,27 +882,27 @@ export default function CreatorsSection() {
 
 /* ------------------- YOUR UPDATED INFLUENCER DATA ------------------- */
 const influencersData = [
-  { id: 1, name: "Sneha Roy", location: "Pune", instagramLink: "https://www.instagram.com/lifestyle_with_shona/profilecard/?igsh=NnVidmoxNHRuNGlr", gender: "female", contentStyle: "Lifestyle", followers: "43K", engagement: "0.92%", image: "-" },
-  { id: 2, name: "Nidhi Sethi", location: "Pune", instagramLink: "https://Instagram.com/sethinidhi01", gender: "female", contentStyle: "Fashion", followers: "32K", engagement: "3.42%", image: "-" },
-  { id: 3, name: "Santoshi Telgu", location: "Pune", instagramLink: "https://www.instagram.com/trippydimple", gender: "female", contentStyle: "Food", followers: "39K", engagement: "0.54%", image: "-" },
-  { id: 4, name: "Arpita Chandekar", location: "Pune", instagramLink: "https://www.instagram.com/chandekararpita/profilecard/?igsh=MXMxcWxwZzNjdXB2dA==", gender: "female", contentStyle: "Beauty", followers: "53K", engagement: "0.95%", image: "-" },
-  { id: 5, name: "Faimin Malik", location: "Pune Hinjewadi", instagramLink: "https://instagram.com/faimin_malik", gender: "female", contentStyle: "Lifestyle", followers: "112K", engagement: "1.45%", image: "-" },
-  { id: 6, name: "Alisha Ranawat", location: "Swargate", instagramLink: "https://www.instagram.com/alisharanawat?", gender: "female", contentStyle: "Host", followers: "60K", engagement: "0.17%", image: "-" },
-  { id: 7, name: "Usha", location: "Pune", instagramLink: "https://instagram.com/dhruvaautade?igshid=YmMyMTA2M2Y=", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "0.97%", image: "-" },
-  { id: 8, name: "Poonam P", location: "Pune", instagramLink: "https://www.instagram.com/p.o.o.n.a.m_p", gender: "female", contentStyle: "Beauty", followers: "24K", engagement: "0.13%", image: "-" },
-  { id: 9, name: "Apurva Pardeshi", location: "Pune", instagramLink: "https://www.instagram.com/apurwaah?igsh=b2J2bzFuZGhieWc4&utm_source=qr", gender: "female", contentStyle: "Fashion", followers: "40K", engagement: "2.25%", image: "-" },
-  { id: 10, name: "Ketaki Sogavkar", location: "Pune", instagramLink: "https://instagram.com/happysoul_ketaki?igshid=ZDc4ODBmNjlmNQ==", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "2.67%", image: "-" },
-  { id: 11, name: "Sudha Jain", location: "Pune", instagramLink: "https://www.instagram.com/thecrazy_explorer", gender: "female", contentStyle: "Lifestyle", followers: "43K", engagement: "0.07%", image: "-" },
-  { id: 12, name: "Reetu Agrawal", location: "Hadapsar", instagramLink: "https://www.instagram.com/thepunemother/profilecard/?igsh=dXoxczJqaGI3cGh6", gender: "female", contentStyle: "Lifestyle", followers: "42K", engagement: "0.8%", image: "-" },
-  { id: 13, name: "Shakshi Dung", location: "Pune", instagramLink: "https://www.instagram.com/tales_of_yuvi/profilecard/?igsh=MXNyNDVyaGphamM5YQ==", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "13.45%", image: "-" },
-  { id: 14, name: "Vatsala Sharma", location: "Pune Baner", instagramLink: "https://www.instagram.com/theladywholeads/profilecard/?igsh=YTV0dnRudjBmdjlr", gender: "female", contentStyle: "Lifestyle", followers: "76K", engagement: "1.59%", image: "-" },
-  { id: 15, name: "Aishwarya Lad", location: "Pune", instagramLink: "https://www.instagram.com/aishwarya_1506/profilecard/?igsh=MjhpZTkxbGMxcTZt", gender: "female", contentStyle: "Lifestyle", followers: "45K", engagement: "2.55%", image: "-" },
-  { id: 16, name: "Sonam Sharma", location: "Magarpatta", instagramLink: "https://instagram.com/styleupwithsonam", gender: "female", contentStyle: "Fashion", followers: "56K", engagement: "5.3%", image: "-" },
-  { id: 17, name: "Samrin Khan", location: "Mumbai", instagramLink: "https://www.instagram.com/samrinkhanofficial", gender: "female", contentStyle: "Fashion", followers: "26K", engagement: "0.59%", image: "-" },
-  { id: 18, name: "Bhagyashree", location: "Pune", instagramLink: "https://www.instagram.com/worldofbhagyashri/profilecard/?igsh=MWE2Z3Aweml4NWthNw==", gender: "female", contentStyle: "Food", followers: "12K", engagement: "0.71%", image: "-" },
-  { id: 19, name: "Sania", location: "Pune", instagramLink: "https://www.instagram.com/glowithsaanu/profilecard/?igsh=MWtkZmY0ZXRhZDYzdw==", gender: "female", contentStyle: "Beauty", followers: "66K", engagement: "0.56%", image: "-" },
-  { id: 20, name: "Payal Mehta", location: "Pune", instagramLink: "https://www.instagram.com/pylmehta?igsh=MWwwY2liM3NxOW55Ng==", gender: "female", contentStyle: "Fashion", followers: "20K", engagement: "0.39%", image: "-" },
-  { id: 21, name: "Priya Rajput", location: "Pune", instagramLink: "https://www.instagram.com/__foodbyprriyaa__/profilecard/?igsh=a3V1ZWIwejBqdXpk", gender: "female", contentStyle: "Food", followers: "3K", engagement: "33.4%", image: "-" },
+  { id: 3, name: "Santoshi Telgu", location: "Pune", instagramLink: "https://www.instagram.com/trippydimple", gender: "female", contentStyle: "Food", followers: "39K", engagement: "0.54%", image: "/Creators/SantoshiTelgu.jpg" },
+  { id: 1, name: "Sneha Roy", location: "Pune", instagramLink: "https://www.instagram.com/lifestyle_with_shona/profilecard/?igsh=NnVidmoxNHRuNGlr", gender: "female", contentStyle: "Lifestyle", followers: "43K", engagement: "0.92%", image: "/Creators/SnehaRoy.jpg" },
+  { id: 5, name: "Faimin Malik", location: "Pune Hinjewadi", instagramLink: "https://instagram.com/faimin_malik", gender: "female", contentStyle: "Lifestyle", followers: "112K", engagement: "1.45%", image: "/Creators/FaiminMalik.jpg" },
+  { id: 2, name: "Nidhi Sethi", location: "Pune", instagramLink: "https://Instagram.com/sethinidhi01", gender: "female", contentStyle: "Fashion", followers: "32K", engagement: "3.42%", image: "/Creators/NidhiSethi.jpg" },
+  { id: 4, name: "Arpita Chandekar", location: "Pune", instagramLink: "https://www.instagram.com/chandekararpita/profilecard/?igsh=MXMxcWxwZzNjdXB2dA==", gender: "female", contentStyle: "Beauty", followers: "53K", engagement: "0.95%", image: "/Creators/ArpitaChandekar.jpg" },
+  { id: 6, name: "Alisha Ranawat", location: "Swargate", instagramLink: "https://www.instagram.com/alisharanawat?", gender: "female", contentStyle: "Host", followers: "60K", engagement: "0.17%", image: "/Creators/AlishaRanawat.jpg" },
+  { id: 7, name: "Usha", location: "Pune", instagramLink: "https://instagram.com/dhruvaautade?igshid=YmMyMTA2M2Y=", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "0.97%", image: "Creators/Usha.jpg" },
+  { id: 8, name: "Poonam P", location: "Pune", instagramLink: "https://www.instagram.com/p.o.o.n.a.m_p", gender: "female", contentStyle: "Beauty", followers: "24K", engagement: "0.13%", image: "Creators/PoonamP.jpg" },
+  { id: 9, name: "Apurva Pardeshi", location: "Pune", instagramLink: "https://www.instagram.com/apurwaah?igsh=b2J2bzFuZGhieWc4&utm_source=qr", gender: "female", contentStyle: "Fashion", followers: "40K", engagement: "2.25%", image: "Creators/ApurvaPardeshi.jpg" },
+  { id: 10, name: "Ketaki Sogavkar", location: "Pune", instagramLink: "https://instagram.com/happysoul_ketaki?igshid=ZDc4ODBmNjlmNQ==", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "2.67%", image: "Creators/KetakiSogavkar.jpg" },
+  { id: 11, name: "Sudha Jain", location: "Pune", instagramLink: "https://www.instagram.com/thecrazy_explorer", gender: "female", contentStyle: "Lifestyle", followers: "43K", engagement: "0.07%", image: "Creators/SudhaJain.jpg" },
+  { id: 12, name: "Reetu Agrawal", location: "Hadapsar", instagramLink: "https://www.instagram.com/thepunemother/profilecard/?igsh=dXoxczJqaGI3cGh6", gender: "female", contentStyle: "Lifestyle", followers: "42K", engagement: "0.8%", image: "Creators/ReetuAgrawal.jpg" },
+  { id: 13, name: "Shakshi Dung", location: "Pune", instagramLink: "https://www.instagram.com/tales_of_yuvi/profilecard/?igsh=MXNyNDVyaGphamM5YQ==", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "13.45%", image: "Creators/SakshiDung.jpg" },
+  { id: 14, name: "Vatsala Sharma", location: "Pune Baner", instagramLink: "https://www.instagram.com/theladywholeads/profilecard/?igsh=YTV0dnRudjBmdjlr", gender: "female", contentStyle: "Lifestyle", followers: "76K", engagement: "1.59%", image: "Creators/VatsalaSharma.jpg" },
+  { id: 15, name: "Aishwarya Lad", location: "Pune", instagramLink: "https://www.instagram.com/aishwarya_1506/profilecard/?igsh=MjhpZTkxbGMxcTZt", gender: "female", contentStyle: "Lifestyle", followers: "45K", engagement: "2.55%", image: "Creators/AishwaryaLad.jpg" },
+  { id: 16, name: "Sonam Sharma", location: "Magarpatta", instagramLink: "https://instagram.com/styleupwithsonam", gender: "female", contentStyle: "Fashion", followers: "56K", engagement: "5.3%", image: "Creators/SonamSharma.jpg" },
+  { id: 17, name: "Samrin Khan", location: "Mumbai", instagramLink: "https://www.instagram.com/samrinkhanofficial", gender: "female", contentStyle: "Fashion", followers: "26K", engagement: "0.59%", image: "Creators/SamrinKhan.jpg" },
+  { id: 18, name: "Bhagyashree", location: "Pune", instagramLink: "https://www.instagram.com/worldofbhagyashri/profilecard/?igsh=MWE2Z3Aweml4NWthNw==", gender: "female", contentStyle: "Food", followers: "12K", engagement: "0.71%", image: "Creators/Sania.jpg" },
+  { id: 19, name: "Sania", location: "Pune", instagramLink: "https://www.instagram.com/glowithsaanu/profilecard/?igsh=MWtkZmY0ZXRhZDYzdw==", gender: "female", contentStyle: "Beauty", followers: "66K", engagement: "0.56%", image: "Creators/Sania.jpg" },
+  { id: 20, name: "Payal Mehta", location: "Pune", instagramLink: "https://www.instagram.com/pylmehta?igsh=MWwwY2liM3NxOW55Ng==", gender: "female", contentStyle: "Fashion", followers: "20K", engagement: "0.39%", image: "Creators/PayalMehta.jpg" },
+  { id: 21, name: "Priya Rajput", location: "Pune", instagramLink: "https://www.instagram.com/__foodbyprriyaa__/profilecard/?igsh=a3V1ZWIwejBqdXpk", gender: "female", contentStyle: "Food", followers: "3K", engagement: "33.4%", image: "Creators/PriyaRajput.jpg" },
   { id: 22, name: "Shweta Godse", location: "Pune", instagramLink: "https://www.instagram.com/ta_ta_bish?igsh=djZocjVsaDF2aW93", gender: "female", contentStyle: "-", followers: "14K", engagement: "10.58%", image: "-" },
   { id: 23, name: "Mugdha Karandikar", location: "Pune", instagramLink: "https://www.instagram.com/mugdhaspeaks?igsh=aTh1ZnZnYmRhaTB3&utm_source=qr", gender: "female", contentStyle: "Food", followers: "64K", engagement: "1.69%", image: "-" },
   { id: 24, name: "Vaishnavi Sakpal", location: "Raviwar Peth", instagramLink: "https://www.instagram.com/vaishnavi_991/profilecard/?igsh=MTA5d3g5bWhtdGxraw==", gender: "female", contentStyle: "Lifestyle", followers: "11K", engagement: "2.3%", image: "-" },
