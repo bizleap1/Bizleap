@@ -1,4 +1,5 @@
 "use client";
+import Head from "next/head";
 import * as React from "react";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -738,7 +739,15 @@ export default function CreatorsSection() {
   const hasActiveOtherFilters = Object.keys(activeFilters).length > 0;
   const showClearFilters = hasActiveInfluencerFilters || hasActiveOtherFilters;
 
-  return (
+  return ( <>
+  <Head>
+  <title>Creators Network | Bizleap</title>
+  <meta
+    name="description"
+    content="Discover Bizleap’s creators network — designers, developers, and digital experts collaborating to deliver impactful and innovative brand solutions."
+  />
+</Head>
+
     <section className="py-20 bg-black text-white" id="creators">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center mb-6 mt-12">
@@ -877,7 +886,8 @@ export default function CreatorsSection() {
       {/* Modal */}
       <InfoModal open={!!selected} item={selected} type={selectedType} onClose={() => setSelected(null)} />
     </section>
-  );
+ </> 
+);
 }
 
 /* ------------------- YOUR UPDATED INFLUENCER DATA ------------------- */

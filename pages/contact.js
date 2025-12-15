@@ -1,9 +1,18 @@
 "use client";
-
+import Head from "next/head";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 export default function ContactPage() {
   return (
+    <>
+    <Head>
+  <title>Contact Bizleap | Let’s Build Your Brand</title>
+  <meta
+    name="description"
+    content="Get in touch with Bizleap to discuss digital marketing, web development, branding, or creative solutions tailored to your business goals."
+  />
+</Head>
+
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 md:px-20 pt-32 pb-24">
       {/* Heading */}
       <h1 className="text-center text-[4rem] md:text-[6rem] font-extrabold leading-tight mb-16">
@@ -65,5 +74,6 @@ export default function ContactPage() {
         </div>
       </div>
     </main>
+  </>
   );
 }

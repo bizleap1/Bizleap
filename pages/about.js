@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import MediaSection from "../components/MediaSection";
-
+import Head from "next/head";
 export default function About() {
   const galleryImages = [
     "/images/Team1.png",
@@ -29,7 +29,15 @@ export default function About() {
       prev === 0 ? galleryImages.length - 1 : prev - 1
     );
 
-  return (
+  return (<>
+  <Head>
+  <title>About Us | Bizleap</title>
+  <meta
+    name="description"
+    content="Learn about Bizleap, our mission, vision, and journey in helping brands leap forward through digital marketing, web development, and creative technology."
+  />
+</Head>
+
     <div className="bg-black text-white min-h-screen px-6 md:px-16 lg:px-32 py-20">
 
       {/* ===== TOP IMAGE GALLERY WITH ARROWS ===== 
@@ -172,5 +180,6 @@ export default function About() {
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 }

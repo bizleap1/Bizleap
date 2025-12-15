@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 // ------------------- Badge Component -------------------
 function Badge({ children, variant = "secondary", className = "" }) {
@@ -77,7 +78,15 @@ const SERVICES = [
 
 // ------------------- Final Section -------------------
 export default function ServicesSection() {
-  return (
+  return (<>
+  <Head>
+  <title>Our Services | Bizleap</title>
+  <meta
+    name="description"
+    content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online."
+  />
+</Head>
+
     <section className="py-20 md:py-32 bg-black text-white" id="services">
       <div className="mx-auto max-w-6xl px-6 space-y-16">
         {/* Header */}
@@ -147,5 +156,6 @@ export default function ServicesSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }

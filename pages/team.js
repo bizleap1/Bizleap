@@ -1,5 +1,5 @@
 "use client";
-
+import Head from "next/head";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -126,7 +126,15 @@ const hoverVariants = {
 };
 
 export default function Team() {
-  return (
+  return (<>
+  <Head>
+  <title>Our Team | Bizleap</title>
+  <meta
+    name="description"
+    content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth."
+  />
+</Head>
+
     <main className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
       <motion.section 
@@ -300,5 +308,6 @@ export default function Team() {
       {/* CTA Section */}
       
     </main>
-  );
+</>  
+);
 }

@@ -1,5 +1,5 @@
 "use client";
-
+import Head from "next/head";
 import Image from "next/image";
 import { useState, useRef } from "react";
 import Link from "next/link";
@@ -79,6 +79,15 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
       : items.filter((item) => item.subtitle === active);
 
   return (
+  <>
+  <Head>
+  <title>Our Work | Bizleap - Where Brands Leap Forward</title>
+  <meta
+    name="description"
+    content="Explore Bizleap’s portfolio showcasing successful web development, digital marketing, branding, and creative projects delivered for growing brands."
+  />
+</Head>
+
     <div className="min-h-screen w-full bg-white text-black">
 
       {/* ------------------ HERO ------------------ */}
@@ -257,5 +266,6 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
 </div>
 
     </div>
+  </>
   );
 }
