@@ -8,7 +8,7 @@ const founders = [
   {
     name: "Akshat Soni",
     role: "Co-Founder & CEO",
-    image: "/team/6.jpg",
+    image: "/team/akshat.jpg",
     linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBjpHAq6iQAxX8yzgGHa19OF8QFnoECBwQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Ftheakshatsoni&usg=AOvVaw1jyn5w2G8sfM5A77RFb3eE&cshid=1760604807211931&opi=89978449",
     instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiBw-_Yq6iQAxUYzDgGHWNRAdEQFnoECCAQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fakshatsoni.in%2F&usg=AOvVaw3PESBA4FruVlwXfbvqKsxD&opi=89978449",
     
