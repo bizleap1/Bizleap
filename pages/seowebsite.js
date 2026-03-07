@@ -181,7 +181,7 @@ export default function SEOAuditsService() {
                   >
                     Get Your Website Audit <FiArrowRight />
                   </Link>
-                  
+
                 </div>
               </ScrollReveal>
             </div>
@@ -189,7 +189,7 @@ export default function SEOAuditsService() {
               <ScrollReveal delay={0.4}>
                 <div className="relative rounded-2xl overflow-hidden">
                   <Image
-                    src="/images/abstract-5.webp"
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
                     alt="SEO & Website Audits"
                     width={600}
                     height={400}
@@ -214,7 +214,7 @@ export default function SEOAuditsService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {seoBenefits.map((benefit, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -242,7 +242,7 @@ export default function SEOAuditsService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {auditAreas.map((area, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -264,7 +264,7 @@ export default function SEOAuditsService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -295,7 +295,7 @@ export default function SEOAuditsService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal>
               <div className="space-y-6">
@@ -318,7 +318,7 @@ export default function SEOAuditsService() {
                 </div>
               </div>
             </ScrollReveal>
-            
+
             <ScrollReveal delay={0.2}>
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold mb-6">Tools We Use</h3>
@@ -363,7 +363,7 @@ export default function SEOAuditsService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal>
               <div className="space-y-6">
@@ -387,7 +387,7 @@ export default function SEOAuditsService() {
                 </ul>
               </div>
             </ScrollReveal>
-            
+
             <ScrollReveal delay={0.1}>
               <div className="space-y-6">
                 <h3 className="text-xl font-semibold text-yellow-400">SEO & Content Issues</h3>
@@ -414,7 +414,7 @@ export default function SEOAuditsService() {
         </div>
       </section>
 
-    
+
     </main>
   )
 }

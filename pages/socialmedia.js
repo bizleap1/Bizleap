@@ -182,7 +182,7 @@ export default function SocialMediaMarketingService() {
                   >
                     Boost Your Social Presence <FiArrowRight />
                   </Link>
-                  
+
                 </div>
               </ScrollReveal>
             </div>
@@ -190,7 +190,7 @@ export default function SocialMediaMarketingService() {
               <ScrollReveal delay={0.4}>
                 <div className="relative rounded-2xl overflow-hidden">
                   <Image
-                    src="/images/abstract-3.webp"
+                    src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1200"
                     alt="Social Media Marketing"
                     width={600}
                     height={400}
@@ -231,7 +231,7 @@ export default function SocialMediaMarketingService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {platforms.map((platform, index) => (
               <ScrollReveal key={index} delay={index * 0.05}>
@@ -253,7 +253,7 @@ export default function SocialMediaMarketingService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -281,7 +281,7 @@ export default function SocialMediaMarketingService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {portfolioProjects.map((project, index) => (
               <ScrollReveal key={project.id} delay={index * 0.1}>
@@ -296,7 +296,7 @@ export default function SocialMediaMarketingService() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-                    
+
                     {/* Title Overlay */}
                     <div className="absolute bottom-0 left-0 right-0 p-6">
                       <Badge variant="secondary" className="mb-2">
@@ -305,7 +305,7 @@ export default function SocialMediaMarketingService() {
                       <h3 className="text-2xl font-bold">{project.title}</h3>
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="p-6">
                     <div className="space-y-4 mb-6">
@@ -316,7 +316,7 @@ export default function SocialMediaMarketingService() {
                         </div>
                       ))}
                     </div>
-                    
+
                     <div className="pt-4 border-t border-gray-800">
                       <Link
                         href={project.link}
@@ -345,7 +345,7 @@ export default function SocialMediaMarketingService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-4 gap-6">
             {[
               { name: "Reels & Shorts", desc: "Short-form video content" },
@@ -368,7 +368,7 @@ export default function SocialMediaMarketingService() {
         </div>
       </section>
 
-      
+
     </main>
   )
 }

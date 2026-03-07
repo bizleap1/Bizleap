@@ -1,10 +1,10 @@
 'use client'
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { FiCheck, FiArrowRight, FiSmartphone, FiLayout, FiUsers, FiZap } from "react-icons/fi"
+import { FiCheck, FiArrowRight, FiSmartphone, FiLayout, FiUsers, FiZap, FiChevronLeft, FiChevronRight } from "react-icons/fi"
 
 // ------------------- Badge Component -------------------
 function Badge({ children, variant = "secondary", className = "" }) {
@@ -57,6 +57,160 @@ function ProcessStep({ number, title, description, icon: Icon }) {
   )
 }
 
+// ------------------- Projects Carousel -------------------
+const PROJECTS = [
+  { name: "Anantara Hotel", description: "Luxury hospitality website designed with premium visuals and a seamless user experience.", url: "https://anantarahotel.com", img: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=1200", tags: ["Hospitality", "Luxury", "UI/UX"] },
+  { name: "Best Resort in Konkan", description: "Tourism and resort website focused on immersive visuals and smooth navigation.", url: "https://bestresortinkonkan.com", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=1200", tags: ["Tourism", "Resort", "Visuals"] },
+  { name: "Kuber Groups", description: "Corporate business website designed to represent a strong digital presence.", url: "https://kubergroups.in", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200", tags: ["Corporate", "Business", "Modern"] },
+  { name: "The Tiger Brand", description: "Brand-focused website highlighting products with modern design elements.", url: "https://thetigerbrand.in", img: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&q=80&w=1200", tags: ["E-commerce", "Branding", "Minimal"] },
+  { name: "CITL Nagpur", description: "Educational institute website built with structured information architecture.", url: "https://citlnagpur.com", img: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1200", tags: ["Education", "Institute", "Structured"] },
+  { name: "Jain Broker", description: "Professional brokerage and financial services website with clear navigation.", url: "https://www.jainbroker.com", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200", tags: ["Finance", "Brokerage", "Professional"] },
+  { name: "Jain Groups", description: "Modern corporate website built with responsive and scalable design.", url: "https://jain-groups-chi.vercel.app", img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200", tags: ["Corporate", "Responsive", "Scalable"] },
+  { name: "SSIT Nagpur", description: "Educational institution website with student-focused interface and accessibility.", url: "https://ssitngp.in", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1200", tags: ["Education", "Accessibility", "UI/UX"] },
+  { name: "The Solar Ark", description: "Renewable energy company website presenting solar solutions and services.", url: "https://thesolarark.com", img: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=1200", tags: ["Renewable", "Energy", "Clean"] },
+  { name: "EEFA Hotel", description: "Hotel website designed with elegant UI and hospitality-focused layout.", url: "https://eefa-hotel.vercel.app", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=1200", tags: ["Hotel", "UI/UX", "Elegant"] },
+  { name: "Nilkantha Chemicals", description: "Industrial corporate website showcasing products and manufacturing services.", url: "https://nilkanthachemicals.com", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200", tags: ["Industrial", "Manufacturing", "B2B"] },
+]
+
+function ProjectsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const scrollContainerRef = useRef(null)
+
+  const scrollToIndex = (index) => {
+    if (scrollContainerRef.current) {
+      const el = scrollContainerRef.current.children[index]
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    }
+  }
+
+  const next = () => { const i = Math.min(currentIndex + 1, PROJECTS.length - 1); setCurrentIndex(i); scrollToIndex(i) }
+  const prev = () => { const i = Math.max(currentIndex - 1, 0); setCurrentIndex(i); scrollToIndex(i) }
+
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    const onScroll = () => {
+      const itemW = container.children[0]?.clientWidth || 1
+      const idx = Math.round(container.scrollLeft / itemW)
+      if (idx !== currentIndex && idx >= 0 && idx < PROJECTS.length) setCurrentIndex(idx)
+    }
+    container.addEventListener('scroll', onScroll, { passive: true })
+    return () => container.removeEventListener('scroll', onScroll)
+  }, [currentIndex])
+
+  return (
+    <div>
+      {/* Nav Controls */}
+      <div className="flex items-center justify-center gap-6 mb-10">
+        <button
+          onClick={prev}
+          disabled={currentIndex === 0}
+          aria-label="Previous project"
+          className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${currentIndex === 0 ? 'border-gray-800 text-gray-700 cursor-not-allowed' : 'border-white text-white hover:bg-white hover:text-black'
+            }`}
+        >
+          <FiChevronLeft className="text-xl" />
+        </button>
+        <span className="text-white font-medium tabular-nums">
+          <span className="text-2xl">{String(currentIndex + 1).padStart(2, '0')}</span>
+          <span className="text-gray-600 mx-2">/</span>
+          <span className="text-gray-500">{String(PROJECTS.length).padStart(2, '0')}</span>
+        </span>
+        <button
+          onClick={next}
+          disabled={currentIndex === PROJECTS.length - 1}
+          aria-label="Next project"
+          className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${currentIndex === PROJECTS.length - 1 ? 'border-gray-800 text-gray-700 cursor-not-allowed' : 'border-white text-white hover:bg-white hover:text-black'
+            }`}
+        >
+          <FiChevronRight className="text-xl" />
+        </button>
+      </div>
+
+      {/* Horizontal Scroll Track */}
+      <div
+        ref={scrollContainerRef}
+        className="flex overflow-x-auto snap-x snap-mandatory pb-10 gap-6 cursor-grab active:cursor-grabbing"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {PROJECTS.map((project, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-[88vw] sm:w-[45vw] lg:w-[calc(33.333%-1rem)] snap-center"
+          >
+            <div className="group flex flex-col h-full hover:-translate-y-2 transition-transform duration-500">
+              {/* MacBook Mockup */}
+              <div className="relative pt-[5%] px-[10%] pb-0 mb-6">
+                <div className="relative z-10 aspect-[16/10] bg-[#1a1a1a] rounded-t-[3%] overflow-hidden border-[7px] border-[#222] shadow-2xl">
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#333] z-20" />
+                  <div className="relative w-full h-full overflow-hidden bg-gray-900">
+                    <Image
+                      src={project.img}
+                      alt={project.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 640px) 88vw, 640px"
+                    />
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
+                      <Link
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-14 h-14 rounded-full bg-yellow-500 flex items-center justify-center -translate-y-4 group-hover:translate-y-0 transition-transform duration-500 shadow-[0_0_30px_rgba(234,179,8,0.5)]"
+                      >
+                        <FiArrowRight className="text-black text-xl" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                {/* Base */}
+                <div className="h-2.5 bg-[#2a2a2a] rounded-b-2xl border-t border-white/5" />
+                <div className="mx-auto w-1/3 h-1.5 bg-[#1a1a1a] rounded-b-xl" />
+              </div>
+
+              {/* Info */}
+              <div className="flex-1 flex flex-col px-2">
+                <div className="flex items-start gap-3 mb-3">
+                  <h3 className="text-2xl font-bold group-hover:text-yellow-400 transition-colors">{project.name}</h3>
+                  <span className="mt-1 shrink-0 px-2 py-0.5 rounded border border-yellow-500/20 text-yellow-500/60 text-[10px] uppercase tracking-widest">{project.tags[0]}</span>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-2 flex-1">{project.description}</p>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-yellow-500 font-semibold text-sm uppercase tracking-widest hover:gap-4 transition-all pt-4 border-t border-gray-800 group/link"
+                >
+                  Visit Website
+                  <FiArrowRight className="transition-transform group-hover/link:translate-x-1" />
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Progress Dots */}
+      <div className="flex justify-center gap-2 mt-2">
+        {PROJECTS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { setCurrentIndex(i); scrollToIndex(i) }}
+            aria-label={`Go to project ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-500 ${i === currentIndex ? 'bg-yellow-500 w-10' : 'bg-gray-700 w-3 hover:bg-gray-500'
+              }`}
+          />
+        ))}
+      </div>
+
+      <style jsx>{`
+        div::-webkit-scrollbar { display: none; }
+      `}</style>
+    </div>
+  )
+}
+
 export default function WebDesignService() {
   const features = [
     "User-Centered Design Approach",
@@ -96,7 +250,7 @@ export default function WebDesignService() {
     }
   ]
 
-  
+
 
   return (
     <main className="bg-black text-white min-h-screen">
@@ -127,7 +281,7 @@ export default function WebDesignService() {
                   >
                     Start Your Project <FiArrowRight />
                   </Link>
-                  
+
                 </div>
               </ScrollReveal>
             </div>
@@ -135,7 +289,7 @@ export default function WebDesignService() {
               <ScrollReveal delay={0.4}>
                 <div className="relative rounded-2xl overflow-hidden">
                   <Image
-                    src="/images/abstract-1.webp"
+                    src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200"
                     alt="Web Design Interface"
                     width={600}
                     height={400}
@@ -160,7 +314,7 @@ export default function WebDesignService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <ScrollReveal>
               <div className="space-y-6">
@@ -183,7 +337,7 @@ export default function WebDesignService() {
                 </div>
               </div>
             </ScrollReveal>
-            
+
             <ScrollReveal delay={0.2}>
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold mb-6">Tools & Technologies</h3>
@@ -228,7 +382,7 @@ export default function WebDesignService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {processSteps.map((step, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -239,116 +393,35 @@ export default function WebDesignService() {
         </div>
       </section>
 
-     {/* Portfolio Preview */}
-<section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
-  <div className="max-w-6xl mx-auto">
-    <ScrollReveal>
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h2 className="text-4xl font-bold mb-6">Recent Web Design Projects</h2>
-        <p className="text-gray-400 text-lg">
-          See how we've transformed digital experiences for businesses across industries.
-        </p>
-      </div>
-    </ScrollReveal>
-    
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {[
-        {
-          name: "Jain Brokers",
-          description:
-            "A modern business website built for a cotton and yarn sourcing company — designed to showcase their global network, product range, and export expertise with a clean and trustworthy interface.",
-          img: "/portfolio/jain_broker.png",
-          url: "https://jainbroker.com",
-          tags: ["Business", "Corporate", "Export"]
-        },
-        {
-          name: "Jain Groups",
-          description:
-            "A dynamic corporate website highlighting multiple business verticals under Jain Group — crafted with engaging visuals and a focus on brand consistency.",
-          img: "/portfolio/jain_groups.png",
-          url: "#",
-          tags: ["Corporate", "Multi-Brand", "Business"]
-        },
-        {
-          name: "Green Acres Realty",
-          description:
-            "An elegant real estate website showcasing premium projects, locations, and inquiry options — designed to reflect a high-end brand identity.",
-          img: "/portfolio/green_acres.png",
-          url: "https://greenacresrealty.co.in",
-          tags: ["Real Estate", "Luxury", "Property"]
-        },
-        {
-          name: "Eefa Hotel",
-          description:
-            "A luxury hospitality platform featuring rooms, events, and an intuitive online booking experience — optimized for both performance and elegance.",
-          img: "/portfolio/eefa.png",
-          url: "https://www.eefahotels.com",
-          tags: ["Hospitality", "Booking", "Luxury"]
-        },
-      ].map((project, index) => (
-        <ScrollReveal key={index} delay={index * 0.1}>
-          <div className="group h-full flex flex-col overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 hover:border-yellow-500/50 transition-all duration-500">
-            <div className="aspect-[4/3] relative overflow-hidden">
-              <Image
-                src={project.img}
-                alt={project.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute top-4 right-4">
-                <div className="w-10 h-10 rounded-full bg-black/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <FiArrowRight className="text-yellow-500" />
-                </div>
-              </div>
+      {/* Portfolio Preview */}
+      <section className="py-24 px-6 bg-gradient-to-b from-gray-900 via-black to-gray-900 border-t border-gray-800/50 overflow-hidden" id="portfolio">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                Recent Web Design Projects
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed">
+                See how we&apos;ve transformed digital experiences for businesses across industries through modern UI/UX design, responsive development, and performance-optimized websites.
+              </p>
             </div>
-            <div className="p-6 flex-1 flex flex-col">
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-yellow-400 transition-colors duration-300">
-                  {project.name}
-                </h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tags.map((tag, tagIndex) => (
-                    <Badge key={tagIndex} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div className="pt-4 border-t border-gray-800">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-yellow-500 hover:text-yellow-400 transition-colors duration-300"
-                >
-                  Visit Live Site <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-      ))}
-    </div>
-    
-    <ScrollReveal delay={0.4}>
-      <div className="text-center mt-12">
-        <Link
-          href="/work"
-          className="inline-flex items-center gap-2 px-8 py-3 border border-gray-700 rounded-lg hover:border-yellow-500 hover:text-yellow-500 transition-all duration-300"
-        >
-          View All Projects <FiArrowRight />
-        </Link>
-      </div>
-    </ScrollReveal>
-  </div>
-</section>
+          </ScrollReveal>
 
-      
+          <ProjectsCarousel />
+
+          <ScrollReveal delay={0.3}>
+            <div className="mt-16 text-center">
+              <Link
+                href="/portfolio"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-sm font-medium text-black transition-all hover:bg-yellow-500 hover:scale-105"
+              >
+                View Full Portfolio
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
     </main>
   )
 }

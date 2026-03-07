@@ -45,32 +45,32 @@ const SERVICES = [
   {
     name: "UI/UX & Web Design",
     tags: ["Figma", "Wireframing", "Prototyping", "Responsive Design", "User Testing"],
-    img: "/images/abstract-1.webp",
-    url: "#",
+    img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200",
+    url: "/webdesign",
     description:
       "End-to-end digital design from wireframes to polished interfaces. We create intuitive, visually appealing experiences for websites and apps, backed by user research and iterative testing.",
   },
   {
     name: "Brand Identity Design",
     tags: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory"],
-    img: "/images/abstract-2.webp",
-    url: "#",
+    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1200",
+    url: "/brandidentity",
     description:
       "Comprehensive branding packages including logos, style guides, and asset kits. We craft cohesive visual identities that communicate your brand’s essence across all touchpoints.",
   },
   {
     name: "SEO & Website Audits",
     tags: ["Technical SEO", "Keyword Strategy", "On-Page Optimization", "Analytics", "Performance Tuning"],
-    img: "/images/abstract-3.webp",
-    url: "#",
+    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+    url: "/seowebsite",
     description:
       "Data-driven SEO audits and optimizations to improve rankings. We analyze technical health, content gaps, and backlink profiles to drive organic growth.",
   },
   {
     name: "Social Media Marketing",
     tags: ["Meta Ads", "Instagram Reels", "Content Strategy", "Community Management", "Performance Tracking"],
-    img: "/images/abstract-5.webp",
-    url: "#",
+    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1200",
+    url: "/socialmedia",
     description:
       "Full-service social media management—from organic content creation to paid campaigns. We build engaging narratives and measurable strategies tailored to each platform.",
   },
@@ -79,13 +79,13 @@ const SERVICES = [
 // ------------------- Final Section -------------------
 export default function ServicesSection() {
   return (<>
-  <Head>
-  <title>Our Services | Bizleap</title>
-  <meta
-    name="description"
-    content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online."
-  />
-</Head>
+    <Head>
+      <title>Our Services | Bizleap</title>
+      <meta
+        name="description"
+        content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online."
+      />
+    </Head>
 
     <section className="py-20 md:py-32 bg-black text-white" id="services">
       <div className="mx-auto max-w-6xl px-6 space-y-16">
@@ -109,9 +109,8 @@ export default function ServicesSection() {
           {SERVICES.map((service, i) => (
             <div
               key={service.name}
-              className={`grid grid-cols-1 lg:grid-cols-5 gap-10 border-b border-gray-700 pb-12 ${
-                i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              }`}
+              className={`grid grid-cols-1 lg:grid-cols-5 gap-10 border-b border-gray-700 pb-12 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                }`}
             >
               {/* Text Section */}
               <div className="lg:col-span-2 flex flex-col justify-center gap-8">
@@ -133,7 +132,7 @@ export default function ServicesSection() {
                   </div>
                 </ScrollReveal>
                 <ScrollReveal delay={0.3}>
-                  
+
                 </ScrollReveal>
               </div>
 
@@ -156,6 +155,6 @@ export default function ServicesSection() {
         </div>
       </div>
     </section>
-    </>
+  </>
   );
 }

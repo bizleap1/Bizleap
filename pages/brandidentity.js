@@ -158,7 +158,7 @@ export default function BrandIdentityService() {
                   >
                     Start Your Brand Journey <FiArrowRight />
                   </Link>
-                  
+
                 </div>
               </ScrollReveal>
             </div>
@@ -166,7 +166,7 @@ export default function BrandIdentityService() {
               <ScrollReveal delay={0.4}>
                 <div className="relative rounded-2xl overflow-hidden">
                   <Image
-                    src="/images/abstract-2.webp"
+                    src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1200"
                     alt="Brand Identity Design"
                     width={600}
                     height={400}
@@ -191,7 +191,7 @@ export default function BrandIdentityService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -233,7 +233,7 @@ export default function BrandIdentityService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {deliverables.map((item, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -255,7 +255,7 @@ export default function BrandIdentityService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="space-y-8">
             {processSteps.map((step, index) => (
               <ScrollReveal key={index} delay={index * 0.1}>
@@ -277,113 +277,113 @@ export default function BrandIdentityService() {
       </section>
 
       {/* Brand Showcase */}
-<section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
-  <div className="max-w-6xl mx-auto">
-    <ScrollReveal>
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h2 className="text-4xl font-bold mb-6">Brand Identity Portfolio</h2>
-        <p className="text-gray-400 text-lg">
-          Discover how we've transformed businesses through strategic brand design and marketing.
-        </p>
-      </div>
-    </ScrollReveal>
-    
-    <div className="grid md:grid-cols-2 gap-8">
-      {[
-        {
-          title: "Lord Of the Drinks - Brand Revival",
-          brand: "Lord Of the Drinks",
-          description: "Once trending in Nagpur, Lord of the Drinks faced declining sales. Bizleap revived the brand with a six-month social media strategy, creative content, food photography, and high-impact events. The result: renewed buzz, higher footfall, and a strong comeback as one of Nagpur's top F&B brands.",
-          img: "/Casestudy/LOD.png",
-          logo: "/clients/15.png",
-          industry: "Hospitality & F&B"
-        },
-        {
-          title: "Rasoi Express - Food Delivery for Small Towns",
-          brand: "Rasoi Express",
-          description: "Bizleap launched Rasoi Express in Pandharkawda, giving 50,000+ residents their first food delivery app. It brings hot meals home, supports local restaurants, and creates jobs—proving small towns deserve big-city convenience.",
-          img: "/Casestudy/Rasoi.png",
-          logo: "/clients/66.png",
-          industry: "Food Tech"
-        },
-        {
-          title: "Hotel Anantara - New Year Party",
-          brand: "Hotel Anantara",
-          description: "Bizleap transformed Nagpur's biggest New Year party at Hotel Anantara into a record-breaking success — with impactful Instagram promotions, lead-driven campaigns, and flawless execution that made it the city's most talked-about celebration.",
-          img: "/Casestudy/Anantara.png",
-          logo: "/clients/20.png",
-          industry: "Hospitality"
-        },
-        {
-          title: "Tuli The Grand - Brand Launch",
-          brand: "Tuli The Grand",
-          description: "We launched Tuli The Grand, a flagship venture of the Tuli Group of Hotels in Nagpur, creating its complete brand identity from logo to strategy. The inauguration was graced by Hon. Nitin Gadkari as chief guest.",
-          img: "/Casestudy/tuli.png",
-          logo: "/clients/14.png",
-          industry: "Luxury Hotels"
-        },
-        {
-          title: "Bizleap x SolarArk: Website Revamp",
-          brand: "SOLAR ARK",
-          description: "Bizleap redesigned Solar Ark's website with fresh content, on-site shoots, and client stories—creating a platform that highlights their solar expertise and strengthens brand credibility.",
-          img: "/Casestudy/solar.webp",
-          logo: "/clients/52.png",
-          industry: "Renewable Energy"
-        },
-      ].map((project, index) => (
-        <ScrollReveal key={index} delay={index * 0.1}>
-          <div className="group overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 hover:border-yellow-500/50 transition-all duration-500 h-full">
-            {/* Project Image */}
-            <div className="relative h-48 overflow-hidden">
-              <Image
-                src={project.img}
-                alt={project.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-              
-              
-              
-              {/* Industry Badge */}
-              <div className="absolute top-4 right-4">
-                <Badge variant="outline" className="bg-black/80 backdrop-blur-sm">
-                  {project.industry}
-                </Badge>
-              </div>
-            </div>
-            
-            {/* Content */}
-            <div className="p-6">
-              <Badge variant="secondary" className="mb-3 text-xs">
-                Case Study
-              </Badge>
-              
-              <h3 className="text-2xl font-semibold mb-3 group-hover:text-yellow-400 transition-colors duration-300">
-                {project.title}
-              </h3>
-              
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center">
-                  <FiStar className="w-3 h-3 text-yellow-500" />
-                </div>
-                <span className="font-medium text-gray-300">{project.brand}</span>
-              </div>
-              
-              <p className="text-gray-400 mb-6 leading-relaxed">
-                {project.description}
+      <section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-4xl font-bold mb-6">Brand Identity Portfolio</h2>
+              <p className="text-gray-400 text-lg">
+                Discover how we've transformed businesses through strategic brand design and marketing.
               </p>
-              
-              
             </div>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Lord Of the Drinks - Brand Revival",
+                brand: "Lord Of the Drinks",
+                description: "Once trending in Nagpur, Lord of the Drinks faced declining sales. Bizleap revived the brand with a six-month social media strategy, creative content, food photography, and high-impact events. The result: renewed buzz, higher footfall, and a strong comeback as one of Nagpur's top F&B brands.",
+                img: "/Casestudy/LOD.png",
+                logo: "/clients/15.png",
+                industry: "Hospitality & F&B"
+              },
+              {
+                title: "Rasoi Express - Food Delivery for Small Towns",
+                brand: "Rasoi Express",
+                description: "Bizleap launched Rasoi Express in Pandharkawda, giving 50,000+ residents their first food delivery app. It brings hot meals home, supports local restaurants, and creates jobs—proving small towns deserve big-city convenience.",
+                img: "/Casestudy/Rasoi.png",
+                logo: "/clients/66.png",
+                industry: "Food Tech"
+              },
+              {
+                title: "Hotel Anantara - New Year Party",
+                brand: "Hotel Anantara",
+                description: "Bizleap transformed Nagpur's biggest New Year party at Hotel Anantara into a record-breaking success — with impactful Instagram promotions, lead-driven campaigns, and flawless execution that made it the city's most talked-about celebration.",
+                img: "/Casestudy/Anantara.png",
+                logo: "/clients/20.png",
+                industry: "Hospitality"
+              },
+              {
+                title: "Tuli The Grand - Brand Launch",
+                brand: "Tuli The Grand",
+                description: "We launched Tuli The Grand, a flagship venture of the Tuli Group of Hotels in Nagpur, creating its complete brand identity from logo to strategy. The inauguration was graced by Hon. Nitin Gadkari as chief guest.",
+                img: "/Casestudy/tuli.png",
+                logo: "/clients/14.png",
+                industry: "Luxury Hotels"
+              },
+              {
+                title: "Bizleap x SolarArk: Website Revamp",
+                brand: "SOLAR ARK",
+                description: "Bizleap redesigned Solar Ark's website with fresh content, on-site shoots, and client stories—creating a platform that highlights their solar expertise and strengthens brand credibility.",
+                img: "/Casestudy/solar.webp",
+                logo: "/clients/52.png",
+                industry: "Renewable Energy"
+              },
+            ].map((project, index) => (
+              <ScrollReveal key={index} delay={index * 0.1}>
+                <div className="group overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 hover:border-yellow-500/50 transition-all duration-500 h-full">
+                  {/* Project Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={project.img}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+
+
+                    {/* Industry Badge */}
+                    <div className="absolute top-4 right-4">
+                      <Badge variant="outline" className="bg-black/80 backdrop-blur-sm">
+                        {project.industry}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <Badge variant="secondary" className="mb-3 text-xs">
+                      Case Study
+                    </Badge>
+
+                    <h3 className="text-2xl font-semibold mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+                      {project.title}
+                    </h3>
+
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-6 h-6 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                        <FiStar className="w-3 h-3 text-yellow-500" />
+                      </div>
+                      <span className="font-medium text-gray-300">{project.brand}</span>
+                    </div>
+
+                    <p className="text-gray-400 mb-6 leading-relaxed">
+                      {project.description}
+                    </p>
+
+
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
-        </ScrollReveal>
-      ))}
-    </div>
-    
-  </div>
-</section>
+
+        </div>
+      </section>
 
       {/* Tools & Software */}
       <section className="py-20 px-6">
@@ -396,7 +396,7 @@ export default function BrandIdentityService() {
               </p>
             </div>
           </ScrollReveal>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { name: "Adobe Illustrator", purpose: "Vector Logo Design" },
@@ -419,7 +419,7 @@ export default function BrandIdentityService() {
         </div>
       </section>
 
-      
+
     </main>
   )
 }

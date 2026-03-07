@@ -87,28 +87,31 @@ const SERVICES_LIST = [
   {
     name: "UI/UX & Web Design",
     tags: ["Figma", "Wireframing", "Prototyping", "Responsive Design", "User Testing"],
-    img: "/images/abstract-1.webp",
+    img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200",
     url: "#",
-    description: "We don’t just design screens we design moments.The kind your audience remembers without knowing why"  },
+    description: "We don’t just design screens—we design moments. The kind your audience remembers without knowing why."
+  },
   {
     name: "Brand Identity",
     tags: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory"],
-    img: "/images/abstract-2.webp",
+    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1200",
     url: "#",
-    description: "Your brand is a story waiting to be heard.We shape the colors, words, and visuals that make people feel like… Yeah, this brand gets me.”" },
+    description: "Your brand is a story waiting to be heard. We shape the colors, words, and visuals that make people feel like… 'Yeah, this brand gets me.'"
+  },
   {
     name: "Social Media Marketing",
     tags: ["Meta Ads", "Instagram Reels", "Content Strategy", "Community Management", "Performance Tracking"],
-    img: "/images/abstract-5.webp",
+    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1200",
     url: "#",
-    description: "Not content for the sake of posting.We create content that hits reach and engagement.The kind that builds communities, not just followers."},
-    {
+    description: "Not content for the sake of posting. We create content that hits reach and engagement. The kind that builds communities, not just followers."
+  },
+  {
     name: "SEO & Website Audits",
     tags: ["Technical SEO", "Keyword Strategy", "On-Page Optimization", "Analytics", "Performance Tuning"],
-    img: "/images/abstract-3.webp",
+    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
     url: "#",
-    description: "We fix what's broken, polish what’s dull, and bring your brand to the front where it deserves to be seen, chosen, and remembered."},
-  
+    description: "We fix what's broken, polish what’s dull, and bring your brand to the front where it deserves to be seen, chosen, and remembered."
+  },
 ];
 
 // ------------------- Responsive Hook -------------------
@@ -130,18 +133,17 @@ function NavigationButtons({ currentIndex, totalItems, onPrevious, onNext }) {
       <button
         onClick={onPrevious}
         disabled={currentIndex === 0}
-        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-          currentIndex === 0 
-            ? 'border-gray-600 text-gray-600 cursor-not-allowed' 
-            : 'border-white text-white hover:bg-white hover:text-black'
-        }`}
+        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${currentIndex === 0
+          ? 'border-gray-600 text-gray-600 cursor-not-allowed'
+          : 'border-white text-white hover:bg-white hover:text-black'
+          }`}
         aria-label="Previous service"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-      
+
       <div className="flex items-center gap-2">
         <span className="text-white text-sm font-medium">
           {String(currentIndex + 1).padStart(2, '0')}
@@ -155,11 +157,10 @@ function NavigationButtons({ currentIndex, totalItems, onPrevious, onNext }) {
       <button
         onClick={onNext}
         disabled={currentIndex === totalItems - 1}
-        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-          currentIndex === totalItems - 1
-            ? 'border-gray-600 text-gray-600 cursor-not-allowed'
-            : 'border-white text-white hover:bg-white hover:text-black'
-        }`}
+        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${currentIndex === totalItems - 1
+          ? 'border-gray-600 text-gray-600 cursor-not-allowed'
+          : 'border-white text-white hover:bg-white hover:text-black'
+          }`}
         aria-label="Next service"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,7 +211,7 @@ function MobileServices() {
       const scrollLeft = scrollContainer.scrollLeft;
       const containerWidth = scrollContainer.clientWidth;
       const newIndex = Math.round(scrollLeft / containerWidth);
-      
+
       if (newIndex !== currentIndex && newIndex >= 0 && newIndex < SERVICES_LIST.length) {
         setCurrentIndex(newIndex);
       }
@@ -218,7 +219,7 @@ function MobileServices() {
 
     // Add scroll event listener
     scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
     };
@@ -249,10 +250,10 @@ function MobileServices() {
 
         {/* Horizontal Scroll Services */}
         <div className="relative">
-          <div 
+          <div
             ref={scrollContainerRef}
             className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 scrollbar-hide"
-            style={{ 
+            style={{
               scrollBehavior: 'smooth',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none'
@@ -265,64 +266,56 @@ function MobileServices() {
               >
                 <motion.div
                   initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0, 
+                  animate={{
+                    opacity: 1,
+                    y: 0,
                     filter: "blur(0px)",
                     transition: { duration: 0.5, ease: "easeOut" }
                   }}
                   className="bg-black rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300"
                 >
-                  {/* Image Section - FIXED */}
-                  <div className="relative h-48 w-full overflow-hidden">
-                    <CustomCursorElement>
-                      <InView
-                        variants={{
-                          hidden: { opacity: 0, scale: 0.8, filter: "blur(14px)" },
-                          visible: { 
-                            opacity: 1, 
-                            scale: 1, 
-                            filter: "blur(0px)", 
-                            transition: { duration: 0.6, ease: "easeOut" } 
-                          },
-                        }}
-                        viewOptions={{ margin: "0px 0px -100px 0px", once: true }}
-                      >
-                        <Link href={service.url} className="block relative w-full h-48">
-                          <Image
-                            src={service.img}
-                            alt={service.name}
-                            fill
-                            sizes="(max-width: 768px) 85vw, 400px"
-                            loading="lazy"
-                            className="object-cover object-top transition-all duration-500 hover:scale-105"
-                          />
-                        </Link>
-                      </InView>
-                    </CustomCursorElement>
-                  </div>
+                  {/* Card Section with Full Background - MOBILE */}
+                  <Link href={service.url} className="block relative h-96 w-full overflow-hidden group">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="absolute inset-0 z-0"
+                    >
+                      <Image
+                        src={service.img}
+                        alt={service.name}
+                        fill
+                        sizes="(max-width: 768px) 85vw, 400px"
+                        loading="lazy"
+                        className="object-cover"
+                      />
+                    </motion.div>
 
-                  {/* Content Section */}
-                  <div className="p-6 space-y-4">
-                    <div className="space-y-3">
-                      <ScrollView>
-                        <h3 className="text-xl font-semibold text-white">{service.name}</h3>
-                      </ScrollView>
-                      <ScrollView stagger delay={0.04}>
-                        <div className="flex flex-wrap gap-2">
-                          {service.tags.map((tag, idx) => (
-                            <Badge key={idx} variant="secondary">{tag}</Badge>
-                          ))}
-                        </div>
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
+
+                    {/* Content Section Overlay */}
+                    <div className="absolute inset-0 z-20 p-6 flex flex-col justify-end space-y-4">
+                      <div className="space-y-3">
+                        <ScrollView>
+                          <h3 className="text-2xl font-semibold text-white">{service.name}</h3>
+                        </ScrollView>
+                        <ScrollView stagger delay={0.04}>
+                          <div className="flex flex-wrap gap-2">
+                            {service.tags.map((tag, idx) => (
+                              <Badge key={idx} variant="outline" className="bg-white/10 backdrop-blur-md border-white/20">{tag}</Badge>
+                            ))}
+                          </div>
+                        </ScrollView>
+                      </div>
+
+                      <ScrollView delay={0.08}>
+                        <p className="text-gray-200 text-sm leading-relaxed max-w-sm">
+                          {service.description}
+                        </p>
                       </ScrollView>
                     </div>
-                    
-                    <ScrollView delay={0.08}>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        {service.description}
-                      </p>
-                    </ScrollView>
-                  </div>
+                  </Link>
                 </motion.div>
               </div>
             ))}
@@ -337,9 +330,8 @@ function MobileServices() {
                   setCurrentIndex(index);
                   scrollToIndex(index);
                 }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-white w-6' : 'bg-gray-600'
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-white w-6' : 'bg-gray-600'
+                  }`}
                 aria-label={`Go to service ${index + 1}`}
               />
             ))}
@@ -412,45 +404,56 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
   return (
     <div
       ref={container}
-      className="h-screen flex items-center justify-center sticky top-0"
+      className="h-screen flex items-center justify-center sticky top-0 px-4 md:px-0"
     >
       <motion.div
         style={{ scale, top: `calc(-5vh + ${i * 25}px)` }}
-        className={`flex flex-col lg:flex-row relative -top-[25%] 
-          w-full h-[450px] overflow-hidden rounded-none lg:rounded-none`}
+        className="flex flex-col relative -top-[25%] w-full max-w-6xl h-[550px] overflow-hidden rounded-3xl group cursor-pointer shadow-2xl"
       >
-        {/* Left Image Section */}
-        <div className="lg:w-1/2 w-full h-64 lg:h-auto relative">
-          <motion.div style={{ scale: imageScale }} className="w-full h-full relative">
+        <Link href={service.url} className="w-full h-full block relative">
+          {/* Full Background Image - DESKTOP */}
+          <motion.div style={{ scale: imageScale }} className="w-full h-full relative z-0">
             <Image
               fill
               src={service.img}
               alt={service.name}
               className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 80vw"
+              priority={i === 0}
             />
           </motion.div>
-        </div>
 
-        {/* Right Content Section */}
-        <div
-          className={`lg:w-1/2 w-full p-6 lg:p-16 flex flex-col justify-center gap-4 
-          ${bgColor === 'white' ? 'bg-white text-black' : 'bg-yellow-400 text-black'}`}
-        >
-          <h2 className="text-3xl font-semibold">{service.name}</h2>
-          <p className="text-base leading-relaxed">{service.description}</p>
+          {/* Gradient Overlay for Readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
 
-          <div className="flex flex-wrap gap-2">
-            {service.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="bg-black/10 text-black px-2 py-1 rounded text-xs"
-              >
-                {tag}
-              </span>
-            ))}
+          {/* Content Overlay */}
+          <div className="absolute inset-0 z-20 p-12 lg:p-20 flex flex-col justify-end gap-6">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="max-w-2xl space-y-4"
+            >
+              <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+                {service.name}
+              </h2>
+              <p className="text-lg lg:text-xl text-gray-200 leading-relaxed max-w-xl">
+                {service.description}
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                {service.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-4 py-1.5 rounded-full text-sm font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           </div>
-        </div>
+        </Link>
       </motion.div>
     </div>
   );
