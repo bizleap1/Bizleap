@@ -8,6 +8,7 @@ export default function Document() {
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Bizleap Team" />
         <meta name="publisher" content="Bizleap" />
+        <meta name="google-site-verification" content="XuetXPhZawkYQinUNS-qbpYv5vrNEV4voDgVVGuAPxQ" />
 
         {/* Canonical */}
         <link rel="canonical" href="https://bizleap.in/" />
