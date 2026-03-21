@@ -4,11 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta name="google-site-verification" content="XuetXPhZawkYQinUNS-qbpYv5vrNEV4voDgVVGuAPxQ" />
+
         {/* Basic SEO */}
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Bizleap Team" />
-        <meta name="publisher" content="Bizleap" />
-        <meta name="google-site-verification" content="XuetXPhZawkYQinUNS-qbpYv5vrNEV4voDgVVGuAPxQ" />
 
         {/* Google Analytics (GA4) */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=G-6Z90883EN6`}></script>
