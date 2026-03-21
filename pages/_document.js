@@ -10,6 +10,21 @@ export default function Document() {
         <meta name="publisher" content="Bizleap" />
         <meta name="google-site-verification" content="XuetXPhZawkYQinUNS-qbpYv5vrNEV4voDgVVGuAPxQ" />
 
+        {/* Google Analytics (GA4) */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-HH7WGGJN16`}></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-HH7WGGJN16', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+
         {/* Canonical */}
         <link rel="canonical" href="https://bizleap.in/" />
 
