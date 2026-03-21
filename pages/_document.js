@@ -11,14 +11,14 @@ export default function Document() {
         <meta name="google-site-verification" content="XuetXPhZawkYQinUNS-qbpYv5vrNEV4voDgVVGuAPxQ" />
 
         {/* Google Analytics (GA4) */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-HH7WGGJN16`}></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=G-6Z90883EN6`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-HH7WGGJN16', {
+              gtag('config', 'G-6Z90883EN6', {
                 page_path: window.location.pathname,
               });
             `,
