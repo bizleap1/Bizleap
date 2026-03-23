@@ -25,6 +25,7 @@ export default function Navbar() {
     { name: "Brand Identity", href: "/brandidentity" },
     { name: "Social Media Marketing", href: "/socialmedia" },
     { name: "SEO & Website Audits", href: "/seowebsite" },
+    { name: "AI Services", href: "/aiservices" },
   ]
 
   // Handle scroll to toggle background
@@ -44,7 +45,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
 
           {/* Logo */}
-          <Link href="/" className="cursor-pointer flex items-center gap-2">
+          <Link href="/" className="cursor-pointer flex items-center gap-2 -ml-6">
             <Image
               src="/2.png"
               alt="Bizleap Logo"

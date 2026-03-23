@@ -8,12 +8,12 @@ import Link from "next/link";
 
 // ------------------- Badge Component -------------------
 function Badge({ children, variant = "secondary", className = "" }) {
-  const base = "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 mr-2 mb-2";
+  const base = "inline-flex items-center justify-center rounded-full border px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-widest whitespace-nowrap shrink-0 mr-2 mb-2 transition-colors";
   const colors = {
     default: "bg-white text-black border-transparent",
-    secondary: "bg-gray-700 text-white border-transparent",
+    secondary: "bg-zinc-800 text-white border-transparent",
     destructive: "bg-red-500 text-white border-transparent",
-    outline: "border-gray-400 text-white bg-transparent",
+    outline: "border-zinc-500 text-gray-300 bg-black/40 hover:bg-white hover:text-black",
   };
   return <span className={`${base} ${colors[variant]} ${className}`}>{children}</span>;
 }
@@ -87,30 +87,37 @@ const SERVICES_LIST = [
   {
     name: "UI/UX & Web Design",
     tags: ["Figma", "Wireframing", "Prototyping", "Responsive Design", "User Testing"],
-    img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1400",
     url: "#",
-    description: "We don’t just design screens—we design moments. The kind your audience remembers without knowing why."
+    description: "We don't just design screens—we design moments. The kind your audience remembers without knowing why."
   },
   {
     name: "Brand Identity",
     tags: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory"],
-    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1586717799252-bd134ad00e26?auto=format&fit=crop&q=80&w=1400",
     url: "#",
     description: "Your brand is a story waiting to be heard. We shape the colors, words, and visuals that make people feel like… 'Yeah, this brand gets me.'"
   },
   {
     name: "Social Media Marketing",
     tags: ["Meta Ads", "Instagram Reels", "Content Strategy", "Community Management", "Performance Tracking"],
-    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=1400",
     url: "#",
     description: "Not content for the sake of posting. We create content that hits reach and engagement. The kind that builds communities, not just followers."
   },
   {
     name: "SEO & Website Audits",
     tags: ["Technical SEO", "Keyword Strategy", "On-Page Optimization", "Analytics", "Performance Tuning"],
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=1400",
     url: "#",
-    description: "We fix what's broken, polish what’s dull, and bring your brand to the front where it deserves to be seen, chosen, and remembered."
+    description: "We fix what's broken, polish what's dull, and bring your brand to the front where it deserves to be seen, chosen, and remembered."
+  },
+  {
+    name: "AI Services",
+    tags: ["AI Automation", "ChatBot Integration", "Generative Content", "AI Strategy", "Workflow AI"],
+    img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=1400",
+    url: "#",
+    description: "We integrate cutting-edge AI into your business workflows — from intelligent chatbots to generative content engines that work while you sleep."
   },
 ];
 
@@ -292,25 +299,25 @@ function MobileServices() {
                     </motion.div>
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
 
                     {/* Content Section Overlay */}
-                    <div className="absolute inset-0 z-20 p-6 flex flex-col justify-end space-y-4">
-                      <div className="space-y-3">
+                    <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end space-y-5">
+                      <div className="space-y-4">
                         <ScrollView>
-                          <h3 className="text-2xl font-semibold text-white">{service.name}</h3>
+                          <h3 className="text-3xl font-bold tracking-tight text-white">{service.name}</h3>
                         </ScrollView>
                         <ScrollView stagger delay={0.04}>
                           <div className="flex flex-wrap gap-2">
                             {service.tags.map((tag, idx) => (
-                              <Badge key={idx} variant="outline" className="bg-white/10 backdrop-blur-md border-white/20">{tag}</Badge>
+                              <Badge key={idx} variant="outline" className="backdrop-blur-md">{tag}</Badge>
                             ))}
                           </div>
                         </ScrollView>
                       </div>
 
                       <ScrollView delay={0.08}>
-                        <p className="text-gray-200 text-sm leading-relaxed max-w-sm">
+                        <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
                           {service.description}
                         </p>
                       </ScrollView>
@@ -408,7 +415,7 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
     >
       <motion.div
         style={{ scale, top: `calc(-5vh + ${i * 25}px)` }}
-        className="flex flex-col relative -top-[25%] w-full max-w-6xl h-[550px] overflow-hidden rounded-3xl group cursor-pointer shadow-2xl"
+        className="flex flex-col relative -top-[25%] w-full max-w-6xl h-[600px] overflow-hidden rounded-[2.5rem] group cursor-pointer shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-gray-800"
       >
         <Link href={service.url} className="w-full h-full block relative">
           {/* Full Background Image - DESKTOP */}
@@ -424,31 +431,28 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
           </motion.div>
 
           {/* Gradient Overlay for Readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
           {/* Content Overlay */}
-          <div className="absolute inset-0 z-20 p-12 lg:p-20 flex flex-col justify-end gap-6">
+          <div className="absolute inset-0 z-20 p-12 lg:p-16 flex flex-col justify-end gap-6">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="max-w-2xl space-y-4"
+              className="max-w-3xl space-y-6"
             >
-              <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+              <h2 className="text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-none">
                 {service.name}
               </h2>
-              <p className="text-lg lg:text-xl text-gray-200 leading-relaxed max-w-xl">
+              <p className="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl">
                 {service.description}
               </p>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-wrap gap-3 pt-4">
                 {service.tags.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-4 py-1.5 rounded-full text-sm font-medium"
-                  >
+                  <Badge key={idx} variant="outline" className="backdrop-blur-md">
                     {tag}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </motion.div>

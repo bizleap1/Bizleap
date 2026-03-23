@@ -1,185 +1,201 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import MediaSection from "../components/MediaSection";
 import Head from "next/head";
+import MediaSection from "../components/MediaSection";
+
 export default function About() {
+  const founders = [
+    {
+      name: "Akshat Soni",
+      role: "Co-Founder & CEO",
+      image: "/team/akshat.jpg",
+      bio: "Visionary leader with a passion for creative excellence and brand growth."
+    },
+    {
+      name: "Kaushal Banginwar",
+      role: "Co-Founder & CTO",
+      image: "/team/77.png",
+      bio: "Strategic mastermind behind BizLeap's most successful digital campaigns."
+    }
+  ];
+
   const galleryImages = [
-    "/images/Team1.png",
-    "/images/Team2.png",
-    "/images/Team3.png",
-    "/images/Team4.png",
+    { src: "/images/Team1.png", aspect: "aspect-square" },
+    { src: "/images/Team2.png", aspect: "aspect-[4/5]" },
+    { src: "/images/Team3.png", aspect: "aspect-video" },
+    { src: "/images/Team4.png", aspect: "aspect-square" },
+    { src: "/images/Office2.webp", aspect: "aspect-[3/4]" },
+    { src: "/images/Office2.webp", aspect: "aspect-square" },
   ];
 
-  const bottomMedia = [
-    
-    { type: "video", src: "/Reel2.mp4" },
-    { type: "video", src: "/Reel1.mp4" },
-    { type: "video", src: "/Reel3.mp4" },
-  ];
+  return (
+    <div className="bg-black text-white min-h-screen">
+      <Head>
+        <title>About BizLeap | Driven by Design. Backed by Results.</title>
+        <meta name="description" content="Discover the story behind BizLeap - a team of dreamers and builders dedicated to high-impact design and digital growth." />
+      </Head>
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedMedia, setSelectedMedia] = useState(null);
-
-  const nextImage = () =>
-    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
-  const prevImage = () =>
-    setCurrentIndex((prev) =>
-      prev === 0 ? galleryImages.length - 1 : prev - 1
-    );
-
-  return (<>
-  <Head>
-  <title>About Us | Bizleap</title>
-  <meta
-    name="description"
-    content="Learn about Bizleap, our mission, vision, and journey in helping brands leap forward through digital marketing, web development, and creative technology."
-  />
-</Head>
-
-    <div className="bg-black text-white min-h-screen px-6 md:px-16 lg:px-32 py-20">
-
-      {/* ===== TOP IMAGE GALLERY WITH ARROWS ===== 
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className="max-w-6xl mx-auto flex flex-col items-center text-center mb-24"
-      >
-        
-        <div className="relative w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={galleryImages[currentIndex]}
-                alt={`Gallery ${currentIndex + 1}`}
-                fill
-                className="object-cover"
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          
-          <button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-white/20"
-          >
-            ←
-          </button>
-          <button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 p-3 rounded-full hover:bg-white/20"
-          >
-            →
-          </button>
-
-          
-          <div className="absolute bottom-4 right-4 bg-black/60 px-3 py-1 rounded-full text-sm">
-            {currentIndex + 1} / {galleryImages.length}
-          </div>
+      {/* --- CINEMATIC HERO --- */}
+      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/Office2.webp"
+            alt="BizLeap Team"
+            fill
+            className="object-cover opacity-40 scale-105"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         </div>
-
         
-        <p className="text-gray-300 text-lg mt-8 max-w-2xl">
-          A full service talent management, influencer marketing, and video production company.
-        </p>
-
-        
-        <div className="flex justify-center gap-4 mt-8 flex-wrap">
-          {galleryImages.map((src, i) => (
-            <div
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`relative w-40 h-24 rounded-xl overflow-hidden border-2 cursor-pointer transition-transform duration-300 ${
-                i === currentIndex ? "border-yellow-400 scale-105" : "border-gray-700 hover:scale-105"
-              }`}
-            >
-              <Image src={src} alt={`Thumb ${i + 1}`} fill className="object-cover" />
-            </div>
-          ))}
-        </div>
-      </motion.div> */}
-
-      {/* ===== ABOUT US SECTION ===== */}
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 py-10 md:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="flex-1"
-        >
-          <h1 className="text-5xl md:text-6xl font-bold mb-8">About Us</h1>
-          <p className="text-gray-300 text-lg font-bold leading-relaxed mb-6">
-            Started with a spark, and now we’re on fire! Bizleap’s 6+ years in the game make us your go-to digital gurus
-          </p>
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            At Bizleap, we’re proud of our journey from humble beginnings to becoming a leading digital marketing company. We started from scratch, with no initial investments or external help, just sheer hard work and determination. Our founders, with over 6 years of combined industry experience, brought their expertise in various fields to the table. Their unique blend of skills and passion for innovation has enabled us to deliver exceptional results for our clients. We offer a range of services, including SEO, website development, social media management, content marketing, and PPC advertising. 
-          </p>
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
-           With having a diverse team of over 30 talented individuals with expertise in various fields. Our team includes seasoned digital marketers, creative designers, expert developers, and skilled writers, all working together to deliver exceptional results for our clients. With a range of specializations, from SEO and PPC to social media management and content creation, our team members bring their unique skills and perspectives to the table.
-          </p>
-<p className="text-gray-300 text-lg leading-relaxed">
-          We’ve come a long way since our humble beginnings. Today, we’re a leading digital marketing company, handling a diverse portfolio of clients across various industries. We’re proud of our journey and look forward to helping businesses succeed online.
-        </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="flex-1"
-        >
-          <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
-            <Image
-              src="/images/Office2.webp"
-              alt="BizLeap Office"
-              width={800}
-              height={600}
-              className="object-cover w-full h-full"
-            />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* ===== BOTTOM SECTION (MEDIA GRID) ===== */}
-      {/* ===== BOTTOM SECTION (MEDIA GRID - FULL WIDTH MASONRY) ===== */}
-<MediaSection/>
-
-
-      {/* ===== FULLSCREEN MEDIA MODAL ===== */}
-      <AnimatePresence>
-        {selectedMedia && (
+        <div className="relative z-10 text-center px-6 max-w-5xl">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm"
+          >
+            Since 2020
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
+            className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-8"
+          >
+            Turning <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Vision</span> into <br />
+            Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Reality</span>.
+          </motion.h1>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-            onClick={() => setSelectedMedia(null)}
+            transition={{ delay: 0.6 }}
+            className="flex justify-center gap-12 mt-12 items-center flex-wrap"
           >
-            {selectedMedia.endsWith(".mp4") ? (
-              <video src={selectedMedia} controls autoPlay className="max-h-[90vh] rounded-lg" />
-            ) : (
-              <Image
-                src={selectedMedia}
-                alt="Full view"
-                width={1000}
-                height={700}
-                className="object-contain max-h-[90vh] rounded-lg"
-              />
-            )}
+            <div className="text-left">
+              <p className="text-3xl font-bold text-white">200+</p>
+              <p className="text-xs text-gray-500 uppercase tracking-widest">Projects</p>
+            </div>
+            <div className="w-px h-12 bg-white/10" />
+            <div className="text-left">
+              <p className="text-3xl font-bold text-white">30+</p>
+              <p className="text-xs text-gray-500 uppercase tracking-widest">Experts</p>
+            </div>
+            <div className="w-px h-12 bg-white/10" />
+            <div className="text-left">
+              <p className="text-3xl font-bold text-white">6Y+</p>
+              <p className="text-xs text-gray-500 uppercase tracking-widest">Experience</p>
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </section>
+
+      {/* --- OUR STORY --- */}
+      <section className="py-24 px-6 md:px-16 container mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Our Journey <span className="text-yellow-500">Started </span> 
+              with a Single Spark.
+            </h2>
+            <p className="text-xl text-gray-400 leading-relaxed">
+              At Bizleap, we’re proud of our journey from humble beginnings to becoming a leading digital agency. 
+              We started from scratch, with no initial investments—just sheer determination and a vision to 
+              redefine how brands communicate.
+            </p>
+            <p className="text-lg text-gray-500">
+              Today, with over 6 years of expertise, we manage a diverse portfolio of clients across various 
+              industries. Our strength lies in our team—a squad of 30+ passionate creatives, developers, 
+              and strategists who treat every brand like it’s their own.
+            </p>
+            <div className="pt-6">
+              <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800">
+                <p className="italic text-gray-300">
+                  "We don't create for clients. We create for the dreamers who want to leave a mark."
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative group">
+              <Image
+                src="/images/Office2.webp"
+                alt="BizLeap Culture"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            </div>
+            {/* Floating Badge */}
+            <div className="absolute -bottom-10 -left-10 bg-yellow-500 text-black p-8 rounded-full w-32 h-32 flex flex-col items-center justify-center animate-bounce shadow-xl">
+              <span className="text-2xl font-bold uppercase tracking-tight leading-none">Best</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest mt-1">Agency</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- LEADERSHIP (CO-FOUNDERS) --- */}
+      <section className="py-24 bg-zinc-950 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Meet the Visionaries</h2>
+            <p className="text-gray-500 uppercase tracking-widest text-sm font-bold">The Creative Minds Behind BizLeap</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            {founders.map((founder, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group bg-black p-8 rounded-3xl border border-white/5 hover:border-yellow-500/50 transition-all duration-500"
+              >
+                <div className="flex flex-col md:flex-row gap-8 items-center">
+                  <div className="relative w-40 h-40 rounded-full overflow-hidden shrink-0 border-2 border-zinc-800">
+                    <Image
+                      src={founder.image}
+                      alt={founder.name}
+                      fill
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h3 className="text-2xl font-bold mb-1">{founder.name}</h3>
+                    <p className="text-yellow-500 font-bold mb-4 uppercase text-xs tracking-[0.2em]">{founder.role}</p>
+                    <p className="text-gray-400 leading-relaxed text-sm">
+                      {founder.bio}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* --- CONTENT SECTION (REELS) --- */}
+      <MediaSection />
+      
+      {/* Footer Space padding */}
+      <div className="h-20" />
     </div>
-    </>
   );
 }
+

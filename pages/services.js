@@ -45,7 +45,7 @@ const SERVICES = [
   {
     name: "UI/UX & Web Design",
     tags: ["Figma", "Wireframing", "Prototyping", "Responsive Design", "User Testing"],
-    img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1400",
     url: "/webdesign",
     description:
       "End-to-end digital design from wireframes to polished interfaces. We create intuitive, visually appealing experiences for websites and apps, backed by user research and iterative testing.",
@@ -53,7 +53,7 @@ const SERVICES = [
   {
     name: "Brand Identity Design",
     tags: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory"],
-    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1586717799252-bd134ad00e26?auto=format&fit=crop&q=80&w=1400",
     url: "/brandidentity",
     description:
       "Comprehensive branding packages including logos, style guides, and asset kits. We craft cohesive visual identities that communicate your brand’s essence across all touchpoints.",
@@ -61,7 +61,7 @@ const SERVICES = [
   {
     name: "SEO & Website Audits",
     tags: ["Technical SEO", "Keyword Strategy", "On-Page Optimization", "Analytics", "Performance Tuning"],
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&q=80&w=1400",
     url: "/seowebsite",
     description:
       "Data-driven SEO audits and optimizations to improve rankings. We analyze technical health, content gaps, and backlink profiles to drive organic growth.",
@@ -69,10 +69,18 @@ const SERVICES = [
   {
     name: "Social Media Marketing",
     tags: ["Meta Ads", "Instagram Reels", "Content Strategy", "Community Management", "Performance Tracking"],
-    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=1400",
     url: "/socialmedia",
     description:
       "Full-service social media management—from organic content creation to paid campaigns. We build engaging narratives and measurable strategies tailored to each platform.",
+  },
+  {
+    name: "AI Services",
+    tags: ["AI Automation", "ChatBot Integration", "Generative Content", "AI Strategy", "Workflow AI"],
+    img: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=1400",
+    url: "/aiservices",
+    description:
+      "We integrate cutting-edge AI into your business workflows — from intelligent chatbots to generative content engines that work while you sleep.",
   },
 ];
 
@@ -105,48 +113,53 @@ export default function ServicesSection() {
         </div>
 
         {/* Services */}
-        <div className="space-y-16 md:space-y-24">
+        <div className="space-y-20 md:space-y-32">
           {SERVICES.map((service, i) => (
             <div
               key={service.name}
-              className={`grid grid-cols-1 lg:grid-cols-5 gap-10 border-b border-gray-700 pb-12 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                }`}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center border-b border-gray-800 pb-20 last:border-0"
             >
               {/* Text Section */}
-              <div className="lg:col-span-2 flex flex-col justify-center gap-8">
+              <div className={`lg:col-span-5 space-y-8 ${i % 2 !== 0 ? "lg:order-last" : ""}`}>
                 <ScrollReveal>
-                  <h3 className="text-2xl md:text-3xl font-medium">{service.name}</h3>
+                  <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
+                    {service.name}
+                  </h3>
                 </ScrollReveal>
                 <ScrollReveal delay={0.1}>
-                  <p className="text-gray-300 text-base md:text-lg leading-relaxed">
+                  <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
                     {service.description}
                   </p>
                 </ScrollReveal>
-                <ScrollReveal delay={0.2} stagger>
-                  <div className="flex flex-wrap">
+                <ScrollReveal delay={0.2}>
+                  <div className="flex flex-wrap gap-2">
                     {service.tags.map((tag, idx) => (
-                      <Badge key={idx} variant="secondary">
+                      <Badge key={idx} variant="outline" className="opacity-70">
                         {tag}
                       </Badge>
                     ))}
                   </div>
                 </ScrollReveal>
                 <ScrollReveal delay={0.3}>
-
+                  <Link href={service.url}>
+                    <button className="text-yellow-500 font-semibold flex items-center gap-2 hover:gap-3 transition-all">
+                      Learn More <span>→</span>
+                    </button>
+                  </Link>
                 </ScrollReveal>
               </div>
 
               {/* Image Section */}
-              <div className="lg:col-span-3 relative">
+              <div className="lg:col-span-7">
                 <ScrollReveal delay={0.2}>
-                  <div className="rounded-xl overflow-hidden">
+                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden group border border-gray-800 shadow-2xl">
                     <Image
                       src={service.img}
                       alt={service.name}
-                      width={900}
-                      height={600}
-                      className="w-full h-full object-cover aspect-[16/9] rounded-xl transition-transform duration-700 hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
                 </ScrollReveal>
               </div>

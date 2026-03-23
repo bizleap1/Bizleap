@@ -1,651 +1,187 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const REELS = [
-  {src: "/reel4.MP4"},
+  { src: "/reel4.MP4" },
   { src: "/reel5.mp4" },
   { src: "/reel6.mp4" },
   { src: "/reel7.mp4" },
   { src: "/reel8.mp4" },
   { src: "/reel9.mp4" },
-  { src: "/reel10.mp4" },
-  { src: "/reel11.mp4" },
+  { src: "/reel10.mp4", poster: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80" },
+  { src: "/reel11.mp4", poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" },
   { src: "/reel12.mp4" },
 ];
 
-// ------------------- Navigation Buttons -------------------
-function NavigationButtons({ currentIndex, totalItems, onPrevious, onNext }) {
-  return (
-    <div className="flex items-center justify-center gap-4 mb-8">
-      <button
-        onClick={onPrevious}
-        disabled={currentIndex === 0}
-        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-          currentIndex === 0 
-            ? 'border-gray-600 text-gray-600 cursor-not-allowed' 
-            : 'border-white text-white hover:bg-white hover:text-black'
-        }`}
-        aria-label="Previous reel"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      
-      <div className="flex items-center gap-2">
-        <span className="text-white text-sm font-medium">
-          {String(currentIndex + 1).padStart(2, '0')}
-        </span>
-        <span className="text-gray-400 text-sm">/</span>
-        <span className="text-gray-400 text-sm">
-          {String(totalItems).padStart(2, '0')}
-        </span>
-      </div>
+// ------------------- Reel Card (hover-to-play) -------------------
+function ReelCard({ reel, index, onClick }) {
+  const videoRef = useRef(null);
 
-      <button
-        onClick={onNext}
-        disabled={currentIndex === totalItems - 1}
-        className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-          currentIndex === totalItems - 1
-            ? 'border-gray-600 text-gray-600 cursor-not-allowed'
-            : 'border-white text-white hover:bg-white hover:text-black'
-        }`}
-        aria-label="Next reel"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </div>
-  );
-}
-
-// ------------------- Mobile Reels Section -------------------
-function MobileReels() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedReel, setSelectedReel] = useState(null);
-  const scrollContainerRef = useRef(null);
-  const videoRefs = useRef([]);
-  const isScrolling = useRef(false);
-  const scrollTimeout = useRef(null);
-
-  const nextReel = () => {
-    const newIndex = Math.min(currentIndex + 1, REELS.length - 1);
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
   };
 
-  const previousReel = () => {
-    const newIndex = Math.max(currentIndex - 1, 0);
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
   };
 
-  const scrollToIndex = useCallback((index) => {
-    if (scrollContainerRef.current) {
-      const scrollContainer = scrollContainerRef.current;
-      const reelElement = scrollContainer.children[index];
-      if (reelElement) {
-        isScrolling.current = true;
-        reelElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-        
-        // Clear previous timeout
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current);
-        }
-        
-        // Reset scrolling flag after animation
-        scrollTimeout.current = setTimeout(() => {
-          isScrolling.current = false;
-          // Ensure the correct video plays after scroll
-          videoRefs.current.forEach((video, i) => {
-            if (video) {
-              if (i === index) {
-                video.play().catch(console.error);
-              } else {
-                video.pause();
-              }
-            }
-          });
-        }, 300);
-      }
-    }
-  }, []);
-
-  // Handle scroll events to update current index
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
-
-    const handleScroll = () => {
-      if (isScrolling.current) return;
-      
-      const scrollLeft = scrollContainer.scrollLeft;
-      const containerWidth = scrollContainer.clientWidth;
-      const newIndex = Math.round(scrollLeft / containerWidth);
-      
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < REELS.length) {
-        setCurrentIndex(newIndex);
-      }
-    };
-
-    // Add scroll event listener with debouncing
-    const debouncedHandleScroll = () => {
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      scrollTimeout.current = setTimeout(handleScroll, 100);
-    };
-
-    scrollContainer.addEventListener('scroll', debouncedHandleScroll, { passive: true });
-    
-    return () => {
-      scrollContainer.removeEventListener('scroll', debouncedHandleScroll);
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-    };
-  }, [currentIndex]);
-
-  // Auto-play current video and pause others - FIXED VERSION
-  useEffect(() => {
-    // First pause all videos
-    videoRefs.current.forEach((video) => {
-      if (video) {
-        video.pause();
-      }
-    });
-    
-    // Then play only the current one
-    const currentVideo = videoRefs.current[currentIndex];
-    if (currentVideo) {
-      currentVideo.currentTime = 0; // Reset to beginning
-      const playPromise = currentVideo.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Auto-play prevented:", error);
-        });
-      }
-    }
-  }, [currentIndex]);
-
   return (
-    <section className="py-16 bg-black text-white lg:hidden">
-      <div className="mx-auto max-w-5xl space-y-8 px-6">
-        {/* Header Section */}
-        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl font-medium"
-          >
-            Featured Reels
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-gray-400 text-lg"
-          >
-            Watch our latest video content
-          </motion.p>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.55, delay: (index % 4) * 0.07, ease: "easeOut" }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => onClick(reel.src)}
+      className="relative rounded-[1.75rem] overflow-hidden cursor-pointer border border-white/10 shadow-xl group bg-zinc-900 w-full"
+      style={{ aspectRatio: "9/16" }}
+    >
+      <video
+        ref={videoRef}
+        src={reel.src}
+        className="w-full h-full object-cover"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      />
 
-        {/* Navigation Buttons */}
-        <NavigationButtons
-          currentIndex={currentIndex}
-          totalItems={REELS.length}
-          onPrevious={previousReel}
-          onNext={nextReel}
+      {/* Cover image — always visible, fades to reveal video on hover */}
+      {reel.poster && (
+        <img
+          src={reel.poster}
+          alt="reel cover"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
         />
+      )}
 
-        {/* Horizontal Scroll Reels */}
-        <div className="relative">
-          <div 
-            ref={scrollContainerRef}
-            className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 scrollbar-hide"
-            style={{ 
-              scrollBehavior: 'smooth',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {REELS.map((reel, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-[85vw] snap-center px-3"
-              >
-                <motion.div
-                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0, 
-                    filter: "blur(0px)",
-                    transition: { duration: 0.5, ease: "easeOut" }
-                  }}
-                  className="bg-black rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 cursor-pointer relative"
-                  onClick={() => setSelectedReel(reel.src)}
-                >
-                  <video
-                    ref={el => videoRefs.current[index] = el}
-                    src={reel.src}
-                    className="w-full h-[70vh] object-cover rounded-2xl"
-                    muted
-                    loop
-                    playsInline
-                  />
-                  
-                  {/* Play Overlay - Only show if not current video */}
-                  {index !== currentIndex && (
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                        <div className="w-0 h-0 border-l-[16px] border-l-white border-y-[10px] border-y-transparent ml-1" />
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              </div>
-            ))}
-          </div>
+      {/* Default pause icon overlay (visible when not hovered) */}
+      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-300" />
 
-          {/* Progress Indicator */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {REELS.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  scrollToIndex(index);
-                }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-white w-6' : 'bg-gray-600'
-                }`}
-                aria-label={`Go to reel ${index + 1}`}
-              />
-            ))}
-          </div>
+      {/* Hover play glow */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
+          <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1" />
         </div>
       </div>
 
-      {/* Fullscreen Modal */}
-      <AnimatePresence>
-        {selectedReel && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black flex items-center justify-center z-50 p-4"
-            onClick={() => setSelectedReel(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", damping: 25 }}
-              className="relative max-w-4xl w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setSelectedReel(null)}
-                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10 bg-black/50 rounded-full p-2"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <video
-                src={selectedReel}
-                controls
-                autoPlay
-                className="w-full h-auto max-h-[85vh] rounded-lg shadow-2xl"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Hide scrollbar globally for this section */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </section>
-  );
-}
-
-// ------------------- Desktop Reels Carousel -------------------
-function DesktopReelsCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedReel, setSelectedReel] = useState(null);
-  const scrollContainerRef = useRef(null);
-  const videoRefs = useRef([]);
-  const isScrolling = useRef(false);
-  const scrollTimeout = useRef(null);
-
-  // Show 3 reels at once on desktop
-  const itemsPerView = 3;
-  const totalGroups = Math.ceil(REELS.length / itemsPerView);
-
-  const nextGroup = () => {
-    const newIndex = Math.min(currentIndex + 1, totalGroups - 1);
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
-  };
-
-  const previousGroup = () => {
-    const newIndex = Math.max(currentIndex - 1, 0);
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
-  };
-
-  const scrollToIndex = useCallback((index) => {
-    if (scrollContainerRef.current) {
-      const scrollContainer = scrollContainerRef.current;
-      const groupElement = scrollContainer.children[index];
-      if (groupElement) {
-        isScrolling.current = true;
-        groupElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-        
-        // Clear previous timeout
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current);
-        }
-        
-        // Reset scrolling flag after animation
-        scrollTimeout.current = setTimeout(() => {
-          isScrolling.current = false;
-        }, 300);
-      }
-    }
-  }, []);
-
-  // Handle scroll events to update current index
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (!scrollContainer) return;
-
-    const handleScroll = () => {
-      if (isScrolling.current) return;
-      
-      const scrollLeft = scrollContainer.scrollLeft;
-      const containerWidth = scrollContainer.clientWidth;
-      const newIndex = Math.round(scrollLeft / containerWidth);
-      
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalGroups) {
-        setCurrentIndex(newIndex);
-      }
-    };
-
-    // Add scroll event listener with debouncing
-    const debouncedHandleScroll = () => {
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      scrollTimeout.current = setTimeout(handleScroll, 100);
-    };
-
-    scrollContainer.addEventListener('scroll', debouncedHandleScroll, { passive: true });
-    
-    return () => {
-      scrollContainer.removeEventListener('scroll', debouncedHandleScroll);
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-    };
-  }, [currentIndex, totalGroups]);
-
-  // Auto-play videos when they come into view for desktop
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            video.play().catch(console.error);
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.7 } // Higher threshold for better accuracy
-    );
-
-    videoRefs.current.forEach((video) => {
-      if (video) observer.observe(video);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Group reels into sets of 3
-  const groupedReels = [];
-  for (let i = 0; i < REELS.length; i += itemsPerView) {
-    groupedReels.push(REELS.slice(i, i + itemsPerView));
-  }
-
-  return (
-    <section className="hidden lg:block py-20 bg-black text-white">
-      <div className="mx-auto max-w-7xl space-y-12 px-6">
-        {/* Header Section */}
-        <div className="relative z-10 mx-auto max-w-3xl space-y-6 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-5xl font-medium"
-          >
-            Featured Reels
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-gray-400 text-xl"
-          >
-            Watch our latest video content
-          </motion.p>
-        </div>
-
-        {/* Navigation Buttons */}
-        <div className="flex items-center justify-center gap-4">
-          <button
-            onClick={previousGroup}
-            disabled={currentIndex === 0}
-            className={`flex items-center justify-center w-14 h-14 rounded-full border-2 transition-all duration-300 ${
-              currentIndex === 0 
-                ? 'border-gray-600 text-gray-600 cursor-not-allowed' 
-                : 'border-white text-white hover:bg-white hover:text-black'
-            }`}
-            aria-label="Previous group"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          
-          <div className="flex items-center gap-3">
-            <span className="text-white text-lg font-medium">
-              {String(currentIndex + 1).padStart(2, '0')}
-            </span>
-            <span className="text-gray-400 text-lg">/</span>
-            <span className="text-gray-400 text-lg">
-              {String(totalGroups).padStart(2, '0')}
-            </span>
-          </div>
-
-          <button
-            onClick={nextGroup}
-            disabled={currentIndex === totalGroups - 1}
-            className={`flex items-center justify-center w-14 h-14 rounded-full border-2 transition-all duration-300 ${
-              currentIndex === totalGroups - 1
-                ? 'border-gray-600 text-gray-600 cursor-not-allowed'
-                : 'border-white text-white hover:bg-white hover:text-black'
-            }`}
-            aria-label="Next group"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Desktop Carousel - Shows 3 reels at once */}
-        <div className="relative">
-          <div 
-            ref={scrollContainerRef}
-            className="flex overflow-x-auto snap-x snap-mandatory pb-8 -mx-6 px-6 scrollbar-hide"
-            style={{ 
-              scrollBehavior: 'smooth',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {groupedReels.map((group, groupIndex) => (
-              <div
-                key={groupIndex}
-                className="flex-shrink-0 w-full snap-center px-3"
-              >
-                <div className="grid grid-cols-3 gap-6">
-                  {group.map((reel, index) => {
-                    const globalIndex = groupIndex * itemsPerView + index;
-                    return (
-                      <motion.div
-                        key={globalIndex}
-                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                        animate={{ 
-                          opacity: 1, 
-                          y: 0, 
-                          filter: "blur(0px)",
-                          transition: { 
-                            duration: 0.5, 
-                            ease: "easeOut",
-                            delay: index * 0.1
-                          }
-                        }}
-                        whileHover={{ 
-                          scale: 1.03,
-                          transition: { duration: 0.2 }
-                        }}
-                        className="bg-black rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 cursor-pointer relative"
-                        onClick={() => setSelectedReel(reel.src)}
-                      >
-                        <video
-                          ref={el => videoRefs.current[globalIndex] = el}
-                          src={reel.src}
-                          className="w-full aspect-[9/16] object-cover rounded-2xl"
-                          muted
-                          loop
-                          playsInline
-                        />
-                        
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                          <div className="opacity-0 hover:opacity-100 transition-opacity duration-300">
-                            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                              <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1" />
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Progress Indicator */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {groupedReels.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  scrollToIndex(index);
-                }}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-white w-8' : 'bg-gray-600'
-                }`}
-                aria-label={`Go to group ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Fullscreen Modal */}
-      <AnimatePresence>
-        {selectedReel && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black flex items-center justify-center z-50 p-4"
-            onClick={() => setSelectedReel(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", damping: 25 }}
-              className="relative max-w-4xl w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setSelectedReel(null)}
-                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10 bg-black/50 rounded-full p-2"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <video
-                src={selectedReel}
-                controls
-                autoPlay
-                className="w-full h-auto max-h-[85vh] rounded-lg shadow-2xl"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Hide scrollbar globally for this section */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </section>
+      {/* Bottom gradient */}
+      <div className="absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+    </motion.div>
   );
 }
 
 // ------------------- Main Reels Section -------------------
 export default function ReelsSection() {
+  const [selectedReel, setSelectedReel] = useState(null);
+
+  // Split reels into 3 columns (staggered)
+  const columns = [[], [], []];
+  REELS.forEach((reel, i) => {
+    columns[i % 3].push({ reel, originalIndex: i });
+  });
+
+  // Alternating vertical offset: col 0 → top, col 1 → down, col 2 → top
+  const offsets = ["mt-0", "mt-12", "mt-0"];
+
   return (
-    <>
-      <MobileReels />
-      <DesktopReelsCarousel />
-    </>
+    <section className="py-20 md:py-32 bg-black text-white overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+        >
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-yellow-500 font-semibold mb-3">Our Content</p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+              Featured Reels
+            </h2>
+            <p className="mt-3 text-gray-400 text-base max-w-md">
+              Hover to preview. Click to watch.
+            </p>
+          </div>
+          <a
+            href="https://www.instagram.com/bizleap.in/reels/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-sm font-semibold text-white hover:bg-white hover:text-black transition-all duration-300 self-start md:self-auto"
+          >
+            View on Instagram
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </motion.div>
+
+        {/* Staggered 4-column grid */}
+        <div className="flex gap-4 md:gap-5 items-start">
+          {columns.map((col, colIndex) => (
+            <div
+              key={colIndex}
+              className={`flex-1 flex flex-col gap-4 md:gap-5 ${offsets[colIndex]}`}
+            >
+              {col.map(({ reel, originalIndex }) => (
+                <ReelCard
+                  key={originalIndex}
+                  reel={reel}
+                  index={originalIndex}
+                  onClick={setSelectedReel}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Fullscreen Modal */}
+      <AnimatePresence>
+        {selectedReel && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+            onClick={() => setSelectedReel(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: "spring", damping: 28 }}
+              className="relative max-w-sm w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedReel(null)}
+                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+              >
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <video
+                src={selectedReel}
+                controls
+                autoPlay
+                className="w-full rounded-[2rem] shadow-2xl"
+                style={{ aspectRatio: "9/16" }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }

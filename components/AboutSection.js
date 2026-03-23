@@ -50,82 +50,133 @@ function ScrollView({ children, stagger = false, delay = 0, viewMargin = "0px 0p
   );
 }
 
-// ------------------- About Section Data -------------------
-const ourPrinciples = [
+// ------------------- Why Choose Us Data -------------------
+const reasons = [
   {
-    title: "Creativity with Purpose",
-    description:
-      "Our designs aren’t just pretty; they’re built to solve problems and make an impact.",
+    title: "Creative Excellence",
+    description: "Our designs aren’t just pretty; they’re built to solve problems and make an impact on your target audience.",
   },
   {
-    title: "Collaboration is Key",
-    description:
-      "We work with you, not just for you. Great ideas come from teamwork.",
+    title: "Data-Driven Strategy",
+    description: "We back our creative instinct with hard data, ensuring your digital presence drives actual business results.",
   },
   {
     title: "Honest & Transparent",
-    description:
-      "No confusing jargon or hidden fees. Just clear communication and real results.",
+    description: "No confusing jargon or hidden fees. Just clear communication, realistic timelines, and tangible outcomes.",
   },
   {
-    title: "Details Matter",
-    description:
-      "The little things make a big difference. We sweat the small stuff, so you don’t have to.",
+    title: "Dedicated Team",
+    description: "When you work with us, you get a dedicated squad of experts who treat your brand like it's their own.",
   },
 ];
 
-// ------------------- About Component -------------------
+// ------------------- Why Choose Us Component -------------------
 export default function AboutSection() {
   return (
-    <section className="py-16 md:py-32 bg-black text-white" id="about">
-<div className="mx-auto max-w-5xl px-6 space-y-12">
-<div className="mx-auto max-w-2xl text-center space-y-8">
-<ScrollView>
-<h2 className="text-4xl lg:text-5xl font-semibold">About Us</h2>
-</ScrollView>
+    <section className="py-20 md:py-32 bg-black text-white overflow-hidden" id="about">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Column: Text and Values */}
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <ScrollView>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-sm font-medium">
+                  <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
+                  Why Choose Us
+                </div>
+              </ScrollView>
+              
+              <ScrollView delay={0.1}>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+                  Built with <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">purpose.</span><br />
+                  Driven by <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">results.</span>
+                </h2>
+              </ScrollView>
+              
+              <ScrollView delay={0.2}>
+                <p className="text-lg text-white/70 max-w-xl leading-relaxed">
+                  Bizleap wasn’t built in a boardroom. We don’t create for “clients.” We create for the dreamers, the builders, the ones who wake up wanting to leave a mark. If you’re here, you’re probably one of them.
+                </p>
+              </ScrollView>
+            </div>
 
-
-<ScrollView delay={0.1}>
-<p className="text-white/90 leading-relaxed space-y-4">
-<span className="block font-semibold mt-4">Made with hard work. Built with purpose.</span>
-<span className="block">BizLeap wasn’t built in a boardroom. It was built from late nights, messy drafts, too many coffees, and a stubborn belief that design should make people feel something.</span>
-<span className="block">We don’t create for “clients.” We create for the dreamers, the builders, the ones who wake up wanting to leave a mark.</span>
-<span className="block">And if you’re here, you’re probably one of them.</span>
-
-
-<span className="block font-semibold mt-4">What we stand for:</span>
-<span className="block">• Honest Work — no shortcuts, no fake promises.</span>
-<span className="block">• Purpose in Every Pixel — everything we make has meaning.</span>
-</p>
-</ScrollView>
-</div>
-
-        <ScrollView delay={0.2}>
-          <video
-    className="rounded-lg object-cover aspect-[16/9] w-full"
-    src="/significareel.mp4"
-    autoPlay
-    muted
-    loop
-    playsInline
-  />
-        </ScrollView>
-
-        <ScrollView delay={0.3}>
-          <div className="relative mx-auto grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-8 lg:grid-cols-4">
-            {ourPrinciples.map((principle, index) => (
-              <div className="space-y-3" key={index}>
-                <ScrollView delay={0.04 * index}>
-                  <div className="flex items-center gap-2">
-                    <Circle className="w-4 h-4 text-white" />
-                    <h3 className="text-sm font-medium">{principle.title}</h3>
+            <div className="space-y-8">
+              {reasons.map((reason, index) => (
+                <ScrollView key={index} delay={0.3 + (index * 0.1)}>
+                  <div className="flex gap-4 group">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center group-hover:bg-yellow-500/10 group-hover:border-yellow-500/50 transition-colors">
+                        <Circle className="w-4 h-4 text-zinc-400 group-hover:text-yellow-500 transition-colors" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">{reason.title}</h3>
+                      <p className="text-white/60 leading-relaxed">{reason.description}</p>
+                    </div>
                   </div>
-                  <p className="text-white/80 text-sm">{principle.description}</p>
                 </ScrollView>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </ScrollView>
+
+          {/* Right Column: Masonry Image Grid */}
+          <div className="relative">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-yellow-600/20 to-transparent blur-[80px] rounded-full pointer-events-none" />
+            
+            <ScrollView delay={0.4}>
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-4 md:space-y-6 translate-y-12">
+                  <div className="relative w-full h-[240px] md:h-[360px] rounded-2xl overflow-hidden group border border-zinc-800">
+                    <Image 
+                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80" 
+                      alt="Team Collaboration" 
+                      fill 
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                  </div>
+                  <div className="relative w-full h-[200px] md:h-[280px] rounded-2xl overflow-hidden group border border-zinc-800">
+                    <Image 
+                      src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80" 
+                      alt="Data Analysis" 
+                      fill 
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                  </div>
+                </div>
+                
+                <div className="space-y-4 md:space-y-6">
+                  <div className="relative w-full h-[200px] md:h-[280px] rounded-2xl overflow-hidden group border border-zinc-800">
+                    <Image 
+                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80" 
+                      alt="Brainstorming" 
+                      fill 
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                  </div>
+                  <div className="relative w-full h-[240px] md:h-[360px] rounded-2xl overflow-hidden group border border-zinc-800">
+                    <Image 
+                      src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" 
+                      alt="Strategic Planning" 
+                      fill 
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                  </div>
+                </div>
+              </div>
+            </ScrollView>
+          </div>
+
+        </div>
       </div>
     </section>
   );

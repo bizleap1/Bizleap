@@ -1,13 +1,23 @@
-// pages/_app.js
 import Head from "next/head";
+import { Playfair_Display, Inter } from "next/font/google";
 import "../styles/globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FloatingButtons from "../components/FloatingButtons";
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <div className={`${playfair.variable} ${inter.variable} font-sans`}>
       <Head>
         {/* Primary SEO */}
         <title>Bizleap</title>
@@ -54,6 +64,6 @@ export default function App({ Component, pageProps }) {
       </main>
       <Footer />
       <FloatingButtons />
-    </>
+    </div>
   );
 }

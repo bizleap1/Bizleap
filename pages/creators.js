@@ -602,9 +602,9 @@ export default function CreatorsSection() {
       { key: "circulation", title: "Circulation Range", options: ["Under 50,000", "50,000 - 500,000", "500,000+"] },
     ],
     digital: [
-      { key: "platform", title: "Platform", options: ["Google", "Meta (FB/Insta)", "LinkedIn", "E-commerce"] },
-      { key: "format", title: "Ad Format", options: ["Search Ads", "Display Ads", "Video Ads", "Social Media"] },
-      { key: "budget", title: "Budget Range", isRange: true },
+      { key: "platformType", title: "Type", options: ["Social Media", "Video", "Search", "Influencer", "Display"] },
+      { key: "format", title: "Format", options: ["Video", "Image", "Carousel", "Reels", "Stories"] },
+      { key: "budget", title: "Min Budget", isRange: true },
     ],
   };
 
@@ -782,79 +782,29 @@ export default function CreatorsSection() {
           ))}
         </div>
 
-        {/* SIMPLIFIED FILTERS FOR INFLUENCERS */}
-{filter === "influencer" && (
-  <div className="mb-8 space-y-4">
-    {/* Simple Search Only */}
-    <div className="flex justify-center">
-      <div className="relative w-full max-w-md">
-        <input
-          type="text"
-          value={influencerSearch}
-          onChange={(e) => setInfluencerSearch(e.target.value)}
-          placeholder="Search influencers by name or location..."
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-transparent text-sm"
-        />
-      </div>
-    </div>
-
-    {/* Simple Filter Row */}
-    <div className="flex flex-wrap justify-center gap-2">
-      <select 
-        value={influencerGenderFilter[0] || ""}
-        onChange={(e) => setInfluencerGenderFilter(e.target.value ? [e.target.value] : [])}
-        className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1 text-white text-sm focus:outline-none focus:ring-1 focus:ring-yellow-500"
-      >
-        <option value="">All Genders</option>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-      </select>
-
-      <select 
-        value={influencerLocationFilter[0] || ""}
-        onChange={(e) => setInfluencerLocationFilter(e.target.value ? [e.target.value] : [])}
-        className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1 text-white text-sm focus:outline-none focus:ring-1 focus:ring-yellow-500"
-      >
-        <option value="">All Locations</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Nagpur">Nagpur</option>
-        <option value="Pune">Pune</option>
-
-      </select>
-    </div>
-
-    {/* Simple Results Count */}
-    <div className="text-center">
-      <p className="text-gray-400 text-sm">
-        Showing {filteredInfluencers.length} of {influencersData.length} influencers
-      </p>
-    </div>
-  </div>
-)}
-
-        {/* ORIGINAL FILTERS FOR OTHER SECTIONS */}
-        {filter !== "influencer" && (
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {filterMenus[filter].map(menu => (
-              <DropdownFilter
-                key={menu.key}
-                id={menu.key}
-                title={menu.title}
-                options={menu.options}
-                isRange={menu.isRange}
-                selected={activeFilters[menu.key] || []}
-                onToggleOption={(opt) => toggleOption(menu.key, opt)}
-                onApplyRange={(min, max) => applyRange(menu.key, min, max)}
-              />
-            ))}
-          </div>
-        )}
+        {/* Dropdown filters row */}
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {filterMenus[filter].map(menu => (
+            <DropdownFilter
+              key={menu.key}
+              id={menu.key}
+              title={menu.title}
+              options={menu.options}
+              isRange={menu.isRange}
+              selected={activeFilters[menu.key] || []}
+              onToggleOption={(opt) => toggleOption(menu.key, opt)}
+              onApplyRange={(min, max) => applyRange(menu.key, min, max)}
+            />
+          ))}
+        </div>
 
         {/* Clear Filters Button */}
         {showClearFilters && (
           <div className="flex justify-center mb-6">
-            <button onClick={clearFilters} className="px-4 py-2 rounded-md bg-yellow-500 text-black text-sm font-medium hover:bg-yellow-400 transition-colors">
+            <button
+              onClick={clearFilters}
+              className="px-4 py-2 rounded-md bg-yellow-500 text-black text-sm font-medium hover:bg-yellow-400 transition-colors"
+            >
               Clear All Filters
             </button>
           </div>
@@ -997,10 +947,9 @@ const newspapersData = [
 ];
 
 const digitalPlatformsData = [
-  { id: 1, name: "Google Ads", websiteLink: "https://ads.google.com/", platformType: "Google", reach: "90% of Internet Users", reachVal: 90, formats: ["Search", "Display", "Video"], adRate: "Pay-Per-Click", minBudget: 25000, recommended: true, image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg" },
-  { id: 2, name: "Meta Ads", websiteLink: "https://www.facebook.com/business/ads", platformType: "Meta", reach: "3.0B+ Monthly Users", reachVal: 80, formats: ["Social", "Video", "Display"], adRate: "Pay-Per-Impression", minBudget: 20000, recommended: true, image: "images/meta.jpg" },
-  { id: 3, name: "LinkedIn Ads", websiteLink: "https://www.linkedin.com/business/marketing/ads", platformType: "LinkedIn", reach: "1B+ Professionals", reachVal: 50, formats: ["Social", "Display"], adRate: "Pay-Per-Click", minBudget: 35000, recommended: false, image: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" },
-  { id: 4, name: "YouTube Ads", websiteLink: "https://www.youtube.com/ads/", platformType: "Google", reach: "2.5B+ Monthly Users", reachVal: 75, formats: ["Video"], adRate: "Pay-Per-View", minBudget: 30000, recommended: true, image: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" },
-  { id: 5, name: "Amazon Ads", websiteLink: "https://advertising.amazon.com/", platformType: "E-commerce", reach: "300M+ Customers", reachVal: 60, formats: ["Display", "Search"], adRate: "Pay-Per-Click", minBudget: 40000, recommended: false, image: "images/Amazon.jpg" },
-  { id: 6, name: "Programmatic Display", websiteLink: "#", platformType: "Programmatic", reach: "Vast Ad Exchanges", reachVal: 85, formats: ["Display", "Video"], adRate: "CPM Bidding", minBudget: 50000, recommended: false, image: "https://i.imgur.com/8aP2B3y.png" }
+  { id: 1, name: "Google Ads", websiteLink: "https://ads.google.com/", platformType: "Search & Display", reach: "90% of Internet Users", formats: ["Search", "Display", "Video", "Shopping"], adRate: "Pay-Per-Click", minBudget: 25000, image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg" },
+  { id: 2, name: "Meta Ads", websiteLink: "https://www.facebook.com/business/ads", platformType: "Social Media", reach: "3B+ Users (FB/IG)", formats: ["Feed", "Stories", "Reels", "video"], adRate: "CPM / CPC", minBudget: 20000, image: "https://upload.wikimedia.org/wikipedia/commons/b/b8/Meta_Platforms_Inc._logo.svg" },
+  { id: 3, name: "LinkedIn Ads", websiteLink: "https://www.linkedin.com/business/marketing/ads", platformType: "B2B Social", reach: "1B+ Professionals", formats: ["Sponsored Content", "InMail", "Dynamic Ads"], adRate: "Pay-Per-Click", minBudget: 35000, image: "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" },
+  { id: 4, name: "YouTube Ads", websiteLink: "https://www.youtube.com/ads/", platformType: "Video Platform", reach: "2.5B+ Users", formats: ["In-stream", "Discovery", "Bumper Ads"], adRate: "Pay-Per-View", minBudget: 30000, image: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" },
+  { id: 5, name: "Amazon Ads", websiteLink: "https://advertising.amazon.com/", platformType: "Retain & E-comm", reach: "300M+ Customers", formats: ["Sponsored Products", "Brands", "Display"], adRate: "Pay-Per-Click", minBudget: 40000, image: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" }
 ];

@@ -8,6 +8,7 @@ import ServicesSection2 from "../components/Services";
 import Stats from "../components/Stats";
 
 import Work from "../components/Work";
+import BrandSlider from "../components/Logo";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       </Head>
     <section>
       <Hero/>
+      <BrandSlider/>
       <AboutSection/>
       <Stats/>
       

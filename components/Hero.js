@@ -1,55 +1,64 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import Logo from "./Logo";
-import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['700', '800', '900'] });
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'] });
 
 
 export default function Hero() {
   const heroRef = useRef();
+  const headlineRef = useRef();
+  const subtextRef = useRef();
+  const buttonsRef = useRef();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Split headline into words for staggered reveal
+      const headlineWords = headlineRef.current.innerText.split(" ");
+      headlineRef.current.innerHTML = headlineWords
+        .map((word) => `<span class="word-wrapper inline-block overflow-hidden pb-1"><span class="word inline-block translate-y-full">${word}</span></span>`)
+        .join(" ");
+
       // Headline animation
-      gsap.from(".headline", {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        ease: "power3.out",
+      gsap.to(".word", {
+        y: 0,
+        duration: 1.2,
+        stagger: 0.08,
+        ease: "power4.out",
+        delay: 0.2,
       });
 
-      // Paragraph animation
-      gsap.from(".subtext", {
-        opacity: 0,
-        y: 15,
-        duration: 1,
-        delay: 0.5,
-        ease: "power3.out",
-      });
+      // Subtext animation
+      gsap.fromTo(
+        subtextRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          delay: 0.8,
+          ease: "expo.out",
+        }
+      );
 
       // Buttons animation
       gsap.fromTo(
         ".hero-button",
-        { opacity: 0, y: 10 },
+        { opacity: 0, y: 20 },
         {
           opacity: 1,
           y: 0,
           duration: 1,
-          delay: 1,
-          stagger: 0.2,
+          delay: 1.2,
+          stagger: 0.15,
           ease: "power3.out",
         }
       );
 
-      // Subtle background movement
-      gsap.to(".shader-gradient-bg", {
-        scale: 1.05,
-        duration: 10,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
     }, heroRef);
 
     return () => ctx.revert();
@@ -58,88 +67,76 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-12 text-center overflow-hidden bg-black"
+      className="relative min-h-screen flex flex-col justify-start pt-28 pb-32 px-8 md:px-16 lg:px-24 overflow-hidden bg-black"
     >
-      {/* Shader Gradient Background */}
-      <div className="absolute inset-0 w-full h-full shader-gradient-bg pointer-events-none z-0">
-        <ShaderGradientCanvas
-          style={{ width: "100%", height: "100%" }}
-          pixelDensity={1}
-          pointerEvents="none"
-        >
-          <ShaderGradient
-            animate="on"
-            type="sphere"
-            wireframe={false}
-            shader="defaults"
-            uTime={0}
-            uSpeed={0.3}
-            uStrength={0.3}
-            uDensity={0.8}
-            uFrequency={5.5}
-            uAmplitude={3.2}
-            positionX={-0.1}
-            positionY={0}
-            positionZ={0}
-            rotationX={0}
-            rotationY={130}
-            rotationZ={70}
-            color1="#73bfc4"
-            color2="#ff810a"
-            color3="#8da0ce"
-            reflection={0.4}
-            cAzimuthAngle={270}
-            cPolarAngle={180}
-            cDistance={0.5}
-            cameraZoom={15.1}
-            lightType="env"
-            brightness={0.8}
-            
-            grain="on"
-            toggleAxis={false}
-            zoomOut={false}
-            hoverState=""
-            enableTransition={false}
-          />
-        </ShaderGradientCanvas>
+      {/* Dynamic Yellow Glows (Perimeter Path to Avoid Center) */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+        {/* Main Yellow Glow traversing the outer edges clockwise */}
+        <motion.div
+          animate={{
+            x: ["-20vw", "80vw", "80vw", "-20vw", "-20vw"],
+            y: ["-20vh", "-20vh", "80vh", "80vh", "-20vh"],
+            scale: [1, 1.2, 1, 1.2, 1],
+            opacity: [0.5, 0.7, 0.5, 0.7, 0.5],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-0 left-0 w-[50vh] h-[50vh] md:w-[70vh] md:h-[70vh] bg-yellow-400 rounded-full blur-[120px] md:blur-[150px] mix-blend-screen"
+        />
+        
+        {/* Secondary Yellow Glow traversing counter-clockwise for balance */}
+        <motion.div
+          animate={{
+            x: ["80vw", "-20vw", "-20vw", "80vw", "80vw"],
+            y: ["80vh", "80vh", "-20vh", "-20vh", "80vh"],
+            scale: [1.2, 1, 1.2, 1, 1.2],
+            opacity: [0.4, 0.6, 0.4, 0.6, 0.4],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute top-0 left-0 w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] bg-yellow-500 rounded-full blur-[130px] md:blur-[160px] mix-blend-screen"
+        />
       </div>
 
-      {/* Hero Content */}
-      <div
-        className="
-          max-w-4xl space-y-6 relative z-20 
-          mt-20 md:mt-0
-        "
-      >
-        <h1 className="headline mt-0 md:mt-20 text-5xl md:text-7xl font-semibold leading-tight text-white">
+      {/* Hero Content — Left Aligned */}
+      <div className="max-w-4xl relative z-20 mt-6 space-y-8">
+        <h1
+          ref={headlineRef}
+          className={`headline text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] text-white tracking-tight ${playfair.className}`}
+        >
           Bizleap – Where Brands Leap Forward
-
         </h1>
 
-        <p className="subtext mx-auto max-w-2xl text-lg text-white/90">
-          Every brand has a heartbeat most just never learn how to make people hear it. At
-BizLeap, we craft stories, designs, and digital experiences that actually converts… the
-kind that make them stop, remember, and come back.
-
+        <p
+          ref={subtextRef}
+          className={`subtext max-w-xl text-lg md:text-xl text-white/60 font-light leading-relaxed ${inter.className}`}
+        >
+          We craft digital experiences that captivate, convert, and scale your brand.
         </p>
 
-        <div className="mt-12 flex flex-col md:flex-row gap-4 justify-center">
-  <Link href="/contact">
-    <button className="hero-button bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
-      Get Started
-    </button>
-  </Link>
+        <div className="mt-10 flex flex-row gap-4 items-center">
+          <Link href="/contact" className="z-30">
+            <button className="hero-button bg-white text-black px-8 py-3.5 rounded-full font-semibold text-base hover:bg-yellow-400 transition-all duration-300">
+              Get Started
+            </button>
+          </Link>
 
-  <Link href="/about">
-    <button className="hero-button border border-white text-white px-6 py-3 rounded-xl font-semibold hover:bg-white hover:text-black transition">
-      Learn More
-    </button>
-  </Link>
-</div>
+          <Link href="/about" className="z-30">
+            <button className="hero-button border border-white/20 text-white px-8 py-3.5 rounded-full font-semibold text-base hover:bg-white hover:text-black transition-all duration-300">
+              Explore Our Work
+            </button>
+          </Link>
+        </div>
       </div>
 
-      {/* Logo stays fixed below */}
-      <Logo />
+
+
+      <style>{`
+        .ease-expo {
+          transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .word-wrapper {
+          margin-right: 0.25em;
+        }
+      `}</style>
     </section>
   );
 }
