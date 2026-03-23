@@ -130,8 +130,8 @@ export default function AboutSection() {
                 <div className="space-y-4 md:space-y-6 translate-y-12">
                   <div className="relative w-full h-[240px] md:h-[360px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80" 
-                      alt="Team Collaboration" 
+                      src="/_MG_5383 (1).jpg.jpeg" 
+                      alt="BizLeap Excellence" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700" 
@@ -140,8 +140,8 @@ export default function AboutSection() {
                   </div>
                   <div className="relative w-full h-[200px] md:h-[280px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80" 
-                      alt="Data Analysis" 
+                      src="/FullSizeRender (1).jpg.jpeg" 
+                      alt="Visual Strategy" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700" 
@@ -153,8 +153,8 @@ export default function AboutSection() {
                 <div className="space-y-4 md:space-y-6">
                   <div className="relative w-full h-[200px] md:h-[280px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80" 
-                      alt="Brainstorming" 
+                      src="/IMG_9655.JPG.jpeg" 
+                      alt="Creative Brainstorming" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700" 
@@ -163,8 +163,8 @@ export default function AboutSection() {
                   </div>
                   <div className="relative w-full h-[240px] md:h-[360px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" 
-                      alt="Strategic Planning" 
+                      src="/IMG_2031.PNG" 
+                      alt="Strategic Vision" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-700" 
