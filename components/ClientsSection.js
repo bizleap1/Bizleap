@@ -142,16 +142,16 @@ function InfiniteLogoSlider({ clients }) {
             key={i}
             className="flex flex-col items-center justify-center text-center flex-shrink-0"
           >
-            <div className="w-[130px] h-[80px] sm:w-[170px] sm:h-[110px] lg:w-[210px] lg:h-[130px] flex items-center justify-center bg-zinc-900 rounded-xl shadow-md p-3 mx-1.5">
+            <div className="w-[100px] h-[60px] sm:w-[130px] sm:h-[80px] lg:w-[160px] lg:h-[100px] flex items-center justify-center bg-zinc-900 rounded-xl shadow-md p-2.5 mx-1">
               <Image
                 src={client.logo}
                 alt={client.name}
-                width={300}
-                height={200}
+                width={200}
+                height={120}
                 className="object-contain w-full h-full transition-transform duration-300"
               />
             </div>
-            <p className="text-gray-400 text-sm mt-2">{client.name}</p>
+            <p className="text-gray-500 text-[10px] sm:text-xs mt-1.5">{client.name}</p>
           </div>
         ))}
       </div>
@@ -166,8 +166,8 @@ export default function ClientsSection() {
       <div className="max-w-7xl mx-auto px-4 space-y-12">
 
         <ScrollView>
-          <h2 className="text-4xl md:text-6xl font-bold">Our Clients</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto mt-3 text-lg md:text-xl">
+          <h2 className="text-3xl md:text-5xl font-bold">Our Clients</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto mt-3 text-base md:text-lg">
             Trusted by leading brands across industries — built on creativity, innovation, and growth.
           </p>
         </ScrollView>
