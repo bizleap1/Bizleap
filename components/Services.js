@@ -67,8 +67,8 @@ function ScrollViewStaggerWrapper({ children, className }) {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, scale: 0.8, filter: "blur(10px)" },
-        visible: { opacity: 1, scale: 1, filter: "blur(0px)" },
+        hidden: { opacity: 0, filter: "blur(10px)" },
+        visible: { opacity: 1, filter: "blur(0px)" },
       }}
       className={className}
     >
@@ -284,7 +284,6 @@ function MobileServices() {
                   {/* Card Section with Full Background - MOBILE */}
                   <Link href={service.url} className="block relative h-96 w-full overflow-hidden group">
                     <motion.div
-                      whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
                       className="absolute inset-0 z-0"
                     >
@@ -406,7 +405,7 @@ const ServiceCard = ({ i, service, progress, range, targetScale, bgColor }) => {
   });
 
   const scale = useTransform(progress, range, [1, targetScale]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.8, 1]);
+  const imageScale = 1; // Removed scroll-based scaling
 
   return (
     <div

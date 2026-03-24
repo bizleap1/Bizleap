@@ -21,6 +21,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         {/* Primary SEO */}
         <title>Bizleap</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta
           name="description"
           content="Driven by Design. Backed by Results. Bizleap creates thoughtful design and digital experiences that help businesses grow."

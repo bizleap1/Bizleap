@@ -45,14 +45,16 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
 
           {/* Logo */}
-          <Link href="/" className="cursor-pointer flex items-center gap-2 -ml-6">
-            <Image
-              src="/2.png"
-              alt="Bizleap Logo"
-              width={140}
-              height={50}
-              priority
-            />
+          <Link href="/" className="cursor-pointer flex items-center gap-2">
+            <div className="relative w-[100px] h-[36px] md:w-[140px] md:h-[50px]">
+              <Image
+                src="/2.png"
+                alt="Bizleap Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Desktop Links */}
@@ -68,7 +70,7 @@ export default function Navbar() {
                     <div className="flex items-center">
                       <Link
                         href={link.href}
-                        className="relative font-medium hover:scale-105 transition-transform duration-200 flex items-center gap-1"
+                        className="relative font-medium flex items-center gap-1"
                       >
                         {link.name}
                         <FiChevronDown className={`transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -118,7 +120,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="relative font-medium hover:scale-105 transition-transform duration-200"
+                    className="relative font-medium"
                   >
                     {link.name}
                     <motion.span

@@ -67,28 +67,26 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col justify-start pt-28 pb-32 px-8 md:px-16 lg:px-24 overflow-hidden bg-black"
+      className="relative min-h-screen flex flex-col justify-start pt-28 pb-32 overflow-hidden bg-black"
     >
-      {/* Dynamic Yellow Glows (Perimeter Path to Avoid Center) */}
+      {/* Dynamic Yellow Glows */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        {/* Main Yellow Glow traversing the outer edges clockwise */}
+        {/* Main Yellow Glow */}
         <motion.div
           animate={{
             x: ["-20vw", "80vw", "80vw", "-20vw", "-20vw"],
             y: ["-20vh", "-20vh", "80vh", "80vh", "-20vh"],
-            scale: [1, 1.2, 1, 1.2, 1],
             opacity: [0.5, 0.7, 0.5, 0.7, 0.5],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           className="absolute top-0 left-0 w-[50vh] h-[50vh] md:w-[70vh] md:h-[70vh] bg-yellow-400 rounded-full blur-[120px] md:blur-[150px] mix-blend-screen"
         />
         
-        {/* Secondary Yellow Glow traversing counter-clockwise for balance */}
+        {/* Secondary Yellow Glow */}
         <motion.div
           animate={{
             x: ["80vw", "-20vw", "-20vw", "80vw", "80vw"],
             y: ["80vh", "80vh", "-20vh", "-20vh", "80vh"],
-            scale: [1.2, 1, 1.2, 1, 1.2],
             opacity: [0.4, 0.6, 0.4, 0.6, 0.4],
           }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -96,34 +94,36 @@ export default function Hero() {
         />
       </div>
 
-      {/* Hero Content — Left Aligned */}
-      <div className="max-w-4xl relative z-20 mt-6 space-y-8">
-        <h1
-          ref={headlineRef}
-          className={`headline text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] text-white tracking-tight ${playfair.className}`}
-        >
-          Bizleap – Where Brands Leap Forward
-        </h1>
+      {/* Hero Content — Aligned with Navbar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20">
+        <div className="max-w-4xl mt-6 space-y-8">
+          <h1
+            ref={headlineRef}
+            className={`headline text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.08] text-white tracking-tight ${playfair.className}`}
+          >
+            Bizleap – Where Brands Leap Forward
+          </h1>
 
-        <p
-          ref={subtextRef}
-          className={`subtext max-w-xl text-lg md:text-xl text-white/60 font-light leading-relaxed ${inter.className}`}
-        >
-          We craft digital experiences that captivate, convert, and scale your brand.
-        </p>
+          <p
+            ref={subtextRef}
+            className={`subtext max-w-xl text-lg md:text-xl text-white/60 font-light leading-relaxed ${inter.className}`}
+          >
+            We craft digital experiences that captivate, convert, and scale your brand.
+          </p>
 
-        <div className="mt-10 flex flex-row gap-4 items-center">
-          <Link href="/contact" className="z-30">
-            <button className="hero-button bg-white text-black px-8 py-3.5 rounded-full font-semibold text-base hover:bg-yellow-400 transition-all duration-300">
-              Get Started
-            </button>
-          </Link>
+          <div className="mt-10 flex flex-row gap-4 items-center">
+            <Link href="/contact" className="z-30">
+              <button className="hero-button bg-white text-black px-8 py-3.5 rounded-full font-semibold text-base hover:bg-yellow-400 transition-all duration-300">
+                Get Started
+              </button>
+            </Link>
 
-          <Link href="/about" className="z-30">
-            <button className="hero-button border border-white/20 text-white px-8 py-3.5 rounded-full font-semibold text-base hover:bg-white hover:text-black transition-all duration-300">
-              Explore Our Work
-            </button>
-          </Link>
+            <Link href="/about" className="z-30">
+              <button className="hero-button border border-white/20 text-white px-8 py-3.5 rounded-full font-semibold text-base hover:bg-white hover:text-black transition-all duration-300">
+                Explore Our Work
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
 

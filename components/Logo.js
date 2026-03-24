@@ -51,7 +51,7 @@ export default function BrandSlider() {
           {[...brands, ...brands].map((brand, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 mx-8 md:mx-12 w-28 h-20 md:w-48 md:h-24 relative opacity-100 hover:scale-110 transition-all duration-500"
+              className="flex-shrink-0 mx-8 md:mx-12 w-28 h-20 md:w-48 md:h-24 relative opacity-100 transition-all duration-500"
             >
               <Image
                 src={brand.logo}

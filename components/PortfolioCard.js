@@ -70,7 +70,7 @@ const PORTFOLIO_CONTENT = [
 function PortfolioCard({ card }) {
   return (
     <ScrollView>
-      <div className="group hover:scale-105 transition-all duration-500">
+      <div className="group transition-all duration-500">
         <a href={card.url} target="_blank" rel="noreferrer">
           <Image
             className="w-full grayscale-[25%] hover:grayscale-0 rounded-md object-cover object-top transition-all duration-500"

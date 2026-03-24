@@ -148,7 +148,7 @@ function InfiniteLogoSlider({ clients }) {
                 alt={client.name}
                 width={300}
                 height={200}
-                className="object-contain w-full h-full hover:scale-110 transition-transform duration-300"
+                className="object-contain w-full h-full transition-transform duration-300"
               />
             </div>
             <p className="text-gray-400 text-sm mt-2">{client.name}</p>

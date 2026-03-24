@@ -34,7 +34,6 @@ export default function FloatingButtons() {
         href="https://wa.me/918128121004" // 🔁 replace with your number
         target="_blank"
         rel="noopener noreferrer"
-        whileHover={{ scale: 1.1 }}
         className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition"
       >
         <FaWhatsapp size={24} />

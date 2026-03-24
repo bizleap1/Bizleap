@@ -134,7 +134,7 @@ export default function AboutSection() {
                       alt="BizLeap Excellence" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                      className="object-cover transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
@@ -144,7 +144,7 @@ export default function AboutSection() {
                       alt="Visual Strategy" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                      className="object-cover transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
@@ -157,7 +157,7 @@ export default function AboutSection() {
                       alt="Creative Brainstorming" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                      className="object-cover transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
@@ -167,7 +167,7 @@ export default function AboutSection() {
                       alt="Strategic Vision" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                      className="object-cover transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>

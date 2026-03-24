@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const REELS = [
@@ -82,19 +82,36 @@ function ReelCard({ reel, index, onClick }) {
 // ------------------- Main Reels Section -------------------
 export default function ReelsSection() {
   const [selectedReel, setSelectedReel] = useState(null);
+  const [numCols, setNumCols] = useState(3);
 
-  // Split reels into 3 columns (staggered)
-  const columns = [[], [], []];
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setNumCols(2);
+      else if (window.innerWidth < 1024) setNumCols(3);
+      else setNumCols(4);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Split reels into dynamic columns
+  const columns = Array.from({ length: numCols }, () => []);
   REELS.forEach((reel, i) => {
-    columns[i % 3].push({ reel, originalIndex: i });
+    columns[i % numCols].push({ reel, originalIndex: i });
   });
 
-  // Alternating vertical offset: col 0 → top, col 1 → down, col 2 → top
-  const offsets = ["mt-0", "mt-12", "mt-0"];
+  // Alternating vertical offset
+  const getOffset = (index) => {
+    if (numCols === 2) return index === 1 ? "mt-12" : "mt-0";
+    if (numCols === 3) return index === 1 ? "mt-12" : "mt-0";
+    if (numCols === 4) return (index === 1 || index === 3) ? "mt-12" : "mt-0";
+    return "mt-0";
+  };
 
   return (
     <section className="py-20 md:py-32 bg-black text-white overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -125,25 +142,49 @@ export default function ReelsSection() {
           </a>
         </motion.div>
 
-        {/* Staggered 4-column grid */}
-        <div className="flex gap-4 md:gap-5 items-start">
-          {columns.map((col, colIndex) => (
-            <div
-              key={colIndex}
-              className={`flex-1 flex flex-col gap-4 md:gap-5 ${offsets[colIndex]}`}
-            >
-              {col.map(({ reel, originalIndex }) => (
+        {/* Staggered grid for Desktop/Tablet, Horizontal scroll for Mobile */}
+        {numCols > 2 ? (
+          <div className="flex gap-4 md:gap-5 items-start">
+            {columns.map((col, colIndex) => (
+              <div
+                key={colIndex}
+                className={`flex-1 flex flex-col gap-4 md:gap-5 ${getOffset(colIndex)}`}
+              >
+                {col.map(({ reel, originalIndex }) => (
+                  <ReelCard
+                    key={originalIndex}
+                    reel={reel}
+                    index={originalIndex}
+                    onClick={setSelectedReel}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 scrollbar-hide">
+            {REELS.map((reel, index) => (
+              <div key={index} className="flex-shrink-0 w-[70vw] snap-center">
                 <ReelCard
-                  key={originalIndex}
                   reel={reel}
-                  index={originalIndex}
+                  index={index}
                   onClick={setSelectedReel}
                 />
-              ))}
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
 
       {/* Fullscreen Modal */}
       <AnimatePresence>

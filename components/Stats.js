@@ -61,8 +61,8 @@ export default function Stats() {
         {stats.map((stat, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 + i * 0.1, ease: [0.19, 1, 0.22, 1] }}
             className="relative group p-8 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:border-yellow-500/30 transition-all duration-500"
           >
