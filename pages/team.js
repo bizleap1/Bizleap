@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Linkedin, Instagram, Mail } from "lucide-react";
+import Link from "next/link";
 
 const founders = [
   {
@@ -188,6 +189,12 @@ export default function Team() {
               variants={itemVariants}
               whileHover="hover"
               custom={i}
+              onClick={() => {
+                if (person.name.includes("Kaushal")) {
+                  window.location.href = "/kaushal";
+                }
+              }}
+              style={{ cursor: person.name.includes("Kaushal") ? "pointer" : "default" }}
             >
               {/* Background Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

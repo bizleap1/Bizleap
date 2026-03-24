@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Head from "next/head";
+import Link from "next/link";
 import MediaSection from "../components/MediaSection";
 
 export default function About() {
@@ -163,7 +164,12 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group bg-black p-8 rounded-3xl border border-white/5 hover:border-yellow-500/50 transition-all duration-500"
+                className="group bg-black p-8 rounded-3xl border border-white/5 hover:border-yellow-500/50 transition-all duration-500 cursor-pointer"
+                onClick={() => {
+                  if (founder.name.includes("Kaushal")) {
+                    window.location.href = "/kaushal";
+                  }
+                }}
               >
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                   <div className="relative w-40 h-40 rounded-full overflow-hidden shrink-0 border-2 border-zinc-800">
