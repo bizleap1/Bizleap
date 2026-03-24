@@ -44,7 +44,7 @@ export default function About() {
             src="/images/Office2.webp"
             alt="BizLeap Team"
             fill
-            className="object-cover opacity-40 scale-105"
+            className="object-cover opacity-40"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -62,7 +62,7 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.8 }}
-            className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-8"
+            className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.9] mb-8"
           >
             Turning <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Vision</span> into <br />
             Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Reality</span>.
@@ -134,7 +134,7 @@ export default function About() {
                 src="/images/Office2.webp"
                 alt="BizLeap Culture"
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                className="object-cover transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             </div>
@@ -171,7 +171,7 @@ export default function About() {
                       src={founder.image}
                       alt={founder.name}
                       fill
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                     />
                   </div>
                   <div className="text-center md:text-left">
