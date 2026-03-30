@@ -7,29 +7,9 @@ import Link from "next/link";
 import MediaSection from "../components/MediaSection";
 
 export default function About() {
-  const founders = [
-    {
-      name: "Akshat Soni",
-      role: "Co-Founder & CEO",
-      image: "/team/akshat.jpg",
-      bio: "Visionary leader with a passion for creative excellence and brand growth."
-    },
-    {
-      name: "Kaushal Banginwar",
-      role: "Co-Founder & CTO",
-      image: "/team/77.png",
-      bio: "Strategic mastermind behind BizLeap's most successful digital campaigns."
-    }
-  ];
 
-  const galleryImages = [
-    { src: "/images/Team1.png", aspect: "aspect-square" },
-    { src: "/images/Team2.png", aspect: "aspect-[4/5]" },
-    { src: "/images/Team3.png", aspect: "aspect-video" },
-    { src: "/images/Team4.png", aspect: "aspect-square" },
-    { src: "/images/Office2.webp", aspect: "aspect-[3/4]" },
-    { src: "/images/Office2.webp", aspect: "aspect-square" },
-  ];
+
+
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -148,51 +128,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* --- LEADERSHIP (CO-FOUNDERS) --- */}
-      <section className="py-24 bg-zinc-950 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Meet the Visionaries</h2>
-            <p className="text-gray-500 uppercase tracking-widest text-sm font-bold">The Creative Minds Behind BizLeap</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {founders.map((founder, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group bg-black p-8 rounded-3xl border border-white/5 hover:border-yellow-500/50 transition-all duration-500 cursor-pointer"
-                onClick={() => {
-                  if (founder.name.includes("Kaushal")) {
-                    window.location.href = "/kaushal";
-                  }
-                }}
-              >
-                <div className="flex flex-col md:flex-row gap-8 items-center">
-                  <div className="relative w-40 h-40 rounded-full overflow-hidden shrink-0 border-2 border-zinc-800">
-                    <Image
-                      src={founder.image}
-                      alt={founder.name}
-                      fill
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    />
-                  </div>
-                  <div className="text-center md:text-left">
-                    <h3 className="text-2xl font-bold mb-1">{founder.name}</h3>
-                    <p className="text-yellow-500 font-bold mb-4 uppercase text-xs tracking-[0.2em]">{founder.role}</p>
-                    <p className="text-gray-400 leading-relaxed text-sm">
-                      {founder.bio}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
 
 

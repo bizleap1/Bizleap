@@ -6,14 +6,14 @@ import { Linkedin, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
 
 const founders = [
-  {
-    name: "Akshat Soni",
-    role: "Co-Founder & CEO",
-    image: "/team/akshat.jpg",
-    linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBjpHAq6iQAxX8yzgGHa19OF8QFnoECBwQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Ftheakshatsoni&usg=AOvVaw1jyn5w2G8sfM5A77RFb3eE&cshid=1760604807211931&opi=89978449",
-    instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiBw-_Yq6iQAxUYzDgGHWNRAdEQFnoECCAQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fakshatsoni.in%2F&usg=AOvVaw3PESBA4FruVlwXfbvqKsxD&opi=89978449",
-    
-  },
+    {
+      name: "Akshat Soni",
+      role: "Co-Founder & CEO",
+      image: "/team/akshat.jpg",
+      linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBjpHAq6iQAxX8yzgGHa19OF8QFnoECBwQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Ftheakshatsoni&usg=AOvVaw1jyn5w2G8sfM5A77RFb3eE&cshid=1760604807211931&opi=89978449",
+      instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiBw-_Yq6iQAxUYzDgGHWNRAdEQFnoECCAQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fakshatsoni.in%2F&usg=AOvVaw3PESBA4FruVlwXfbvqKsxD&opi=89978449",
+      page: "/akshat"
+    },
   {
     name: "Kaushal Banginwar",
     role: "Co-Founder & CTO",
@@ -115,6 +115,8 @@ const itemVariants = {
   }
 };
 
+import MediaSection from "../components/MediaSection";
+
 const hoverVariants = {
   hover: {
     y: -8,
@@ -190,11 +192,13 @@ export default function Team() {
               whileHover="hover"
               custom={i}
               onClick={() => {
-                if (person.name.includes("Kaushal")) {
+                if (person.page) {
+                  window.location.href = person.page;
+                } else if (person.name.includes("Kaushal")) {
                   window.location.href = "/kaushal";
                 }
               }}
-              style={{ cursor: person.name.includes("Kaushal") ? "pointer" : "default" }}
+              style={{ cursor: person.page ? "pointer" : "default" }}
             >
               {/* Background Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -311,6 +315,8 @@ export default function Team() {
           ))}
         </motion.div>
       </section>
+
+      <MediaSection />
 
       {/* CTA Section */}
       

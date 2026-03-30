@@ -9,11 +9,19 @@ const REELS = [
   { src: "/reel6.mp4" },
   { src: "/reel7.mp4" },
   { src: "/reel8.mp4" },
-  { src: "/reel9.mp4" },
+{ src: "/reel 1.mp4" },
   { src: "/reel10.mp4", poster: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80" },
   { src: "/reel11.mp4", poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" },
   { src: "/reel12.mp4" },
+  { src: "/reel 2.mp4" },
+  { src: "/reel 3.mp4" },
+  { src: "/reel 4.mp4" },
 ];
+
+
+
+
+
 
 // ------------------- Reel Card (hover-to-play) -------------------
 function ReelCard({ reel, index, onClick }) {

@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaInstagram, FaLinkedin, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 
@@ -62,9 +63,14 @@ const Footer = () => {
 
           {/* Brand column */}
           <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="text-4xl font-extrabold tracking-tight block">
-              <span className="text-white">Biz</span>
-              <span className="text-yellow-500">leap</span>
+            <Link href="/" className="group w-40 h-12 relative">
+              <Image
+src="/2.png"
+                alt="Bizleap"
+                fill
+className="object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-300 hover:drop-shadow-xl"
+                priority
+              />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
               Where brands leap forward. Driven by design. Backed by results.

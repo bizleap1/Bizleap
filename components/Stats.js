@@ -67,8 +67,8 @@ export default function Stats() {
             className="relative group p-8 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:border-yellow-500/30 transition-all duration-500"
           >
             <div className="absolute -inset-1 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative">
-              <div className="text-6xl md:text-7xl font-black mb-4 tracking-tighter tabular-nums">
+<div className="relative">
+              <div className="text-4xl md:text-5xl font-black mb-4 tracking-tighter tabular-nums">
                 {inView && (
                   <CountUp
                     start={0}

@@ -28,6 +28,8 @@ export default function Navbar() {
     { name: "AI Services", href: "/aiservices" },
   ]
 
+
+
   // Handle scroll to toggle background
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
