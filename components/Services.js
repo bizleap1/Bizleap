@@ -304,7 +304,9 @@ function MobileServices() {
                     <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end space-y-5">
                       <div className="space-y-4">
                         <ScrollView>
-                          <h3 className="text-3xl font-bold tracking-tight text-white">{service.name}</h3>
+                          <h3 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-white mb-2 leading-tight">
+                            {service.name}
+                          </h3>
                         </ScrollView>
                         <ScrollView stagger delay={0.04}>
                           <div className="flex flex-wrap gap-2">

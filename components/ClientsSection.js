@@ -110,7 +110,7 @@ function InfiniteLogoSlider({ clients }) {
     if (!slider) return;
 
     let x = 0;
-    const speed = 0.7;
+    const speed = 1.8;
     let animationId;
 
     const scroll = () => {

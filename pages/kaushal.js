@@ -46,7 +46,7 @@ export default function KaushalProfile() {
       title: "Solar Manufacturing LinkedIn Strategy",
       category: "B2B",
       desc: "Developed LinkedIn content plan for solar manufacturing client. Corporate-focused messaging targeting decision-makers. Positioned brand as industry thought leader.",
-      image: "https://images.unsplash.com/photo-1509391366360-feaffa64e4c9?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2070&auto=format&fit=crop",
       tags: ["B2B", "LinkedIn", "Thought Leadership"]
     }
   ];

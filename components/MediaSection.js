@@ -59,7 +59,8 @@ function ReelCard({ reel, index, onClick }) {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
+        poster={reel.poster}
       />
 
       {/* Cover image — always visible, fades to reveal video on hover */}
