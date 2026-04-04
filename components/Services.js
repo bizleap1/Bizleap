@@ -282,7 +282,7 @@ function MobileServices() {
                   className="bg-black rounded-2xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300"
                 >
                   {/* Card Section with Full Background - MOBILE */}
-                  <Link href={service.url} className="block relative h-96 w-full overflow-hidden group">
+                  <Link href={service.url} className="block relative h-[480px] md:h-96 w-full overflow-hidden group">
                     <motion.div
                       transition={{ duration: 0.6, ease: "easeOut" }}
                       className="absolute inset-0 z-0"
@@ -301,10 +301,10 @@ function MobileServices() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
 
                     {/* Content Section Overlay */}
-                    <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end space-y-5">
+                    <div className="absolute inset-0 z-20 p-6 sm:p-8 flex flex-col justify-end space-y-5">
                       <div className="space-y-4">
                         <ScrollView>
-                          <h3 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-white mb-2 leading-tight">
+                          <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold tracking-tight text-white mb-2 leading-tight">
                             {service.name}
                           </h3>
                         </ScrollView>

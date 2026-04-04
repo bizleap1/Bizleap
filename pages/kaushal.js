@@ -585,7 +585,7 @@ export default function KaushalProfile() {
                       animate={{ opacity: 1, scale: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
                       transition={{ duration: 0.5, ease: "backOut", delay: i * 0.1 }}
-                      className="min-w-[85vw] md:min-w-[45vw] lg:min-w-[35vw] group relative rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#050505] isolate h-[450px] snap-center transition-all duration-500 hover:border-brand-accent/20"
+                      className="min-w-[85vw] md:min-w-[45vw] lg:min-w-[35vw] group relative rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#050505] isolate h-[520px] md:h-[450px] snap-center transition-all duration-500 hover:border-brand-accent/20"
                     >
                       <Image
                         src={project.image}
@@ -601,7 +601,7 @@ export default function KaushalProfile() {
                           <div className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black text-white uppercase tracking-widest mb-6 border border-white/20">
                             {project.category}
                           </div>
-                          <h4 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">{project.title}</h4>
+                          <h4 className="text-2xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">{project.title}</h4>
                           <p className="text-white/70 text-sm leading-relaxed mb-8 max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500 line-clamp-3">
                             {project.desc}
                           </p>
