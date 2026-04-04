@@ -59,7 +59,7 @@ function ReelCard({ reel, index, onClick }) {
         muted
         loop
         playsInline
-        preload="none"
+        preload="metadata"
         poster={reel.poster}
       />
 
