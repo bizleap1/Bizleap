@@ -149,15 +149,34 @@ export default function KaushalProfile() {
               "@type": "Person",
               "name": "Kaushal Banginwar",
               "jobTitle": "Co-founder & CTO",
+              "description": "Strategic digital marketing visionary and Co-founder of Bizleap. Expert in automotive, hospitality, and healthcare marketing.",
+              "image": "https://bizleap.in/team/77.png",
               "worksFor": {
                 "@type": "Organization",
-                "name": "Bizleap"
+                "name": "Bizleap",
+                "url": "https://bizleap.in"
               },
               "url": "https://bizleap.in/kaushal",
               "sameAs": [
                 "https://www.linkedin.com/in/kaushal-banginwar/",
                 "https://www.instagram.com/kaushal_banginwar/"
-              ]
+              ],
+              "knowsAbout": [
+                "Digital Marketing",
+                "Strategic Branding",
+                "Social Media Growth",
+                "Lead Generation",
+                "B2B Marketing"
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Marketing Services",
+                "itemListElement": [
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Strategy" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Personal Branding" } },
+                  { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lead Generation" } }
+                ]
+              }
             })
           }}
         />
@@ -302,18 +321,37 @@ export default function KaushalProfile() {
         </section>
 
         {/* STATISTICS SECTION */}
-        <section className="py-20 bg-black/50 backdrop-blur-sm border-b border-white/5">
-          <div className="max-w-[1400px] mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <section className="py-24 relative overflow-hidden bg-white/[0.02]">
+          <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { label: "Team Member", value: "35+" },
-                { label: "Brands", value: "250+" },
-                { label: "Students Mentor", value: "10k+" }
+                { label: "Elite Team Members", value: "35+", color: "from-brand-accent to-amber-500", icon: <Users className="w-6 h-6" /> },
+                { label: "Global Brand Partners", value: "250+", color: "from-blue-400 to-indigo-600", icon: <Briefcase className="w-6 h-6" /> },
+                { label: "Students Empowered", value: "10k+", color: "from-emerald-400 to-teal-600", icon: <GraduationCap className="w-6 h-6" /> }
               ].map((stat, i) => (
-                <div key={i} className="text-center space-y-2">
-                  <div className="text-4xl md:text-5xl font-serif font-black text-brand-accent">{stat.value}</div>
-                  <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">{stat.label}</div>
-                </div>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.8 }}
+                  className="relative group p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all duration-500 overflow-hidden"
+                >
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.color} opacity-[0.03] blur-3xl group-hover:opacity-10 transition-opacity`} />
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-white/70 group-hover:bg-brand-accent group-hover:text-black transition-all duration-500">
+                      {stat.icon}
+                    </div>
+                    <div>
+                      <div className={`text-5xl md:text-6xl font-serif font-black mb-2 text-transparent bg-clip-text bg-gradient-to-r ${stat.color}`}>
+                        {stat.value}
+                      </div>
+                      <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 group-hover:text-white/60 transition-colors">
+                        {stat.label}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -434,8 +472,8 @@ export default function KaushalProfile() {
                       <div className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
                       <span className="text-[10px] font-bold text-brand-accent tracking-widest uppercase">The Journey</span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold leading-[1.1]">
-                      How We <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-600 italic">Got Here</span>.
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] text-white">
+                      The Journey: <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-amber-600 italic">How We Got Here</span>.
                     </h2>
                     <p className="text-white/50 text-base leading-relaxed font-light">
                       From a 15-year-old with a dream to leading a 20+ person agency.
@@ -536,7 +574,7 @@ export default function KaushalProfile() {
               </motion.div>
             </div>
 
-            <div className="flex overflow-x-auto gap-8 pb-12 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 lg:px-0 lg:mx-0">
+            <div className="flex overflow-x-auto gap-8 pb-12 scrollbar-hide snap-x snap-mandatory px-4 -mx-4 lg:px-0 lg:mx-0 mask-fade-right">
               <AnimatePresence mode="popLayout">
                 {projects
                   .filter(p => activeTab === "all" || p.category === activeTab)
@@ -547,7 +585,7 @@ export default function KaushalProfile() {
                       animate={{ opacity: 1, scale: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
                       transition={{ duration: 0.5, ease: "backOut", delay: i * 0.1 }}
-                      className="min-w-[85vw] md:min-w-[40vw] lg:min-w-[35vw] group relative rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#050505] isolate h-[400px] snap-center"
+                      className="min-w-[85vw] md:min-w-[45vw] lg:min-w-[35vw] group relative rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#050505] isolate h-[450px] snap-center transition-all duration-500 hover:border-brand-accent/20"
                     >
                       <Image
                         src={project.image}
@@ -558,16 +596,16 @@ export default function KaushalProfile() {
                       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#020202] via-[#020202]/80 to-transparent" />
 
                       {/* Content Overlay */}
-                      <div className="absolute inset-0 z-20 p-10 flex flex-col justify-end">
+                      <div className="absolute inset-0 z-20 p-8 md:p-12 flex flex-col justify-end">
                         <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                          <div className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-widest mb-6 border border-white/20">
+                          <div className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black text-white uppercase tracking-widest mb-6 border border-white/20">
                             {project.category}
                           </div>
                           <h4 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">{project.title}</h4>
-                          <p className="text-white/60 text-sm leading-relaxed mb-8 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover:h-auto overflow-hidden">
+                          <p className="text-white/70 text-sm leading-relaxed mb-8 max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500 line-clamp-3">
                             {project.desc}
                           </p>
-                          <div className="flex flex-wrap gap-2 mb-8">
+                          <div className="flex flex-wrap gap-2 mb-8 opacity-60 group-hover:opacity-100 transition-opacity">
                             {project.tags.map(tag => (
                               <span key={tag} className="text-[10px] font-bold text-brand-accent bg-brand-accent/10 border border-brand-accent/20 px-3 py-1 rounded-full uppercase tracking-tighter">
                                 {tag}
@@ -576,7 +614,7 @@ export default function KaushalProfile() {
                           </div>
 
                           <Link href="#" className="inline-flex items-center gap-3 text-sm font-bold text-brand-accent hover:text-white transition-colors group/link pb-2 border-b border-brand-accent/30 hover:border-white">
-                            View Case Study
+                            Explore Project
                             <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform" />
                           </Link>
                         </div>
@@ -589,40 +627,6 @@ export default function KaushalProfile() {
           </div>
         </section>
 
-        {/* TESTIMONIALS */}
-        <section className="py-32 relative overflow-hidden bg-brand-accent text-black">
-          <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
-          <div className="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col md:flex-row gap-16">
-            <div className="md:w-1/3 space-y-6">
-              <h2 className="text-5xl font-serif font-bold leading-tight">Partners in <br />Progress.</h2>
-              <p className="text-black/70 font-medium">The true measure of our strategic impact comes directly from the visionary founders we collaborate with.</p>
-            </div>
-            <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
-              {testimonials.map((t, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2, duration: 0.6 }}
-                  className="p-10 bg-black/5 rounded-[2.5rem] border border-black/10 relative"
-                >
-                  <Quote className="absolute top-8 right-8 w-8 h-8 text-black/10" />
-                  <p className="text-lg font-serif leading-relaxed mb-6 font-medium">"{t.content}"</p>
-                  <div className="flex items-center gap-4 mt-auto">
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden border border-black/20">
-                      <Image src={t.avatar} alt={t.name} fill />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-base leading-none mb-1">{t.name}</h4>
-                      <p className="text-[10px] text-black/60 uppercase tracking-[0.2em] font-bold">{t.role}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* CONTACT SECTION */}
         <section id="contact" className="py-32 relative">
