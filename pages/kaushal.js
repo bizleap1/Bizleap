@@ -141,6 +141,26 @@ export default function KaushalProfile() {
       <Head>
         <title>Kaushal Banginwar | Co-founder & CTO</title>
         <meta name="description" content="Official portfolio of Kaushal Banginwar - A premium founder and digital marketing visionary." />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Kaushal Banginwar",
+              "jobTitle": "Co-founder & CTO",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Bizleap"
+              },
+              "url": "https://bizleap.in/kaushal",
+              "sameAs": [
+                "https://www.linkedin.com/in/kaushal-banginwar/",
+                "https://www.instagram.com/kaushal_banginwar/"
+              ]
+            })
+          }}
+        />
       </Head>
 
       {/* GLOBAL AMBIENT GLOWS */}
@@ -186,7 +206,7 @@ export default function KaushalProfile() {
               transition={{ duration: 1, delay: 0.2 }}
               className="space-y-4"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-serif font-bold leading-[1.05] tracking-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] font-serif font-bold leading-[1.05] tracking-tight">
                 Kaushal <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-amber-200 to-amber-600 italic pr-4">
                   Banginwar

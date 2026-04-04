@@ -71,6 +71,26 @@ export default function AkshatProfile() {
       <Head>
         <title>Akshat Soni | Co-founder & CEO, BizLeap</title>
         <meta name="description" content="Official portfolio of Akshat Soni - Revenue Growth Strategist and co-founder of BizLeap." />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Akshat Soni",
+              "jobTitle": "Co-founder & CEO",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "Bizleap"
+              },
+              "url": "https://bizleap.in/akshat",
+              "sameAs": [
+                "https://www.linkedin.com/in/akshat-soni-664879208/",
+                "https://www.instagram.com/akshat.sonii/"
+              ]
+            })
+          }}
+        />
       </Head>
 
       {/* GLOBAL AMBIENT GLOWS */}
@@ -116,7 +136,7 @@ export default function AkshatProfile() {
               transition={{ duration: 1, delay: 0.2 }}
               className="space-y-4"
             >
-              <h1 className="text-6xl md:text-8xl lg:text-[7.5rem] font-serif font-bold leading-[0.95] tracking-tight text-white">
+              <h1 className="text-4xl md:text-8xl lg:text-[7.5rem] font-serif font-bold leading-[0.95] tracking-tight text-white">
                 Akshat <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-amber-200 to-amber-600 italic pr-4">
                   Soni
