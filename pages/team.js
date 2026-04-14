@@ -4,23 +4,24 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Linkedin, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
+import MediaSection from "../components/MediaSection";
 
 const founders = [
-    {
-      name: "Akshat Soni",
-      role: "Co-Founder & CEO",
-      image: "/team/akshat.jpg",
-      linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBjpHAq6iQAxX8yzgGHa19OF8QFnoECBwQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Ftheakshatsoni&usg=AOvVaw1jyn5w2G8sfM5A77RFb3eE&cshid=1760604807211931&opi=89978449",
-      instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiBw-_Yq6iQAxUYzDgGHWNRAdEQFnoECCAQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fakshatsoni.in%2F&usg=AOvVaw3PESBA4FruVlwXfbvqKsxD&opi=89978449",
-      page: "/akshat"
-    },
+  {
+    name: "Akshat Soni",
+    role: "Co-Founder & CEO",
+    image: "/team/akshat.jpg",
+    linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBjpHAq6iQAxX8yzgGHa19OF8QFnoECBwQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Ftheakshatsoni&usg=AOvVaw1jyn5w2G8sfM5A77RFb3eE&cshid=1760604807211931&opi=89978449",
+    instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiBw-_Yq6iQAxUYzDgGHWNRAdEQFnoECCAQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fakshatsoni.in%2F&usg=AOvVaw3PESBA4FruVlwXfbvqKsxD&opi=89978449",
+    page: "/akshat"
+  },
   {
     name: "Kaushal Banginwar",
     role: "Co-Founder & CTO",
     image: "/team/77.png",
     linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiL7MTnq6iQAxUJ1TgGHaIeOs8QFnoECBoQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Fkaushalbanginwar&usg=AOvVaw2kTuQvtbZNzZ1X_6KSLhjW&opi=89978449",
     instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiL7MTnq6iQAxUJ1TgGHaIeOs8QFnoECB0QAQ&url=https%3A%2F%2Fwww.instagram.com%2Fkaushalbanginwar.in%2F&usg=AOvVaw3gv5GYW0bxmVyub0ofGM9t&opi=89978449",
-    
+
   },
 ];
 
@@ -29,7 +30,7 @@ const team = [
     name: "Samir Thumbe",
     role: "CFO",
     image: "/team/79.png",
-    style: { transform: "scale(1.1) translateY(-10px)" },
+    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
   },
@@ -37,15 +38,39 @@ const team = [
     name: "Antara Vibhandik",
     role: "Senior Designer",
     image: "/team/80.png",
-    style: { transform: "scale(1.05) translateX(5px)" },
+    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-44 w-44",
     linkedin: "https://linkedin.com/in/",
+  },
+  {
+    name: "Aditya Sule",
+    role: "General Manager",
+    image: "/team/Aditya%20GM.png",
+    style: { objectFit: "cover", objectPosition: "center top", transform: "scale(1.1)" },
+    size: "h-52 w-52",
+    linkedin: "https://www.linkedin.com/in/aditya-sule-46a2b4158?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+  },
+  {
+    name: "Indrajit Kshirsagar",
+    role: "Technical Lead",
+    image: "/team/Indrajit%20TL.jpeg",
+    style: { transform: "scale(1.05) translateX(5px)" },
+    size: "h-44 w-44",
+    linkedin: "https://www.linkedin.com/in/indrajit-kshirsagar-869430257/",
+  },
+  {
+    name: "Darshan Raje",
+    role: "Editor & Graphic Designer",
+    image: "/team/DA.png",
+    style: { objectPosition: "center 5%", transform: "scale(1.1) translateY(-25px)" },
+    size: "h-44 w-44",
+    linkedin: "https://www.linkedin.com/in/darshan-raje-73030b389?utm_source=share_via&utm_content=profile&utm_medium=member_android",
   },
   {
     name: "Neil Vyas",
     role: "Content Manager",
     image: "/team/81.png",
-    style: { transform: "translateY(10px)" },
+    style: { objectPosition: "center 15%", transform: "scale(1.1)" },
     size: "h-52 w-52",
     linkedin: "https://linkedin.com/in/",
   },
@@ -53,6 +78,7 @@ const team = [
     name: "Kalyani Banginwar",
     role: "UI UX Designer",
     image: "/team/82.png",
+    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
   },
@@ -60,6 +86,7 @@ const team = [
     name: "Kartik Pillai",
     role: "SEO Expert",
     image: "/team/83.png",
+    style: { objectPosition: "center 20%", transform: "scale(1.1)" },
     size: "h-44 w-44",
     linkedin: "https://linkedin.com/in/",
   },
@@ -67,6 +94,7 @@ const team = [
     name: "Ebin Edison",
     role: "AD Expert",
     image: "/team/84.png",
+    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
   },
@@ -74,13 +102,15 @@ const team = [
     name: "Prakriti Jain",
     role: "HR",
     image: "/team/85.png",
+    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
   },
   {
     name: "Ashi Jain",
-    role: "General Manager",
+    role: "Social Media Manager",
     image: "/team/86.png",
+    style: { objectPosition: "center 25%", transform: "scale(1.4)" },
     size: "h-44 w-44",
     linkedin: "https://linkedin.com/in/",
   },
@@ -88,6 +118,7 @@ const team = [
     name: "Lakshay Sharma",
     role: "UI/Business Analyst",
     image: "/team/87.png",
+    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
   },
@@ -115,8 +146,6 @@ const itemVariants = {
   }
 };
 
-import MediaSection from "../components/MediaSection";
-
 const hoverVariants = {
   hover: {
     y: -8,
@@ -130,17 +159,17 @@ const hoverVariants = {
 
 export default function Team() {
   return (<>
-  <Head>
-  <title>Our Team | Bizleap</title>
-  <meta
-    name="description"
-    content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth."
-  />
-</Head>
+    <Head>
+      <title>Our Team | Bizleap</title>
+      <meta
+        name="description"
+        content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth."
+      />
+    </Head>
 
     <main className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
-      <motion.section 
+      <motion.section
         className="text-center mb-20 mt-16"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -202,7 +231,7 @@ export default function Team() {
             >
               {/* Background Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="relative z-10">
                 <div className="relative mx-auto mb-6">
                   <div className={`rounded-full p-1 bg-gradient-to-r from-yellow-400 to-amber-600 ${person.size || "h-56 w-56"} mx-auto`}>
@@ -217,16 +246,16 @@ export default function Team() {
                     </div>
                   </div>
                 </div>
-                
+
                 <h3 className="text-2xl font-bold mb-2">{person.name}</h3>
                 <p className="text-yellow-400 font-medium mb-4">{person.role}</p>
                 <p className="text-sm text-gray-400 mb-6 leading-relaxed">
                   Driving innovation and excellence in every aspect of our business.
                 </p>
-                
+
                 <div className="flex justify-center gap-4">
-                  <motion.a 
-                    href={person.linkedin} 
+                  <motion.a
+                    href={person.linkedin}
                     target="_blank"
                     className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
                     whileHover={{ scale: 1.1 }}
@@ -234,8 +263,8 @@ export default function Team() {
                   >
                     <Linkedin className="w-5 h-5" />
                   </motion.a>
-                  <motion.a 
-                    href={person.instagram} 
+                  <motion.a
+                    href={person.instagram}
                     target="_blank"
                     className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
                     whileHover={{ scale: 1.1 }}
@@ -243,7 +272,7 @@ export default function Team() {
                   >
                     <Instagram className="w-5 h-5" />
                   </motion.a>
-                  
+
                 </div>
               </div>
             </motion.div>
@@ -276,14 +305,14 @@ export default function Team() {
               key={i}
               className="group relative bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-2xl overflow-hidden p-6 border border-zinc-800 hover:border-yellow-400/30 transition-colors duration-300"
               variants={itemVariants}
-              whileHover={{ 
+              whileHover={{
                 y: -5,
                 transition: { duration: 0.3 }
               }}
             >
               {/* Hover Background Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="relative z-10">
                 <div className={`mx-auto mb-5 rounded-full overflow-hidden border-2 border-zinc-700 group-hover:border-yellow-400/50 transition-colors duration-300 ${person.size || "h-48 w-48"}`}>
                   <Image
@@ -295,12 +324,12 @@ export default function Team() {
                     style={person.style}
                   />
                 </div>
-                
+
                 <h3 className="text-xl font-semibold mb-2">{person.name}</h3>
                 <p className="text-yellow-400 text-sm font-medium mb-3">{person.role}</p>
-                
+
                 {person.linkedin && (
-                  <motion.a 
+                  <motion.a
                     href={person.linkedin}
                     target="_blank"
                     className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-yellow-400 transition-colors duration-300"
@@ -319,8 +348,8 @@ export default function Team() {
       <MediaSection />
 
       {/* CTA Section */}
-      
+
     </main>
-</>  
-);
+  </>
+  );
 }

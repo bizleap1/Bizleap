@@ -267,7 +267,7 @@ export default function KaushalProfile() {
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
             className="flex-1 w-full lg:w-auto relative mt-16 lg:mt-0 flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[480px] mx-auto aspect-[4/5] rounded-[2.5rem] p-4 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/10 shadow-2xl overflow-visible group">
+            <div className="relative w-full max-w-[400px] mx-auto aspect-[4/5] rounded-[2.5rem] p-4 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/10 shadow-2xl overflow-visible group">
               <div className="absolute inset-x-8 -top-8 -bottom-8 bg-brand-accent/20 rounded-[3rem] blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
               <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-white/5">
@@ -309,13 +309,13 @@ export default function KaushalProfile() {
         <section className="py-12 border-y border-white/5 bg-white/[0.02] flex relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10" />
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10" />
-          <div className="flex gap-24 items-center whitespace-nowrap px-12 animate-scroll opacity-40">
+          <div className="flex gap-24 items-center whitespace-nowrap px-12 animate-scroll opacity-90">
             {['Amity University', 'Symbiosis', 'Raisoni Group', 'Dhanwate National', 'Palloti College'].map((w, i) => (
-              <span key={i} className="text-3xl font-serif font-black tracking-widest text-transparent paint-stroke text-white/20" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>{w}</span>
+              <span key={i} className="text-3xl font-serif font-black tracking-widest text-white">{w}</span>
             ))}
             {/* Duplicate for infinite effect */}
             {['Amity University', 'Symbiosis', 'Raisoni Group', 'Dhanwate National', 'Palloti College'].map((w, i) => (
-              <span key={i + 'dup'} className="text-3xl font-serif font-black tracking-widest text-transparent paint-stroke text-white/20" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.3)' }}>{w}</span>
+              <span key={i + 'dup'} className="text-3xl font-serif font-black tracking-widest text-white">{w}</span>
             ))}
           </div>
         </section>
