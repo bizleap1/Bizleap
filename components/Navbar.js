@@ -35,8 +35,8 @@ export default function Navbar() {
       name: "Founder", 
       href: "#",
       subItems: [
-        { name: "Kaushal Banginwar", href: "/kaushal" },
         { name: "Akshat Soni", href: "/akshat" },
+        { name: "Kaushal Banginwar", href: "/kaushal" },
       ]
     },
     { name: "Our Team", href: "/team" },
