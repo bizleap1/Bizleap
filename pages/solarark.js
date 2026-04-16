@@ -1,10 +1,16 @@
-// pages/work/solarark.js
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function SolarArk() {
   return (
-    <div className="w-full min-h-screen bg-white text-black">
+    <>
+      <Head>
+        <title>Solar Ark Project | Bizleap</title>
+        <meta name="description" content="Discover Solar Ark, a forward-thinking renewable energy project blending advanced technology with clean-energy principles for a sustainable future." />
+        <link rel="canonical" href="https://bizleap.in/solarark" />
+      </Head>
+      <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}
       <div className="relative w-full h-[40vh] md:h-[55vh]">
         <Image
@@ -142,5 +148,6 @@ export default function SolarArk() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,10 +1,16 @@
-// pages/work/meher.js
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Meher() {
   return (
-    <div className="w-full min-h-screen bg-white text-black">
+    <>
+      <Head>
+        <title>Meher Infra Solutions Project | Bizleap</title>
+        <meta name="description" content="Meher Infra Solutions focuses on sustainable infrastructure development with futuristic and efficient design approaches. Explore our branding and design work." />
+        <link rel="canonical" href="https://bizleap.in/meher" />
+      </Head>
+      <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}
       <div className="relative w-full h-[40vh] md:h-[55vh]">
         <Image
@@ -102,5 +108,6 @@ export default function Meher() {
         </div>
       </div>
     </div>
+    </>
   );
 }

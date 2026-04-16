@@ -19,6 +19,7 @@ export default function Home() {
           name="description"
           content="Bizleap is a digital marketing and web development agency helping brands grow online through SEO, modern websites, creative design, and technology-driven solutions."
         />
+        <link rel="canonical" href="https://bizleap.in/" />
         <meta
           name="keywords"
           content="bizleap, digital marketing, web development, branding, seo services"

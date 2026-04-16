@@ -141,6 +141,7 @@ export default function KaushalProfile() {
       <Head>
         <title>Kaushal Banginwar | Co-founder & CTO</title>
         <meta name="description" content="Official portfolio of Kaushal Banginwar - A premium founder and digital marketing visionary." />
+        <link rel="canonical" href="https://bizleap.in/kaushal" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

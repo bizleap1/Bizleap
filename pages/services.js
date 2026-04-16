@@ -93,6 +93,7 @@ export default function ServicesSection() {
         name="description"
         content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online."
       />
+      <link rel="canonical" href="https://bizleap.in/services" />
     </Head>
 
     <section className="py-20 md:py-32 bg-black text-white" id="services">

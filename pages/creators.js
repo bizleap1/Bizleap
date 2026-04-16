@@ -746,6 +746,7 @@ export default function CreatorsSection() {
     name="description"
     content="Discover Bizleap’s creators network — designers, developers, and digital experts collaborating to deliver impactful and innovative brand solutions."
   />
+  <link rel="canonical" href="https://bizleap.in/creators" />
 </Head>
 
     <section className="py-20 bg-black text-white" id="creators">

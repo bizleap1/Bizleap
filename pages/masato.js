@@ -1,10 +1,16 @@
-// pages/work/masato.js
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Masato() {
   return (
-    <div className="w-full min-h-screen bg-white text-black">
+    <>
+      <Head>
+        <title>Masato Project | Bizleap</title>
+        <meta name="description" content="Masato delivers authentic culinary experiences wrapped in tradition and taste. Explore our branding and design work for this modern culinary brand." />
+        <link rel="canonical" href="https://bizleap.in/masato" />
+      </Head>
+      <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}
       <div className="relative w-full h-[40vh] md:h-[55vh]">
         <Image
@@ -103,5 +109,6 @@ export default function Masato() {
         </div>
       </div>
     </div>
+    </>
   );
 }

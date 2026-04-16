@@ -16,6 +16,7 @@ export default function About() {
       <Head>
         <title>About BizLeap | Driven by Design. Backed by Results.</title>
         <meta name="description" content="Discover the story behind BizLeap - a team of dreamers and builders dedicated to high-impact design and digital growth." />
+        <link rel="canonical" href="https://bizleap.in/about" />
       </Head>
 
       {/* --- CINEMATIC HERO --- */}

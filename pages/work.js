@@ -86,6 +86,7 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
     name="description"
     content="Explore Bizleap’s portfolio showcasing successful web development, digital marketing, branding, and creative projects delivered for growing brands."
   />
+  <link rel="canonical" href="https://bizleap.in/work" />
 </Head>
 
     <div className="min-h-screen w-full bg-white text-black">

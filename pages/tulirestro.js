@@ -1,10 +1,16 @@
-// pages/work/tulirestro.js
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function TuliRestro() {
   return (
-    <div className="w-full min-h-screen bg-white text-black">
+    <>
+      <Head>
+        <title>Tuli Restro Project | Bizleap</title>
+        <meta name="description" content="Tuli Restro combines fine dining and a vibrant ambiance to redefine culinary luxury. Explore our branding and design work for this fine dining experience." />
+        <link rel="canonical" href="https://bizleap.in/tulirestro" />
+      </Head>
+      <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}
       <div className="relative w-full h-[40vh] md:h-[55vh]">
         <Image
@@ -102,5 +108,6 @@ export default function TuliRestro() {
         </div>
       </div>
     </div>
+    </>
   );
 }

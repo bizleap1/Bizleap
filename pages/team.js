@@ -165,6 +165,7 @@ export default function Team() {
         name="description"
         content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth."
       />
+      <link rel="canonical" href="https://bizleap.in/team" />
     </Head>
 
     <main className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8">

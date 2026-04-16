@@ -1,5 +1,5 @@
-// pages/work.js
 import { useState } from "react";
+import Head from "next/head";
 import Image from "next/image";
 import PortfolioSection from "../components/PortfolioCard";
 
@@ -43,7 +43,13 @@ export default function Work() {
   ];
 
   return (
-    <div className="bg-black min-h-screen text-white px-6 md:px-16 lg:px-24 py-20">
+    <>
+      <Head>
+        <title>Portfolio Gallery | Bizleap</title>
+        <meta name="description" content="Explore Bizleap's interactive portfolio gallery showcasing our diverse range of successful projects across branding, design, and digital solutions." />
+        <link rel="canonical" href="https://bizleap.in/tempwork" />
+      </Head>
+      <div className="bg-black min-h-screen text-white px-6 md:px-16 lg:px-24 py-20">
       {/* Inline animation styles */}
       <style jsx>{`
         @keyframes fadeBlur {
@@ -171,5 +177,6 @@ export default function Work() {
       )}
       
     </div>
+    </>
   );
 }

@@ -27,8 +27,6 @@ export default function Document() {
           }}
         />
 
-        {/* Canonical */}
-        <link rel="canonical" href="https://bizleap.in/" />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon2.png" />

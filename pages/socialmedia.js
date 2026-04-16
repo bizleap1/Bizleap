@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from "react"
+import Head from "next/head";
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -154,7 +155,13 @@ export default function SocialMediaMarketingService() {
   ]
 
   return (
-    <main className="bg-black text-white min-h-screen">
+    <>
+      <Head>
+        <title>Social Media Marketing | Bizleap</title>
+        <meta name="description" content="Elevate your brand with Bizleap's social media marketing. We drive engagement and growth through strategic content, community management, and paid advertising." />
+        <link rel="canonical" href="https://bizleap.in/socialmedia" />
+      </Head>
+      <main className="bg-black text-white min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-transparent to-blue-500/5"></div>
@@ -370,5 +377,6 @@ export default function SocialMediaMarketingService() {
 
 
     </main>
+    </>
   )
 }
