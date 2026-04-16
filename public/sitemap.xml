@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap><loc>https://bizleap.in/sitemap-0.xml</loc></sitemap>
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://bizleap.in/</loc>
+  </url>
+
+  <url>
+    <loc>https://bizleap.in/contact</loc>
+  </url>
+
+</urlset>
