@@ -53,8 +53,8 @@ const team = [
   {
     name: "Indrajit Kshirsagar",
     role: "Technical Lead",
-    image: "/team/Indrajit%20TL.jpeg",
-    style: { transform: "scale(1.05) translateX(5px)" },
+    image: "/team/ik%20photo.jpeg",
+    style: { objectPosition: "center 5%", transform: "scale(1.1)" },
     size: "h-44 w-44",
     linkedin: "https://www.linkedin.com/in/indrajit-kshirsagar-869430257/",
   },
