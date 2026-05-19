@@ -11,7 +11,7 @@ const projects = [
     description:
       "Once trending in Nagpur, Lord of the Drinks faced declining sales. Bizleap revived the brand with a six-month social media strategy, creative content, food photography, and high-impact events. The result: renewed buzz, higher footfall, and a strong comeback as one of Nagpur’s top F&B brands.",
     img: "/Casestudy/LOD.png",
-    logo: "/clients/15.png",
+    logo: "/clients/lord of the drinks.png",
   },
   {
     title: "Rasoi Express - Food Delivery for Small Towns",
@@ -19,7 +19,7 @@ const projects = [
     description:
       "Bizleap launched Rasoi Express in Pandharkawda, giving 50,000+ residents their first food delivery app. It brings hot meals home, supports local restaurants, and creates jobs—proving small towns deserve big-city convenience.",
     img: "/Casestudy/Rasoi.png",
-    logo: "/clients/66.png",
+    logo: "/clients/rasoi express.png",
   },
   {
     title: "Hotel Anantara - New Year Party",
@@ -27,7 +27,7 @@ const projects = [
     description:
       "Bizleap transformed Nagpur’s biggest New Year party at Hotel Anantara into a record-breaking success — with impactful Instagram promotions, lead-driven campaigns, and flawless execution that made it the city’s most talked-about celebration.",
     img: "/Casestudy/Anantara.png",
-    logo: "/clients/20.png",
+    logo: "/clients/hotel anantara.png",
   },
   {
     title: "Tuli The Grand - Brand Launch",
@@ -35,7 +35,7 @@ const projects = [
     description:
       "We launched Tuli The Grand, a flagship venture of the Tuli Group of Hotels in Nagpur, creating its complete brand identity from logo to strategy. The inauguration was graced by Hon. Nitin Gadkari as chief guest.",
     img: "/Casestudy/tuli.png",
-    logo: "/clients/14.png",
+    logo: "/clients/tuli grand.png",
   },
   {
     title: "Bizleap x SolarArk: Website Revamp",
@@ -43,7 +43,7 @@ const projects = [
     description:
       "Bizleap redesigned Solar Ark’s website with fresh content, on-site shoots, and client stories—creating a platform that highlights their solar expertise and strengthens brand credibility.",
     img: "/Casestudy/solar.webp",
-    logo: "/clients/52.png",
+    logo: "/clients/ece india.png",
   },
 ];
 

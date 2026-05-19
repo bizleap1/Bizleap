@@ -14,7 +14,7 @@ const GlobalSchema = () => {
                 "url": siteUrl,
                 "logo": {
                     "@type": "ImageObject",
-                    "url": `${siteUrl}/2.png`,
+                    "url": `${siteUrl}/logo.png`,
                     "width": "140",
                     "height": "50"
                 },

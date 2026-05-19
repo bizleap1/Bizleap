@@ -66,7 +66,7 @@ const Footer = () => {
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="group w-40 h-12 relative">
               <Image
-src="/2.png"
+src="/logo.png"
                 alt="Bizleap"
                 fill
 className="object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-300 hover:drop-shadow-xl"

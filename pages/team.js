@@ -10,7 +10,7 @@ const founders = [
   {
     name: "Akshat Soni",
     role: "Co-Founder & CEO",
-    image: "/team/akshat.jpg",
+    image: "/team/akshat soni.jpg",
     linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiBjpHAq6iQAxX8yzgGHa19OF8QFnoECBwQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Ftheakshatsoni&usg=AOvVaw1jyn5w2G8sfM5A77RFb3eE&cshid=1760604807211931&opi=89978449",
     instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiBw-_Yq6iQAxUYzDgGHWNRAdEQFnoECCAQAQ&url=https%3A%2F%2Fwww.instagram.com%2Fakshatsoni.in%2F&usg=AOvVaw3PESBA4FruVlwXfbvqKsxD&opi=89978449",
     page: "/akshat"
@@ -18,7 +18,7 @@ const founders = [
   {
     name: "Kaushal Banginwar",
     role: "Co-Founder & CTO",
-    image: "/team/77.png",
+    image: "/team/kaushal banginwar.png",
     linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiL7MTnq6iQAxUJ1TgGHaIeOs8QFnoECBoQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Fkaushalbanginwar&usg=AOvVaw2kTuQvtbZNzZ1X_6KSLhjW&opi=89978449",
     instagram: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiL7MTnq6iQAxUJ1TgGHaIeOs8QFnoECB0QAQ&url=https%3A%2F%2Fwww.instagram.com%2Fkaushalbanginwar.in%2F&usg=AOvVaw3gv5GYW0bxmVyub0ofGM9t&opi=89978449",
 
@@ -29,7 +29,7 @@ const team = [
   {
     name: "Samir Thumbe",
     role: "CFO",
-    image: "/team/79.png",
+    image: "/team/sameer.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
@@ -38,7 +38,7 @@ const team = [
   {
     name: "Aditya Sule",
     role: "General Manager",
-    image: "/team/Aditya%20GM.png",
+    image: "/team/Aditya sule.png",
     style: { objectFit: "cover", objectPosition: "center top", transform: "scale(1.1)" },
     size: "h-52 w-52",
     linkedin: "https://www.linkedin.com/in/aditya-sule-46a2b4158?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
@@ -46,7 +46,7 @@ const team = [
   {
     name: "Indrajit Kshirsagar",
     role: "Technical Lead",
-    image: "/team/ik%20photo.jpeg",
+    image: "/team/indrajit kshirsagar.jpeg",
     style: { objectPosition: "center 5%", transform: "scale(1.1)" },
     size: "h-44 w-44",
     linkedin: "https://www.linkedin.com/in/indrajit-kshirsagar-869430257/",
@@ -54,7 +54,7 @@ const team = [
   {
     name: "Darshan Raje",
     role: "Editor & Graphic Designer",
-    image: "/team/DA.png",
+    image: "/team/darshan raje.png",
     style: { objectPosition: "center 5%", transform: "scale(1.1) translateY(-25px)" },
     size: "h-44 w-44",
     linkedin: "https://www.linkedin.com/in/darshan-raje-73030b389?utm_source=share_via&utm_content=profile&utm_medium=member_android",
@@ -62,7 +62,7 @@ const team = [
   {
     name: "Neil Vyas",
     role: "Content Manager",
-    image: "/team/81.png",
+    image: "/team/neil vyas.png",
     style: { objectPosition: "center 15%", transform: "scale(1.1)" },
     size: "h-52 w-52",
     linkedin: "https://linkedin.com/in/",
@@ -70,7 +70,7 @@ const team = [
   {
     name: "Kalyani Banginwar",
     role: "UI UX Designer",
-    image: "/team/82.png",
+    image: "/team/kalyani banginwar.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
@@ -78,7 +78,7 @@ const team = [
   {
     name: "Kartik Pillai",
     role: "SEO Expert",
-    image: "/team/83.png",
+    image: "/team/kartik pillai.png",
     style: { objectPosition: "center 20%", transform: "scale(1.1)" },
     size: "h-44 w-44",
     linkedin: "https://linkedin.com/in/",
@@ -86,7 +86,7 @@ const team = [
   {
     name: "Ebin Edison",
     role: "AD Expert",
-    image: "/team/84.png",
+    image: "/team/ebin edison.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
@@ -94,7 +94,7 @@ const team = [
   {
     name: "Prakriti Jain",
     role: "HR",
-    image: "/team/85.png",
+    image: "/team/prakriti jain.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
@@ -102,7 +102,7 @@ const team = [
   {
     name: "Ashi Jain",
     role: "Social Media Manager",
-    image: "/team/86.png",
+    image: "/team/ashi jain.png",
     style: { objectPosition: "center 25%", transform: "scale(1.4)" },
     size: "h-44 w-44",
     linkedin: "https://linkedin.com/in/",
@@ -110,7 +110,7 @@ const team = [
   {
     name: "Lakshay Sharma",
     role: "UI/Business Analyst",
-    image: "/team/87.png",
+    image: "/team/laksh.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",

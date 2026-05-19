@@ -4,17 +4,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const brands = [
-  { name: "Ayrak", logo: "/clients/50.png" },
-  { name: "Yofobo", logo: "/clients/16.png", className: "scale-125" },
-  { name: "Elite India", logo: "/images/Logo4.PNG", className: "scale-[1.4]" },
-  { name: "Tanvi Bhandari", logo: "/images/Logo5.PNG" },
-  { name: "Snuggle", logo: "/images/Logo6.PNG" },
-  { name: "Udaan", logo: "/images/Logo7.PNG" },
-  { name: "Metro", logo: "/images/Logo8.PNG", className: "scale-[1.3]" },
-  { name: "Nike", logo: "/images/Logo10.png" },
-  { name: "NTSW", logo: "/images/Logo11.png" },
-  { name: "NTX", logo: "/images/Logo12.png" },
-  { name: "amity", logo: "/clients/22.png" },
+  { name: "Ayrak", logo: "/images/ayrak pharma.png" },
+  { name: "Yofobo", logo: "/clients/yo fo bo.png", className: "scale-125" },
+  { name: "Elite India", logo: "/images/elite india.PNG", className: "scale-[1.4]" },
+  { name: "Tanvi Bhandari", logo: "/images/tanvi bhandari.PNG" },
+  { name: "Snuggle", logo: "/images/snuggle store.PNG" },
+  { name: "Udaan", logo: "/images/udan amity pune.PNG" },
+  { name: "Metro", logo: "/images/metro dental care.PNG", className: "scale-[1.3]" },
+  { name: "Nike", logo: "/images/kathmandu jhol momo.png" },
+  { name: "NTSW", logo: "/images/ntsw.png" },
+  { name: "NTX", logo: "/images/ntx.png" },
+  { name: "amity", logo: "/clients/amity unviersity.png" },
 ];
 
 export default function BrandSlider() {

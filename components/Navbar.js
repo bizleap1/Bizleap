@@ -65,7 +65,7 @@ export default function Navbar() {
           <Link href="/" className="cursor-pointer flex items-center gap-2">
             <div className="relative w-[100px] h-[36px] md:w-[140px] md:h-[50px]">
               <Image
-                src="/2.png"
+                src="/logo.png"
                 alt="Bizleap Logo"
                 fill
                 className="object-contain"
