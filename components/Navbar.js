@@ -17,6 +17,7 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Our Work", href: "/work" },
+    { name: "Blogs", href: "/blogs" },
     { name: "Creators", href: "/creators" },
     { name: "Team", href: "#" },
     { name: "About", href: "/about" },
@@ -238,15 +239,7 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Brochure Button */}
-            <a
-              href="https://drive.google.com/drive/folders/1xjoTpewKi2WMFEBPEWyVMqco8k_aVIhK?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-4 px-4 py-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400 transition"
-            >
-              Portfolio <FiDownload />
-            </a>
+
 
             {/* Contact Button */}
             <Link
@@ -443,16 +436,7 @@ export default function Navbar() {
               </div>
             ))}
 
-            {/* Brochure Mobile */}
-            <a
-              href="https://drive.google.com/drive/folders/1xjoTpewKi2WMFEBPEWyVMqco8k_aVIhK?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block px-4 py-2 mt-2 bg-yellow-500 text-black rounded flex items-center gap-2 font-medium hover:bg-yellow-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              Portfolio <FiDownload />
-            </a>
+
 
             {/* Contact Mobile */}
             <Link
