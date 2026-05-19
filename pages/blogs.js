@@ -13,7 +13,7 @@ const BLOGS_DATA = [
     date: "May 18, 2026",
     readTime: "6 min read",
     author: "Kaushal Banginwar",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&q=80&w=800",
+    image: "/ai_hero.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         Generative Artificial Intelligence is no longer just a futuristic concept. Today, forward-thinking enterprises are moving beyond simple chatbots and implementing complex, automated AI systems that completely reshape how business is done.
@@ -47,7 +47,7 @@ const BLOGS_DATA = [
     date: "May 12, 2026",
     readTime: "5 min read",
     author: "Akshat Soni",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800",
+    image: "/images/Office2.webp",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         In the B2B world, your website is not just a digital brochure—it is your most powerful sales engine. A premium B2B web design must balance artistic visual storytelling with strategic user pathways that seamlessly guide visitors toward conversion.
@@ -77,7 +77,7 @@ const BLOGS_DATA = [
     date: "May 05, 2026",
     readTime: "7 min read",
     author: "Kaushal Banginwar",
-    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=800",
+    image: "/images/Office3.webp",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         SEO is no longer just about stuffing keywords into blog posts. Google's modern search algorithms prioritize user experience, website performance, and structural schema above almost everything else.
@@ -102,7 +102,7 @@ const BLOGS_DATA = [
     date: "April 28, 2026",
     readTime: "5 min read",
     author: "Akshat Soni",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800",
+    image: "/images/Office4.webp",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         Traditional advertising is facing declining engagement as audiences seek authenticity. Modern consumers turn to curators, creators, and niche influencers for trusted recommendations.
