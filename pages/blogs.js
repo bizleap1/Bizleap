@@ -47,7 +47,7 @@ const BLOGS_DATA = [
     date: "May 12, 2026",
     readTime: "5 min read",
     author: "Akshat Soni",
-    image: "/images/Office2.webp",
+    image: "/images/b2b_web_design_hero.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         In the B2B world, your website is not just a digital brochure—it is your most powerful sales engine. A premium B2B web design must balance artistic visual storytelling with strategic user pathways that seamlessly guide visitors toward conversion.
@@ -77,7 +77,7 @@ const BLOGS_DATA = [
     date: "May 05, 2026",
     readTime: "7 min read",
     author: "Kaushal Banginwar",
-    image: "/images/Office3.webp",
+    image: "/images/technical_seo_vitals.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         SEO is no longer just about stuffing keywords into blog posts. Google's modern search algorithms prioritize user experience, website performance, and structural schema above almost everything else.
@@ -102,7 +102,7 @@ const BLOGS_DATA = [
     date: "April 28, 2026",
     readTime: "5 min read",
     author: "Akshat Soni",
-    image: "/images/Office4.webp",
+    image: "/images/creator_influencer_network.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         Traditional advertising is facing declining engagement as audiences seek authenticity. Modern consumers turn to curators, creators, and niche influencers for trusted recommendations.
