@@ -34,14 +34,7 @@ const team = [
     size: "h-48 w-48",
     linkedin: "https://linkedin.com/in/",
   },
-  {
-    name: "Antara Vibhandik",
-    role: "Senior Designer",
-    image: "/team/80.png",
-    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
-    size: "h-44 w-44",
-    linkedin: "https://linkedin.com/in/",
-  },
+
   {
     name: "Aditya Sule",
     role: "General Manager",
