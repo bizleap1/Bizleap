@@ -7,3 +7,4 @@ Host: https://bizleap.in
 
 # Sitemaps
 Sitemap: https://bizleap.in/sitemap.xml
+Sitemap: https://bizleap.in/sitemap-0.xml
