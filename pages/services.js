@@ -94,6 +94,38 @@ export default function ServicesSection() {
         content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online."
       />
       <link rel="canonical" href="https://bizleap.in/services" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": "https://bizleap.in/services#webpage",
+            "url": "https://bizleap.in/services",
+            "name": "Our Services | Bizleap",
+            "description": "Bizleap offers UI/UX & Web Design, Brand Identity, SEO, Social Media Marketing, and AI Services for businesses looking to grow online.",
+            "isPartOf": { "@id": "https://bizleap.in/#website" },
+            "provider": { "@id": "https://bizleap.in/#organization" },
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" }
+              ]
+            },
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "UI/UX & Web Design", "url": "https://bizleap.in/webdesign" },
+                { "@type": "ListItem", "position": 2, "name": "Brand Identity Design", "url": "https://bizleap.in/brandidentity" },
+                { "@type": "ListItem", "position": 3, "name": "SEO & Website Audits", "url": "https://bizleap.in/seowebsite" },
+                { "@type": "ListItem", "position": 4, "name": "Social Media Marketing", "url": "https://bizleap.in/socialmedia" },
+                { "@type": "ListItem", "position": 5, "name": "AI Services", "url": "https://bizleap.in/aiservices" }
+              ]
+            }
+          })
+        }}
+      />
     </Head>
 
     <section className="py-20 md:py-32 bg-black text-white" id="services">

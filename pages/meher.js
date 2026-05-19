@@ -9,6 +9,30 @@ export default function Meher() {
         <title>Meher Infra Solutions Project | Bizleap</title>
         <meta name="description" content="Meher Infra Solutions focuses on sustainable infrastructure development with futuristic and efficient design approaches. Explore our branding and design work." />
         <link rel="canonical" href="https://bizleap.in/meher" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "@id": "https://bizleap.in/meher#creativework",
+              "url": "https://bizleap.in/meher",
+              "name": "Meher Infra Solutions - Brand Strategy & Design",
+              "description": "Meher Infra Solutions focuses on sustainable infrastructure development with futuristic design. Bizleap crafted the brand strategy, visual identity, and design for this infrastructure company.",
+              "image": "https://bizleap.in/images/Meher.png",
+              "keywords": "Brand Strategy, Design, Infrastructure, Sustainability",
+              "creator": { "@id": "https://bizleap.in/#organization" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://bizleap.in/work" },
+                  { "@type": "ListItem", "position": 3, "name": "Meher Infra Solutions", "item": "https://bizleap.in/meher" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}

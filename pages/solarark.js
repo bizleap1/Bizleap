@@ -9,6 +9,30 @@ export default function SolarArk() {
         <title>Solar Ark Project | Bizleap</title>
         <meta name="description" content="Discover Solar Ark, a forward-thinking renewable energy project blending advanced technology with clean-energy principles for a sustainable future." />
         <link rel="canonical" href="https://bizleap.in/solarark" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "@id": "https://bizleap.in/solarark#creativework",
+              "url": "https://bizleap.in/solarark",
+              "name": "Solar Ark - Brand Strategy & Design",
+              "description": "Solar Ark is a forward-thinking renewable energy brand. Bizleap crafted the brand strategy, visual identity, and design for this sustainable solar ecosystem project.",
+              "image": "https://bizleap.in/images/Solar.png",
+              "keywords": "Brand Strategy, Design, Sustainability, Energy Innovation, Solar",
+              "creator": { "@id": "https://bizleap.in/#organization" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://bizleap.in/work" },
+                  { "@type": "ListItem", "position": 3, "name": "Solar Ark", "item": "https://bizleap.in/solarark" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}

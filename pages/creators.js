@@ -744,9 +744,30 @@ export default function CreatorsSection() {
   <title>Creators Network | Bizleap</title>
   <meta
     name="description"
-    content="Discover Bizleap’s creators network — designers, developers, and digital experts collaborating to deliver impactful and innovative brand solutions."
+    content="Discover Bizleap's creators network — designers, developers, and digital experts collaborating to deliver impactful and innovative brand solutions."
   />
   <link rel="canonical" href="https://bizleap.in/creators" />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://bizleap.in/creators#webpage",
+        "url": "https://bizleap.in/creators",
+        "name": "Creators Network | Bizleap",
+        "description": "Discover Bizleap's curated network of social media influencers, print magazines, newspapers, and digital platforms for impactful brand partnerships and media placements.",
+        "isPartOf": { "@id": "https://bizleap.in/#website" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+            { "@type": "ListItem", "position": 2, "name": "Creators Network", "item": "https://bizleap.in/creators" }
+          ]
+        }
+      })
+    }}
+  />
 </Head>
 
     <section className="py-20 bg-black text-white" id="creators">

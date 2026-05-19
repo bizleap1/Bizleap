@@ -6,10 +6,47 @@ export default function ContactPage() {
   return (
     <>
     <Head>
-  <title>Contact Bizleap | Let’s Build Your Brand</title>
+  <title>Contact Bizleap | Let's Build Your Brand</title>
   <meta
     name="description"
     content="Get in touch with Bizleap to discuss digital marketing, web development, branding, or creative solutions tailored to your business goals."
+  />
+  <link rel="canonical" href="https://bizleap.in/contact" />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "@id": "https://bizleap.in/contact#webpage",
+        "url": "https://bizleap.in/contact",
+        "name": "Contact Bizleap | Let's Build Your Brand",
+        "description": "Get in touch with Bizleap to discuss digital marketing, web development, branding, or creative solutions tailored to your business goals.",
+        "isPartOf": { "@id": "https://bizleap.in/#website" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+            { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://bizleap.in/contact" }
+          ]
+        },
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "Bizleap",
+          "url": "https://bizleap.in",
+          "telephone": ["+91-70970-95152", "+91-93071-98119"],
+          "email": "bizleapinc@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "8, Wardha Rd, Near Sai Mandir, Sawarkar Nagar, Gajanan Nagar",
+            "addressLocality": "Nagpur",
+            "addressRegion": "Maharashtra",
+            "postalCode": "440015",
+            "addressCountry": "IN"
+          }
+        }
+      })
+    }}
   />
 </Head>
 

@@ -166,6 +166,36 @@ export default function Team() {
         content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth."
       />
       <link rel="canonical" href="https://bizleap.in/team" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": "https://bizleap.in/team#webpage",
+            "url": "https://bizleap.in/team",
+            "name": "Our Team | Bizleap",
+            "description": "Meet the Bizleap team — 30+ passionate designers, developers, marketers, and creators driving digital growth.",
+            "isPartOf": { "@id": "https://bizleap.in/#website" },
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                { "@type": "ListItem", "position": 2, "name": "Team", "item": "https://bizleap.in/team" }
+              ]
+            },
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Bizleap",
+              "url": "https://bizleap.in",
+              "member": [
+                { "@type": "Person", "name": "Akshat Soni", "jobTitle": "Co-Founder & CEO", "url": "https://bizleap.in/akshat" },
+                { "@type": "Person", "name": "Kaushal Banginwar", "jobTitle": "Co-Founder & CTO", "url": "https://bizleap.in/kaushal" }
+              ]
+            }
+          })
+        }}
+      />
     </Head>
 
     <main className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8">

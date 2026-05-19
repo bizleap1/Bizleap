@@ -9,6 +9,30 @@ export default function TuliRestro() {
         <title>Tuli Restro Project | Bizleap</title>
         <meta name="description" content="Tuli Restro combines fine dining and a vibrant ambiance to redefine culinary luxury. Explore our branding and design work for this fine dining experience." />
         <link rel="canonical" href="https://bizleap.in/tulirestro" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "@id": "https://bizleap.in/tulirestro#creativework",
+              "url": "https://bizleap.in/tulirestro",
+              "name": "Tuli Restro - Brand Strategy & Design",
+              "description": "Tuli Restro combines fine dining and vibrant ambiance to redefine culinary luxury. Bizleap crafted the brand strategy, visual identity, and design language for this premium restaurant experience.",
+              "image": "https://bizleap.in/images/Tuii.png",
+              "keywords": "Brand Strategy, Design, Fine Dining, Luxury Experience",
+              "creator": { "@id": "https://bizleap.in/#organization" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://bizleap.in/work" },
+                  { "@type": "ListItem", "position": 3, "name": "Tuli Restro", "item": "https://bizleap.in/tulirestro" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}

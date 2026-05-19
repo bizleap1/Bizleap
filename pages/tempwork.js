@@ -48,6 +48,36 @@ export default function Work() {
         <title>Portfolio Gallery | Bizleap</title>
         <meta name="description" content="Explore Bizleap's interactive portfolio gallery showcasing our diverse range of successful projects across branding, design, and digital solutions." />
         <link rel="canonical" href="https://bizleap.in/tempwork" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              "@id": "https://bizleap.in/tempwork#webpage",
+              "url": "https://bizleap.in/tempwork",
+              "name": "Portfolio Gallery | Bizleap",
+              "description": "Explore Bizleap's interactive portfolio gallery showcasing branding, design, and digital solutions across 4 flagship projects.",
+              "isPartOf": { "@id": "https://bizleap.in/#website" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://bizleap.in/tempwork" }
+                ]
+              },
+              "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Solar Ark", "url": "https://bizleap.in/solarark" },
+                  { "@type": "ListItem", "position": 2, "name": "Masato", "url": "https://bizleap.in/masato" },
+                  { "@type": "ListItem", "position": 3, "name": "Meher Infra Solutions", "url": "https://bizleap.in/meher" },
+                  { "@type": "ListItem", "position": 4, "name": "Tuli Restro", "url": "https://bizleap.in/tulirestro" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <div className="bg-black min-h-screen text-white px-6 md:px-16 lg:px-24 py-20">
       {/* Inline animation styles */}

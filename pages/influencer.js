@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Head from "next/head";
 import { motion } from "framer-motion";
 import { Search, Filter, Instagram } from "lucide-react";
 
@@ -28,7 +29,34 @@ export default function InfluencerPage() {
   });
 
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-16 md:px-12">
+    <>
+      <Head>
+        <title>Influencer Registry | Bizleap</title>
+        <meta name="description" content="Discover and connect with top social media influencers from Nagpur and beyond across fitness, beauty, business, and food categories." />
+        <link rel="canonical" href="https://bizleap.in/influencer" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "@id": "https://bizleap.in/influencer#webpage",
+              "url": "https://bizleap.in/influencer",
+              "name": "Influencer Registry | Bizleap",
+              "description": "Discover and connect with top social media influencers from Nagpur and beyond across fitness, beauty, business, and food categories.",
+              "isPartOf": { "@id": "https://bizleap.in/#website" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Influencer Network", "item": "https://bizleap.in/influencer" }
+                ]
+              }
+            })
+          }}
+        />
+      </Head>
+      <main className="min-h-screen bg-black text-white px-6 py-16 md:px-12">
       {/* Header */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
@@ -110,5 +138,6 @@ export default function InfluencerPage() {
         ))}
       </div>
     </main>
+    </>
   );
 }

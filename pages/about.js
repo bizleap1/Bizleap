@@ -17,6 +17,35 @@ export default function About() {
         <title>About BizLeap | Driven by Design. Backed by Results.</title>
         <meta name="description" content="Discover the story behind BizLeap - a team of dreamers and builders dedicated to high-impact design and digital growth." />
         <link rel="canonical" href="https://bizleap.in/about" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "AboutPage",
+              "@id": "https://bizleap.in/about#webpage",
+              "url": "https://bizleap.in/about",
+              "name": "About BizLeap | Driven by Design. Backed by Results.",
+              "description": "Discover the story behind BizLeap - a team of 30+ creatives, developers, and strategists dedicated to high-impact design and digital growth since 2020.",
+              "isPartOf": { "@id": "https://bizleap.in/#website" },
+              "about": { "@id": "https://bizleap.in/#organization" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "About", "item": "https://bizleap.in/about" }
+                ]
+              },
+              "mainEntity": {
+                "@type": "Organization",
+                "name": "Bizleap",
+                "foundingDate": "2020",
+                "numberOfEmployees": { "@type": "QuantitativeValue", "value": 30 },
+                "description": "Bizleap is a full-service digital agency with 200+ projects completed across branding, SEO, social media, and web design."
+              }
+            })
+          }}
+        />
       </Head>
 
       {/* --- CINEMATIC HERO --- */}

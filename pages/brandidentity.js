@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from "react"
+import Head from "next/head"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -130,7 +131,47 @@ export default function BrandIdentityService() {
   ]
 
   return (
-    <main className="bg-black text-white min-h-screen">
+    <>
+      <Head>
+        <title>Brand Identity Design | Bizleap</title>
+        <meta name="description" content="Bizleap crafts memorable brand identities that connect emotionally with your audience. From logos to complete brand systems, we build foundations for lasting success." />
+        <link rel="canonical" href="https://bizleap.in/brandidentity" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "@id": "https://bizleap.in/brandidentity#service",
+              "url": "https://bizleap.in/brandidentity",
+              "name": "Brand Identity Design",
+              "description": "Bizleap crafts memorable brand identities that connect emotionally with your audience. From logos to complete brand systems, we build foundations for lasting success.",
+              "provider": { "@id": "https://bizleap.in/#organization" },
+              "serviceType": "Brand Identity & Design",
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" },
+                  { "@type": "ListItem", "position": 3, "name": "Brand Identity Design", "item": "https://bizleap.in/brandidentity" }
+                ]
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Brand Identity Deliverables",
+                "itemListElement": [
+                  { "@type": "Offer", "name": "Logo Design" },
+                  { "@type": "Offer", "name": "Color Palette" },
+                  { "@type": "Offer", "name": "Typography System" },
+                  { "@type": "Offer", "name": "Brand Guidelines" },
+                  { "@type": "Offer", "name": "Brand Assets & Social Media Kit" }
+                ]
+              }
+            })
+          }}
+        />
+      </Head>
+      <main className="bg-black text-white min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-yellow-500/5"></div>
@@ -421,5 +462,6 @@ export default function BrandIdentityService() {
 
 
     </main>
+    </>
   )
 }

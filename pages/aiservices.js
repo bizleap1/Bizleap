@@ -133,6 +133,41 @@ export default function AIServicesPage() {
         <title>AI Innovation & Services | Bizleap</title>
         <meta name="description" content="Unlock the potential of Artificial Intelligence with Bizleap. We provide Generative AI, Automation, and Custom AI solutions for modern businesses." />
         <link rel="canonical" href="https://bizleap.in/aiservices" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "@id": "https://bizleap.in/aiservices#service",
+              "url": "https://bizleap.in/aiservices",
+              "name": "AI Innovation & Services",
+              "description": "Bizleap provides Generative AI integration, AI-powered automation, predictive analytics, and custom AI solutions to help businesses stay competitive.",
+              "provider": { "@id": "https://bizleap.in/#organization" },
+              "serviceType": "AI & Technology Services",
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" },
+                  { "@type": "ListItem", "position": 3, "name": "AI Services", "item": "https://bizleap.in/aiservices" }
+                ]
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "AI Capabilities",
+                "itemListElement": [
+                  { "@type": "Offer", "name": "Generative AI Integration" },
+                  { "@type": "Offer", "name": "AI-Powered Automation" },
+                  { "@type": "Offer", "name": "Predictive Analytics" },
+                  { "@type": "Offer", "name": "Custom AI Solutions" },
+                  { "@type": "Offer", "name": "AI-Driven Marketing" },
+                  { "@type": "Offer", "name": "Computer Vision" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       
       <main className="bg-black text-white min-h-screen">

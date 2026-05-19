@@ -87,6 +87,36 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
     content="Explore Bizleap’s portfolio showcasing successful web development, digital marketing, branding, and creative projects delivered for growing brands."
   />
   <link rel="canonical" href="https://bizleap.in/work" />
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://bizleap.in/work#webpage",
+        "url": "https://bizleap.in/work",
+        "name": "Our Work | Bizleap Portfolio",
+        "description": "Explore Bizleap's portfolio showcasing branding, web development, digital marketing, and creative projects delivered for growing brands.",
+        "isPartOf": { "@id": "https://bizleap.in/#website" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+            { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://bizleap.in/work" }
+          ]
+        },
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Solar Ark - Branding", "url": "https://bizleap.in/solarark" },
+            { "@type": "ListItem", "position": 2, "name": "Masato - Branding", "url": "https://bizleap.in/masato" },
+            { "@type": "ListItem", "position": 3, "name": "Meher Infra Solutions - Branding", "url": "https://bizleap.in/meher" },
+            { "@type": "ListItem", "position": 4, "name": "Tuli Restro - Branding", "url": "https://bizleap.in/tulirestro" }
+          ]
+        }
+      })
+    }}
+  />
 </Head>
 
     <div className="min-h-screen w-full bg-white text-black">

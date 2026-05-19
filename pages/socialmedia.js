@@ -160,6 +160,41 @@ export default function SocialMediaMarketingService() {
         <title>Social Media Marketing | Bizleap</title>
         <meta name="description" content="Elevate your brand with Bizleap's social media marketing. We drive engagement and growth through strategic content, community management, and paid advertising." />
         <link rel="canonical" href="https://bizleap.in/socialmedia" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "@id": "https://bizleap.in/socialmedia#service",
+              "url": "https://bizleap.in/socialmedia",
+              "name": "Social Media Marketing",
+              "description": "Bizleap creates social media strategies that drive engagement, build communities, and generate real business results through content creation, community management, and paid campaigns.",
+              "provider": { "@id": "https://bizleap.in/#organization" },
+              "serviceType": "Social Media Marketing",
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" },
+                  { "@type": "ListItem", "position": 3, "name": "Social Media Marketing", "item": "https://bizleap.in/socialmedia" }
+                ]
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Social Media Services",
+                "itemListElement": [
+                  { "@type": "Offer", "name": "Social Media Strategy" },
+                  { "@type": "Offer", "name": "Community Management" },
+                  { "@type": "Offer", "name": "Content Creation" },
+                  { "@type": "Offer", "name": "Paid Advertising" },
+                  { "@type": "Offer", "name": "Influencer Marketing" },
+                  { "@type": "Offer", "name": "Visual Branding" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <main className="bg-black text-white min-h-screen">
       {/* Hero Section */}

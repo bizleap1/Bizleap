@@ -159,6 +159,41 @@ export default function SEOAuditsService() {
         <title>SEO & Website Audits | Bizleap</title>
         <meta name="description" content="Maximize your search potential with Bizleap's comprehensive SEO and website audits. We analyze technical health, content, and backlinks to drive organic growth." />
         <link rel="canonical" href="https://bizleap.in/seowebsite" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "@id": "https://bizleap.in/seowebsite#service",
+              "url": "https://bizleap.in/seowebsite",
+              "name": "SEO & Website Audits",
+              "description": "Bizleap provides comprehensive SEO and website audits including technical SEO analysis, content evaluation, backlink profile review, and keyword research to drive organic growth.",
+              "provider": { "@id": "https://bizleap.in/#organization" },
+              "serviceType": "SEO & Digital Marketing",
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" },
+                  { "@type": "ListItem", "position": 3, "name": "SEO & Website Audits", "item": "https://bizleap.in/seowebsite" }
+                ]
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "SEO Audit Services",
+                "itemListElement": [
+                  { "@type": "Offer", "name": "Technical SEO Audit" },
+                  { "@type": "Offer", "name": "Content Analysis" },
+                  { "@type": "Offer", "name": "Backlink Profile Review" },
+                  { "@type": "Offer", "name": "Keyword Research" },
+                  { "@type": "Offer", "name": "Performance Metrics & Core Web Vitals" },
+                  { "@type": "Offer", "name": "Security Audit" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <main className="bg-black text-white min-h-screen">
       {/* Hero Section */}

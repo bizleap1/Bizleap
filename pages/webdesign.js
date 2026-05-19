@@ -259,6 +259,41 @@ export default function WebDesignService() {
         <title>UI/UX & Web Design | Bizleap</title>
         <meta name="description" content="Bizleap crafts intuitive, visually stunning websites and applications. Our user-centered UI/UX design approach ensures every decision drives engagement." />
         <link rel="canonical" href="https://bizleap.in/webdesign" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "@id": "https://bizleap.in/webdesign#service",
+              "url": "https://bizleap.in/webdesign",
+              "name": "UI/UX & Web Design",
+              "description": "Bizleap crafts intuitive, visually stunning websites and applications using user-centered design principles. Mobile-first, responsive, and SEO-friendly by default.",
+              "provider": { "@id": "https://bizleap.in/#organization" },
+              "serviceType": "Web Design & UI/UX",
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" },
+                  { "@type": "ListItem", "position": 3, "name": "UI/UX & Web Design", "item": "https://bizleap.in/webdesign" }
+                ]
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Web Design Services",
+                "itemListElement": [
+                  { "@type": "Offer", "name": "User-Centered Design" },
+                  { "@type": "Offer", "name": "Mobile-First Responsive Design" },
+                  { "@type": "Offer", "name": "Interactive Prototypes" },
+                  { "@type": "Offer", "name": "Accessibility Compliance (WCAG 2.1)" },
+                  { "@type": "Offer", "name": "Performance Optimization" },
+                  { "@type": "Offer", "name": "SEO-Friendly Structure" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <main className="bg-black text-white min-h-screen">
       {/* Hero Section */}

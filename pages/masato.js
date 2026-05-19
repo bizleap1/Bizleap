@@ -9,6 +9,30 @@ export default function Masato() {
         <title>Masato Project | Bizleap</title>
         <meta name="description" content="Masato delivers authentic culinary experiences wrapped in tradition and taste. Explore our branding and design work for this modern culinary brand." />
         <link rel="canonical" href="https://bizleap.in/masato" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "@id": "https://bizleap.in/masato#creativework",
+              "url": "https://bizleap.in/masato",
+              "name": "Masato - Brand Strategy & Design",
+              "description": "Masato delivers authentic culinary experiences wrapped in tradition and taste. Bizleap crafted the brand strategy, visual identity, and design language for this modern culinary brand.",
+              "image": "https://bizleap.in/images/Masato.png",
+              "keywords": "Brand Strategy, Design, Culinary Experience, Aesthetics",
+              "creator": { "@id": "https://bizleap.in/#organization" },
+              "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
+                  { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://bizleap.in/work" },
+                  { "@type": "ListItem", "position": 3, "name": "Masato", "item": "https://bizleap.in/masato" }
+                ]
+              }
+            })
+          }}
+        />
       </Head>
       <div className="w-full min-h-screen bg-white text-black">
       {/* Hero Section */}
