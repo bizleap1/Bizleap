@@ -130,8 +130,9 @@ export default function AIServicesPage() {
   return (
     <>
       <Head>
-        <title>AI Innovation & Services | Bizleap</title>
-        <meta name="description" content="Unlock the potential of Artificial Intelligence with Bizleap. We provide Generative AI, Automation, and Custom AI solutions for modern businesses." />
+        <title key="title">AI Innovation & Services | Bizleap</title>
+        <meta name="description" content="Unlock the potential of Artificial Intelligence with Bizleap. We provide Generative AI, Automation, and Custom AI solutions for modern businesses." key="description" />
+        <meta name="keywords" content="artificial intelligence, generative ai, custom llm, ai automation, bizleap ai" />
         <link rel="canonical" href="https://bizleap.in/aiservices" />
         <script
           type="application/ld+json"

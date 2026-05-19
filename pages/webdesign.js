@@ -256,8 +256,9 @@ export default function WebDesignService() {
   return (
     <>
       <Head>
-        <title>UI/UX & Web Design | Bizleap</title>
-        <meta name="description" content="Bizleap crafts intuitive, visually stunning websites and applications. Our user-centered UI/UX design approach ensures every decision drives engagement." />
+        <title key="title">UI/UX & Web Design | Bizleap</title>
+        <meta name="description" content="Bizleap crafts intuitive, visually stunning websites and applications. Our user-centered UI/UX design approach ensures every decision drives engagement." key="description" />
+        <meta name="keywords" content="web design Nagpur, ui ux design agency, custom website development" />
         <link rel="canonical" href="https://bizleap.in/webdesign" />
         <script
           type="application/ld+json"

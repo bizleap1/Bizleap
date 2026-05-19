@@ -134,7 +134,8 @@ export default function BlogsPage() {
   return (
     <>
       <Head>
-        <title>Insightful Blogs | Bizleap</title>
+        <title key="title">Insightful Blogs | Bizleap</title>
+        <meta name="keywords" content="bizleap blog, digital marketing insights, web design tips, technical seo blog" />
         <meta name="description" content="Explore Bizleap's latest articles and insights on digital marketing, web design, technology audits, and advanced generative AI innovations." />
         <link rel="canonical" href="https://bizleap.in/blogs" />
         <script

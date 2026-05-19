@@ -6,8 +6,9 @@ export default function TuliRestro() {
   return (
     <>
       <Head>
-        <title>Tuli Restro Project | Bizleap</title>
-        <meta name="description" content="Tuli Restro combines fine dining and a vibrant ambiance to redefine culinary luxury. Explore our branding and design work for this fine dining experience." />
+        <title key="title">Tuli Restro Project | Bizleap</title>
+        <meta name="description" content="Tuli Restro combines fine dining and a vibrant ambiance to redefine culinary luxury. Explore our branding and design work for this fine dining experience." key="description" />
+        <meta name="keywords" content="tuli restro, Nagpur fine dining restro design, restro branding" />
         <link rel="canonical" href="https://bizleap.in/tulirestro" />
         <script
           type="application/ld+json"

@@ -88,11 +88,9 @@ const SERVICES = [
 export default function ServicesSection() {
   return (<>
     <Head>
-      <title>Our Services | Bizleap</title>
-      <meta
-        name="description"
-        content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online."
-      />
+      <title key="title">Our Services | Bizleap</title>
+      <meta name="description" content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online." key="description" />
+        <meta name="keywords" content="bizleap services, seo web design branding Nagpur" />
       <link rel="canonical" href="https://bizleap.in/services" />
       <script
         type="application/ld+json"

@@ -69,8 +69,9 @@ export default function AkshatProfile() {
   return (
     <div className="bg-[#050505] text-white font-sans selection:bg-brand-accent selection:text-black min-h-screen relative">
       <Head>
-        <title>Akshat Project | Bizleap</title>
-        <meta name="description" content="Detailed case study of Akshat project..." />
+        <title key="title">Akshat Soni | Co-founder & CEO | Bizleap</title>
+        <meta name="description" content="Official profile of Akshat Soni, Co-founder & CEO of Bizleap. Explore his journey in strategic business development, revenue growth systems, and brand scaling." key="description" />
+        <meta name="keywords" content="akshat soni, bizleap ceo, co-founder akshat" />
         <link rel="canonical" href="https://bizleap.in/akshat" />
         <script
           type="application/ld+json"

@@ -14,8 +14,9 @@ export default function About() {
   return (
     <div className="bg-black text-white min-h-screen">
       <Head>
-        <title>About BizLeap | Driven by Design. Backed by Results.</title>
-        <meta name="description" content="Discover the story behind BizLeap - a team of dreamers and builders dedicated to high-impact design and digital growth." />
+        <title key="title">About BizLeap | Driven by Design. Backed by Results.</title>
+        <meta name="description" content="Discover the story behind BizLeap - a team of dreamers and builders dedicated to high-impact design and digital growth." key="description" />
+        <meta name="keywords" content="bizleap about, bizleap team, digital marketing agency about" />
         <link rel="canonical" href="https://bizleap.in/about" />
         <script
           type="application/ld+json"

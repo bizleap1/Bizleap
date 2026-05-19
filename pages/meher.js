@@ -6,8 +6,9 @@ export default function Meher() {
   return (
     <>
       <Head>
-        <title>Meher Infra Solutions Project | Bizleap</title>
-        <meta name="description" content="Meher Infra Solutions focuses on sustainable infrastructure development with futuristic and efficient design approaches. Explore our branding and design work." />
+        <title key="title">Meher Infra Solutions Project | Bizleap</title>
+        <meta name="description" content="Meher Infra Solutions focuses on sustainable infrastructure development with futuristic and efficient design approaches. Explore our branding and design work." key="description" />
+        <meta name="keywords" content="meher infra solutions, infrastructure design, industrial branding" />
         <link rel="canonical" href="https://bizleap.in/meher" />
         <script
           type="application/ld+json"

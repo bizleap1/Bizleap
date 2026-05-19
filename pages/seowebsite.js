@@ -156,7 +156,8 @@ export default function SEOAuditsService() {
   return (
     <>
       <Head>
-        <title>SEO & Website Audits | Bizleap</title>
+        <title key="title">SEO & Website Audits | Bizleap</title>
+        <meta name="keywords" content="seo Nagpur, technical seo audit, core web vitals speed audit" />
         <meta name="description" content="Maximize your search potential with Bizleap's comprehensive SEO and website audits. We analyze technical health, content, and backlinks to drive organic growth." />
         <link rel="canonical" href="https://bizleap.in/seowebsite" />
         <script

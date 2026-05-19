@@ -6,8 +6,9 @@ export default function SolarArk() {
   return (
     <>
       <Head>
-        <title>Solar Ark Project | Bizleap</title>
-        <meta name="description" content="Discover Solar Ark, a forward-thinking renewable energy project blending advanced technology with clean-energy principles for a sustainable future." />
+        <title key="title">Solar Ark Project | Bizleap</title>
+        <meta name="description" content="Discover Solar Ark, a forward-thinking renewable energy project blending advanced technology with clean-energy principles for a sustainable future." key="description" />
+        <meta name="keywords" content="solar ark project, clean energy website, renewable energy branding" />
         <link rel="canonical" href="https://bizleap.in/solarark" />
         <script
           type="application/ld+json"

@@ -139,8 +139,9 @@ export default function KaushalProfile() {
   return (
     <div className="bg-[#050505] text-white font-sans selection:bg-brand-accent/40 selection:text-black min-h-screen relative">
       <Head>
-        <title>Kaushal Banginwar | Co-founder & CTO</title>
-        <meta name="description" content="Official portfolio of Kaushal Banginwar - A premium founder and digital marketing visionary." />
+        <title key="title">Kaushal Banginwar | Co-founder & CTO</title>
+        <meta name="description" content="Official portfolio of Kaushal Banginwar - A premium founder and digital marketing visionary." key="description" />
+        <meta name="keywords" content="kaushal banginwar, bizleap cto, co-founder kaushal" />
         <link rel="canonical" href="https://bizleap.in/kaushal" />
         <script
           type="application/ld+json"

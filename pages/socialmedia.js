@@ -157,7 +157,8 @@ export default function SocialMediaMarketingService() {
   return (
     <>
       <Head>
-        <title>Social Media Marketing | Bizleap</title>
+        <title key="title">Social Media Marketing | Bizleap</title>
+        <meta name="keywords" content="social media marketing Nagpur, organic sse, instagram marketing, facebook ads" />
         <meta name="description" content="Elevate your brand with Bizleap's social media marketing. We drive engagement and growth through strategic content, community management, and paid advertising." />
         <link rel="canonical" href="https://bizleap.in/socialmedia" />
         <script

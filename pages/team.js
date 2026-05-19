@@ -160,11 +160,9 @@ const hoverVariants = {
 export default function Team() {
   return (<>
     <Head>
-      <title>Our Team | Bizleap</title>
-      <meta
-        name="description"
-        content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth."
-      />
+      <title key="title">Our Team | Bizleap</title>
+      <meta name="description" content="Meet the Bizleap team — a passionate group of designers, developers, marketers, and creators driving innovation and digital growth." key="description" />
+        <meta name="keywords" content="bizleap team, co-founders bizleap, creators designers Nagpur" />
       <link rel="canonical" href="https://bizleap.in/team" />
       <script
         type="application/ld+json"

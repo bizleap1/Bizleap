@@ -31,8 +31,9 @@ export default function InfluencerPage() {
   return (
     <>
       <Head>
-        <title>Influencer Registry | Bizleap</title>
-        <meta name="description" content="Discover and connect with top social media influencers from Nagpur and beyond across fitness, beauty, business, and food categories." />
+        <title key="title">Influencer Registry | Bizleap</title>
+        <meta name="description" content="Discover and connect with top social media influencers from Nagpur and beyond across fitness, beauty, business, and food categories." key="description" />
+        <meta name="keywords" content="influencer registry, Nagpur influencers, fitness beauty influencer Nagpur" />
         <link rel="canonical" href="https://bizleap.in/influencer" />
         <script
           type="application/ld+json"

@@ -6,11 +6,9 @@ export default function ContactPage() {
   return (
     <>
     <Head>
-  <title>Contact Bizleap | Let's Build Your Brand</title>
-  <meta
-    name="description"
-    content="Get in touch with Bizleap to discuss digital marketing, web development, branding, or creative solutions tailored to your business goals."
-  />
+  <title key="title">Contact Bizleap | Let's Build Your Brand</title>
+  <meta name="description" content="Get in touch with Bizleap to discuss digital marketing, web development, branding, or creative solutions tailored to your business goals." key="description" />
+        <meta name="keywords" content="contact bizleap, hire digital marketing agency, Nagpur web development" />
   <link rel="canonical" href="https://bizleap.in/contact" />
   <script
     type="application/ld+json"

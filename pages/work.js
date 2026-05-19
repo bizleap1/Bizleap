@@ -81,11 +81,9 @@ const [showMobileFilter, setShowMobileFilter] = useState(false);
   return (
   <>
   <Head>
-  <title>Our Work | Bizleap - Where Brands Leap Forward</title>
-  <meta
-    name="description"
-    content="Explore Bizleap’s portfolio showcasing successful web development, digital marketing, branding, and creative projects delivered for growing brands."
-  />
+  <title key="title">Our Work | Bizleap - Where Brands Leap Forward</title>
+  <meta name="description" content="Explore Bizleap’s portfolio showcasing successful web development, digital marketing, branding, and creative projects delivered for growing brands." key="description" />
+        <meta name="keywords" content="bizleap work, branding portfolio, website portfolio Nagpur" />
   <link rel="canonical" href="https://bizleap.in/work" />
   <script
     type="application/ld+json"

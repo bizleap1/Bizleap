@@ -14,11 +14,8 @@ export default function Home() {
   return (
     <>
     <Head>
-        <title>Bizleap - Where Brands Leap Forward</title>
-        <meta
-          name="description"
-          content="Bizleap is a digital marketing and web development agency helping brands grow online through SEO, modern websites, creative design, and technology-driven solutions."
-        />
+        <title key="title">Bizleap - Where Brands Leap Forward</title>
+        <meta name="description" content="Bizleap is a digital marketing and web development agency helping brands grow online through SEO, modern websites, creative design, and technology-driven solutions." key="description" />
         <link rel="canonical" href="https://bizleap.in/" />
         <meta
           name="keywords"

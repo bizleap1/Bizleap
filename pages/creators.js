@@ -741,7 +741,8 @@ export default function CreatorsSection() {
 
   return ( <>
   <Head>
-  <title>Creators Network | Bizleap</title>
+  <title key="title">Creators Network | Bizleap</title>
+        <meta name="keywords" content="creators network Nagpur, brand placements, influencer marketing Nagpur" />
   <meta
     name="description"
     content="Discover Bizleap's creators network — designers, developers, and digital experts collaborating to deliver impactful and innovative brand solutions."

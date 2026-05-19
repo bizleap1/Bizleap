@@ -133,8 +133,9 @@ export default function BrandIdentityService() {
   return (
     <>
       <Head>
-        <title>Brand Identity Design | Bizleap</title>
-        <meta name="description" content="Bizleap crafts memorable brand identities that connect emotionally with your audience. From logos to complete brand systems, we build foundations for lasting success." />
+        <title key="title">Brand Identity Design | Bizleap</title>
+        <meta name="description" content="Bizleap crafts memorable brand identities that connect emotionally with your audience. From logos to complete brand systems, we build foundations for lasting success." key="description" />
+        <meta name="keywords" content="brand identity, logo design Nagpur, corporate branding, brand systems" />
         <link rel="canonical" href="https://bizleap.in/brandidentity" />
         <script
           type="application/ld+json"

@@ -45,7 +45,8 @@ export default function Work() {
   return (
     <>
       <Head>
-        <title>Portfolio Gallery | Bizleap</title>
+        <title key="title">Portfolio Gallery | Bizleap</title>
+        <meta name="keywords" content="portfolio gallery, bizleap works, case studies design" />
         <meta name="description" content="Explore Bizleap's interactive portfolio gallery showcasing our diverse range of successful projects across branding, design, and digital solutions." />
         <link rel="canonical" href="https://bizleap.in/tempwork" />
         <script

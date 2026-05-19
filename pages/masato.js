@@ -6,8 +6,9 @@ export default function Masato() {
   return (
     <>
       <Head>
-        <title>Masato Project | Bizleap</title>
-        <meta name="description" content="Masato delivers authentic culinary experiences wrapped in tradition and taste. Explore our branding and design work for this modern culinary brand." />
+        <title key="title">Masato Project | Bizleap</title>
+        <meta name="description" content="Masato delivers authentic culinary experiences wrapped in tradition and taste. Explore our branding and design work for this modern culinary brand." key="description" />
+        <meta name="keywords" content="masato project, culinary branding, logo design restro" />
         <link rel="canonical" href="https://bizleap.in/masato" />
         <script
           type="application/ld+json"
