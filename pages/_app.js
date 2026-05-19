@@ -26,6 +26,16 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <meta name="description" content="Driven by Design. Backed by Results. Bizleap creates thoughtful design and digital experiences that help businesses grow." key="description" />
 
+        {/* International & Geographic Targeting (USA, UK, UAE) */}
+        <link rel="alternate" href="https://bizleap.in/" hrefLang="en-us" />
+        <link rel="alternate" href="https://bizleap.in/" hrefLang="en-gb" />
+        <link rel="alternate" href="https://bizleap.in/" hrefLang="en-ae" />
+        <link rel="alternate" href="https://bizleap.in/" hrefLang="x-default" />
+        <meta name="geo.region" content="AE-DU, GB-LND, US-NY" />
+        <meta name="geo.placename" content="Dubai, London, New York" />
+        <meta name="geo.position" content="25.2048;55.2708;51.5074;-0.1278;40.7128;-74.0060" />
+        <meta name="ICBM" content="25.2048, 55.2708, 51.5074, -0.1278, 40.7128, -74.0060" />
+
         {/* Open Graph (Google / WhatsApp / LinkedIn) */}
         <meta property="og:title" content="Bizleap" />
         <meta

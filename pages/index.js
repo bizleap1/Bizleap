@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="canonical" href="https://bizleap.in/" />
         <meta
           name="keywords"
-          content="bizleap, digital marketing, web development, branding, seo services"
+          content="bizleap, digital marketing, web development, branding, seo services, B2B web design USA, creative design London UK, SEO agency Dubai UAE, global brand growth"
         />
         <script
           type="application/ld+json"
