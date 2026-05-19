@@ -130,7 +130,7 @@ export default function AboutSection() {
                 <div className="space-y-4 md:space-y-6 translate-y-12">
                   <div className="relative w-full h-[240px] md:h-[360px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="/Team Meeting.jpeg" 
+                      src="/Team-Meeting.jpeg" 
                       alt="BizLeap Excellence" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
@@ -140,7 +140,7 @@ export default function AboutSection() {
                   </div>
                   <div className="relative w-full h-[200px] md:h-[280px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="/Team meeting 2.jpeg" 
+                      src="/Team-meeting-2.jpeg" 
                       alt="Visual Strategy" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"
@@ -163,7 +163,7 @@ export default function AboutSection() {
                   </div>
                   <div className="relative w-full h-[240px] md:h-[360px] rounded-2xl overflow-hidden group border border-zinc-800">
                     <Image 
-                      src="/Akshat meet.PNG" 
+                      src="/Akshat-meet.PNG" 
                       alt="Strategic Vision" 
                       fill 
                       sizes="(max-width: 768px) 50vw, 25vw"

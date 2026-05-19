@@ -4,18 +4,22 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const REELS = [
-  { src: "/reel4.MP4" },
-  { src: "/reel5.mp4" },
-  { src: "/reel6.mp4" },
-  { src: "/reel7.mp4" },
-  { src: "/reel8.mp4" },
-{ src: "/reel 1.mp4" },
-  { src: "/reel10.mp4", poster: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80" },
-  { src: "/reel11.mp4", poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=80" },
-  { src: "/reel12.mp4" },
-  { src: "/reel 2.mp4" },
-  { src: "/reel 3.mp4" },
-  { src: "/reel 4.mp4" },
+  { src: "/asian-street.mp4" },
+  { src: "/balaji-enterprise.mp4" },
+  { src: "/cakes-and-bakes.mp4" },
+  { src: "/jhol-momo.mp4" },
+  { src: "/luxury-greenacres.mp4" },
+  { src: "/meher-ganga.mp4" },
+  { src: "/meher-ganga-2.mp4" },
+  { src: "/oswal-jwellers.mp4" },
+  { src: "/quikfizzy.MP4" },
+  { src: "/quikfizzy2.mp4" },
+  { src: "/rooftop-restaurnt.mp4" },
+  { src: "/siddharth-groups.mp4" },
+  { src: "/significareel.mp4" },
+  { src: "/taubys.mp4" },
+  { src: "/taubys-2.mp4" },
+  { src: "/tunwai.mp4" },
 ];
 
 
