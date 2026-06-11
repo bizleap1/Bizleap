@@ -1,7 +1,7 @@
 import Head from "next/head";
 import AboutSection from "../components/AboutSection";
 import ClientsSection from "../components/ClientsSection";
-import Hero from "../components/Hero";
+import StickyHeroSection from "../components/StickyHeroSection";
 import MediaSection from "../components/MediaSection";
 import PortfolioCard from "../components/PortfolioCard";
 import ServicesSection2 from "../components/Services";
@@ -68,7 +68,7 @@ export default function Home() {
         />
       </Head>
     <section>
-      <Hero/>
+      <StickyHeroSection/>
       <BrandSlider/>
       <AboutSection/>
       <Stats/>

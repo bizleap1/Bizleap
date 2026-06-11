@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const brands = [
-  { name: "Ayrak", logo: "/images/ayrak pharma.png" },
+  { name: "Ayrak", logo: "/images/ayrak pharma_bw.png", customFilter: "" },
   { name: "Yofobo", logo: "/clients/yo fo bo.png", className: "scale-125" },
   { name: "Elite India", logo: "/images/elite india.PNG", className: "scale-[1.4]" },
   { name: "Tanvi Bhandari", logo: "/images/tanvi bhandari.PNG" },
@@ -57,7 +57,7 @@ export default function BrandSlider() {
                 src={brand.logo}
                 alt={brand.name}
                 fill
-                className={`object-contain filter brightness-0 invert ${brand.className || ""}`}
+                className={`object-contain ${brand.customFilter !== undefined ? brand.customFilter : "filter brightness-0 invert"} ${brand.className || ""}`}
               />
             </div>
           ))}
