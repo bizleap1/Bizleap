@@ -452,16 +452,6 @@ export default function WebDesignService() {
 
           <ProjectsCarousel />
 
-          <ScrollReveal delay={0.3}>
-            <div className="mt-16 text-center">
-              <Link
-                href="/portfolio"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-sm font-medium text-black transition-all hover:bg-yellow-500 hover:scale-105"
-              >
-                View Full Portfolio
-              </Link>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 

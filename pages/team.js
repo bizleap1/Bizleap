@@ -1,10 +1,49 @@
 "use client";
 import Head from "next/head";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Linkedin, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
+import { useRef } from "react";
 import MediaSection from "../components/MediaSection";
+
+// ------------------- Hero Reveal -------------------
+function HeroReveal({ children, delay = 0 }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, filter: "blur(5px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// ------------------- Scroll Reveal -------------------
+function ScrollReveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "0px 0px -50px 0px", once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30, filter: "blur(5px)" }}
+      animate={
+        inView
+          ? {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+            }
+          : {}
+      }
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 const founders = [
   {
@@ -206,7 +245,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.04
     }
   }
 };
@@ -275,29 +314,18 @@ export default function Team() {
 
     <main className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
-      <motion.section
-        className="text-center mb-20 mt-16"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-        >
-          Meet Our Team
-        </motion.h1>
-        <motion.p
-          className="text-xl text-gray-400 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-        >
-          The passionate individuals behind our success story
-        </motion.p>
-      </motion.section>
+      <section className="text-center mb-20 mt-16">
+        <HeroReveal>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            Meet Our Team
+          </h1>
+        </HeroReveal>
+        <HeroReveal delay={0.1}>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            The passionate individuals behind our success story
+          </p>
+        </HeroReveal>
+      </section>
 
       {/* Founders Section */}
       <section className="text-center mb-32">
@@ -317,7 +345,7 @@ export default function Team() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
         >
           {founders.map((person, i) => (
             <motion.div
@@ -348,6 +376,7 @@ export default function Team() {
                         width={300}
                         height={300}
                         className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500"
+                        priority={true}
                       />
                     </div>
                   </div>
@@ -404,7 +433,7 @@ export default function Team() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "100px" }}
         >
           {team.map((person, i) => (
             <motion.div
@@ -428,6 +457,7 @@ export default function Team() {
                     height={250}
                     className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500"
                     style={person.style}
+                    priority={i < 4}
                   />
                 </div>
 

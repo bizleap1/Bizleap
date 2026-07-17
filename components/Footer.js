@@ -46,14 +46,6 @@ const Footer = () => {
             <Link href="/contact" className="px-8 py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full text-sm tracking-wide transition-all duration-300 text-center w-full sm:w-auto">
               Start a Project →
             </Link>
-            <a
-              href="https://drive.google.com/drive/folders/1xjoTpewKi2WMFEBPEWyVMqco8k_aVIhK?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 border border-white/20 hover:border-yellow-500 text-white font-semibold rounded-full text-sm tracking-wide transition-all duration-300 text-center w-full sm:w-auto"
-            >
-              View Portfolio
-            </a>
           </div>
         </div>
       </div>

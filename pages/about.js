@@ -1,10 +1,48 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import MediaSection from "../components/MediaSection";
+
+// ------------------- Hero Reveal -------------------
+function HeroReveal({ children, delay = 0 }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, filter: "blur(5px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// ------------------- Scroll Reveal -------------------
+function ScrollReveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { margin: "0px 0px -50px 0px", once: true });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30, filter: "blur(5px)" }}
+      animate={
+        inView
+          ? {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: { delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+            }
+          : {}
+      }
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 export default function About() {
 
@@ -63,43 +101,35 @@ export default function About() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-5xl mt-8">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm"
-          >
-            Since 2020
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] md:leading-[0.9] mb-8"
-          >
-            Turning <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Vision</span> into <br className="hidden md:block" />
-            Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Reality</span>.
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="flex justify-center gap-8 md:gap-12 mt-12 items-center flex-wrap"
-          >
-            <div className="text-center md:text-left w-[40%] md:w-auto">
-              <p className="text-3xl font-bold text-white">200+</p>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">Projects</p>
+          <HeroReveal>
+            <p className="text-yellow-500 font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
+              Since 2020
+            </p>
+          </HeroReveal>
+          <HeroReveal delay={0.1}>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] md:leading-[0.9] mb-8">
+              Turning <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Vision</span> into <br className="hidden md:block" />
+              Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Reality</span>.
+            </h1>
+          </HeroReveal>
+          <HeroReveal delay={0.2}>
+            <div className="flex justify-center gap-8 md:gap-12 mt-12 items-center flex-wrap">
+              <div className="text-center md:text-left w-[40%] md:w-auto">
+                <p className="text-3xl font-bold text-white">200+</p>
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">Projects</p>
+              </div>
+              <div className="hidden md:block w-px h-12 bg-white/10" />
+              <div className="text-center md:text-left w-[40%] md:w-auto">
+                <p className="text-3xl font-bold text-white">30+</p>
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">Experts</p>
+              </div>
+              <div className="hidden md:block w-px h-12 bg-white/10" />
+              <div className="text-center md:text-left w-full md:w-auto mt-4 md:mt-0">
+                <p className="text-3xl font-bold text-white">6Y+</p>
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">Experience</p>
+              </div>
             </div>
-            <div className="hidden md:block w-px h-12 bg-white/10" />
-            <div className="text-center md:text-left w-[40%] md:w-auto">
-              <p className="text-3xl font-bold text-white">30+</p>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">Experts</p>
-            </div>
-            <div className="hidden md:block w-px h-12 bg-white/10" />
-            <div className="text-center md:text-left w-full md:w-auto mt-4 md:mt-0">
-              <p className="text-3xl font-bold text-white">6Y+</p>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mt-1">Experience</p>
-            </div>
-          </motion.div>
+          </HeroReveal>
         </div>
       </section>
 

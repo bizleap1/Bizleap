@@ -203,21 +203,21 @@ export default function Navbar() {
                                   {/* Founder Sub-submenu (Desktop) */}
                                   <AnimatePresence>
                                     {founderOpen && (
-                                      <motion.div
-                                        className="absolute top-0 left-full ml-0.5 w-60 bg-black/95 backdrop-blur-sm rounded-lg shadow-lg py-2 z-50"
-                                        initial={{ opacity: 0, x: -10 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -10 }}
-                                        transition={{ duration: 0.2 }}
-                                      >
-                                        {subItem.subItems.map((child) => (
-                                          <Link
-                                            key={child.name}
-                                            href={child.href}
-                                            className="block px-4 py-3 hover:bg-gray-800/50 transition-colors duration-200"
-                                          >
-                                            {child.name}
-                                          </Link>
+                                        <motion.div
+                                          className="absolute top-0 right-full mr-0.5 w-max min-w-[200px] bg-black/95 backdrop-blur-sm rounded-lg shadow-lg py-2 z-50"
+                                          initial={{ opacity: 0, x: 10 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          exit={{ opacity: 0, x: 10 }}
+                                          transition={{ duration: 0.2 }}
+                                        >
+                                          {subItem.subItems.map((child) => (
+                                            <Link
+                                              key={child.name}
+                                              href={child.href}
+                                              className="block px-4 py-3 hover:bg-gray-800/50 transition-colors duration-200 whitespace-nowrap"
+                                            >
+                                              {child.name}
+                                            </Link>
                                         ))}
                                       </motion.div>
                                     )}
