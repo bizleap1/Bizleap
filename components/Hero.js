@@ -96,7 +96,7 @@ export default function Hero() {
 
       {/* Hero Text */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pointer-events-auto flex flex-col justify-start md:justify-center md:h-full">
-        <div className="max-w-3xl space-y-6 md:space-y-8 mt-12 md:mt-0">
+        <div className="max-w-3xl space-y-6 md:space-y-8 mt-4 md:-mt-16">
           <div className="md:hidden flex items-center gap-3 mb-[-10px]">
             <div className="w-8 h-[1px] bg-white"></div>
             <span className="text-white text-[10px] font-bold tracking-[0.2em] uppercase">Premium Digital Agency</span>
