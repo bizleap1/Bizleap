@@ -81,7 +81,7 @@ export default function Hero() {
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           className="absolute top-0 left-0 w-[50vh] h-[50vh] md:w-[70vh] md:h-[70vh] bg-yellow-400 rounded-full blur-[120px] md:blur-[150px] mix-blend-screen"
         />
-        
+
         {/* Secondary Yellow Glow */}
         <motion.div
           animate={{
@@ -94,32 +94,28 @@ export default function Hero() {
         />
       </div>
 
-      {/* Hero Content — Aligned with Navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20">
-        <div className="max-w-4xl mt-6 space-y-6 md:space-y-8">
-          <h1
-            ref={headlineRef}
-            className={`headline text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.08] text-white tracking-tight ${playfair.className}`}
-          >
-            Bizleap – Where Brands Leap Forward
+      {/* Hero Text */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pointer-events-auto flex flex-col justify-start md:justify-center md:h-full">
+        <div className="max-w-3xl space-y-6 md:space-y-8 mt-12 md:mt-0">
+          <div className="md:hidden flex items-center gap-3 mb-[-10px]">
+            <div className="w-8 h-[1px] bg-white"></div>
+            <span className="text-white text-[10px] font-bold tracking-[0.2em] uppercase">Premium Digital Agency</span>
+          </div>
+          <h1 ref={headlineRef} className={`headline text-5xl sm:text-7xl md:text-7xl lg:text-[5rem] font-bold leading-[1.25] md:leading-[1.15] text-white tracking-tight ${playfair.className} text-left`}>
+            Bizleap – Where Brands Leap <br /> Forward
           </h1>
-
-          <p
-            ref={subtextRef}
-            className={`subtext max-w-xl text-base sm:text-lg md:text-xl text-white/60 font-light leading-relaxed ${inter.className}`}
-          >
+          <p ref={subtextRef} className={`subtext max-w-xl text-base md:text-xl text-white/70 md:text-white/80 font-light leading-relaxed md:leading-relaxed ${inter.className} text-left`}>
             We craft digital experiences that captivate, convert, and scale your brand.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4 sm:items-center">
             <Link href="/contact" className="z-30 w-full sm:w-auto">
-              <button className="hero-button w-full bg-white text-black px-8 py-3.5 rounded-full font-semibold text-base hover:bg-yellow-400 transition-all duration-300">
-                Get Started
+              <button className="hero-button w-full sm:w-auto bg-white text-black px-8 py-4 md:py-3.5 rounded-sm md:rounded-full font-bold md:font-semibold text-[13px] md:text-base uppercase tracking-widest md:tracking-normal hover:bg-yellow-400 transition-all duration-300 flex justify-center items-center gap-2">
+                Get Started <span className="md:hidden font-light text-lg leading-none mt-[-2px]">&#8594;</span>
               </button>
             </Link>
-
-            <Link href="/about" className="z-30 w-full sm:w-auto">
-              <button className="hero-button w-full border border-white/20 text-white px-8 py-3.5 rounded-full font-semibold text-base hover:bg-white hover:text-black transition-all duration-300">
+            <Link href="/work" className="z-30 w-full sm:w-auto">
+              <button className="hero-button w-full sm:w-auto border border-white/20 text-white px-8 py-4 md:py-3.5 rounded-sm md:rounded-full font-bold md:font-semibold text-[13px] md:text-base uppercase tracking-widest md:tracking-normal hover:bg-white hover:text-black transition-all duration-300">
                 Explore Our Work
               </button>
             </Link>
