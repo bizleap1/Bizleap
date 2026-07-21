@@ -8,7 +8,7 @@ ABOUT BIZLEAP:
 - Tagline: "Where Brands Leap Forward" – Driven by Design, Backed by Results.
 - Founded: Started in 2020 from scratch with no initial investments.
 - Team: A squad of 30+ passionate creatives, developers, and strategists who treat every brand like it's their own.
-- Founders: Akshat Soni (Co-founder & CEO, Revenue Growth Strategist) and Kaushal Banginwar (Co-founder & CTO, Strategic Digital Marketing Visionary).
+- Founders: Akshat Soni (Co-founder & CEO, Revenue Growth Strategist) and Kaushal B (Co-founder & CTO, Strategic Digital Marketing Visionary).
 - Experience: 6+ years of expertise.
 - Track Record: 200+ projects completed with a diverse portfolio of clients.
 - Locations: Nagpur (Headquarters) with global reach (Dubai, London, New York).

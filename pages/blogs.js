@@ -12,7 +12,7 @@ const BLOGS_DATA = [
     category: "AI & Tech",
     date: "May 18, 2026",
     readTime: "6 min read",
-    author: "Kaushal Banginwar",
+    author: "Kaushal B",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
@@ -52,7 +52,7 @@ const BLOGS_DATA = [
     category: "AI & Tech",
     date: "June 14, 2026",
     readTime: "7 min read",
-    author: "Kaushal Banginwar",
+    author: "Kaushal B",
     image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
@@ -212,7 +212,7 @@ const BLOGS_DATA = [
     category: "Marketing",
     date: "June 02, 2026",
     readTime: "8 min read",
-    author: "Kaushal Banginwar",
+    author: "Kaushal B",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">

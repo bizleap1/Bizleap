@@ -139,8 +139,8 @@ export default function KaushalProfile() {
   return (
     <div className="bg-[#050505] text-white font-sans selection:bg-brand-accent/40 selection:text-black min-h-screen relative">
       <Head>
-        <title key="title">Kaushal Banginwar | Co-founder & CTO</title>
-        <meta name="description" content="Official portfolio of Kaushal Banginwar - A premium founder and digital marketing visionary." key="description" />
+        <title key="title">Kaushal B | Co-founder & CTO</title>
+        <meta name="description" content="Official portfolio of Kaushal B - A premium founder and digital marketing visionary." key="description" />
         <meta name="keywords" content="kaushal banginwar, bizleap cto, co-founder kaushal" />
         <link rel="canonical" href="https://bizleap.in/kaushal" />
         <script
@@ -149,7 +149,7 @@ export default function KaushalProfile() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              "name": "Kaushal Banginwar",
+              "name": "Kaushal B",
               "jobTitle": "Co-founder & CTO",
               "description": "Strategic digital marketing visionary and Co-founder of Bizleap. Expert in automotive, hospitality, and healthcare marketing.",
               "image": "https://bizleap.in/team/77.png",
@@ -228,9 +228,9 @@ export default function KaushalProfile() {
               className="space-y-4"
             >
               <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] font-serif font-bold leading-[1.05] tracking-tight">
-                Kaushal <br />
+                Kaushal{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-amber-200 to-amber-600 italic pr-4">
-                  Banginwar
+                  B
                 </span>
               </h1>
               <p className="max-w-xl text-base md:text-lg text-white/50 leading-relaxed font-light mt-6">
@@ -253,12 +253,12 @@ export default function KaushalProfile() {
                 View Work
               </Link>
               <div className="flex gap-2 ml-auto lg:ml-4">
-                <Link href="#" className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent hover:border-brand-accent transition-all group backdrop-blur-sm">
-                  <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </Link>
-                <Link href="#" className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent hover:border-brand-accent transition-all group backdrop-blur-sm">
-                  <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                </Link>
+                <div className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 backdrop-blur-sm cursor-default">
+                  <Linkedin className="w-5 h-5" />
+                </div>
+                <div className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 backdrop-blur-sm cursor-default">
+                  <Instagram className="w-5 h-5" />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -276,7 +276,7 @@ export default function KaushalProfile() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80 mix-blend-multiply" />
                 <Image
                   src="/team/kaushal banginwar.png"
-                  alt="Kaushal Banginwar"
+                  alt="Kaushal B"
                   fill
                   className="object-cover object-top filter contrast-[1.1] grayscale-[0.2] transition-all duration-700 group-hover:grayscale-0"
                   priority
@@ -368,7 +368,7 @@ export default function KaushalProfile() {
                 <div className="relative w-full max-w-[400px] mx-auto aspect-[4/5] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-white/5">
                   <Image
                     src="/kaushal banginwar.JPEG"
-                    alt="Kaushal Banginwar Story"
+                    alt="Kaushal B Story"
                     fill
                     className="object-cover"
                     priority

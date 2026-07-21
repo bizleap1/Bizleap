@@ -33,6 +33,11 @@ export default function Navbar() {
     { name: "Social Media Marketing", href: "/socialmedia" },
     { name: "SEO & Website Audits", href: "/seowebsite" },
     { name: "AI Services", href: "/aiservices" },
+    { name: "Staffing Services", href: "/staffing" },
+    { name: "Contract Staffing", href: "/contract-staffing" },
+    { name: "Permanent Placement", href: "/permanent-placement" },
+    { name: "Contract To Hire", href: "/contract-to-hire" },
+    { name: "Remote Staffing", href: "/remote-staffing" },
   ]
 
   const teamSubmenu = [
@@ -41,7 +46,7 @@ export default function Navbar() {
       href: "#",
       subItems: [
         { name: "Akshat Soni", href: "/akshat" },
-        { name: "Kaushal Banginwar", href: "/kaushal" },
+        { name: "Kaushal B", href: "/kaushal" },
       ]
     },
     { name: "Our Team", href: "/team" },

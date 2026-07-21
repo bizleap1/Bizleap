@@ -55,7 +55,7 @@ const founders = [
     page: "/akshat"
   },
   {
-    name: "Kaushal Banginwar",
+    name: "Kaushal B",
     role: "Co-Founder & CTO",
     image: "/team/kaushal banginwar.png",
     linkedin: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiL7MTnq6iQAxUJ1TgGHaIeOs8QFnoECBoQAQ&url=https%3A%2F%2Fin.linkedin.com%2Fin%2Fkaushalbanginwar&usg=AOvVaw2kTuQvtbZNzZ1X_6KSLhjW&opi=89978449",
@@ -304,7 +304,7 @@ export default function Team() {
               "url": "https://bizleap.in",
               "member": [
                 { "@type": "Person", "name": "Akshat Soni", "jobTitle": "Co-Founder & CEO", "url": "https://bizleap.in/akshat" },
-                { "@type": "Person", "name": "Kaushal Banginwar", "jobTitle": "Co-Founder & CTO", "url": "https://bizleap.in/kaushal" }
+                { "@type": "Person", "name": "Kaushal B", "jobTitle": "Co-Founder & CTO", "url": "https://bizleap.in/kaushal" }
               ]
             }
           })
@@ -389,25 +389,39 @@ export default function Team() {
                 </p>
 
                 <div className="flex justify-center gap-4">
-                  <motion.a
-                    href={person.linkedin}
-                    target="_blank"
-                    className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </motion.a>
-                  <motion.a
-                    href={person.instagram}
-                    target="_blank"
-                    className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Instagram className="w-5 h-5" />
-                  </motion.a>
-
+                  {person.name === "Kaushal B" ? (
+                    <>
+                      <div className="p-2 bg-zinc-800 rounded-lg text-white cursor-default" onClick={(e) => e.stopPropagation()}>
+                        <Linkedin className="w-5 h-5" />
+                      </div>
+                      <div className="p-2 bg-zinc-800 rounded-lg text-white cursor-default" onClick={(e) => e.stopPropagation()}>
+                        <Instagram className="w-5 h-5" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <motion.a
+                        href={person.linkedin}
+                        target="_blank"
+                        className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </motion.a>
+                      <motion.a
+                        href={person.instagram}
+                        target="_blank"
+                        className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Instagram className="w-5 h-5" />
+                      </motion.a>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>

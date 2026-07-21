@@ -51,6 +51,41 @@ const SERVICES_LIST = [
     url: "/aiservices",
     description: "We integrate cutting-edge AI into your business workflows."
   },
+  {
+    name: "Staffing Services",
+    tags: ["Recruitment", "Talent Acquisition"],
+    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1400",
+    url: "/staffing",
+    description: "End-to-end staffing solutions to help you build your dream team."
+  },
+  {
+    name: "Contract Staffing",
+    tags: ["Temporary", "Short-term"],
+    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1400",
+    url: "/contract-staffing",
+    description: "Flexible, short-term talent for your project-based needs."
+  },
+  {
+    name: "Permanent Placement",
+    tags: ["Full-time", "Long-term"],
+    img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=1400",
+    url: "/permanent-placement",
+    description: "Dedicated professionals committed to your long-term success."
+  },
+  {
+    name: "Contract To Hire",
+    tags: ["Evaluation", "Trial to Full-time"],
+    img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1400",
+    url: "/contract-to-hire",
+    description: "Evaluate talent on the job before making a permanent commitment."
+  },
+  {
+    name: "Remote Staffing",
+    tags: ["Global Talent", "Work from Anywhere"],
+    img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=1400",
+    url: "/remote-staffing",
+    description: "Access a global pool of remote experts for your business."
+  },
 ];
 
 export default function ServicesSection() {
@@ -82,8 +117,6 @@ export default function ServicesSection() {
               
               const isCenter = normalizedOffset === 0;
               const isVisible = Math.abs(normalizedOffset) <= 1;
-
-              if (Math.abs(normalizedOffset) > 2) return null;
 
               return (
                 <motion.div
