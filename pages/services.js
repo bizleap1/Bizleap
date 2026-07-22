@@ -90,38 +90,6 @@ const SERVICES = [
     description:
       "End-to-end staffing solutions to help you build your dream team. We specialize in finding the right candidates to match your company's culture and needs.",
   },
-  {
-    name: "Contract Staffing",
-    tags: ["Temporary", "Short-term", "Project-based", "Agile Workforce"],
-    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1400",
-    url: "/contract-staffing",
-    description:
-      "Flexible, short-term talent for your project-based needs. Scale your workforce up or down based on your current business demands without long-term commitments.",
-  },
-  {
-    name: "Permanent Placement",
-    tags: ["Full-time", "Long-term", "Career", "Direct Hire"],
-    img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=1400",
-    url: "/permanent-placement",
-    description:
-      "Dedicated professionals committed to your long-term success. We help you find full-time employees who will grow with your business and contribute to your vision.",
-  },
-  {
-    name: "Contract To Hire",
-    tags: ["Evaluation", "Trial to Full-time", "Temp-to-perm"],
-    img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1400",
-    url: "/contract-to-hire",
-    description:
-      "Evaluate talent on the job before making a permanent commitment. Ensure the candidate is the perfect fit for your team before transitioning them to a full-time role.",
-  },
-  {
-    name: "Remote Staffing",
-    tags: ["Global Talent", "Work from Anywhere", "Virtual Teams", "Offshore"],
-    img: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&q=80&w=1400",
-    url: "/remote-staffing",
-    description:
-      "Access a global pool of remote experts for your business. Build a highly skilled virtual team that can collaborate across time zones and deliver exceptional results.",
-  },
 ];
 
 // ------------------- Final Section -------------------
@@ -159,11 +127,7 @@ export default function ServicesSection() {
                 { "@type": "ListItem", "position": 3, "name": "SEO & Website Audits", "url": "https://bizleap.in/seowebsite" },
                 { "@type": "ListItem", "position": 4, "name": "Social Media Marketing", "url": "https://bizleap.in/socialmedia" },
                 { "@type": "ListItem", "position": 5, "name": "AI Services", "url": "https://bizleap.in/aiservices" },
-                { "@type": "ListItem", "position": 6, "name": "Staffing Services", "url": "https://bizleap.in/staffing" },
-                { "@type": "ListItem", "position": 7, "name": "Contract Staffing", "url": "https://bizleap.in/contract-staffing" },
-                { "@type": "ListItem", "position": 8, "name": "Permanent Placement", "url": "https://bizleap.in/permanent-placement" },
-                { "@type": "ListItem", "position": 9, "name": "Contract To Hire", "url": "https://bizleap.in/contract-to-hire" },
-                { "@type": "ListItem", "position": 10, "name": "Remote Staffing", "url": "https://bizleap.in/remote-staffing" }
+                { "@type": "ListItem", "position": 6, "name": "Staffing Services", "url": "https://bizleap.in/staffing" }
               ]
             }
           })

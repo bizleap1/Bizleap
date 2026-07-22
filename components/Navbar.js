@@ -16,6 +16,7 @@ export default function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [teamOpen, setTeamOpen] = useState(false)
   const [founderOpen, setFounderOpen] = useState(false)
+  const [staffingOpen, setStaffingOpen] = useState(false)
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -33,11 +34,16 @@ export default function Navbar() {
     { name: "Social Media Marketing", href: "/socialmedia" },
     { name: "SEO & Website Audits", href: "/seowebsite" },
     { name: "AI Services", href: "/aiservices" },
-    { name: "Staffing Services", href: "/staffing" },
-    { name: "Contract Staffing", href: "/contract-staffing" },
-    { name: "Permanent Placement", href: "/permanent-placement" },
-    { name: "Contract To Hire", href: "/contract-to-hire" },
-    { name: "Remote Staffing", href: "/remote-staffing" },
+    { 
+      name: "Staffing Services", 
+      href: "/staffing",
+      subItems: [
+        { name: "Contract Staffing", href: "/contract-staffing" },
+        { name: "Permanent Placement", href: "/permanent-placement" },
+        { name: "Contract To Hire", href: "/contract-to-hire" },
+        { name: "Remote Staffing", href: "/remote-staffing" },
+      ]
+    },
   ]
 
   const teamSubmenu = [
@@ -135,21 +141,62 @@ export default function Navbar() {
                           onMouseLeave={() => setServicesOpen(false)}
                         >
                           {serviceSubmenu.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block px-4 py-3 hover:bg-gray-800/50 transition-colors duration-200"
-                            >
-                              <span className="relative">
-                                {subItem.name}
-                                <motion.span
-                                  className="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 rounded"
-                                  initial={{ scaleX: 0 }}
-                                  whileHover={{ scaleX: 1 }}
-                                  transition={{ duration: 0.3 }}
-                                />
-                              </span>
-                            </Link>
+                            <div key={subItem.name} className="relative group/sub">
+                              {subItem.subItems ? (
+                                <div 
+                                  className="relative"
+                                  onMouseEnter={() => setStaffingOpen(true)}
+                                  onMouseLeave={() => setStaffingOpen(false)}
+                                >
+                                  <div 
+                                    className="flex items-center justify-between px-4 py-3 hover:bg-gray-800/50 transition-colors duration-200 cursor-pointer"
+                                    onClick={() => router.push(subItem.href)}
+                                  >
+                                    <span className="relative">
+                                      {subItem.name}
+                                    </span>
+                                    <FiChevronDown className="rotate-[-90deg] w-4 h-4" />
+                                  </div>
+                                  
+                                  <AnimatePresence>
+                                    {staffingOpen && (
+                                        <motion.div
+                                          className="absolute top-0 left-full ml-0.5 w-max min-w-[200px] bg-black/95 backdrop-blur-sm rounded-lg shadow-lg py-2 z-50"
+                                          initial={{ opacity: 0, x: -10 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          exit={{ opacity: 0, x: -10 }}
+                                          transition={{ duration: 0.2 }}
+                                        >
+                                          {subItem.subItems.map((child) => (
+                                            <Link
+                                              key={child.name}
+                                              href={child.href}
+                                              className="block px-4 py-3 hover:bg-gray-800/50 transition-colors duration-200 whitespace-nowrap"
+                                            >
+                                              {child.name}
+                                            </Link>
+                                        ))}
+                                      </motion.div>
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                              ) : (
+                                <Link
+                                  href={subItem.href}
+                                  className="block px-4 py-3 hover:bg-gray-800/50 transition-colors duration-200"
+                                >
+                                  <span className="relative">
+                                    {subItem.name}
+                                    <motion.span
+                                      className="absolute left-0 bottom-0 w-full h-0.5 bg-yellow-500 rounded"
+                                      initial={{ scaleX: 0 }}
+                                      whileHover={{ scaleX: 1 }}
+                                      transition={{ duration: 0.3 }}
+                                    />
+                                  </span>
+                                </Link>
+                              )}
+                            </div>
                           ))}
                         </motion.div>
                       )}
@@ -340,17 +387,67 @@ export default function Navbar() {
                           transition={{ duration: 0.2 }}
                         >
                           {serviceSubmenu.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block px-4 py-2 text-gray-300 hover:bg-gray-800 rounded"
-                              onClick={() => {
-                                setMenuOpen(false)
-                                setServicesOpen(false)
-                              }}
-                            >
-                              {subItem.name}
-                            </Link>
+                            <div key={subItem.name}>
+                              {subItem.subItems ? (
+                                <div>
+                                  <div className="flex items-center">
+                                    <Link
+                                      href={subItem.href}
+                                      className="flex-1 text-left px-4 py-2 text-gray-300 hover:bg-gray-800 rounded"
+                                      onClick={() => {
+                                        setMenuOpen(false)
+                                        setServicesOpen(false)
+                                      }}
+                                    >
+                                      {subItem.name}
+                                    </Link>
+                                    <button
+                                      className="px-3 py-2 text-gray-300"
+                                      onClick={() => setStaffingOpen(!staffingOpen)}
+                                    >
+                                      <FiChevronDown className={`transition-transform duration-200 ${staffingOpen ? 'rotate-180' : ''}`} />
+                                    </button>
+                                  </div>
+                                  
+                                  <AnimatePresence>
+                                    {staffingOpen && (
+                                      <motion.div
+                                        className="ml-8 mt-1 space-y-1 border-l border-gray-600 pl-2"
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                      >
+                                        {subItem.subItems.map((child) => (
+                                          <Link
+                                            key={child.name}
+                                            href={child.href}
+                                            className="block px-4 py-2 text-gray-400 hover:bg-gray-800 rounded"
+                                            onClick={() => {
+                                              setMenuOpen(false)
+                                              setServicesOpen(false)
+                                              setStaffingOpen(false)
+                                            }}
+                                          >
+                                            {child.name}
+                                          </Link>
+                                        ))}
+                                      </motion.div>
+                                    )}
+                                  </AnimatePresence>
+                                </div>
+                              ) : (
+                                <Link
+                                  href={subItem.href}
+                                  className="block px-4 py-2 text-gray-300 hover:bg-gray-800 rounded"
+                                  onClick={() => {
+                                    setMenuOpen(false)
+                                    setServicesOpen(false)
+                                  }}
+                                >
+                                  {subItem.name}
+                                </Link>
+                              )}
+                            </div>
                           ))}
                         </motion.div>
                       )}

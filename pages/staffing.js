@@ -39,16 +39,26 @@ function ScrollReveal({ children, delay = 0 }) {
 }
 
 // ------------------- Service Card Component -------------------
-function ServiceCard({ icon: Icon, title, description, delay }) {
+function ServiceCard({ icon: Icon, title, description, delay, href }) {
+  const CardContent = (
+    <div className="group p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-yellow-500/30 transition-all duration-300 h-full flex flex-col">
+      <div className="w-14 h-14 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+        {Icon && <Icon className="w-7 h-7 text-yellow-500" />}
+      </div>
+      <h3 className="text-2xl font-semibold mb-4 group-hover:text-yellow-400 transition-colors">{title}</h3>
+      <p className="text-gray-400 leading-relaxed flex-1">{description}</p>
+    </div>
+  );
+
   return (
     <ScrollReveal delay={delay}>
-      <div className="group p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-yellow-500/30 transition-all duration-300 h-full flex flex-col">
-        <div className="w-14 h-14 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-          {Icon && <Icon className="w-7 h-7 text-yellow-500" />}
-        </div>
-        <h3 className="text-2xl font-semibold mb-4 group-hover:text-yellow-400 transition-colors">{title}</h3>
-        <p className="text-gray-400 leading-relaxed flex-1">{description}</p>
-      </div>
+      {href ? (
+        <Link href={href} className="block h-full cursor-pointer">
+          {CardContent}
+        </Link>
+      ) : (
+        CardContent
+      )}
     </ScrollReveal>
   )
 }
@@ -57,39 +67,31 @@ export default function StaffingServicesPage() {
   const aiFeatures = [
     {
       icon: FiStar,
-      title: "Executive Search",
-      description: "Identify and recruit top-level leadership for your organization.",
+      title: "Contract Staffing",
+      description: "Flexible, short-term talent for your project-based needs.",
+      href: "/contract-staffing",
       delay: 0.1
     },
     {
       icon: FiStar,
-      title: "Talent Screening",
-      description: "Rigorous vetting processes to ensure candidates meet your high standards.",
+      title: "Permanent Placement",
+      description: "Dedicated professionals committed to your long-term success.",
+      href: "/permanent-placement",
       delay: 0.2
     },
     {
       icon: FiStar,
-      title: "Cultural Alignment",
-      description: "Matching candidates not just on skills, but on company culture fit.",
-      delay: 0.30000000000000004
+      title: "Contract To Hire",
+      description: "Evaluate talent on the job before making a permanent commitment.",
+      href: "/contract-to-hire",
+      delay: 0.3
     },
     {
       icon: FiStar,
-      title: "Rapid Onboarding",
-      description: "Streamlined processes to get your new hires productive faster.",
+      title: "Remote Staffing",
+      description: "Access a global pool of remote experts for your business.",
+      href: "/remote-staffing",
       delay: 0.4
-    },
-    {
-      icon: FiStar,
-      title: "Diversity Hiring",
-      description: "Building inclusive teams with diverse backgrounds and perspectives.",
-      delay: 0.5
-    },
-    {
-      icon: FiStar,
-      title: "Market Insights",
-      description: "Data-driven salary benchmarking and talent market analysis.",
-      delay: 0.6000000000000001
     }
   ]
 
@@ -221,7 +223,7 @@ export default function StaffingServicesPage() {
               </div>
             </ScrollReveal>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {aiFeatures.map((feature, index) => (
                 <ServiceCard key={index} {...feature} />
               ))}
