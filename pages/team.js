@@ -67,7 +67,7 @@ const founders = [
 const team = [
 
   {
-    name: "Samir Thumbe",
+    name: "Samir Thube",
     role: "CFO",
     image: "/team/sameer.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
@@ -186,7 +186,7 @@ const team = [
   },
 
   {
-    name: "Kalyani Banginwar",
+    name: "Kalyani",
     role: "UI UX Designer",
     image: "/team/kalyani banginwar.png",
     style: { objectPosition: "center 20%", transform: "scale(1.2)" },
