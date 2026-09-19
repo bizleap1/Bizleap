@@ -86,9 +86,9 @@ const team = [
   },
 
   {
-    name: "Yash Bampattiwar",
+    name: "Yash Pampattiwar",
     role: "Senior Technical Consultant",
-    image: "/team/Yash Bampattiwar.png",
+    image: "/team/Yash pampattiwar.png",
     style: { objectPosition: "center 5%", transform: "scale(1.1)" },
     size: "h-44 w-44",
     linkedin: "https://www.linkedin.com/in/yash-pampattiwar?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
