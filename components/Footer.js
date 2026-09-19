@@ -2,16 +2,20 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FaInstagram, FaLinkedin, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 
-const navLinks = [
+const companyLinks = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
+  { name: "About Us", href: "/about" },
   { name: "Our Work", href: "/work" },
+  { name: "Contact", href: "/contact" },
+];
+
+const resourceLinks = [
+  { name: "Services", href: "/services" },
   { name: "Blogs", href: "/blogs" },
   { name: "Creators", href: "/creators" },
-  { name: "About Us", href: "/about" },
-  { name: "Contact", href: "/contact" },
 ];
 
 const services = [
@@ -23,13 +27,17 @@ const services = [
 ];
 
 const Footer = () => {
+  const router = useRouter();
+  const isContactPage = router.pathname === '/contact';
+
   return (
     <footer className="relative bg-[#050505] text-gray-400 overflow-hidden">
       {/* Top yellow glow accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Big CTA band */}
+      {/* Big CTA band (Hidden on Contact Page) */}
+      {!isContactPage && (
       <div className="border-b border-white/5 py-16 md:py-20 px-6 md:px-12">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 text-center lg:text-left">
           <div className="space-y-4 max-w-xl">
@@ -49,52 +57,72 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      )}
 
       {/* Main footer grid */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-16">
 
           {/* Brand column */}
-          <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="group w-40 h-12 relative">
+          <div className="md:col-span-2 space-y-6">
+            <Link href="/" className="block relative w-48 h-12">
               <Image
-src="/logo.png"
+                src="/logo.png"
                 alt="Bizleap"
                 fill
-className="object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-300 hover:drop-shadow-xl"
+                className="object-contain object-left"
                 priority
               />
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
               Where brands leap forward. Driven by design. Backed by results.
             </p>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-4 pt-2">
               {[
-                { icon: <FaInstagram size={16} />, href: "https://www.instagram.com/bizleap.in/reels/" },
-                { icon: <FaLinkedin size={16} />, href: "https://www.linkedin.com/company/bizleapinc" },
-                { icon: <FaXTwitter size={16} />, href: "#" },
-                { icon: <FaYoutube size={16} />, href: "#" },
+                { icon: <FaInstagram size={18} />, href: "https://www.instagram.com/bizleap.in/reels/" },
+                { icon: <FaLinkedin size={18} />, href: "https://www.linkedin.com/company/bizleapinc" },
+                { icon: <FaXTwitter size={18} />, href: "#" },
+                { icon: <FaYoutube size={18} />, href: "#" },
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center text-gray-500 hover:border-yellow-500 hover:text-yellow-500 hover:bg-yellow-500/10 transition-all duration-300"
+                  className="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:border-[#E5A900] hover:text-[#E5A900] hover:bg-[#E5A900]/10 transition-all duration-300"
                 >
                   {social.icon}
                 </a>
               ))}
             </div>
+            <div className="pt-2">
+               <a href="mailto:bizleapinc@gmail.com" className="text-sm font-medium text-gray-400 hover:text-[#E5A900] transition-colors">
+                  bizleapinc@gmail.com
+               </a>
+            </div>
           </div>
 
           {/* Company links */}
-          <div className="lg:col-span-2 space-y-5">
+          <div className="md:col-span-1 space-y-6">
             <h4 className="text-white font-semibold text-[11px] uppercase tracking-[0.2em]">Company</h4>
-            <ul className="space-y-3">
-              {navLinks.map((link, i) => (
+            <ul className="space-y-4">
+              {companyLinks.map((link, i) => (
                 <li key={i}>
-                  <Link href={link.href} className="text-gray-400 text-sm hover:text-yellow-400 transition-colors duration-200 hover:translate-x-1 inline-block">
+                  <Link href={link.href} className="text-gray-400 text-sm hover:text-[#E5A900] transition-colors duration-200 hover:translate-x-1 inline-block">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources links */}
+          <div className="md:col-span-1 space-y-6">
+            <h4 className="text-white font-semibold text-[11px] uppercase tracking-[0.2em]">Resources</h4>
+            <ul className="space-y-4">
+              {resourceLinks.map((link, i) => (
+                <li key={i}>
+                  <Link href={link.href} className="text-gray-400 text-sm hover:text-[#E5A900] transition-colors duration-200 hover:translate-x-1 inline-block">
                     {link.name}
                   </Link>
                 </li>
@@ -103,12 +131,12 @@ className="object-contain drop-shadow-lg group-hover:scale-110 transition-transf
           </div>
 
           {/* Services links */}
-          <div className="lg:col-span-2 space-y-5">
+          <div className="md:col-span-1 space-y-6">
             <h4 className="text-white font-semibold text-[11px] uppercase tracking-[0.2em]">Services</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {services.map((s, i) => (
                 <li key={i}>
-                  <Link href={s.href} className="text-gray-400 text-sm hover:text-yellow-400 transition-colors duration-200 hover:translate-x-1 inline-block">
+                  <Link href={s.href} className="text-gray-400 text-sm hover:text-[#E5A900] transition-colors duration-200 hover:translate-x-1 inline-block">
                     {s.name}
                   </Link>
                 </li>
@@ -116,34 +144,6 @@ className="object-contain drop-shadow-lg group-hover:scale-110 transition-transf
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div className="lg:col-span-4 space-y-5">
-            <h4 className="text-white font-semibold text-[11px] uppercase tracking-[0.2em]">Stay in the loop</h4>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Get insights on brand building, design trends, and growth strategies. No spam.
-            </p>
-            <form className="space-y-3" onSubmit={e => e.preventDefault()}>
-              <div className="flex border border-gray-800 rounded-xl overflow-hidden focus-within:border-yellow-500 transition-all duration-300 bg-white/[0.02]">
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  className="bg-transparent px-4 py-3 text-sm text-white placeholder-gray-600 flex-1 outline-none"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="shrink-0 px-4 sm:px-5 py-3 bg-yellow-500 hover:bg-yellow-400 text-black text-[11px] sm:text-xs font-bold tracking-wider transition-colors duration-200 whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </form>
-            <div className="flex items-center gap-2 pt-1">
-              <a href="mailto:bizleapinc@gmail.com" className="text-xs text-gray-500 hover:text-yellow-400 transition-colors">
-                bizleapinc@gmail.com
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Bottom bar */}

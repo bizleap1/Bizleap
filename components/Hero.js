@@ -20,7 +20,13 @@ export default function Hero() {
       // Split headline into words for staggered reveal
       const headlineWords = headlineRef.current.innerText.split(" ");
       headlineRef.current.innerHTML = headlineWords
-        .map((word) => `<span class="word-wrapper inline-block overflow-hidden pb-1"><span class="word inline-block translate-y-full">${word}</span></span>`)
+        .map((word) => {
+          let extraClass = "";
+          if (word.includes("Brands") || word.includes("Leap")) {
+            extraClass = " text-[#E5A900] italic font-medium";
+          }
+          return `<span class="word-wrapper inline-block overflow-hidden pb-1"><span class="word inline-block translate-y-full${extraClass}">${word}</span></span>`;
+        })
         .join(" ");
 
       // Headline animation
@@ -78,7 +84,7 @@ export default function Hero() {
             y: ["-20vh", "-20vh", "80vh", "80vh", "-20vh"],
             opacity: [0.5, 0.7, 0.5, 0.7, 0.5],
           }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           className="absolute top-0 left-0 w-[50vh] h-[50vh] md:w-[70vh] md:h-[70vh] bg-yellow-400 rounded-full blur-[120px] md:blur-[150px] mix-blend-screen"
         />
 
@@ -89,20 +95,20 @@ export default function Hero() {
             y: ["80vh", "80vh", "-20vh", "-20vh", "80vh"],
             opacity: [0.4, 0.6, 0.4, 0.6, 0.4],
           }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute top-0 left-0 w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] bg-yellow-500 rounded-full blur-[130px] md:blur-[160px] mix-blend-screen"
         />
       </div>
 
       {/* Hero Text */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-20 pointer-events-auto flex flex-col justify-start md:justify-center md:h-full">
-        <div className="max-w-3xl space-y-6 md:space-y-8 mt-4 md:-mt-16">
+        <div className="max-w-4xl space-y-6 md:space-y-8 mt-12 md:mt-12">
           <div className="md:hidden flex items-center gap-3 mb-[-10px]">
             <div className="w-8 h-[1px] bg-white"></div>
             <span className="text-white text-[10px] font-bold tracking-[0.2em] uppercase">Premium Digital Agency</span>
           </div>
           <h1 ref={headlineRef} className={`headline text-5xl sm:text-7xl md:text-7xl lg:text-[5rem] font-bold leading-[1.25] md:leading-[1.15] text-white tracking-tight ${playfair.className} text-left`}>
-            Bizleap – Where Brands Leap <br /> Forward
+            Bizleap – Where <span className="text-[#E5A900] italic font-medium">Brands</span> <br className="hidden md:block" /> <span className="text-[#E5A900] italic font-medium">Leap</span> Forward
           </h1>
           <p ref={subtextRef} className={`subtext max-w-xl text-base md:text-xl text-white/70 md:text-white/80 font-light leading-relaxed md:leading-relaxed ${inter.className} text-left`}>
             We craft digital experiences that captivate, convert, and scale your brand.

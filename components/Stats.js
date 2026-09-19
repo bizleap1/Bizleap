@@ -5,87 +5,132 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { Playfair_Display, Inter } from "next/font/google";
 
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800", "900"] });
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400", "600", "700"] });
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500"] });
-
 
 export default function Stats() {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.3,
+    threshold: 0.2,
+    rootMargin: "-50px"
   });
 
   const stats = [
     {
       value: 200,
       suffix: "+",
-      label: "Projects Launched",
+      label: "Projects\nDelivered",
     },
     {
       value: 40,
       suffix: "%",
-      label: "Average Client Growth",
+      label: "Average Growth\nImpact",
     },
     {
       value: 6,
       suffix: "+",
-      label: "Years in the Game",
+      label: "Years Building\nDigital Brands",
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
   return (
-    <section ref={ref} className="py-16 md:py-24 px-6 md:px-12 bg-black text-white relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-0 left-1/4 w-[40vw] h-[40vw] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[30vw] h-[30vw] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+    <section className="py-16 md:py-24 bg-[#050505] text-white relative overflow-hidden">
+      {/* Subtle Noise Texture & Soft Radial Lighting */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
+      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-yellow-600/5 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* Heading Group */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
-        className="max-w-4xl mx-auto text-center relative z-10"
-      >
-        <h2 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 tracking-tighter leading-[1.1] ${playfair.className}`}>
-          Driven by <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Design</span>.<br /> 
-          Backed by <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Results</span>.
-        </h2>
-        <p className={`text-lg md:text-xl lg:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed ${inter.className}`}>
-          At <span className="text-white font-bold">BizLeap</span>, we don’t just make things look good — 
-          we create thoughtful design experiences that help businesses leap forward.
-        </p>
-      </motion.div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10" ref={ref}>
+        
+        {/* Header Section */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="max-w-4xl mx-auto text-center space-y-6"
+        >
+          <motion.div variants={itemVariants} className="flex items-center justify-center gap-3">
+            <div className="w-6 h-[1px] bg-white/30"></div>
+            <span className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase">Our Impact</span>
+            <div className="w-6 h-[1px] bg-white/30"></div>
+          </motion.div>
 
-      {/* STATS GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 max-w-6xl mx-auto mt-16 md:mt-24 relative z-10">
-        {stats.map((stat, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 + i * 0.1, ease: [0.19, 1, 0.22, 1] }}
-            className="relative group p-8 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:border-yellow-500/30 transition-all duration-500"
-          >
-            <div className="absolute -inset-1 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-<div className="relative">
-              <div className="text-4xl md:text-5xl font-black mb-4 tracking-tighter tabular-nums">
-                {inView && (
-                  <CountUp
-                    start={0}
-                    end={stat.value}
-                    duration={3}
-                    suffix={stat.suffix}
-                    useEasing={true}
-                  />
-                )}
+          <motion.h2 variants={itemVariants} className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] ${playfair.className}`}>
+            Creative thinking. Measurable <span className="text-[#E5A900] italic font-medium">growth.</span>
+          </motion.h2>
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div 
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={inView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          className="w-full mx-auto h-[1px] bg-white/10 my-12 origin-center"
+        />
+
+        {/* Statistics Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0 w-full mx-auto md:divide-x divide-white/10"
+        >
+          {stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className="relative flex flex-col items-center text-center px-6"
+            >
+              <div className="relative mb-6 flex flex-col items-center">
+                <div className={`text-5xl md:text-6xl lg:text-7xl font-medium tracking-tighter tabular-nums text-white ${playfair.className}`}>
+                  {inView ? (
+                    <CountUp
+                      start={0}
+                      end={stat.value}
+                      duration={2.5}
+                      useEasing={true}
+                    />
+                  ) : "0"}
+                  <span className="text-[#E5A900] font-light">{stat.suffix}</span>
+                </div>
+                
+                {/* Gold Accent Line */}
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 1, delay: 0.6 + i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-12 h-[1px] bg-[#E5A900] origin-center mt-6"
+                />
               </div>
-              <div className="h-1 w-12 bg-yellow-500 mb-6 group-hover:w-20 transition-all duration-500" />
-              <p className={`text-sm md:text-md uppercase tracking-[0.25em] font-bold text-gray-500 group-hover:text-yellow-500 transition-colors ${inter.className}`}>
+              
+              <p className={`text-sm md:text-sm uppercase tracking-[0.2em] text-white/50 whitespace-pre-line leading-relaxed ${inter.className}`}>
                 {stat.label}
               </p>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );
