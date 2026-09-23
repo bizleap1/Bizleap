@@ -9,6 +9,7 @@ import Stats from "../components/Stats";
 
 import Work from "../components/Work";
 import BrandSlider from "../components/Logo";
+import FAQSection from "../components/FAQSection";
 
 export default function Home() {
   return (
@@ -79,7 +80,7 @@ export default function Home() {
       <Work/>
       <MediaSection/>
       <ClientsSection/>
-      
+      <FAQSection/>
     
     </section>
     </>

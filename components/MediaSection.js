@@ -2,24 +2,21 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const REELS = [
-  { src: "/asian-street.mp4" },
-  { src: "/balaji-enterprise.mp4" },
-  { src: "/cakes-and-bakes.mp4" },
+  { src: "/videos/Masala-and-Morsales.mp4" },
+  { src: "/videos/MilesAlongSmiles.mp4" },
+  { src: "/videos/MirayabyGarima.mp4" },
+  { src: "/videos/Suko.mp4" },
+  { src: "/videos/Tifstay.mp4" },
+  { src: "/videos/Toni-and-Guys.mp4" },
+  { src: "/videos/WealthAcumen.mp4" },
+  { src: "/videos/asma.mp4" },
+  { src: "/videos/taubys.mp4" },
   { src: "/jhol-momo.mp4" },
-  { src: "/luxury-greenacres.mp4" },
-  { src: "/meher-ganga.mp4" },
   { src: "/meher-ganga-2.mp4" },
   { src: "/oswal-jwellers.mp4" },
-  { src: "/quikfizzy.MP4" },
-  { src: "/quikfizzy2.mp4" },
-  { src: "/rooftop-restaurnt.mp4" },
-  { src: "/siddharth-groups.mp4" },
-  { src: "/significareel.mp4" },
-  { src: "/taubys.mp4" },
-  { src: "/taubys-2.mp4" },
-  { src: "/tunwai.mp4" },
 ];
 
 
@@ -30,6 +27,10 @@ const REELS = [
 // ------------------- Reel Card (hover-to-play) -------------------
 function ReelCard({ reel, index, onClick }) {
   const videoRef = useRef(null);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "300px 0px", // Load slightly before it comes into view
+  });
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
@@ -46,6 +47,7 @@ function ReelCard({ reel, index, onClick }) {
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -58,7 +60,7 @@ function ReelCard({ reel, index, onClick }) {
     >
       <video
         ref={videoRef}
-        src={`${reel.src}#t=2.0`}
+        src={inView ? `${reel.src}#t=0.1` : ""}
         className="w-full h-full object-cover"
         muted
         loop
@@ -95,32 +97,30 @@ function ReelCard({ reel, index, onClick }) {
 // ------------------- Main Reels Section -------------------
 export default function ReelsSection() {
   const [selectedReel, setSelectedReel] = useState(null);
-  const [numCols, setNumCols] = useState(3);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) setNumCols(2);
-      else if (window.innerWidth < 1024) setNumCols(3);
-      else setNumCols(4);
+    if (selectedReel) {
+      document.body.style.setProperty('overflow', 'hidden', 'important');
+      document.documentElement.style.setProperty('overflow', 'hidden', 'important');
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [selectedReel]);
 
-  // Split reels into dynamic columns
-  const columns = Array.from({ length: numCols }, () => []);
-  REELS.forEach((reel, i) => {
-    columns[i % numCols].push({ reel, originalIndex: i });
-  });
+  // Split reels into two rows
+  const half = Math.ceil(REELS.length / 2);
+  const row1 = REELS.slice(0, half);
+  const row2 = REELS.slice(half);
 
-  // Alternating vertical offset
-  const getOffset = (index) => {
-    if (numCols === 2) return index === 1 ? "mt-12" : "mt-0";
-    if (numCols === 3) return index === 1 ? "mt-12" : "mt-0";
-    if (numCols === 4) return (index === 1 || index === 3) ? "mt-12" : "mt-0";
-    return "mt-0";
-  };
+  // Duplicate for seamless infinite scroll
+  const duplicatedRow1 = [...row1, ...row1, ...row1];
+  const duplicatedRow2 = [...row2, ...row2, ...row2];
+  const duplicatedAllReels = [...REELS, ...REELS, ...REELS];
 
   return (
     <section className="py-20 md:py-32 bg-black text-white overflow-hidden">
@@ -131,7 +131,7 @@ export default function ReelsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
         >
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-yellow-500 font-semibold mb-3">Our Content</p>
@@ -155,47 +155,97 @@ export default function ReelsSection() {
           </a>
         </motion.div>
 
-        {/* Staggered grid for Desktop/Tablet, Horizontal scroll for Mobile */}
-        {numCols > 2 ? (
-          <div className="flex gap-4 md:gap-5 items-start">
-            {columns.map((col, colIndex) => (
-              <div
-                key={colIndex}
-                className={`flex-1 flex flex-col gap-4 md:gap-5 ${getOffset(colIndex)}`}
-              >
-                {col.map(({ reel, originalIndex }) => (
+        {/* Continuous Scrolling Rows within Container */}
+        <div className="flex flex-col gap-6 md:gap-8 overflow-hidden relative">
+          
+          {/* Fade overlays for the edges */}
+          <div className="absolute inset-y-0 left-0 w-12 md:w-24 bg-gradient-to-r from-black/60 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-12 md:w-24 bg-gradient-to-l from-black/60 to-transparent z-10 pointer-events-none" />
+
+          {/* Mobile View: Single Row */}
+          <div className="relative w-full flex md:hidden overflow-hidden">
+            <div className="flex gap-4 animate-scroll-left w-max pr-4 hover:[animation-play-state:paused]">
+              {duplicatedAllReels.map((reel, index) => (
+                <div 
+                  key={`mobile-${index}`} 
+                  className="flex-shrink-0 w-[50vw] sm:w-[35vw]"
+                >
                   <ReelCard
-                    key={originalIndex}
                     reel={reel}
-                    index={originalIndex}
+                    index={index}
                     onClick={setSelectedReel}
                   />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop View: Two Rows */}
+          <div className="hidden md:flex flex-col gap-8 w-full">
+            {/* Row 1 - Scrolls Left */}
+            <div className="relative w-full flex overflow-hidden">
+              <div className="flex gap-6 animate-scroll-left w-max pr-6 hover:[animation-play-state:paused]">
+                {duplicatedRow1.map((reel, index) => (
+                  <div 
+                    key={`row1-${index}`} 
+                    className="flex-shrink-0 w-[22vw] lg:w-[16vw]"
+                  >
+                    <ReelCard
+                      reel={reel}
+                      index={index}
+                      onClick={setSelectedReel}
+                    />
+                  </div>
                 ))}
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 -mx-6 px-6 scrollbar-hide">
-            {REELS.map((reel, index) => (
-              <div key={index} className="flex-shrink-0 w-[70vw] snap-center">
-                <ReelCard
-                  reel={reel}
-                  index={index}
-                  onClick={setSelectedReel}
-                />
+            </div>
+
+            {/* Row 2 - Scrolls Right */}
+            <div className="relative w-full flex overflow-hidden">
+              <div className="flex gap-6 animate-scroll-right w-max pr-6 hover:[animation-play-state:paused]">
+                {duplicatedRow2.map((reel, index) => (
+                  <div 
+                    key={`row2-${index}`} 
+                    className="flex-shrink-0 w-[22vw] lg:w-[16vw]"
+                  >
+                    <ReelCard
+                      reel={reel}
+                      index={index}
+                      onClick={setSelectedReel}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        )}
+
+        </div>
       </div>
 
       <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
+        @keyframes scroll-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-33.333% - 8px)); }
         }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+        @keyframes scroll-right {
+          0% { transform: translateX(calc(-33.333% - 8px)); }
+          100% { transform: translateX(0); }
+        }
+        .animate-scroll-left {
+          animation: scroll-left 50s linear infinite;
+        }
+        .animate-scroll-right {
+          animation: scroll-right 50s linear infinite;
+        }
+        @media (max-width: 768px) {
+          @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-33.333% - 5px)); }
+          }
+          @keyframes scroll-right {
+            0% { transform: translateX(calc(-33.333% - 5px)); }
+            100% { transform: translateX(0); }
+          }
         }
       `}</style>
 
@@ -206,23 +256,27 @@ export default function ReelsSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-[100] p-6 md:p-12"
             onClick={() => setSelectedReel(null)}
+            style={{ touchAction: 'none' }}
+            data-lenis-prevent="true"
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
           >
             <motion.div
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.85, opacity: 0 }}
               transition={{ type: "spring", damping: 28 }}
-              className="relative max-w-sm w-full"
+              className="relative max-w-[280px] sm:max-w-sm w-full mx-auto flex items-start justify-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedReel(null)}
-                className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+                className="absolute -right-12 md:-right-16 top-0 text-white bg-black/50 p-2 rounded-full hover:bg-black/80 hover:text-gray-200 transition-all z-50 backdrop-blur-sm"
               >
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
               <video
