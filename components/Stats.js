@@ -17,7 +17,7 @@ export default function Stats() {
 
   const stats = [
     {
-      value: 200,
+      value: 350,
       suffix: "+",
       label: "Projects\nDelivered",
     },
