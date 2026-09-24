@@ -1,46 +1,10 @@
 "use client";
 import * as React from "react";
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import { motion } from "motion/react";
 
-// ------------------- Badge Component -------------------
-function Badge({ children, variant = "secondary", className = "" }) {
-  const base =
-    "inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 mr-2 mb-2 transition-all duration-300";
-  const colors = {
-    default: "bg-white text-black border-transparent",
-    secondary: "bg-white/5 text-gray-300 border-white/10 backdrop-blur-sm hover:bg-white/10 hover:border-white/20",
-    outline: "border-white/10 text-gray-400 bg-white/5 backdrop-blur-md hover:text-white hover:border-white/20 hover:bg-white/10",
-  };
-  return (
-    <span className={`${base} ${colors[variant]} ${className}`}>{children}</span>
-  );
-}
-
-// ------------------- InView Scroll Reveal -------------------
-function ScrollReveal({ children, delay = 0, stagger = false }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { margin: "0px 0px -100px 0px", once: true });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-      animate={
-        inView
-          ? { opacity: 1, y: 0, filter: "blur(0px)", transition: { delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-          : {}
-      }
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-// ------------------- Data -------------------
 const SERVICES = [
   {
     name: "UI/UX & Web Design",
@@ -92,138 +56,180 @@ const SERVICES = [
   },
 ];
 
-// ------------------- Final Section -------------------
+const padZero = (num) => String(num).padStart(2, "0");
+
 export default function ServicesSection() {
-  return (<>
-    <Head>
-      <title key="title">Our Services | Bizleap</title>
-      <meta name="description" content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online." key="description" />
-      <meta name="keywords" content="bizleap services, seo web design branding Nagpur" />
-      <link rel="canonical" href="https://bizleap.in/services" />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "@id": "https://bizleap.in/services#webpage",
-            "url": "https://bizleap.in/services",
-            "name": "Our Services | Bizleap",
-            "description": "Bizleap offers UI/UX & Web Design, Brand Identity, SEO, Social Media Marketing, and AI Services for businesses looking to grow online.",
-            "isPartOf": { "@id": "https://bizleap.in/#website" },
-            "provider": { "@id": "https://bizleap.in/#organization" },
-            "breadcrumb": {
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bizleap.in/" },
-                { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://bizleap.in/services" }
-              ]
-            },
-            "mainEntity": {
-              "@type": "ItemList",
-              "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "UI/UX & Web Design", "url": "https://bizleap.in/webdesign" },
-                { "@type": "ListItem", "position": 2, "name": "Brand Identity Design", "url": "https://bizleap.in/brandidentity" },
-                { "@type": "ListItem", "position": 3, "name": "SEO & Website Audits", "url": "https://bizleap.in/seowebsite" },
-                { "@type": "ListItem", "position": 4, "name": "Social Media Marketing", "url": "https://bizleap.in/socialmedia" },
-                { "@type": "ListItem", "position": 5, "name": "AI Services", "url": "https://bizleap.in/aiservices" },
-                { "@type": "ListItem", "position": 6, "name": "Staffing Services", "url": "https://bizleap.in/staffing" }
-              ]
-            }
-          })
-        }}
-      />
-    </Head>
+  const scrollToService = (e, index) => {
+    e.preventDefault();
+    const element = document.getElementById(`service-${index}`);
+    if (element) {
+      window.scrollTo({ top: element.offsetTop - 50, behavior: 'smooth' });
+    }
+  };
 
-    <section className="relative pt-28 pb-20 md:pt-32 md:pb-28 bg-[#050505] text-white overflow-hidden" id="services">
-      {/* Background Glow Effects */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[80vw] md:w-[600px] h-[400px] bg-yellow-500/10 blur-[100px] rounded-full pointer-events-none z-0" />
+  return (
+    <>
+      <Head>
+        <title key="title">Our Services | Bizleap</title>
+        <meta name="description" content="Bizleap offers digital marketing, web development, branding, SEO, and creative services designed to help businesses grow and succeed online." key="description" />
+        <meta name="keywords" content="bizleap services, seo web design branding Nagpur" />
+        <link rel="canonical" href="https://bizleap.in/services" />
+      </Head>
 
-      <div className="mx-auto max-w-6xl px-6 lg:px-8 space-y-24 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-8">
-          <ScrollReveal>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 tracking-tight leading-[1.1] text-white">
-              Elevate<br />
-              <span className="italic font-medium text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">Your Brand.</span>
-            </h1>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <p className="text-neutral-400 text-sm md:text-base leading-relaxed max-w-xl mx-auto font-light text-center">
-              Mastering the intersection of advanced technology, premium design, and scalable business growth.
-            </p>
-          </ScrollReveal>
-        </div>
+      <main className="bg-[#050505] min-h-screen text-white font-sans selection:bg-yellow-500/30 selection:text-white pb-[100px]">
+        
+        {/* ====================================================
+            HERO
+            ==================================================== */}
+        <section className="relative w-full min-h-[70vh] md:min-h-[85vh] overflow-hidden bg-black flex flex-col justify-start">
+          {/* Dynamic Yellow Glows */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+            <motion.div
+              animate={{
+                x: ["-20vw", "80vw", "80vw", "-20vw", "-20vw"],
+                y: ["-20vh", "-20vh", "80vh", "80vh", "-20vh"],
+                opacity: [0.5, 0.7, 0.5, 0.7, 0.5],
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute top-0 left-0 w-[50vh] h-[50vh] md:w-[70vh] md:h-[70vh] bg-yellow-400 rounded-full blur-[120px] md:blur-[150px] mix-blend-screen"
+            />
+            <motion.div
+              animate={{
+                x: ["80vw", "-20vw", "-20vw", "80vw", "80vw"],
+                y: ["80vh", "80vh", "-20vh", "-20vh", "80vh"],
+                opacity: [0.4, 0.6, 0.4, 0.6, 0.4],
+              }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute top-0 left-0 w-[60vh] h-[60vh] md:w-[80vh] md:h-[80vh] bg-yellow-500 rounded-full blur-[130px] md:blur-[160px] mix-blend-screen"
+            />
+          </div>
 
-        {/* Services List */}
-        <div className="space-y-32 md:space-y-48 mt-24">
-          {SERVICES.map((service, i) => (
-            <div
-              key={service.name}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center group/section"
-            >
-              {/* Text Section */}
-              <div className={`lg:col-span-5 space-y-8 ${i % 2 !== 0 ? "lg:order-last" : ""}`}>
-                <ScrollReveal>
-                  <div className="space-y-4">
-                    <span className="text-yellow-500/80 font-mono text-sm tracking-wider uppercase">
-                      0{i + 1} / Service
-                    </span>
-                    <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white group-hover/section:text-yellow-500 transition-colors duration-500">
-                      {service.name}
-                    </h3>
-                  </div>
-                </ScrollReveal>
-                <ScrollReveal delay={0.1}>
-                  <p className="text-gray-400 text-lg leading-relaxed font-light">
-                    {service.description}
-                  </p>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2}>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {service.tags.map((tag, idx) => (
-                      <Badge key={idx} variant="outline">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </ScrollReveal>
-                <ScrollReveal delay={0.3}>
-                  <Link href={service.url}>
-                    <button className="group mt-6 inline-flex items-center gap-3 text-white font-medium transition-all hover:text-yellow-400">
-                      <span className="relative overflow-hidden inline-block">
-                        <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">Explore Service</span>
-                        <span className="absolute left-0 top-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-yellow-400">Explore Service</span>
-                      </span>
-                      <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center transform transition-all duration-300 group-hover:border-yellow-400 group-hover:bg-yellow-400/10 group-hover:translate-x-2">
-                        →
-                      </span>
-                    </button>
-                  </Link>
-                </ScrollReveal>
-              </div>
-
-              {/* Image Section */}
-              <div className="lg:col-span-7">
-                <ScrollReveal delay={0.2}>
-                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_0_50px_-20px_rgba(255,255,255,0.1)] group-hover/section:shadow-[0_0_50px_-20px_rgba(234,179,8,0.15)] transition-shadow duration-700">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60 z-10" />
-                    <Image
-                      src={service.img}
-                      alt={service.name}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover/section:scale-105 opacity-80 group-hover/section:opacity-100"
-                    />
-                    {/* Inner glowing ring effect */}
-                    <div className="absolute inset-0 rounded-3xl border border-white/10 z-20 pointer-events-none mix-blend-overlay" />
-                  </div>
-                </ScrollReveal>
-              </div>
+          <div className="pt-[140px] md:pt-[240px] pb-[120px] md:pb-[250px] max-w-[1360px] mx-auto px-5 md:px-[60px] lg:px-[72px] relative z-10 w-full">
+            <div className="flex flex-col justify-start relative">
+              <motion.h1 
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="text-[46px] md:text-[76px] lg:text-[90px] font-serif font-light leading-[1.05] tracking-tight text-white max-w-[900px]"
+              >
+                Everything you need<br className="hidden md:block" /> to <span className="text-[#E5A900] italic font-medium">scale.</span>
+              </motion.h1>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="mt-6 md:mt-8 max-w-xl"
+              >
+                <p className="text-lg md:text-xl text-[#999] font-light leading-relaxed">
+                  Engineered for performance and designed for conversion. We provide the complete stack for your digital presence.
+                </p>
+              </motion.div>
             </div>
-          ))}
+          </div>
+        </section>
+
+
+        {/* ====================================================
+            MAIN SERVICES
+            ==================================================== */}
+        <div className="max-w-[1360px] mx-auto px-5 md:px-[60px] lg:px-[72px]">
+          {SERVICES.map((service, index) => {
+            const isReversed = index % 2 !== 0;
+
+            return (
+              <section 
+                id={`service-${index}`} 
+                key={service.name}
+                className="min-h-[75vh] md:min-h-[85vh] py-[80px] md:py-[120px] lg:py-[150px] border-t border-[#222] flex flex-col justify-center relative scroll-mt-24"
+              >
+                <div className={`flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-[10%]`}>
+                  
+                  {/* TEXT COLUMN */}
+                  <div className={`w-full ${isReversed ? 'lg:w-[45%]' : 'lg:w-[42%]'} flex flex-col`}>
+                    <motion.div 
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                    >
+                      <h2 className="text-[32px] md:text-[44px] lg:text-[46px] xl:text-[52px] font-serif font-light leading-[1.1] mb-8 text-white lg:whitespace-nowrap">
+                        {service.name}
+                      </h2>
+                      
+                      <p className="text-[#999] text-base md:text-lg font-light leading-relaxed max-w-[500px] mb-12">
+                        {service.description}
+                      </p>
+                    </motion.div>
+                    
+                    {/* CAPABILITIES */}
+                    <div className="mb-10 w-full max-w-[500px]">
+                      {service.tags.slice(0, 3).map((tag, tagIndex) => (
+                        <motion.div 
+                          key={tag}
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "-50px" }}
+                          transition={{ duration: 0.4, delay: tagIndex * 0.05 }}
+                          className="border-t border-[#222] py-[16px] flex justify-between items-center"
+                        >
+                          <span className="text-[#999] font-light">
+                            {tag}
+                          </span>
+                        </motion.div>
+                      ))}
+                      
+                      {/* VIEW DETAILS LINK (Integrated into list) */}
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.4, delay: 0.2 }}
+                      >
+                        <Link
+                          href={service.url}
+                          className="border-t border-b border-[#222] py-[20px] group flex justify-between items-center cursor-pointer transition-all duration-300 hover:border-yellow-500/30 block w-full"
+                        >
+                          <span className="text-white font-bold text-xs md:text-[13px] uppercase tracking-[0.2em] transition-colors duration-300 group-hover:text-yellow-500">
+                            View Details
+                          </span>
+                          <span className="text-[#555] group-hover:text-yellow-500 font-light text-xl leading-none transition-transform duration-300 group-hover:translate-x-2">
+                            →
+                          </span>
+                        </Link>
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  {/* IMAGE COLUMN */}
+                  <div className={`w-full ${isReversed ? 'lg:w-[55%]' : 'lg:w-[58%]'} flex items-center`}>
+                    <motion.div 
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.6 }}
+                      className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden bg-[#111]"
+                    >
+                      <Image 
+                        src={service.img} 
+                        alt={service.name} 
+                        fill 
+                        className="object-cover transition-transform duration-700 hover:scale-[1.02]" 
+                      />
+                    </motion.div>
+                  </div>
+                  
+                </div>
+
+
+              </section>
+            );
+          })}
         </div>
-      </div>
-    </section>
-  </>
+
+
+
+      </main>
+    </>
   );
 }

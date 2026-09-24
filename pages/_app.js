@@ -7,6 +7,7 @@ import FloatingButtons from "../components/FloatingButtons";
 import GlobalSchema from "../components/GlobalSchema";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { useRouter } from "next/router";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -19,6 +20,8 @@ const inter = Inter({
 });
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.5, // Super smooth "makhan" duration
@@ -35,10 +38,17 @@ export default function App({ Component, pageProps }) {
 
     requestAnimationFrame(raf);
 
+    const handleRouteChange = () => {
+      lenis.scrollTo(0, { immediate: true });
+    };
+
+    router.events.on("routeChangeComplete", handleRouteChange);
+
     return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
       lenis.destroy();
     };
-  }, []);
+  }, [router.events]);
 
   return (
     <div className={`${playfair.variable} ${inter.variable} font-sans`}>
