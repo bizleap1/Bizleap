@@ -178,6 +178,7 @@ export default function ServicesSection() {
                           </span>
                         </motion.div>
                       ))}
+                      <div className="border-t border-[#222]" />
                       
                       {/* VIEW DETAILS LINK (Integrated into list) */}
                       <motion.div 
@@ -185,10 +186,11 @@ export default function ServicesSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.4, delay: 0.2 }}
+                        className="mt-6"
                       >
                         <Link
                           href={service.url}
-                          className="border-t border-b border-[#222] py-[20px] group flex justify-between items-center cursor-pointer transition-all duration-300 hover:border-yellow-500/30 block w-full"
+                          className="border-b border-[#222] py-[20px] group flex justify-between items-center cursor-pointer transition-all duration-300 hover:border-yellow-500/30 block w-full"
                         >
                           <span className="text-white font-bold text-xs md:text-[13px] uppercase tracking-[0.2em] transition-colors duration-300 group-hover:text-yellow-500">
                             View Details
