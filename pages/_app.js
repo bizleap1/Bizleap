@@ -70,30 +70,34 @@ export default function App({ Component, pageProps }) {
         <meta name="ICBM" content="25.2048, 55.2708, 51.5074, -0.1278, 40.7128, -74.0060" />
 
         {/* Open Graph (Google / WhatsApp / LinkedIn) */}
-        <meta property="og:title" content="Bizleap" />
+        <meta property="og:title" content="Bizleap" key="og:title" />
         <meta
           property="og:description"
           content="Driven by Design. Backed by Results. Thoughtful design and digital experiences that help businesses grow."
+          key="og:description"
         />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bizleap.in/" />
+        <meta property="og:type" content="website" key="og:type" />
+        <meta property="og:url" content="https://bizleap.in/" key="og:url" />
         <meta
           property="og:image"
           content="https://bizleap.in/og-image.png"
+          key="og:image"
         />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="1200" key="og:image:width" />
+        <meta property="og:image:height" content="630" key="og:image:height" />
 
         {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bizleap" />
+        <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+        <meta name="twitter:title" content="Bizleap" key="twitter:title" />
         <meta
           name="twitter:description"
           content="Driven by Design. Backed by Results."
+          key="twitter:description"
         />
         <meta
           name="twitter:image"
           content="https://bizleap.in/og-image.png"
+          key="twitter:image"
         />
 
         {/* Favicon */}

@@ -424,10 +424,15 @@ export default function BlogsPage() {
   return (
     <>
       <Head>
-        <title key="title">Insightful Blogs | Bizleap</title>
+        <title key="title">Bizleap Blog – Digital Marketing, AI & Technology Insights</title>
         <meta name="keywords" content="bizleap blog, digital marketing insights, web design tips, technical seo blog" />
-        <meta name="description" content="Explore Bizleap's latest articles and insights on digital marketing, web design, technology audits, and advanced generative AI innovations." />
+        <meta name="description" key="description" content="Explore Bizleap's latest insights on digital marketing, web design, technology audits, SEO, and generative AI innovations." />
         <link rel="canonical" href="https://bizleap.in/blogs" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Bizleap Blog – Digital Marketing, AI & Technology Insights" key="og:title" />
+        <meta property="og:description" content="Explore Bizleap's latest insights on digital marketing, web design, technology audits, SEO, and generative AI innovations." key="og:description" />
+        <meta property="og:url" content="https://bizleap.in/blogs" key="og:url" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -479,7 +484,8 @@ export default function BlogsPage() {
                 {/* Background Glow Effects */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[600px] h-[400px] bg-yellow-500/10 blur-[100px] rounded-full pointer-events-none z-0" />
 
-                <motion.h1
+                <h1 className="sr-only">Bizleap Blog</h1>
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
@@ -487,7 +493,7 @@ export default function BlogsPage() {
                 >
                   Leap Into <span className="font-serif italic font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">Smarter</span><br />
                   Business Decisions.
-                </motion.h1>
+                </motion.div>
 
                 <motion.p
                   initial={{ opacity: 0 }}

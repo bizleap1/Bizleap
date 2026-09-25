@@ -646,10 +646,11 @@ function CreatorsHero() {
         transition={{ delay: 0.2, duration: 0.8 }}
         className="absolute top-24 left-6 md:top-32 md:left-12 z-30 pointer-events-none"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.1] text-white drop-shadow-lg">
+        <h1 className="sr-only">Bizleap Creators</h1>
+        <div className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.1] text-white drop-shadow-lg">
           <span className="font-light">Amplify</span><br />
           <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">Your Reach.</span>
-        </h1>
+        </div>
       </motion.div>
 
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-12 flex items-center justify-center relative z-20 h-full">
@@ -1020,13 +1021,19 @@ export default function CreatorsSection() {
 
   return (<>
     <Head>
-      <title key="title">Creators Network | Bizleap</title>
+      <title key="title">Bizleap Creators – Designers, Developers & Digital Experts</title>
       <meta name="keywords" content="creators network Nagpur, brand placements, influencer marketing Nagpur" />
       <meta
         name="description"
-        content="Discover Bizleap's creators network — designers, developers, and digital experts collaborating to deliver impactful and innovative brand solutions."
+        key="description"
+        content="Discover Bizleap's creators network of designers, developers, and digital experts building impactful digital and brand solutions."
       />
       <link rel="canonical" href="https://bizleap.in/creators" />
+      
+      {/* Open Graph */}
+      <meta property="og:title" content="Bizleap Creators – Designers, Developers & Digital Experts" key="og:title" />
+      <meta property="og:description" content="Discover Bizleap's creators network of designers, developers, and digital experts building impactful digital and brand solutions." key="og:description" />
+      <meta property="og:url" content="https://bizleap.in/creators" key="og:url" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

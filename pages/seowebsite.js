@@ -156,10 +156,15 @@ export default function SEOAuditsService() {
   return (
     <>
       <Head>
-        <title key="title">SEO & Website Audits | Bizleap</title>
+        <title key="title">SEO & Website Audit Services | Bizleap</title>
         <meta name="keywords" content="seo Nagpur, technical seo audit, core web vitals speed audit" />
-        <meta name="description" content="Maximize your search potential with Bizleap's comprehensive SEO and website audits. We analyze technical health, content, and backlinks to drive organic growth." />
+        <meta name="description" key="description" content="Improve your search visibility with Bizleap's SEO and website audits covering technical SEO, content, keywords, and backlinks." />
         <link rel="canonical" href="https://bizleap.in/seowebsite" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="SEO & Website Audit Services | Bizleap" key="og:title" />
+        <meta property="og:description" content="Improve your search visibility with Bizleap's SEO and website audits covering technical SEO, content, keywords, and backlinks." key="og:description" />
+        <meta property="og:url" content="https://bizleap.in/seowebsite" key="og:url" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -207,9 +212,10 @@ export default function SEOAuditsService() {
                 <Badge variant="outline" className="mb-6">SEO & Website Audits</Badge>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="sr-only">SEO & Website Audit Services</h1>
+                <div className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                   Maximize Your <span className="text-yellow-500">Search Potential</span>
-                </h1>
+                </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">

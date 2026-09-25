@@ -157,10 +157,15 @@ export default function SocialMediaMarketingService() {
   return (
     <>
       <Head>
-        <title key="title">Social Media Marketing | Bizleap</title>
+        <title key="title">Social Media Marketing Services | Bizleap</title>
         <meta name="keywords" content="social media marketing Nagpur, organic sse, instagram marketing, facebook ads" />
-        <meta name="description" content="Elevate your brand with Bizleap's social media marketing. We drive engagement and growth through strategic content, community management, and paid advertising." />
+        <meta name="description" key="description" content="Grow your brand with Bizleap's social media marketing services, including strategic content, community management, and paid advertising." />
         <link rel="canonical" href="https://bizleap.in/socialmedia" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Social Media Marketing Services | Bizleap" key="og:title" />
+        <meta property="og:description" content="Grow your brand with Bizleap's social media marketing services, including strategic content, community management, and paid advertising." key="og:description" />
+        <meta property="og:url" content="https://bizleap.in/socialmedia" key="og:url" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -208,9 +213,10 @@ export default function SocialMediaMarketingService() {
                 <Badge variant="outline" className="mb-6">Social Media Marketing</Badge>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="sr-only">Social Media Marketing Services</h1>
+                <div className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
                   Grow Your Brand <span className="text-yellow-500">Socially</span>
-                </h1>
+                </div>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
