@@ -14,10 +14,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const blog = BLOGS_DATA.find((b) => b.id === params.slug);
-  return { props: { blog } };
+  // Find author details from AUTHORS_DATA, or fallback to name if not found
+  const authorData = require("../../data/authorsData").AUTHORS_DATA.find((a) => a.name === blog.author);
+  
+  return { props: { blog, authorDetails: authorData || null } };
 }
 
-export default function BlogPost({ blog }) {
+export default function BlogPost({ blog, authorDetails }) {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -131,18 +134,20 @@ export default function BlogPost({ blog }) {
               transition={{ delay: 0.6 }}
               className="lg:w-[250px] shrink-0 lg:sticky lg:top-32 h-fit order-2 lg:order-1 flex flex-row lg:flex-col items-center lg:items-start justify-between lg:justify-start gap-8 py-8 lg:py-0 border-t lg:border-t-0 border-white/10"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-yellow-500/20">
-                  {blog.author.split(' ').map(n => n[0]).join('')}
+              <Link href={`/authors/${blog.author.toLowerCase().replace(/ /g, '-')}`} className="group flex items-center gap-4 cursor-pointer">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-yellow-500/20 overflow-hidden border-2 border-transparent group-hover:border-yellow-400 transition-colors">
+                  {authorDetails?.image ? (
+                    <img src={authorDetails.image} alt={blog.author} className="w-full h-full object-cover" />
+                  ) : (
+                    blog.author.split(' ').map(n => n[0]).join('')
+                  )}
                 </div>
                 <div>
                   <p className="text-xs text-neutral-500 uppercase tracking-widest font-semibold mb-1">Written By</p>
-                  <Link href={`/authors/${blog.author.toLowerCase().replace(/ /g, '-')}`}>
-                     <p className="text-base font-bold text-white hover:text-yellow-400 transition-colors cursor-pointer">{blog.author}</p>
-                  </Link>
+                  <p className="text-base font-bold text-white group-hover:text-yellow-400 transition-colors">{blog.author}</p>
                   <p className="text-xs text-neutral-400 mt-1">{blog.date}</p>
                 </div>
-              </div>
+              </Link>
 
               <div className="flex lg:flex-col gap-4">
                 <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-yellow-400 hover:bg-yellow-400/10 transition-all">

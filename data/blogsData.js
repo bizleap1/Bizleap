@@ -7,7 +7,7 @@ export const BLOGS_DATA = [
     date: "May 18, 2026",
     readTime: "6 min read",
     author: "Kaushal B",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "https://www.bizleap.in/kaushal",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         Generative Artificial Intelligence is no longer just a futuristic concept. Today, Bizleap partners with forward-thinking enterprises to move beyond simple chatbots and implement complex, automated AI systems that completely reshape how business is done.

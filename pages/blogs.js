@@ -22,7 +22,7 @@ export default function BlogsPage() {
         <meta name="keywords" content="bizleap blog, digital marketing insights, web design tips, technical seo blog" />
         <meta name="description" key="description" content="Explore Bizleap's latest insights on digital marketing, web design, technology audits, SEO, and generative AI innovations." />
         <link rel="canonical" href="https://bizleap.in/blogs" />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content="Bizleap Blog – Digital Marketing, AI & Technology Insights" key="og:title" />
         <meta property="og:description" content="Explore Bizleap's latest insights on digital marketing, web design, technology audits, SEO, and generative AI innovations." key="og:description" />
@@ -72,105 +72,105 @@ export default function BlogsPage() {
             transition={{ duration: 0.6 }}
             className="pb-24 pt-20 px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto"
           >
-              {/* Ultra-Premium Hero Section */}
-              <div className="relative text-center max-w-5xl mx-auto mb-10 pt-4">
-                {/* Background Glow Effects */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[600px] h-[400px] bg-yellow-500/10 blur-[100px] rounded-full pointer-events-none z-0" />
+            {/* Ultra-Premium Hero Section */}
+            <div className="relative text-center max-w-5xl mx-auto mb-10 pt-4">
+              {/* Background Glow Effects */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[600px] h-[400px] bg-yellow-500/10 blur-[100px] rounded-full pointer-events-none z-0" />
 
-                <h1 className="sr-only">Bizleap Blog</h1>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                  className="relative z-10 text-3xl md:text-4xl lg:text-5xl font-bold mb-3 tracking-tight leading-[1.05] text-white"
-                >
-                  Leap Into <span className="font-serif italic font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">Smarter</span><br />
-                  Business Decisions.
-                </motion.div>
+              <h1 className="sr-only">Bizleap Blog</h1>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="relative z-10 text-3xl md:text-4xl lg:text-5xl font-bold mb-3 tracking-tight leading-[1.05] text-white"
+              >
+                Leap Into <span className="font-serif italic font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">Smarter</span><br />
+                Business Decisions.
+              </motion.div>
 
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                  className="relative z-10 text-neutral-400 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed"
-                >
-                  Mastering the intersection of advanced technology, premium design, and scalable brand growth.
-                </motion.p>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="relative z-10 text-neutral-400 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed"
+              >
+                Mastering the intersection of advanced technology, premium design, and scalable brand growth.
+              </motion.p>
 
 
+            </div>
+
+            {/* Static Glassmorphic Category Bar */}
+            <div className="flex justify-center mb-16 pointer-events-none">
+              <div className="pointer-events-auto flex gap-2 p-1.5 bg-[#111]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-2xl overflow-x-auto max-w-full scrollbar-hide">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-500 whitespace-nowrap ${selectedCategory === cat
+                      ? "text-black bg-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)]"
+                      : "text-neutral-400 hover:text-white hover:bg-white/5"
+                      }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
               </div>
+            </div>
 
-              {/* Static Glassmorphic Category Bar */}
-              <div className="flex justify-center mb-16 pointer-events-none">
-                <div className="pointer-events-auto flex gap-2 p-1.5 bg-[#111]/80 backdrop-blur-2xl border border-white/10 rounded-full shadow-2xl overflow-x-auto max-w-full scrollbar-hide">
-                  {CATEGORIES.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-500 whitespace-nowrap ${selectedCategory === cat
-                        ? "text-black bg-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.3)]"
-                        : "text-neutral-400 hover:text-white hover:bg-white/5"
-                        }`}
+            {/* Bento Grid for All Posts */}
+            {filteredBlogs.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-[1400px] mx-auto px-4 lg:px-8">
+                {filteredBlogs.map((blog, idx) => (
+                  <Link href={`/blogs/${blog.id}`} key={blog.id} passHref>
+                    <motion.a
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ delay: (idx % 3) * 0.15, duration: 0.6 }}
+                      className="group cursor-pointer flex flex-col bg-transparent overflow-hidden h-full"
                     >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
+                      {/* Image */}
+                      <div className="relative h-64 rounded-2xl overflow-hidden shrink-0">
+                        <div className="absolute inset-0 bg-black/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
+                        <img
+                          src={blog.image}
+                          alt={blog.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-5 z-20 font-bold text-white tracking-wide text-sm drop-shadow-md">
+                          Biz<span className="text-yellow-400">leap</span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="mt-5 flex flex-col flex-1">
+                        {/* Meta Row: Category + Read Time */}
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="bg-neutral-800 text-white text-xs font-semibold px-3 py-1.5 rounded">
+                            {blog.category}
+                          </span>
+                          <span className="text-neutral-400 text-sm font-medium">
+                            {blog.readTime}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-snug group-hover:text-yellow-400 transition-colors">
+                          {blog.title}
+                        </h3>
+
+                        {/* Author */}
+                        <div className="mt-auto pt-4 text-neutral-500 text-base">
+                          {blog.author}
+                        </div>
+                      </div>
+                    </motion.a>
+                  </Link>
+                ))}
               </div>
-
-              {/* Bento Grid for All Posts */}
-              {filteredBlogs.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-[1400px] mx-auto px-4 lg:px-8">
-                  {filteredBlogs.map((blog, idx) => (
-                    <Link href={`/blogs/${blog.id}`} key={blog.id} passHref>
-                      <motion.a
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ delay: (idx % 3) * 0.15, duration: 0.6 }}
-                        className="group cursor-pointer flex flex-col bg-transparent overflow-hidden h-full"
-                      >
-                        {/* Image */}
-                        <div className="relative h-64 rounded-2xl overflow-hidden shrink-0">
-                          <div className="absolute inset-0 bg-black/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
-                          <img
-                            src={blog.image}
-                            alt={blog.title}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute top-4 left-5 z-20 font-bold text-white tracking-wide text-sm drop-shadow-md">
-                            Biz<span className="text-yellow-400">leap</span>
-                          </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="mt-5 flex flex-col flex-1">
-                          {/* Meta Row: Category + Read Time */}
-                          <div className="flex items-center gap-3 mb-4">
-                            <span className="bg-neutral-800 text-white text-xs font-semibold px-3 py-1.5 rounded">
-                              {blog.category}
-                            </span>
-                            <span className="text-neutral-400 text-sm font-medium">
-                              {blog.readTime}
-                            </span>
-                          </div>
-
-                          {/* Title */}
-                          <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-snug group-hover:text-yellow-400 transition-colors">
-                            {blog.title}
-                          </h3>
-
-                          {/* Author */}
-                          <div className="mt-auto pt-4 text-neutral-500 text-base">
-                            {blog.author}
-                          </div>
-                        </div>
-                      </motion.a>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </motion.div>
+            )}
+          </motion.div>
         </AnimatePresence>
       </main>
     </>
