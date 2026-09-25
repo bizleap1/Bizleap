@@ -61,7 +61,7 @@ export const BLOGS_DATA = [
     date: "June 14, 2026",
     readTime: "7 min read",
     author: "Kaushal B",
-    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/ai_hero.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         The days of manual, repetitive marketing tasks are over. At Bizleap, we believe AI-driven automation is no longer an experimental luxury—it is a baseline requirement for staying competitive in the digital landscape.
@@ -101,7 +101,7 @@ export const BLOGS_DATA = [
     date: "May 12, 2026",
     readTime: "5 min read",
     author: "Akshat Soni",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/ui ux & website.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         In the B2B world, your website is not just a digital brochure—it is your most powerful sales engine. A premium Bizleap web design perfectly balances artistic visual storytelling with strategic user pathways that seamlessly guide visitors toward conversion.
@@ -141,7 +141,7 @@ export const BLOGS_DATA = [
     date: "May 05, 2026",
     readTime: "7 min read",
     author: "Indrajit Kshirsagar",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/seo.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         SEO is no longer just about stuffing keywords. Bizleap knows that Google's modern search algorithms prioritize user experience, website performance, and structural schema above almost everything else.
@@ -181,7 +181,7 @@ export const BLOGS_DATA = [
     date: "April 28, 2026",
     readTime: "5 min read",
     author: "Akshat Soni",
-    image: "https://images.unsplash.com/photo-1616469829581-73993eb86b02?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/smm.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         Traditional advertising is facing declining engagement as audiences seek authenticity. Bizleap helps modern brands turn to curators, creators, and niche influencers for trusted recommendations.
@@ -221,7 +221,7 @@ export const BLOGS_DATA = [
     date: "June 02, 2026",
     readTime: "8 min read",
     author: "Kaushal B",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/brand identity.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         Growth is no longer a guessing game. By implementing Bizleap's robust data analytics framework, brands can map the entire customer journey and identify exactly where to deploy resources for maximum ROI.
@@ -261,7 +261,7 @@ export const BLOGS_DATA = [
     date: "June 10, 2026",
     readTime: "6 min read",
     author: "Indrajit Kshirsagar",
-    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/ui ux & website.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         At Bizleap, we know great design is not just about making things look pretty. It is about understanding human behavior and guiding the user's eye toward a specific, measurable action.
@@ -301,7 +301,7 @@ export const BLOGS_DATA = [
     date: "June 20, 2026",
     readTime: "7 min read",
     author: "Aditya Sule",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/staffing services.png",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         The traditional approach to scaling an engineering team—simply hiring more developers—is no longer the most effective way to increase product velocity. At Bizleap, we help organizations embrace Agile AI.
@@ -341,7 +341,7 @@ export const BLOGS_DATA = [
     date: "July 01, 2026",
     readTime: "7 min read",
     author: "Aditya Sule",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "/Team-Meeting.jpeg",
     content: `
       <p class="lead text-xl text-neutral-300 mb-6 leading-relaxed">
         The B2B sales cycle is notoriously complex, often involving multiple decision-makers and months of deliberation. At Bizleap, we shorten this cycle using precision marketing automation.
