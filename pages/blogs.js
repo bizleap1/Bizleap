@@ -122,51 +122,58 @@ export default function BlogsPage() {
             {filteredBlogs.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-[1400px] mx-auto px-4 lg:px-8">
                 {filteredBlogs.map((blog, idx) => (
-                  <Link href={`/blogs/${blog.id}`} key={blog.id} passHref>
-                    <motion.a
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      transition={{ delay: (idx % 3) * 0.15, duration: 0.6 }}
-                      className="group cursor-pointer flex flex-col bg-transparent overflow-hidden h-full"
-                    >
-                      {/* Image */}
-                      <div className="relative h-64 rounded-2xl overflow-hidden shrink-0">
-                        <div className="absolute inset-0 bg-black/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
-                        <img
-                          src={blog.image}
-                          alt={blog.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute top-4 left-5 z-20 font-bold text-white tracking-wide text-sm drop-shadow-md">
-                          Biz<span className="text-yellow-400">leap</span>
-                        </div>
+                  <motion.div
+                    key={blog.id}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: (idx % 3) * 0.15, duration: 0.6 }}
+                    className="group flex flex-col bg-transparent overflow-hidden h-full"
+                  >
+                    {/* Image — links to blog post */}
+                    <Link href={`/blogs/${blog.id}`} className="block relative h-64 rounded-2xl overflow-hidden shrink-0 cursor-pointer">
+                      <div className="absolute inset-0 bg-black/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
+                      <img
+                        src={blog.image}
+                        alt={blog.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute top-4 left-5 z-20 font-bold text-white tracking-wide text-sm drop-shadow-md">
+                        Biz<span className="text-yellow-400">leap</span>
+                      </div>
+                    </Link>
+
+                    {/* Content */}
+                    <div className="mt-5 flex flex-col flex-1">
+                      {/* Meta Row */}
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="bg-neutral-800 text-white text-xs font-semibold px-3 py-1.5 rounded">
+                          {blog.category}
+                        </span>
+                        <span className="text-neutral-400 text-sm font-medium">
+                          {blog.readTime}
+                        </span>
                       </div>
 
-                      {/* Content */}
-                      <div className="mt-5 flex flex-col flex-1">
-                        {/* Meta Row: Category + Read Time */}
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="bg-neutral-800 text-white text-xs font-semibold px-3 py-1.5 rounded">
-                            {blog.category}
-                          </span>
-                          <span className="text-neutral-400 text-sm font-medium">
-                            {blog.readTime}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="text-base md:text-lg font-bold text-white mb-3 leading-snug group-hover:text-yellow-400 transition-colors">
+                      {/* Title — links to blog post */}
+                      <Link href={`/blogs/${blog.id}`} className="block mb-3">
+                        <h3 className="text-base md:text-lg font-bold text-white leading-snug hover:text-yellow-400 transition-colors">
                           {blog.title}
                         </h3>
+                      </Link>
 
-                        {/* Author */}
-                        <div className="mt-auto pt-4 text-neutral-500 text-base">
+                      {/* Author — links to author profile */}
+                      <div className="mt-auto pt-4">
+                        <Link
+                          href={`/authors/${blog.author.toLowerCase().replace(/ /g, '-')}`}
+                          className="text-neutral-500 text-sm hover:text-yellow-400 transition-colors font-medium"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           {blog.author}
-                        </div>
+                        </Link>
                       </div>
-                    </motion.a>
-                  </Link>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             )}
