@@ -1,3 +1,9 @@
+/**
+ * AUTHOR REGISTRY
+ * Approved authors: Kaushal B, Akshat Soni, Indrajit Kshirsagar
+ * Aditya Sule is NOT an approved author and must NOT be added here.
+ * Any blog records attributed to Aditya Sule require MANUAL reassignment.
+ */
 export const AUTHORS_DATA = [
   {
     id: "kaushal-b",
@@ -6,7 +12,7 @@ export const AUTHORS_DATA = [
     bio: "Kaushal is a growth marketer and AI specialist with a deep understanding of enterprise-scale automation. He helps brands transform their operations through advanced technology.",
     image: "https://www.bizleap.in/kaushal",
     socials: {
-      linkedin: "https://linkedin.com/",
+      linkedin: "https://linkedin.com/in/",
       twitter: "https://twitter.com/"
     }
   },
@@ -17,7 +23,7 @@ export const AUTHORS_DATA = [
     bio: "Akshat merges premium visual design with psychological conversion strategies to craft B2B experiences that drive measurable impact.",
     image: "https://www.bizleap.in/akshat",
     socials: {
-      linkedin: "https://linkedin.com/",
+      linkedin: "https://linkedin.com/in/",
       twitter: "https://twitter.com/"
     }
   },
@@ -28,19 +34,17 @@ export const AUTHORS_DATA = [
     bio: "Indrajit specializes in technical SEO, site architecture, and performance optimization, ensuring that high-converting websites dominate search engine results.",
     image: "https://www.bizleap.in/indrajit",
     socials: {
-      linkedin: "https://linkedin.com/",
-      twitter: "https://twitter.com/"
-    }
-  },
-  {
-    id: "aditya-sule",
-    name: "Aditya Sule",
-    role: "Engineering Manager",
-    bio: "Aditya leads the engineering team at Bizleap, implementing Agile AI methodologies to dramatically increase product velocity for B2B tech companies.",
-    image: "https://www.bizleap.in/aditya",
-    socials: {
-      linkedin: "https://linkedin.com/",
+      linkedin: "https://linkedin.com/in/",
       twitter: "https://twitter.com/"
     }
   }
 ];
+
+/**
+ * Helper: get author slug from name
+ * Returns null if the author is not in the approved registry.
+ */
+export function getAuthorSlug(authorName) {
+  const author = AUTHORS_DATA.find((a) => a.name === authorName);
+  return author ? author.id : null;
+}
