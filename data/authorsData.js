@@ -30,8 +30,8 @@ export const AUTHORS_DATA = [
   {
     id: "indrajit-kshirsagar",
     name: "Indrajit Kshirsagar",
-    role: "SEO & Technical Lead",
-    bio: "Indrajit specializes in technical SEO, site architecture, and performance optimization, ensuring that high-converting websites dominate search engine results.",
+    role: "AI Specialist & General Manager Technology and Operations",
+    bio: "Indrajit specializes in AI, site architecture, and performance optimization, ensuring that high-converting websites deliver exceptional experiences.",
     image: "/team/indrajit kshirsagar.jpeg",
     socials: {
       linkedin: "https://linkedin.com/in/",
