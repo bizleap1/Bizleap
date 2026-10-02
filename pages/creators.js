@@ -5,6 +5,10 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '700', '800', '900'] });
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'] });
 
 // ------------------- Small icons -------------------
 const InstaIcon = () => (
@@ -148,11 +152,11 @@ function SidebarFilterSection({ id, title, options = [], isRange = false, select
 
   return (
     <div className="mb-6">
-      <h5 className="text-gray-300 text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+      <div className={`text-gray-300 text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] mb-4 flex items-center gap-2 ${inter.className}`}>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-500"><path d="M22 3L2 3L10 12.46 10 19 14 21 14 12.46 22 3"></path></svg>
         {title}
         {selected.length > 0 && <span className="ml-2 bg-yellow-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full">{selected.length}</span>}
-      </h5>
+      </div>
 
       {isRange ? (
         <div className="space-y-3 pl-1">
@@ -190,18 +194,11 @@ function InfluencerCard({ item, onClick, idx = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="relative w-full h-[24rem] rounded-[1.5rem] p-2.5 flex flex-col border border-white/10 hover:border-white/20 transition-all shadow-2xl group overflow-hidden"
+      className="relative w-full h-[25rem] cursor-pointer group"
+      onClick={() => onClick(item, "influencer")}
     >
-      {/* Dynamic Colored Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[1.5rem]">
-        {item.image && item.image !== "-" && (
-          <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover blur-[40px] opacity-60 scale-125" />
-        )}
-        <div className="absolute inset-0 bg-[#141414]/70 backdrop-blur-3xl" />
-      </div>
-
-      <div className="relative z-10 h-[60%] w-full overflow-hidden rounded-xl bg-black">
+      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
+        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
         {item.image && item.image !== "-" ? (
           <SafeImage src={item.image} alt={item.name} width={600} height={800} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
         ) : (
@@ -211,45 +208,46 @@ function InfluencerCard({ item, onClick, idx = 0 }) {
             </div>
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-        <div className="absolute top-2 right-2 z-10">
-          <span className="px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md text-[10px] font-medium text-white">
+        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
+        <div className="absolute top-4 right-4 z-10">
+          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
             {item.contentStyle || "Lifestyle"}
           </span>
         </div>
       </div>
 
-      <div className="relative z-10 h-[40%] px-1 py-1 flex flex-col justify-between font-sans">
-        <div className="pt-1">
-          <div className="mb-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-transparent text-[10px] font-semibold text-gray-300 tracking-wide">
+      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
+        <div>
+          <div className="mb-2">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
               <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
               {item.category || "Creator"}
             </span>
           </div>
-          <h3 className="text-3xl font-serif font-bold text-white tracking-tight mb-1 line-clamp-1">{item.name}</h3>
-          <p className="text-[14px] text-gray-400 font-semibold tracking-wide">{item.location || "India"}</p>
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.location || "India"}</p>
         </div>
 
-        <div className="mt-2 pt-3 border-t border-white/5 flex items-center justify-between">
+        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-4">
             {item.followers && item.followers !== "-" && (
-              <a href={item.instagramLink || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white hover:text-yellow-400 transition-colors cursor-pointer z-20 relative">
-                <InstaIcon /> <span className="font-bold text-[14px] tracking-tight">{item.followers}</span>
-              </a>
+              <div className="flex items-center gap-1.5 text-white">
+                <InstaIcon /> <span className="font-semibold text-[14px]">{item.followers}</span>
+              </div>
             )}
             {item.youtubeSubscribers && (
-              <a href={item.youtubeLink || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-white hover:text-yellow-400 transition-colors cursor-pointer z-20 relative">
-                <YoutubeIcon /> <span className="font-bold text-[14px] tracking-tight">{item.youtubeSubscribers}</span>
-              </a>
+              <div className="flex items-center gap-1.5 text-white">
+                <YoutubeIcon /> <span className="font-semibold text-[14px]">{item.youtubeSubscribers}</span>
+              </div>
             )}
           </div>
           {item.engagement && item.engagement !== "-" && (
             <div className="flex items-center gap-1.5 text-white">
-              <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Eng:</span> <span className="font-bold text-[14px] tracking-tight text-white">{item.engagement}</span>
+              <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Eng:</span> <span className="font-semibold text-[14px] text-white">{item.engagement}</span>
             </div>
           )}
         </div>
+      </div>
       </div>
     </motion.div>
   );
@@ -274,47 +272,41 @@ function MagazineCard({ item, onClick, idx = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="relative w-full h-[24rem] rounded-[1.5rem] p-2.5 flex flex-col border border-white/10 hover:border-white/20 transition-all shadow-2xl group overflow-hidden cursor-pointer block"
+      className="relative w-full h-[25rem] cursor-pointer group block"
+      onClick={() => onClick(item, "magazine")}
     >
-      {/* Dynamic Colored Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[1.5rem]">
-        {item.image && item.image !== "-" && (
-          <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover blur-[40px] opacity-60 scale-125" />
-        )}
-        <div className="absolute inset-0 bg-[#141414]/70 backdrop-blur-3xl" />
-      </div>
-
-      <div className="relative z-10 h-[60%] w-full overflow-hidden rounded-xl bg-black">
+      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
+        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
         <SafeImage src={item.image} alt={item.name} width={700} height={800} className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-        <div className="absolute top-2 right-2 z-10">
-          <span className="px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md text-[10px] font-medium text-white">
+        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
+        <div className="absolute top-4 right-4 z-10">
+          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
             {item.genre || "Magazine"}
           </span>
         </div>
       </div>
 
-      <div className="relative z-10 h-[40%] px-1 py-1 flex flex-col justify-between font-sans">
-        <div className="pt-1">
-          <div className="mb-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-transparent text-[10px] font-semibold text-gray-300 tracking-wide">
+      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
+        <div>
+          <div className="mb-2">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
               <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
               Magazine
             </span>
           </div>
-          <h3 className="text-3xl font-serif font-bold text-white tracking-tight mb-1 line-clamp-1">{item.name}</h3>
-          <p className="text-[14px] text-gray-400 font-semibold tracking-wide">{item.frequency || "Monthly"}</p>
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.frequency || "Monthly"}</p>
         </div>
 
-        <div className="mt-2 pt-3 border-t border-white/5 flex items-center justify-between">
+        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Readers:</span> <span className="font-bold text-[14px] tracking-tight">{fmt(item.readership)}</span>
+            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Readers:</span> <span className="font-semibold text-[14px]">{fmt(item.readership)}</span>
           </div>
           <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Starting:</span> <span className="font-bold text-[14px] tracking-tight text-white">₹{fmt(Number(starting))}</span>
+            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Starting:</span> <span className="font-semibold text-[14px] text-white">₹{fmt(Number(starting))}</span>
           </div>
         </div>
+      </div>
       </div>
     </motion.a>
   );
@@ -337,47 +329,41 @@ function NewspaperCard({ item, onClick, idx = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="relative w-full h-[24rem] rounded-[1.5rem] p-2.5 flex flex-col border border-white/10 hover:border-white/20 transition-all shadow-2xl group overflow-hidden cursor-pointer block"
+      className="relative w-full h-[25rem] cursor-pointer group block"
+      onClick={() => onClick(item, "newspaper")}
     >
-      {/* Dynamic Colored Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[1.5rem]">
-        {item.image && item.image !== "-" && (
-          <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover blur-[40px] opacity-60 scale-125" />
-        )}
-        <div className="absolute inset-0 bg-[#141414]/70 backdrop-blur-3xl" />
-      </div>
-
-      <div className="relative z-10 h-[60%] w-full overflow-hidden rounded-xl bg-black">
+      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
+        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
         <SafeImage src={item.image} alt={item.name} width={700} height={800} className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-        <div className="absolute top-2 right-2 z-10">
-          <span className="px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md text-[10px] font-medium text-white">
+        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
+        <div className="absolute top-4 right-4 z-10">
+          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
             {item.genre || "News"}
           </span>
         </div>
       </div>
 
-      <div className="relative z-10 h-[40%] px-1 py-1 flex flex-col justify-between font-sans">
-        <div className="pt-1">
-          <div className="mb-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-transparent text-[10px] font-semibold text-gray-300 tracking-wide">
+      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
+        <div>
+          <div className="mb-2">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
               <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
               Newspaper
             </span>
           </div>
-          <h3 className="text-[26px] font-serif font-bold text-white tracking-tight mb-1 line-clamp-1">{item.name}</h3>
-          <p className="text-[14px] text-gray-400 font-semibold tracking-wide">{item.language || "English"}</p>
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.language || "English"}</p>
         </div>
 
-        <div className="mt-2 pt-3 border-t border-white/5 flex items-center justify-between">
+        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Circ:</span> <span className="font-bold text-[14px] tracking-tight">{fmt(item.circulation || "-")}</span>
+            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Circ:</span> <span className="font-semibold text-[14px]">{fmt(item.circulation || "-")}</span>
           </div>
           <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Rate:</span> <span className="font-bold text-[14px] tracking-tight text-white">{item.adRate || "-"}</span>
+            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Rate:</span> <span className="font-semibold text-[14px] text-white">{item.adRate || "-"}</span>
           </div>
         </div>
+      </div>
       </div>
     </motion.a>
   );
@@ -398,47 +384,41 @@ function DigitalCard({ item, onClick, idx = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="relative w-full h-[24rem] rounded-[1.5rem] p-2.5 flex flex-col border border-white/10 hover:border-white/20 transition-all shadow-2xl group overflow-hidden cursor-pointer block"
+      className="relative w-full h-[25rem] cursor-pointer group block"
+      onClick={() => onClick(item, "digital")}
     >
-      {/* Dynamic Colored Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[1.5rem]">
-        {item.image && item.image !== "-" && (
-          <img src={item.image} alt="" className="absolute inset-0 w-full h-full object-cover blur-[40px] opacity-60 scale-125" />
-        )}
-        <div className="absolute inset-0 bg-[#141414]/70 backdrop-blur-3xl" />
-      </div>
-
-      <div className="relative z-10 h-[60%] w-full overflow-hidden rounded-xl bg-black">
+      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
+        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
         <SafeImage src={item.image} alt={item.name} width={700} height={800} className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-        <div className="absolute top-2 right-2 z-10">
-          <span className="px-2.5 py-1 bg-white/20 backdrop-blur-md rounded-md text-[10px] font-medium text-white">
+        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
+        <div className="absolute top-4 right-4 z-10">
+          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
             {item.platformType || "Digital"}
           </span>
         </div>
       </div>
 
-      <div className="relative z-10 h-[40%] px-1 py-1 flex flex-col justify-between font-sans">
-        <div className="pt-1">
-          <div className="mb-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-transparent text-[10px] font-semibold text-gray-300 tracking-wide">
+      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
+        <div>
+          <div className="mb-2">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
               <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
               Platform
             </span>
           </div>
-          <h3 className="text-[26px] font-serif font-bold text-white tracking-tight mb-1 line-clamp-1">{item.name}</h3>
-          <p className="text-[14px] text-gray-400 font-semibold tracking-wide">{item.formats?.[0] || "Ads"}</p>
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.formats?.[0] || "Ads"}</p>
         </div>
 
-        <div className="mt-2 pt-3 border-t border-white/5 flex items-center justify-between">
+        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Reach:</span> <span className="font-bold text-[14px] tracking-tight">{shortReach}</span>
+            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Reach:</span> <span className="font-semibold text-[14px]">{shortReach}</span>
           </div>
           <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">Model:</span> <span className="font-bold text-[14px] tracking-tight text-white">{shortModel}</span>
+            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Model:</span> <span className="font-semibold text-[14px] text-white">{shortModel}</span>
           </div>
         </div>
+      </div>
       </div>
     </motion.a>
   );
@@ -647,9 +627,9 @@ function CreatorsHero() {
         className="absolute top-24 left-6 md:top-32 md:left-12 z-30 pointer-events-none"
       >
         <h1 className="sr-only">Bizleap Creators</h1>
-        <div className="text-4xl sm:text-5xl md:text-7xl font-sans tracking-tight leading-[1.1] text-white drop-shadow-lg">
-          <span className="font-light">Amplify</span><br />
-          <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">Your Reach.</span>
+        <div className={`text-5xl sm:text-7xl md:text-7xl lg:text-[5rem] font-bold tracking-tight leading-[1.15] text-white drop-shadow-lg ${playfair.className}`}>
+          Amplify <br />
+          <span className="text-[#E5A900] italic font-medium">Your Reach.</span>
         </div>
       </motion.div>
 
@@ -796,6 +776,7 @@ export default function CreatorsSection() {
   const [selectedType, setSelectedType] = useState(null);
   const [activeFilters, setActiveFilters] = useState({}); // { key: [values] or ["min-max"] }
   const [openDropdownKey, setOpenDropdownKey] = useState(null); // Tracks which dropdown is open
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // NEW STATE FOR INFLUENCER FILTERS
   const [influencerSearch, setInfluencerSearch] = useState("");
@@ -1060,25 +1041,23 @@ export default function CreatorsSection() {
       <CreatorsHero />
 
       {/* Information Section */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 pb-10 flex flex-col items-center text-center">
-        <div className="max-w-4xl">
-          <h2 className="text-3xl md:text-5xl font-sans font-light mb-6 leading-tight text-white drop-shadow-md">
-            Connecting Brands with <br />
-            <span className="font-bold text-yellow-400">Authentic Voices.</span>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8 flex flex-col items-start text-left">
+        <div className="w-full">
+          <h2 className={`text-3xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold mb-6 text-white tracking-tight drop-shadow-md whitespace-normal sm:whitespace-nowrap ${playfair.className}`}>
+            Connecting Brands with <span className="text-[#E5A900] italic font-medium">Authentic Voices.</span>
           </h2>
-          <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl font-light mx-auto">
-            Bizleap's Creators Network is an exclusive ecosystem of premium influencers, renowned magazines, trusted newspapers, and leading digital platforms. We bridge the gap between visionary brands and influential storytellers to create high-impact, authentic media placements that drive real engagement.
+          <p className={`text-white/70 md:text-white/80 text-base md:text-xl leading-relaxed max-w-3xl font-light ${inter.className}`}>
+            Bizleap's Creators Network is an exclusive ecosystem of premium influencers, renowned magazines, trusted newspapers, and leading digital platforms.
           </p>
         </div>
+      </div>
 
-        {/* Horizontal Category Tabs */}
-        <div className="mt-16 flex flex-col items-center w-full">
-          <div className="flex items-center justify-center gap-6 mb-8 w-full max-w-2xl">
-            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/20"></div>
-            <h3 className="text-gray-300 text-xs md:text-sm font-medium uppercase tracking-[0.3em]">Categories</h3>
-            <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/20"></div>
-          </div>
-          <div className="flex flex-wrap items-center justify-center p-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
+        
+        {/* Sleek Toolbar */}
+        <div className="mt-8 mb-10 w-full border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+          {/* Categories */}
+          <div className="flex flex-wrap items-center gap-2 md:gap-3">
             {sections.map((s) => (
               <button
                 key={s.key}
@@ -1087,64 +1066,79 @@ export default function CreatorsSection() {
                   setActiveFilters({});
                   setOpenDropdownKey(null);
                 }}
-                className={`relative px-6 sm:px-8 py-2.5 rounded-full text-[13px] md:text-sm tracking-wide transition-all duration-500 ease-out ${filter === s.key
-                  ? "text-black bg-yellow-400 font-semibold shadow-[0_0_20px_rgba(250,204,21,0.4)]"
-                  : "text-gray-400 font-light hover:text-white hover:bg-white/10"
+                className={`relative px-6 py-3 rounded-full text-[13px] md:text-sm font-semibold transition-all duration-300 tracking-wide ${filter === s.key
+                  ? "text-black bg-[#E5A900] shadow-[0_0_20px_rgba(229,169,0,0.3)]"
+                  : "text-gray-400 hover:text-white bg-white/5 hover:bg-white/10"
                   }`}
               >
                 {s.label}
               </button>
             ))}
           </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 pb-20">
-
-        {/* MAIN LAYOUT WITH CONDITIONAL SIDEBAR */}
-        <div className="flex flex-col lg:flex-row gap-8 w-full relative z-40">
-
-          {/* Sidebar (Filters) - Only render if category has filters */}
+          
+          {/* Filter Button & Dropdown */}
           {filterMenus[filter].length > 0 && (
-            <div className="w-full lg:w-[250px] flex flex-col shrink-0 lg:sticky lg:top-28 h-fit z-10">
+            <div className="relative z-50">
+              <button
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all text-white font-medium ${hasActiveOtherFilters || isFilterOpen ? "bg-[#E5A900]/10 border-[#E5A900]/50 text-[#E5A900]" : "bg-white/5 border-white/10 hover:bg-white/10"}`}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                Filters {hasActiveOtherFilters && <span className="bg-[#E5A900] text-black w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold ml-1">{Object.values(activeFilters).flat().length}</span>}
+              </button>
 
-              {/* Filters (Vertical List) */}
-              <div className="bg-[#111]/90 backdrop-blur-3xl border border-white/10 p-5 md:p-6 rounded-[2rem] shadow-[0_15px_50px_rgba(0,0,0,0.9)] flex flex-col gap-2 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
-                <div className="flex items-center gap-3 mb-6 pl-1 border-b border-white/10 pb-4 shrink-0">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-yellow-400"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-                  <h4 className="text-white text-sm md:text-base font-semibold uppercase tracking-[0.25em]">Filters</h4>
-                </div>
-
-                {filterMenus[filter].map(menu => (
-                  <SidebarFilterSection
-                    key={menu.key}
-                    id={menu.key}
-                    title={menu.title}
-                    options={menu.options}
-                    isRange={menu.isRange}
-                    selected={activeFilters[menu.key] || []}
-                    onToggleOption={(opt) => toggleOption(menu.key, opt)}
-                    onApplyRange={(min, max) => applyRange(menu.key, min, max)}
-                  />
-                ))}
-
-                {showClearFilters && (
-                  <button
-                    onClick={clearFilters}
-                    className="mt-2 w-full px-5 py-3 rounded-xl bg-red-500/10 text-red-400 text-[13px] font-semibold hover:bg-red-500/20 border border-red-500/20 transition-all flex items-center justify-center gap-2 tracking-wide"
-                  >
-                    ✕ Clear Filters
-                  </button>
+              <AnimatePresence>
+                {isFilterOpen && (
+                  <>
+                    <div 
+                      className="fixed inset-0 z-[90]" 
+                      onClick={() => setIsFilterOpen(false)} 
+                    />
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-full mt-3 w-[280px] sm:w-[320px] bg-[#111]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-[100] flex flex-col overflow-hidden"
+                    >
+                      <div className="max-h-[400px] overflow-y-auto p-5 overscroll-contain scrollbar-hide" data-lenis-prevent="true">
+                        {filterMenus[filter].map(menu => (
+                          <SidebarFilterSection
+                            key={menu.key}
+                            id={menu.key}
+                            title={menu.title}
+                            options={menu.options}
+                            isRange={menu.isRange}
+                            selected={activeFilters[menu.key] || []}
+                            onToggleOption={(opt) => toggleOption(menu.key, opt)}
+                            onApplyRange={(min, max) => applyRange(menu.key, min, max)}
+                          />
+                        ))}
+                      </div>
+                      
+                      {showClearFilters && (
+                        <div className="p-4 border-t border-white/10 bg-[#0a0a0c]/80 backdrop-blur-md">
+                          <button
+                            onClick={clearFilters}
+                            className="w-full px-5 py-3 rounded-xl bg-red-500/10 text-red-400 text-[13px] font-semibold hover:bg-red-500/20 transition-all flex items-center justify-center gap-2"
+                          >
+                            ✕ Clear Filters
+                          </button>
+                        </div>
+                      )}
+                    </motion.div>
+                  </>
                 )}
-              </div>
+              </AnimatePresence>
             </div>
           )}
+        </div>
 
-          {/* Cards Grid (3 columns max on desktop) */}
-          <div className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-              {cardsForSection(sections.find(s => s.key === filter))}
-            </div>
+        {/* Full Width Grid */}
+        <div className="w-full relative z-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+            {cardsForSection(sections.find(s => s.key === filter))}
           </div>
         </div>
 
