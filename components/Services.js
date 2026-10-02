@@ -22,10 +22,10 @@ function Badge({ children, variant = "secondary", className = "" }) {
 
 const SERVICES_LIST = [
   {
-    name: "UI/UX & Web Design",
+    name: "Development services",
     tags: ["Figma", "Wireframing", "Prototyping"],
     img: "/ui ux & website.png",
-    url: "/webdesign",
+    url: "https://www.bizdevelopment.in/",
     description: "We don't just design screens—we design moments."
   },
   {

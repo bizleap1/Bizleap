@@ -29,7 +29,7 @@ export default function Navbar() {
   ]
 
   const serviceSubmenu = [
-    { name: "UI/UX Web Design", href: "/webdesign" },
+    { name: "Development Services", href: "https://www.bizdevelopment.in/" },
     { name: "Brand Identity", href: "/brandidentity" },
     { name: "Social Media Marketing", href: "/socialmedia" },
     { name: "SEO & Website Audits", href: "/seowebsite" },

@@ -7,10 +7,10 @@ import { motion } from "motion/react";
 
 const SERVICES = [
   {
-    name: "UI/UX & Web Design",
+    name: "Development services",
     tags: ["Figma", "Wireframing", "Prototyping", "Responsive Design", "User Testing"],
     img: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1400",
-    url: "/webdesign",
+    url: "https://www.bizdevelopment.in/",
     description:
       "End-to-end digital design from wireframes to polished interfaces. We create intuitive, visually appealing experiences for websites and apps, backed by user research and iterative testing.",
   },
