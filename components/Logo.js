@@ -146,6 +146,7 @@ export default function BrandSlider() {
                 src={brand.logo}
                 alt={brand.name}
                 fill
+                sizes="(max-width: 768px) 112px, 192px"
                 draggable={false}
                 className={`object-contain select-none ${brand.customFilter !== undefined ? brand.customFilter : "filter brightness-0 invert"} ${brand.className || ""}`}
               />

@@ -55,7 +55,7 @@ export default function App({ Component, pageProps }) {
       <GlobalSchema />
       <Head>
         {/* Primary SEO */}
-        <title key="title">Bizleap</title>
+        <title key="title">Bizleap - The best digital marketing company in Nagpur</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <meta name="description" content="Driven by Design. Backed by Results. Bizleap creates thoughtful design and digital experiences that help businesses grow." key="description" />
 
@@ -70,7 +70,7 @@ export default function App({ Component, pageProps }) {
         <meta name="ICBM" content="25.2048, 55.2708, 51.5074, -0.1278, 40.7128, -74.0060" />
 
         {/* Open Graph (Google / WhatsApp / LinkedIn) */}
-        <meta property="og:title" content="Bizleap" key="og:title" />
+        <meta property="og:title" content="Bizleap - The best digital marketing company in Nagpur" key="og:title" />
         <meta
           property="og:description"
           content="Driven by Design. Backed by Results. Thoughtful design and digital experiences that help businesses grow."
@@ -88,7 +88,7 @@ export default function App({ Component, pageProps }) {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
-        <meta name="twitter:title" content="Bizleap" key="twitter:title" />
+        <meta name="twitter:title" content="Bizleap - The best digital marketing company in Nagpur" key="twitter:title" />
         <meta
           name="twitter:description"
           content="Driven by Design. Backed by Results."

@@ -70,6 +70,7 @@ const Footer = () => {
                 src="/logo.png"
                 alt="Bizleap"
                 fill
+                sizes="192px"
                 className="object-contain object-left"
                 priority
               />

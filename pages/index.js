@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
     <Head>
-        <title key="title">Bizleap - Where Brands Leap Forward</title>
+        <title key="title">Bizleap - The best digital marketing company in Nagpur</title>
         <meta name="description" content="Bizleap is a digital marketing and web development agency helping brands grow online through SEO, modern websites, creative design, and technology-driven solutions." key="description" />
         <link rel="canonical" href="https://bizleap.in/" />
         <meta
@@ -32,7 +32,7 @@ export default function Home() {
                   "@type": "WebPage",
                   "@id": "https://bizleap.in/#webpage",
                   "url": "https://bizleap.in/",
-                  "name": "Bizleap - Where Brands Leap Forward",
+                  "name": "Bizleap - The best digital marketing company in Nagpur",
                   "description": "Bizleap is a digital marketing and web development agency helping brands grow online through SEO, modern websites, creative design, and technology-driven solutions.",
                   "isPartOf": { "@id": "https://bizleap.in/#website" },
                   "about": { "@id": "https://bizleap.in/#organization" },

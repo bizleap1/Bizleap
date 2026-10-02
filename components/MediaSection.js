@@ -60,7 +60,7 @@ function ReelCard({ reel, index, onClick }) {
     >
       <video
         ref={videoRef}
-        src={inView ? `${reel.src}#t=0.1` : ""}
+        src={inView ? `${reel.src}#t=0.1` : null}
         className="w-full h-full object-cover"
         muted
         loop

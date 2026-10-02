@@ -95,6 +95,7 @@ export default function Navbar() {
                 src="/logo.png"
                 alt="Bizleap Logo"
                 fill
+                sizes="(max-width: 768px) 100px, 140px"
                 className="object-contain"
                 priority
               />
