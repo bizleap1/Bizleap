@@ -189,11 +189,7 @@ function InfluencerCard({ item, onClick, idx = 0 }) {
   const getInitials = (name) => name.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
+    <div
       className="relative w-full h-[25rem] cursor-pointer group"
       onClick={() => onClick(item, "influencer")}
     >
@@ -249,7 +245,7 @@ function InfluencerCard({ item, onClick, idx = 0 }) {
         </div>
       </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -264,14 +260,10 @@ function MagazineCard({ item, onClick, idx = 0 }) {
   const starting = item.minBudget || item.startingPrice || 25000;
 
   return (
-    <motion.a
+    <a
       href={item.websiteLink || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
       className="relative w-full h-[25rem] cursor-pointer group block"
       onClick={() => onClick(item, "magazine")}
     >
@@ -308,7 +300,7 @@ function MagazineCard({ item, onClick, idx = 0 }) {
         </div>
       </div>
       </div>
-    </motion.a>
+    </a>
   );
 }
 
@@ -321,14 +313,10 @@ function NewspaperCard({ item, onClick, idx = 0 }) {
     return v;
   };
   return (
-    <motion.a
+    <a
       href={item.websiteLink || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
       className="relative w-full h-[25rem] cursor-pointer group block"
       onClick={() => onClick(item, "newspaper")}
     >
@@ -365,7 +353,7 @@ function NewspaperCard({ item, onClick, idx = 0 }) {
         </div>
       </div>
       </div>
-    </motion.a>
+    </a>
   );
 }
 
@@ -376,14 +364,10 @@ function DigitalCard({ item, onClick, idx = 0 }) {
       item.adRate || item.pricingModel || "-";
 
   return (
-    <motion.a
+    <a
       href={item.websiteLink || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, delay: (idx % 3) * 0.15, ease: "easeOut" }}
       className="relative w-full h-[25rem] cursor-pointer group block"
       onClick={() => onClick(item, "digital")}
     >
@@ -420,7 +404,7 @@ function DigitalCard({ item, onClick, idx = 0 }) {
         </div>
       </div>
       </div>
-    </motion.a>
+    </a>
   );
 }
 

@@ -181,9 +181,15 @@ export default function ContactPage() {
                         </div>
                       </div>
 
-                      <div>
-                        <label className="block text-xs text-gray-400 font-medium mb-2">Email Address</label>
-                        <input type="email" name="email" required className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="Your email address" />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs text-gray-400 font-medium mb-2">Email Address</label>
+                          <input type="email" name="email" required className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="Your email address" />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-gray-400 font-medium mb-2">Contact No.</label>
+                          <input type="tel" name="phone" required className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="Your contact number" />
+                        </div>
                       </div>
 
                       <div>
@@ -225,13 +231,18 @@ export default function ContactPage() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
+                          <label className="block text-xs text-gray-400 font-medium mb-2">Contact No.</label>
+                          <input type="tel" name="phone" required className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="Your contact number" />
+                        </div>
+                        <div>
                           <label className="block text-xs text-gray-400 font-medium mb-2">Applying For</label>
                           <input type="text" name="role" required className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="e.g. Frontend Developer" />
                         </div>
-                        <div>
-                          <label className="block text-xs text-gray-400 font-medium mb-2">Portfolio URL</label>
-                          <input type="url" name="portfolio" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="https://" />
-                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs text-gray-400 font-medium mb-2">Portfolio URL</label>
+                        <input type="url" name="portfolio" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:bg-black transition-colors" placeholder="https://" />
                       </div>
 
                       <div>
