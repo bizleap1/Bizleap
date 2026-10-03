@@ -6,6 +6,10 @@ import { Linkedin, Instagram, Mail } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 import MediaSection from "../components/MediaSection";
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '600', '700', '800', '900'] });
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500'] });
 
 // ------------------- Hero Reveal -------------------
 function HeroReveal({ children, delay = 0 }) {
@@ -98,7 +102,7 @@ const team = [
     name: "Darshan Raje",
     role: "Editor & Graphic Designer",
     image: "/team/darshan raje.png",
-    style: { objectPosition: "center 5%", transform: "scale(1.1) translateY(-25px)" },
+    style: { objectPosition: "center 5%", transform: "scale(1.1)" },
     size: "h-44 w-44",
     linkedin: "https://www.linkedin.com/in/darshan-raje-73030b389?utm_source=share_via&utm_content=profile&utm_medium=member_android",
   },
@@ -230,23 +234,6 @@ const team = [
     linkedin: "https://linkedin.com/in/",
   },
 
-  {
-    name: "Ashi Jain",
-    role: "Social Media Manager",
-    image: "/team/ashi jain.png",
-    style: { objectPosition: "center 25%", transform: "scale(1.4)" },
-    size: "h-44 w-44",
-    linkedin: "https://linkedin.com/in/",
-  },
-
-  {
-    name: "Lakshay Sharma",
-    role: "UI/Business Analyst",
-    image: "/team/laksh.png",
-    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
-    size: "h-48 w-48",
-    linkedin: "https://linkedin.com/in/",
-  },
 ];
 
 const containerVariants = {
@@ -325,12 +312,12 @@ export default function Team() {
       {/* Header Section */}
       <section className="text-center mb-20 mt-16">
         <HeroReveal>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+          <h1 className={`text-5xl md:text-7xl font-bold mb-6 text-white ${playfair.className}`}>
             Meet Our Team
           </h1>
         </HeroReveal>
         <HeroReveal delay={0.1}>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className={`text-xl text-gray-400 max-w-2xl mx-auto ${inter.className}`}>
             The passionate individuals behind our success story
           </p>
         </HeroReveal>
@@ -345,8 +332,8 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-white">Our </span>
-          <span className="text-yellow-400">Leadership</span>
+          <span className={`text-white ${playfair.className}`}>Our </span>
+          <span className={`text-yellow-400 ${playfair.className}`}>Leadership</span>
         </motion.h2>
 
         <motion.div
@@ -373,12 +360,12 @@ export default function Team() {
               style={{ cursor: person.page ? "pointer" : "default" }}
             >
               {/* Background Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-[#E5A900]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative z-10">
                 <div className="relative mx-auto mb-6">
                   <div className={`rounded-full p-1 bg-gradient-to-r from-yellow-400 to-amber-600 ${person.size || "h-56 w-56"} mx-auto`}>
-                    <div className="rounded-full overflow-hidden bg-zinc-900 h-full w-full">
+                    <div className="rounded-full overflow-hidden bg-white h-full w-full">
                       <Image
                         src={person.image}
                         alt={person.name}
@@ -391,20 +378,20 @@ export default function Team() {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold mb-2">{person.name}</h3>
-                <p className="text-yellow-400 font-medium mb-4">{person.role}</p>
-                <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+                <h3 className={`text-3xl font-bold mb-2 text-white ${playfair.className}`}>{person.name}</h3>
+                <p className={`text-[#E5A900] text-sm uppercase tracking-widest font-semibold mb-4 ${inter.className}`}>{person.role}</p>
+                <p className={`text-sm text-white/60 mb-6 leading-relaxed ${inter.className}`}>
                   Driving innovation and excellence in every aspect of our business.
                 </p>
 
                 <div className="flex justify-center gap-4">
                   {person.name === "Kaushal B" ? (
                     <>
-                      <div className="p-2 bg-zinc-800 rounded-lg text-white cursor-default" onClick={(e) => e.stopPropagation()}>
-                        <Linkedin className="w-5 h-5" />
+                      <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white cursor-default" onClick={(e) => e.stopPropagation()}>
+                        <Linkedin className="w-4 h-4" />
                       </div>
-                      <div className="p-2 bg-zinc-800 rounded-lg text-white cursor-default" onClick={(e) => e.stopPropagation()}>
-                        <Instagram className="w-5 h-5" />
+                      <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white cursor-default" onClick={(e) => e.stopPropagation()}>
+                        <Instagram className="w-4 h-4" />
                       </div>
                     </>
                   ) : (
@@ -412,22 +399,22 @@ export default function Team() {
                       <motion.a
                         href={person.linkedin}
                         target="_blank"
-                        className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
+                        className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-colors duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <Linkedin className="w-5 h-5" />
+                        <Linkedin className="w-4 h-4" />
                       </motion.a>
                       <motion.a
                         href={person.instagram}
                         target="_blank"
-                        className="p-2 bg-zinc-800 rounded-lg hover:bg-yellow-400 hover:text-black transition-colors duration-300"
+                        className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-colors duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <Instagram className="w-5 h-5" />
+                        <Instagram className="w-4 h-4" />
                       </motion.a>
                     </>
                   )}
@@ -447,12 +434,12 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-yellow-400">Amazing</span>
-          <span className="text-white"> Team</span>
+          <span className={`text-yellow-400 ${playfair.className}`}>Amazing </span>
+          <span className={`text-white ${playfair.className}`}>Team</span>
         </motion.h2>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -461,7 +448,7 @@ export default function Team() {
           {team.map((person, i) => (
             <motion.div
               key={i}
-              className="group relative bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-2xl overflow-hidden p-6 border border-zinc-800 hover:border-yellow-400/30 transition-colors duration-300"
+              className="group relative bg-gradient-to-br from-zinc-900 to-zinc-800 rounded-2xl overflow-hidden p-6 border border-zinc-800 hover:border-[#E5A900]/30 transition-colors duration-300 shadow-xl"
               variants={itemVariants}
               whileHover={{
                 y: -5,
@@ -469,10 +456,10 @@ export default function Team() {
               }}
             >
               {/* Hover Background Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-[#E5A900]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative z-10">
-                <div className={`mx-auto mb-5 rounded-full overflow-hidden border-2 border-zinc-700 group-hover:border-yellow-400/50 transition-colors duration-300 ${person.size || "h-48 w-48"}`}>
+                <div className={`mx-auto mb-5 rounded-full overflow-hidden bg-white border-2 border-zinc-700 group-hover:border-[#E5A900]/50 transition-colors duration-300 ${person.size || "h-48 w-48"}`}>
                   <Image
                     src={person.image}
                     alt={person.name}
@@ -484,17 +471,17 @@ export default function Team() {
                   />
                 </div>
 
-                <h3 className="text-xl font-semibold mb-2">{person.name}</h3>
-                <p className="text-yellow-400 text-sm font-medium mb-3">{person.role}</p>
+                <h3 className={`text-2xl font-bold mb-1 text-white ${playfair.className}`}>{person.name}</h3>
+                <p className={`text-[#E5A900] text-xs tracking-[0.1em] uppercase font-semibold mb-4 ${inter.className}`}>{person.role}</p>
 
                 {person.linkedin && (
                   <motion.a
                     href={person.linkedin}
                     target="_blank"
-                    className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-yellow-400 transition-colors duration-300"
+                    className={`inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-white/50 hover:text-white transition-colors duration-300 font-semibold ${inter.className}`}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <Linkedin className="w-4 h-4" />
+                    <Linkedin className="w-3 h-3" />
                     Connect
                   </motion.a>
                 )}
