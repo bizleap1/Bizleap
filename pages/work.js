@@ -307,8 +307,8 @@ export default function Work() {
 <style>
   {`
     @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(-6px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; transform: translateY(-10px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
   `}
 </style>
@@ -316,52 +316,63 @@ export default function Work() {
 
 
       {/* ------------------ PROJECT GRID ------------------ */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-6 md:px-20 py-5 md:py-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 px-6 md:px-12 py-10 md:py-16 max-w-7xl mx-auto">
   {filtered.map((item, idx) => (
     <ScrollReveal key={idx} delay={(idx % 3) * 0.1}>
-      <Link href={item.link} className="group cursor-pointer block">
+      <Link href={item.link} className="group cursor-pointer block h-full">
 
         {/* CARD CONTAINER */}
-        <div className={`w-full relative overflow-hidden rounded-lg shadow-sm bg-[#111] border border-gray-800 transition-colors duration-300 ${item.isOriginal ? "group-hover:border-yellow-400/50" : "group-hover:border-yellow-400/30"}`}>
-          {/* Uniform Layout (Full Image) for all cards */}
-          <div className="w-full aspect-[4/3] overflow-hidden bg-gray-900 relative">
+        <div className="w-full relative overflow-hidden rounded-3xl bg-neutral-900/40 border border-white/5 transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_40px_rgba(255,255,255,0.03)] flex flex-col h-full">
+          
+          {/* Image Wrapper */}
+          <div className="w-full aspect-[4/3] overflow-hidden relative rounded-t-3xl">
             <Image
               src={item.image}
               alt={item.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-90 group-hover:opacity-100"
             />
+            {/* Elegant overlay gradient on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* View Project Floating Badge */}
+            <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md border border-white/20 text-white text-xs font-medium px-4 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+              View Project ↗
+            </div>
           </div>
-        </div>
 
-        <h3
-          className="text-xl font-semibold mt-4 text-white"
-          style={{ fontFamily: '"Noto Sans", sans-serif' }}
-        >
-          {item.title}
-        </h3>
+          {/* Content Wrapper */}
+          <div className="p-6 md:p-8 flex flex-col flex-grow justify-between">
+            <div>
+              <p
+                className="text-neutral-400 text-xs font-semibold tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: '"Noto Sans", sans-serif' }}
+              >
+                {item.subtitle}
+              </p>
+              <h3
+                className="text-xl md:text-2xl font-semibold text-white group-hover:text-yellow-400 transition-colors duration-300 truncate"
+                style={{ fontFamily: '"Noto Sans", sans-serif' }}
+                title={item.title}
+              >
+                {item.title}
+              </h3>
+            </div>
+            
+            {/* Bottom divider and button replacement */}
+            <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+               <span className="text-sm font-medium text-neutral-400 group-hover:text-white transition-colors duration-300">
+                 Explore Case Study
+               </span>
+               <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300">
+                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                   <path d="M5 12h14"></path>
+                   <path d="M12 5l7 7-7 7"></path>
+                 </svg>
+               </div>
+            </div>
+          </div>
 
-        <p
-          className="text-gray-400 text-lg"
-          style={{ fontFamily: '"Noto Sans", sans-serif' }}
-        >
-          {item.subtitle}
-        </p>
-
-        <div className="w-full h-[1px] bg-gray-700 mt-3" />
-
-        {/* VIEW MORE BUTTON */}
-        <div className="mt-4 inline-block relative group">
-          <span
-            className="absolute -bottom-1 -right-1 w-full h-full bg-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.4)] transition-all duration-300 group-hover:-bottom-1.5 group-hover:-right-1.5 group-hover:shadow-[0_0_25px_rgba(250,204,21,0.6)]"
-          ></span>
-
-          <span
-            className="border border-yellow-400/40 px-5 py-2 bg-[#0a0a0a] text-white font-semibold text-sm relative z-10 block transition-colors duration-300 group-hover:text-yellow-400"
-            style={{ fontFamily: '"Noto Sans", sans-serif' }}
-          >
-            VIEW MORE
-          </span>
         </div>
 
       </Link>

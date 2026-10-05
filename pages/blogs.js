@@ -3,6 +3,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Clock, Calendar, ArrowRight, User, Tag, ChevronLeft, Share2, Bookmark } from "lucide-react";
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600', '700', '800', '900'] });
+const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
 
 import { BLOGS_DATA } from "../data/blogsData";
 
@@ -62,7 +66,7 @@ export default function BlogsPage() {
       {/* Reading Progress Bar (Only visible when reading an article) */}
 
 
-      <main className="min-h-screen bg-[#0a0a0a] text-white">
+      <main className={`min-h-screen bg-black text-white ${inter.className}`}>
         <AnimatePresence mode="wait">
           <motion.div
             key="list"
@@ -70,34 +74,41 @@ export default function BlogsPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="pb-24 pt-20 px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto"
+            className="pb-24 pt-28 px-6 md:px-12 lg:px-24 max-w-[1600px] mx-auto relative overflow-hidden"
           >
+            {/* Dynamic Yellow Glows - Matching Home Theme */}
+            <div className="absolute inset-0 w-full h-[600px] pointer-events-none z-0 overflow-hidden opacity-50">
+              <motion.div
+                animate={{
+                  x: ["-10vw", "60vw", "60vw", "-10vw", "-10vw"],
+                  y: ["-10vh", "-10vh", "40vh", "40vh", "-10vh"],
+                  opacity: [0.5, 0.7, 0.5, 0.7, 0.5],
+                }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute top-0 left-0 w-[40vh] h-[40vh] md:w-[50vh] md:h-[50vh] bg-yellow-400 rounded-full blur-[100px] md:blur-[120px] mix-blend-screen"
+              />
+            </div>
             {/* Ultra-Premium Hero Section */}
-            <div className="relative text-center max-w-5xl mx-auto mb-10 pt-4">
-              {/* Background Glow Effects */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[600px] h-[400px] bg-yellow-500/10 blur-[100px] rounded-full pointer-events-none z-0" />
-
+            <div className="relative text-center max-w-5xl mx-auto mb-16 pt-8 z-10">
               <h1 className="sr-only">Bizleap Blog</h1>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="relative z-10 text-3xl md:text-4xl lg:text-5xl font-bold mb-3 tracking-tight leading-[1.05] text-white"
+                className={`text-4xl md:text-5xl lg:text-[4rem] font-bold mb-6 tracking-tight leading-[1.1] text-white ${playfair.className}`}
               >
-                Leap Into <span className="font-serif italic font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">Smarter</span><br />
-                Business Decisions.
+                Leap Into <span className="text-[#E5A900] italic font-medium">Smarter</span><br />
+                <span className="text-[#E5A900] italic font-medium">Business</span> Decisions.
               </motion.div>
 
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="relative z-10 text-neutral-400 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed"
+                className="text-white/80 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed"
               >
                 Mastering the intersection of advanced technology, premium design, and scalable brand growth.
               </motion.p>
-
-
             </div>
 
             {/* Static Glassmorphic Category Bar */}
@@ -120,7 +131,7 @@ export default function BlogsPage() {
 
             {/* Bento Grid for All Posts */}
             {filteredBlogs.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-[1400px] mx-auto px-4 lg:px-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-7xl mx-auto">
                 {filteredBlogs.map((blog, idx) => (
                   <motion.div
                     key={blog.id}
@@ -128,48 +139,66 @@ export default function BlogsPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ delay: (idx % 3) * 0.15, duration: 0.6 }}
-                    className="group flex flex-col bg-transparent overflow-hidden h-full"
+                    className="group relative w-full h-full flex flex-col overflow-hidden rounded-3xl bg-neutral-900/40 border border-white/5 transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_40px_rgba(255,255,255,0.03)]"
                   >
-                    {/* Image — links to blog post */}
-                    <Link href={`/blogs/${blog.id}`} className="block relative h-64 rounded-2xl overflow-hidden shrink-0 cursor-pointer">
+                    {/* Image Wrapper */}
+                    <Link href={`/blogs/${blog.id}`} className="block relative aspect-video overflow-hidden shrink-0 cursor-pointer rounded-t-3xl">
                       <div className="absolute inset-0 bg-black/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
                       <img
                         src={blog.image}
                         alt={blog.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-90 group-hover:opacity-100"
                       />
+                      {/* Elegant overlay gradient on hover */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Bizleap Watermark */}
                       <div className="absolute top-4 left-5 z-20 font-bold text-white tracking-wide text-sm drop-shadow-md">
                         Biz<span className="text-yellow-400">leap</span>
                       </div>
                     </Link>
 
-                    {/* Content */}
-                    <div className="mt-5 flex flex-col flex-1">
-                      {/* Meta Row */}
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="bg-neutral-800 text-white text-xs font-semibold px-3 py-1.5 rounded">
-                          {blog.category}
-                        </span>
-                        <span className="text-neutral-400 text-sm font-medium">
-                          {blog.readTime}
-                        </span>
+                    {/* Content Wrapper */}
+                    <div className="p-6 md:p-8 flex flex-col flex-grow justify-between z-10 relative">
+                      <div>
+                        {/* Meta Row */}
+                        <div className="flex items-center gap-3 mb-5">
+                          <span className="bg-yellow-400/10 text-yellow-400 text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                            {blog.category}
+                          </span>
+                          <span className="text-neutral-400 text-xs sm:text-sm font-medium">
+                            {blog.readTime}
+                          </span>
+                        </div>
+
+                        {/* Title — links to blog post */}
+                        <Link href={`/blogs/${blog.id}`} className="block mb-3">
+                          <h3 
+                            className={`text-xl md:text-2xl font-medium text-white leading-tight group-hover:text-[#E5A900] transition-colors duration-300 line-clamp-2 ${playfair.className}`}
+                            title={blog.title}
+                          >
+                            {blog.title}
+                          </h3>
+                        </Link>
                       </div>
 
-                      {/* Title — links to blog post */}
-                      <Link href={`/blogs/${blog.id}`} className="block mb-3">
-                        <h3 className="text-base md:text-lg font-bold text-white leading-snug hover:text-yellow-400 transition-colors">
-                          {blog.title}
-                        </h3>
-                      </Link>
-
-                      {/* Author — links to author profile */}
-                      <div className="mt-auto pt-4">
+                      {/* Author & Arrow Button Row */}
+                      <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
                         <Link
                           href={`/authors/${blog.author.toLowerCase().replace(/ /g, '-')}`}
-                          className="text-neutral-500 text-sm hover:text-yellow-400 transition-colors font-medium"
+                          className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          {blog.author}
+                          By {blog.author}
+                        </Link>
+                        
+                        <Link href={`/blogs/${blog.id}`}>
+                          <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300 cursor-pointer">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M5 12h14"></path>
+                              <path d="M12 5l7 7-7 7"></path>
+                            </svg>
+                          </div>
                         </Link>
                       </div>
                     </div>
