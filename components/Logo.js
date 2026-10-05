@@ -58,7 +58,7 @@ export default function BrandSlider() {
     let animationFrameId;
     let lastTime = performance.now();
     // Calculate speed based on screen size (roughly analogous to the previous duration math)
-    const speed = window.innerWidth < 768 ? 0.08 : 0.05;
+    const speed = window.innerWidth < 768 ? 0.12 : 0.08;
 
     const scroll = (time) => {
       if (containerRef.current && !isDragging) {

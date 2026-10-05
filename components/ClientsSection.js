@@ -36,29 +36,48 @@ import { CLIENT_CATEGORIES } from "../data/clientsData";
 // ------------------- Infinite Logo Slider -------------------
 function InfiniteLogoSlider({ clients }) {
   const sliderRef = useRef(null);
-  const total = [...clients, ...clients];
+  // Duplicate the array multiple times so it always fills large screens, 
+  // even if a category only has 1 or 2 items.
+  const multiplier = 12;
+  const total = Array(multiplier).fill(clients).flat();
 
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
 
     let x = 0;
-    const speed = 1.8;
+    const speed = 1.0;
     let animationId;
 
     const scroll = () => {
-      x -= speed;
-      const totalWidth = slider.scrollWidth / 2;
+      // Calculate exact width of ONE full original set to translate. 
+      const children = slider.children;
+      if (children.length > clients.length) {
+        // Distance between the very first item and the first duplicated item
+        const totalWidth = children[clients.length]?.offsetLeft - children[0]?.offsetLeft;
 
-      if (Math.abs(x) >= totalWidth) x = 0;
+        x -= speed;
+
+        if (totalWidth && Math.abs(x) >= totalWidth) {
+          // Add back totalWidth so it loops seamlessly
+          x += totalWidth; 
+        }
+      }
 
       slider.style.transform = `translateX(${x}px)`;
       animationId = requestAnimationFrame(scroll);
     };
 
-    animationId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationId);
-  }, []);
+    // Give images a moment to load and render layouts before starting
+    const timeoutId = setTimeout(() => {
+      animationId = requestAnimationFrame(scroll);
+    }, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+      cancelAnimationFrame(animationId);
+    };
+  }, [clients]);
 
   return (
     <div className="relative w-full overflow-hidden">
