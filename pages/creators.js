@@ -188,62 +188,61 @@ function SidebarFilterSection({ id, title, options = [], isRange = false, select
 function InfluencerCard({ item, onClick, idx = 0 }) {
   const getInitials = (name) => name.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2);
 
+  const aspectRatios = ["aspect-[4/5]", "aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[3/5]"];
+  const ratio = aspectRatios[idx % 5];
+  
   return (
     <div
-      className="relative w-full h-[25rem] cursor-pointer group"
+      className={`relative w-full ${ratio} break-inside-avoid inline-block mb-6 lg:mb-8 cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-500/50 transition-all duration-500 bg-[#0a0a0c] shadow-lg hover:shadow-[0_10px_40px_rgba(229,169,0,0.15)]`}
       onClick={() => onClick(item, "influencer")}
     >
-      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
-        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
-        {item.image && item.image !== "-" ? (
-          <SafeImage src={item.image} alt={item.name} width={600} height={800} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-        ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-black font-bold text-2xl">
-              {getInitials(item.name)}
-            </div>
+      {item.image && item.image !== "-" ? (
+        <SafeImage src={item.image} alt={item.name} width={600} height={800} className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-110 ${item.imageClass || 'object-cover'}`} />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-[#0a0a0c] flex items-center justify-center">
+          <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-black font-bold text-2xl shadow-xl">
+            {getInitials(item.name)}
           </div>
-        )}
-        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
-        <div className="absolute top-4 right-4 z-10">
-          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
-            {item.contentStyle || "Lifestyle"}
-          </span>
         </div>
+      )}
+      
+      {/* Sleek Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      {/* Top Right Tag - slides in on hover */}
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+          {item.contentStyle || "Lifestyle"}
+        </span>
       </div>
 
-      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
-        <div>
-          <div className="mb-2">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
-              <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
-              {item.category || "Creator"}
-            </span>
-          </div>
-          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
-          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.location || "India"}</p>
-        </div>
-
-        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+      {/* Content */}
+      <div className={`absolute inset-x-0 bottom-0 p-5 md:p-6 flex flex-col justify-end z-20 ${inter.className}`}>
+        <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 group-hover:text-yellow-400 transition-colors ${playfair.className}`}>{item.name}</h3>
+          <div className="flex items-center justify-between mt-2">
+            <p className="text-[13px] text-gray-300 font-medium tracking-wide flex items-center gap-1.5">
+              <LocationIcon /> {item.location || "India"}
+            </p>
             {item.followers && item.followers !== "-" && (
-              <div className="flex items-center gap-1.5 text-white">
-                <InstaIcon /> <span className="font-semibold text-[14px]">{item.followers}</span>
-              </div>
-            )}
-            {item.youtubeSubscribers && (
-              <div className="flex items-center gap-1.5 text-white">
-                <YoutubeIcon /> <span className="font-semibold text-[14px]">{item.youtubeSubscribers}</span>
-              </div>
+              <p className="text-[13px] text-white font-bold flex items-center gap-1.5 bg-white/10 px-2 py-1 rounded-md backdrop-blur-sm">
+                <InstaIcon /> {item.followers}
+              </p>
             )}
           </div>
-          {item.engagement && item.engagement !== "-" && (
+          
+          {/* Extra stats that fade in on hover */}
+          <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
             <div className="flex items-center gap-1.5 text-white">
-              <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Eng:</span> <span className="font-semibold text-[14px] text-white">{item.engagement}</span>
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Eng:</span> 
+              <span className="font-semibold text-[13px]">{item.engagement && item.engagement !== "-" ? item.engagement : "N/A"}</span>
             </div>
-          )}
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Cat:</span> 
+              <span className="font-semibold text-[13px] truncate max-w-[80px]">{item.category || "Creator"}</span>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
@@ -259,46 +258,43 @@ function MagazineCard({ item, onClick, idx = 0 }) {
   };
   const starting = item.minBudget || item.startingPrice || 25000;
 
+  const aspectRatios = ["aspect-[4/5]", "aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[3/5]"];
+  const ratio = aspectRatios[idx % 5];
+  
   return (
     <a
       href={item.websiteLink || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      className="relative w-full h-[25rem] cursor-pointer group block"
+      className={`relative w-full ${ratio} break-inside-avoid inline-block mb-6 lg:mb-8 cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-500/50 transition-all duration-500 bg-[#0a0a0c] shadow-lg hover:shadow-[0_10px_40px_rgba(229,169,0,0.15)] block`}
       onClick={() => onClick(item, "magazine")}
     >
-      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
-        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
-        <SafeImage src={item.image} alt={item.name} width={700} height={800} className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
-        <div className="absolute top-4 right-4 z-10">
-          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
-            {item.genre || "Magazine"}
-          </span>
-        </div>
+      <SafeImage src={item.image} alt={item.name} width={700} height={800} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" />
+      
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+          {item.genre || "Magazine"}
+        </span>
       </div>
 
-      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
-        <div>
-          <div className="mb-2">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
-              <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
-              Magazine
-            </span>
-          </div>
-          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
-          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.frequency || "Monthly"}</p>
-        </div>
-
-        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Readers:</span> <span className="font-semibold text-[14px]">{fmt(item.readership)}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Starting:</span> <span className="font-semibold text-[14px] text-white">₹{fmt(Number(starting))}</span>
+      <div className={`absolute inset-x-0 bottom-0 p-5 md:p-6 flex flex-col justify-end z-20 ${inter.className}`}>
+        <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 group-hover:text-yellow-400 transition-colors ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-300 font-medium tracking-wide mt-2">{item.frequency || "Monthly"}</p>
+          
+          <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Readers:</span> 
+              <span className="font-semibold text-[13px]">{fmt(item.readership)}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Starts at:</span> 
+              <span className="font-semibold text-[13px] text-yellow-400">₹{fmt(Number(starting))}</span>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </a>
   );
@@ -312,46 +308,44 @@ function NewspaperCard({ item, onClick, idx = 0 }) {
     if (v >= 1000) return (v / 1000).toFixed(0) + "K";
     return v;
   };
+  
+  const aspectRatios = ["aspect-[4/5]", "aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[3/5]"];
+  const ratio = aspectRatios[idx % 5];
+  
   return (
     <a
       href={item.websiteLink || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      className="relative w-full h-[25rem] cursor-pointer group block"
+      className={`relative w-full ${ratio} break-inside-avoid inline-block mb-6 lg:mb-8 cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-500/50 transition-all duration-500 bg-[#0a0a0c] shadow-lg hover:shadow-[0_10px_40px_rgba(229,169,0,0.15)] block`}
       onClick={() => onClick(item, "newspaper")}
     >
-      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
-        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
-        <SafeImage src={item.image} alt={item.name} width={700} height={800} className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
-        <div className="absolute top-4 right-4 z-10">
-          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
-            {item.genre || "News"}
-          </span>
-        </div>
+      <SafeImage src={item.image} alt={item.name} width={700} height={800} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" />
+      
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+          {item.genre || "News"}
+        </span>
       </div>
 
-      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
-        <div>
-          <div className="mb-2">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
-              <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
-              Newspaper
-            </span>
-          </div>
-          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
-          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.language || "English"}</p>
-        </div>
-
-        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Circ:</span> <span className="font-semibold text-[14px]">{fmt(item.circulation || "-")}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Rate:</span> <span className="font-semibold text-[14px] text-white">{item.adRate || "-"}</span>
+      <div className={`absolute inset-x-0 bottom-0 p-5 md:p-6 flex flex-col justify-end z-20 ${inter.className}`}>
+        <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 group-hover:text-yellow-400 transition-colors ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-300 font-medium tracking-wide mt-2">{item.language || "English"}</p>
+          
+          <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Circ:</span> 
+              <span className="font-semibold text-[13px]">{fmt(item.circulation || "-")}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Rate:</span> 
+              <span className="font-semibold text-[13px] text-yellow-400">{item.adRate || "-"}</span>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </a>
   );
@@ -363,46 +357,43 @@ function DigitalCard({ item, onClick, idx = 0 }) {
     item.adRate === "Pay-Per-View" ? "PPV" :
       item.adRate || item.pricingModel || "-";
 
+  const aspectRatios = ["aspect-[4/5]", "aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[3/5]"];
+  const ratio = aspectRatios[idx % 5];
+  
   return (
     <a
       href={item.websiteLink || "#"}
       target="_blank"
       rel="noopener noreferrer"
-      className="relative w-full h-[25rem] cursor-pointer group block"
+      className={`relative w-full ${ratio} break-inside-avoid inline-block mb-6 lg:mb-8 cursor-pointer group rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-500/50 transition-all duration-500 bg-[#0a0a0c] shadow-lg hover:shadow-[0_10px_40px_rgba(229,169,0,0.15)] block`}
       onClick={() => onClick(item, "digital")}
     >
-      <div className="relative w-full h-full rounded-2xl flex flex-col border border-white/10 group-hover:border-white/30 transition-all duration-300 bg-[#0a0a0c] group-hover:shadow-[0_0_30px_rgba(250,204,21,0.08)] group-hover:-translate-y-2 overflow-hidden">
-        <div className="relative z-10 h-[55%] w-full overflow-hidden bg-[#0a0a0c]">
-        <SafeImage src={item.image} alt={item.name} width={700} height={800} className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105" />
-        <div className="absolute inset-x-0 bottom-[-2px] h-24 bg-gradient-to-t from-[#0a0a0c] to-transparent pointer-events-none" />
-        <div className="absolute top-4 right-4 z-10">
-          <span className={`px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-md text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
-            {item.platformType || "Digital"}
-          </span>
-        </div>
+      <SafeImage src={item.image} alt={item.name} width={700} height={800} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110" />
+      
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+          {item.platformType || "Digital"}
+        </span>
       </div>
 
-      <div className={`relative z-20 flex-1 p-5 pt-3 flex flex-col justify-between bg-[#0a0a0c] -mt-1 rounded-b-2xl ${inter.className}`}>
-        <div>
-          <div className="mb-2">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-yellow-500 tracking-widest uppercase">
-              <span className="w-1 h-1 rounded-full bg-yellow-500"></span>
-              Platform
-            </span>
-          </div>
-          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 ${playfair.className}`}>{item.name}</h3>
-          <p className="text-[13px] text-gray-400 font-medium tracking-wide">{item.formats?.[0] || "Ads"}</p>
-        </div>
-
-        <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Reach:</span> <span className="font-semibold text-[14px]">{shortReach}</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-white">
-            <span className="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Model:</span> <span className="font-semibold text-[14px] text-white">{shortModel}</span>
+      <div className={`absolute inset-x-0 bottom-0 p-5 md:p-6 flex flex-col justify-end z-20 ${inter.className}`}>
+        <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+          <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 group-hover:text-yellow-400 transition-colors ${playfair.className}`}>{item.name}</h3>
+          <p className="text-[13px] text-gray-300 font-medium tracking-wide mt-2">{item.formats?.[0] || "Ads"}</p>
+          
+          <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75">
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Reach:</span> 
+              <span className="font-semibold text-[13px]">{shortReach}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-white">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Model:</span> 
+              <span className="font-semibold text-[13px] text-yellow-400">{shortModel}</span>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </a>
   );
@@ -777,7 +768,7 @@ export default function CreatorsSection() {
   useEffect(() => {
     const customSort = (data, topNames = []) => {
       // First, shuffle the data
-      const shuffled = [...data].sort(() => Math.random() - 0.5);
+      const shuffled = [...data];
 
       const topCreators = [];
       const withImage = [];
@@ -805,7 +796,7 @@ export default function CreatorsSection() {
     };
 
     setShuffledData({
-      influencer: customSort(influencersData, ["faimin malik", "aishwarya lad", "samrin khan"]),
+      influencer: customSort(influencersData, []),
       magazine: customSort(magazinesData),
       newspaper: customSort(newspapersData),
       digital: customSort(digitalPlatformsData),
@@ -1041,7 +1032,7 @@ export default function CreatorsSection() {
         {/* Sleek Toolbar */}
         <div className="mt-8 mb-10 w-full border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           {/* Categories */}
-          <div className="flex flex-wrap items-center gap-2 md:gap-3">
+          <div className="flex overflow-x-auto whitespace-nowrap items-center gap-2 md:gap-3 pb-2 md:pb-0 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
             {sections.map((s) => (
               <button
                 key={s.key}
@@ -1121,7 +1112,7 @@ export default function CreatorsSection() {
 
         {/* Full Width Grid */}
         <div className="w-full relative z-0">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+          <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-6 lg:gap-8">
             {cardsForSection(sections.find(s => s.key === filter))}
           </div>
         </div>
@@ -1137,85 +1128,365 @@ export default function CreatorsSection() {
 
 /* ------------------- YOUR UPDATED INFLUENCER DATA ------------------- */
 const influencersData = [
-  { id: 3, name: "Santoshi Telgu", location: "Pune", instagramLink: "https://www.instagram.com/trippydimple", gender: "female", contentStyle: "Food", followers: "39K", engagement: "0.54%", image: "/Creators/SantoshiTelgu.jpg" },
-  { id: 1, name: "Sneha Roy", location: "Pune", instagramLink: "https://www.instagram.com/lifestyle_with_shona/profilecard/?igsh=NnVidmoxNHRuNGlr", gender: "female", contentStyle: "Lifestyle", followers: "43K", engagement: "0.92%", image: "/Creators/SnehaRoy.jpg" },
-  { id: 5, name: "Faimin Malik", location: "Pune Hinjewadi", instagramLink: "https://instagram.com/faimin_malik", gender: "female", contentStyle: "Lifestyle", followers: "112K", engagement: "1.45%", image: "/Creators/FaiminMalik.jpg" },
-  { id: 2, name: "Nidhi Sethi", location: "Pune", instagramLink: "https://Instagram.com/sethinidhi01", gender: "female", contentStyle: "Fashion", followers: "32K", engagement: "3.42%", image: "/Creators/NidhiSethi.jpg" },
-  { id: 4, name: "Arpita Chandekar", location: "Pune", instagramLink: "https://www.instagram.com/chandekararpita/profilecard/?igsh=MXMxcWxwZzNjdXB2dA==", gender: "female", contentStyle: "Beauty", followers: "53K", engagement: "0.95%", image: "/Creators/ArpitaChandekar.jpg" },
-  { id: 6, name: "Alisha Ranawat", location: "Swargate", instagramLink: "https://www.instagram.com/alisharanawat?", gender: "female", contentStyle: "Host", followers: "60K", engagement: "0.17%", image: "/Creators/AlishaRanawat.jpg" },
-  { id: 7, name: "Usha", location: "Pune", instagramLink: "https://instagram.com/dhruvaautade?igshid=YmMyMTA2M2Y=", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "0.97%", image: "Creators/Usha.jpg" },
-  { id: 8, name: "Poonam P", location: "Pune", instagramLink: "https://www.instagram.com/p.o.o.n.a.m_p", gender: "female", contentStyle: "Beauty", followers: "24K", engagement: "0.13%", image: "Creators/PoonamP.jpg" },
-  { id: 9, name: "Apurva Pardeshi", location: "Pune", instagramLink: "https://www.instagram.com/apurwaah?igsh=b2J2bzFuZGhieWc4&utm_source=qr", gender: "female", contentStyle: "Fashion", followers: "40K", engagement: "2.25%", image: "Creators/ApurvaPardeshi.jpg" },
-  { id: 10, name: "Ketaki Sogavkar", location: "Pune", instagramLink: "https://instagram.com/happysoul_ketaki?igshid=ZDc4ODBmNjlmNQ==", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "2.67%", image: "Creators/KetakiSogavkar.jpg" },
-  { id: 11, name: "Sudha Jain", location: "Pune", instagramLink: "https://www.instagram.com/thecrazy_explorer", gender: "female", contentStyle: "Lifestyle", followers: "43K", engagement: "0.07%", image: "Creators/SudhaJain.jpg" },
-  { id: 12, name: "Reetu Agrawal", location: "Hadapsar", instagramLink: "https://www.instagram.com/thepunemother/profilecard/?igsh=dXoxczJqaGI3cGh6", gender: "female", contentStyle: "Lifestyle", followers: "42K", engagement: "0.8%", image: "Creators/ReetuAgrawal.jpg" },
-  { id: 13, name: "Shakshi Dung", location: "Pune", instagramLink: "https://www.instagram.com/tales_of_yuvi/profilecard/?igsh=MXNyNDVyaGphamM5YQ==", gender: "female", contentStyle: "Lifestyle", followers: "13K", engagement: "13.45%", image: "Creators/SakshiDung.jpg" },
-  { id: 14, name: "Vatsala Sharma", location: "Pune Baner", instagramLink: "https://www.instagram.com/theladywholeads/profilecard/?igsh=YTV0dnRudjBmdjlr", gender: "female", contentStyle: "Lifestyle", followers: "76K", engagement: "1.59%", image: "Creators/VatsalaSharma.jpg" },
-  { id: 15, name: "Aishwarya Lad", location: "Pune", instagramLink: "https://www.instagram.com/aishwarya_1506/profilecard/?igsh=MjhpZTkxbGMxcTZt", gender: "female", contentStyle: "Lifestyle", followers: "45K", engagement: "2.55%", image: "Creators/AishwaryaLad.jpg" },
-  { id: 16, name: "Sonam Sharma", location: "Magarpatta", instagramLink: "https://instagram.com/styleupwithsonam", gender: "female", contentStyle: "Fashion", followers: "56K", engagement: "5.3%", image: "Creators/SonamSharma.jpg" },
-  { id: 17, name: "Samrin Khan", location: "Mumbai", instagramLink: "https://www.instagram.com/samrinkhanofficial", gender: "female", contentStyle: "Fashion", followers: "26K", engagement: "0.59%", image: "Creators/SamrinKhan.jpg" },
-  { id: 18, name: "Bhagyashree", location: "Pune", instagramLink: "https://www.instagram.com/worldofbhagyashri/profilecard/?igsh=MWE2Z3Aweml4NWthNw==", gender: "female", contentStyle: "Food", followers: "12K", engagement: "0.71%", image: "Creators/Sania.jpg" },
-  { id: 19, name: "Sania", location: "Pune", instagramLink: "https://www.instagram.com/glowithsaanu/profilecard/?igsh=MWtkZmY0ZXRhZDYzdw==", gender: "female", contentStyle: "Beauty", followers: "66K", engagement: "0.56%", image: "Creators/Sania.jpg" },
-  { id: 20, name: "Payal Mehta", location: "Pune", instagramLink: "https://www.instagram.com/pylmehta?igsh=MWwwY2liM3NxOW55Ng==", gender: "female", contentStyle: "Fashion", followers: "20K", engagement: "0.39%", image: "Creators/PayalMehta.jpg" },
-  { id: 21, name: "Priya Rajput", location: "Pune", instagramLink: "https://www.instagram.com/__foodbyprriyaa__/profilecard/?igsh=a3V1ZWIwejBqdXpk", gender: "female", contentStyle: "Food", followers: "3K", engagement: "33.4%", image: "Creators/PriyaRajput.jpg" },
-  { id: 22, name: "Shweta Godse", location: "Pune", instagramLink: "https://www.instagram.com/ta_ta_bish?igsh=djZocjVsaDF2aW93", gender: "female", contentStyle: "-", followers: "14K", engagement: "10.58%", image: "-" },
-  { id: 23, name: "Mugdha Karandikar", location: "Pune", instagramLink: "https://www.instagram.com/mugdhaspeaks?igsh=aTh1ZnZnYmRhaTB3&utm_source=qr", gender: "female", contentStyle: "Food", followers: "64K", engagement: "1.69%", image: "-" },
-  { id: 24, name: "Vaishnavi Sakpal", location: "Raviwar Peth", instagramLink: "https://www.instagram.com/vaishnavi_991/profilecard/?igsh=MTA5d3g5bWhtdGxraw==", gender: "female", contentStyle: "Lifestyle", followers: "11K", engagement: "2.3%", image: "-" },
-  { id: 25, name: "Madhu", location: "East Delhi", instagramLink: "https://www.instagram.com/minniemadhu_?igsh=ajB2dW9zb2dzeWFh", gender: "female", contentStyle: "Lifestyle", followers: "5K", engagement: "13.69%", image: "-" },
-  { id: 26, name: "Akshata Lokhande", location: "Pune", instagramLink: "https://www.instagram.com/akshataaa.1/profilecard/?igsh=MXcyMHluNW9lY2hvbw==", gender: "female", contentStyle: "Fashion", followers: "55K", engagement: "1.88%", image: "-" },
-  { id: 27, name: "Pragya Kalapad", location: "Gurugram, Delhi", instagramLink: "https://www.instagram.com/prxgya_404/profilecard", gender: "female", contentStyle: "Lifestyle", followers: "11K", engagement: "7.41%", image: "-" },
-  { id: 28, name: "Mayuri Navhate", location: "Pune", instagramLink: "https://www.instagram.com/mayurinavhate?igsh=djljdHh3eGsxZ3Vv", gender: "female", contentStyle: "-", followers: "10K", engagement: "1.69%", image: "-" },
-  { id: 29, name: "Anmol Milaney", location: "Cloud 9, NIBM", instagramLink: "https://www.instagram.com/anmol_milaney?igsh=dm9qenJtdDBheGtx&utm_source=qr", gender: "female", contentStyle: "Food & Lifestyle", followers: "27K", engagement: "1.48%", image: "-" },
-  { id: 30, name: "Daljeet Kaur", location: "Hadapsar", instagramLink: "https://www.instagram.com/nehadkaur?igsh=MWN2eWw0dzJ5a3Aydg==", gender: "female", contentStyle: "Makeup", followers: "12K", engagement: "2.93%", image: "-" },
-  { id: 31, name: "Nikita Sohoni", location: "Pune", instagramLink: "https://www.instagram.com/sangriamulgi/profilecard/?igsh=MW5iMXVtcDNkb2x1eA==", gender: "female", contentStyle: "Travel", followers: "11K", engagement: "2.5%", image: "-" },
-  { id: 32, name: "Nibedita Nayak", location: "Pune", instagramLink: "https://www.instagram.com/iamnibeditta?igsh=bmNtd3o0bjI2ZzJx", gender: "female", contentStyle: "Actor", followers: "94K", engagement: "0.11%", image: "-" },
-  { id: 33, name: "Shruti", location: "Pune", instagramLink: "https://www.instagram.com/shrutiiyyyyyy?igsh=ZDg0YWd6MzZtNHhp&utm_source=qr", gender: "female", contentStyle: "Lifestyle", followers: "11K", engagement: "9.77%", image: "-" },
-  { id: 34, name: "Komal Jain", location: "Pune", instagramLink: "https://www.instagram.com/kdkomaljain?igsh=MWdrbTZhbndoMGZrYQ%3D%3D&utm_source=qr", gender: "female", contentStyle: "Model", followers: "51K", engagement: "1.14%", image: "-" },
-  { id: 35, name: "Jayti Moitra", location: "Pune", instagramLink: "https://www.instagram.com/jaytimoitra/profilecard/?igsh=MW42eDZvazllM2swaA==", gender: "female", contentStyle: "-", followers: "28K", engagement: "5.54%", image: "-" },
-  { id: 36, name: "Sarika", location: "Pune", instagramLink: "https://www.instagram.com/foodsie_mum", gender: "female", contentStyle: "Food", followers: "27K", engagement: "1.18%", image: "-" },
-  { id: 37, name: "Pune Food Lover", location: "Pune", instagramLink: "https://instagram.com/punefoodloverzz?utm_medium=copy_link", gender: "female", contentStyle: "Food", followers: "9K", engagement: "3.43%", image: "-" },
-  { id: 38, name: "Kanchan Uma Rajak", location: "Pune", instagramLink: "https://www.instagram.com/kanchan_2812/profilecard", gender: "female", contentStyle: "Lifestyle", followers: "21K", engagement: "1.4%", image: "-" },
-  { id: 39, name: "Shruti Borkar", location: "Swargate", instagramLink: "https://www.instagram.com/shruti_the_explorer_?igsh=MTF5MW9xdGU0aW85dQ==", gender: "female", contentStyle: "Fashion, Fitness, Food", followers: "17K", engagement: "0.11%", image: "-" },
-  { id: 40, name: "Surajita Das", location: "Pune", instagramLink: "https://www.instagram.com/myra_the_angel/profilecard/?igsh=MTdldDAyZ3Rsb2F1Yg==", gender: "female", contentStyle: "Digital Creator", followers: "14K", engagement: "4.41%", image: "-" },
-  { id: 41, name: "Mrunal Mungi", location: "Pune", instagramLink: "https://instagram.com/mrunal_mungi?igshid=MzRlODBiNWFlZA==", gender: "female", contentStyle: "Luxury Lifestyle", followers: "61K", engagement: "1.79%", image: "-" },
-  { id: 42, name: "Aarti Kolte", location: "Pune", instagramLink: "https://www.instagram.com/yourfoodescort/profilecard/?igsh=MTlhbWtncGN1amFrZg==", gender: "female", contentStyle: "Food", followers: "12K", engagement: "15.78%", image: "-" },
-  { id: 43, name: "Rishi Barad", location: "Pune", instagramLink: "https://www.instagram.com/puneriblogger/profilecard/?igsh=dXJ4MXk2dGkyY2Zs", gender: "male", contentStyle: "Real Estate & Lifestyle", followers: "55K", engagement: "3.59%", image: "-" },
-  { id: 44, name: "Kratika Pandey", location: "Pune", instagramLink: "https://www.instagram.com/kratika_vogue_?igsh=cXh5YTdhN2IzcTZn&utm_source=qr", gender: "female", contentStyle: "Fashion, Fitness", followers: "29K", engagement: "0.13%", image: "-" },
-  { id: 45, name: "Preeti", location: "Pune", instagramLink: "https://instagram.com/simple_yet_classy_preeti", gender: "female", contentStyle: "Beauty Influencer", followers: "37K", engagement: "0.07%", image: "-" },
-  { id: 46, name: "Vidhi Gupta", location: "Delhi", instagramLink: "https://www.instagram.com/vidhigupta1923/profilecard/?igsh=dTBlNHA3czcycnFw", gender: "female", contentStyle: "Influencer", followers: "98K", engagement: "0.64%", image: "-" },
-  { id: 47, name: "Rajat Wankhede", location: "Amravati", instagramLink: "https://www.instagram.com/rajatwankhade007?igsh=cDhrYTlpbzFteW1k", gender: "male", contentStyle: "Model / Lifestyle", followers: "49K", engagement: "29.08%", image: "-" },
-  { id: 48, name: "Riya Narula", location: "Pune / Delhi / Bangalore / Mumbai", instagramLink: "https://www.instagram.com/riyabeni?igsh=MTAybHE5NWM1cWNm", gender: "female", contentStyle: "Fitness", followers: "22K", engagement: "5.92%", image: "-" },
-  { id: 49, name: "Sneha Misal", location: "Pune / Delhi / Bangalore / Mumbai", instagramLink: "https://www.instagram.com/sssnehahaha_?igsh=MWVoNW9tbTdqbXZjMQ==", gender: "female", contentStyle: "-", followers: "20K", engagement: "37.22%", image: "-" },
-  { id: 50, name: "Plate For Two", location: "Nagpur", instagramLink: "https://www.instagram.com/plate_for_two/", gender: "female", contentStyle: "Food", followers: "12K", engagement: "5.7%", image: "-" },
-  { id: 51, name: "Ruchika Asatkar", location: "Nagpur", instagramLink: "https://www.instagram.com/ruchika_asatkar/", gender: "female", contentStyle: "Blogger", followers: "290K", engagement: "1%", image: "-" },
-  { id: 52, name: "The Tongue and Scissors", location: "Nagpur", instagramLink: "https://www.instagram.com/thetongueandscissors/", gender: "female", contentStyle: "Lifestyle", followers: "117K", engagement: "0.9%", image: "-" },
-  { id: 53, name: "Girly N Gluttony", location: "Nagpur", instagramLink: "https://www.instagram.com/girly_n_gluttony/", gender: "female", contentStyle: "Food / Lifestyle", followers: "61K", engagement: "1.7%", image: "-" },
-  { id: 54, name: "Binge Life", location: "Nagpur", instagramLink: "https://www.instagram.com/bingelife/", gender: "female", contentStyle: "Food / Travel", followers: "147K", engagement: "0.7%", image: "-" },
-  { id: 55, name: "Angel Peter", location: "Nagpur", instagramLink: "https://www.instagram.com/angelpeterr_/", gender: "female", contentStyle: "Lifestyle", followers: "172K", engagement: "1%", image: "-" },
-  { id: 56, name: "Doyash", location: "Nagpur", instagramLink: "https://www.instagram.com/doyash/", gender: "male", contentStyle: "Food", followers: "92K", engagement: "20%", image: "-" },
-  { id: 57, name: "Rustoodie", location: "Nagpur", instagramLink: "https://www.instagram.com/rustoodie/", gender: "female", contentStyle: "Lifestyle", followers: "20K", engagement: "0.9%", image: "-" },
-  { id: 58, name: "Dilmange Veg", location: "Nagpur", instagramLink: "https://www.instagram.com/dilmange_veg/", gender: "male", contentStyle: "Food", followers: "14K", engagement: "5.7%", image: "-" },
-  { id: 59, name: "Khate Raho Dilse", location: "Nagpur", instagramLink: "https://www.instagram.com/khate_raho_dilse/", gender: "male", contentStyle: "Food", followers: "78K", engagement: "0.7%", image: "-" },
-  { id: 60, name: "Wandering Jojo", location: "Nagpur", instagramLink: "https://www.instagram.com/wandering_jojo/", gender: "female", contentStyle: "Travel", followers: "17K", engagement: "5.4%", image: "-" },
-  { id: 61, name: "Nagpurchi Santri", location: "Nagpur", instagramLink: "https://www.instagram.com/nagpurchi_santri/", gender: "female", contentStyle: "Reel Creator", followers: "16K", engagement: "1.7%", image: "-" },
-  { id: 62, name: "Sakshi Mood", location: "Nagpur", instagramLink: "https://www.instagram.com/sakshimood/", gender: "female", contentStyle: "Content Creator", followers: "21K", engagement: "5.9%", image: "-" },
-  { id: 63, name: "Life Swaadanusar", location: "Nagpur", instagramLink: "https://www.instagram.com/life_swaadanusar/", gender: "female", contentStyle: "Digital Creator", followers: "1K", engagement: "79.5%", image: "-" },
-  { id: 64, name: "Nagpur Foodpedia", location: "Nagpur", instagramLink: "https://www.instagram.com/nagpurfoodpedia/", gender: "male", contentStyle: "Content Creator", followers: "51K", engagement: "12.4%", image: "-" },
-  { id: 65, name: "Nagpur Hone", location: "Nagpur", instagramLink: "https://www.instagram.com/nagpurhone/", gender: "male", contentStyle: "Content Creator", followers: "11K", engagement: "30.4%", image: "-" },
-  { id: 66, name: "Pizzandpie", location: "Nagpur", instagramLink: "https://www.instagram.com/pizzandpie/", gender: "female", contentStyle: "Content Creator", followers: "49K", engagement: "3%", image: "-" },
-  { id: 67, name: "Gourmet Musafir", location: "Nagpur", instagramLink: "https://www.instagram.com/gourmetmusafir/", gender: "male", contentStyle: "Content Creator", followers: "125K", engagement: "0.7%", image: "-" },
-  { id: 68, name: "Priyal Giri", location: "Nagpur", instagramLink: "https://www.instagram.com/priyal_giri/", gender: "female", contentStyle: "Lifestyle", followers: "15K", engagement: "12.3%", image: "-" },
-  { id: 69, name: "Daawat.e.ishq", location: "Nagpur", instagramLink: "https://www.instagram.com/daawat.e.ishq/", gender: "female", contentStyle: "Lifestyle", followers: "66K", engagement: "1.2%", image: "-" },
-  { id: 70, name: "Tarushi Sinha", location: "Nagpur", instagramLink: "https://www.instagram.com/tarushisinhaa/", gender: "female", contentStyle: "Blogger", followers: "1K", engagement: "9.3%", image: "-" },
-  { id: 71, name: "The Flavourful Sagas", location: "Nagpur", instagramLink: "https://www.instagram.com/the_flavourful_sagas/", gender: "female", contentStyle: "Blogger", followers: "5K", engagement: "4.1%", image: "-" },
-  { id: 72, name: "Foodie Ank", location: "Nagpur", instagramLink: "https://www.instagram.com/foodie_ank/", gender: "female", contentStyle: "Blogger", followers: "32K", engagement: "0.8%", image: "-" },
-  { id: 73, name: "Khana Khajana Nagpur", location: "Nagpur", instagramLink: "https://www.instagram.com/khana_khajana_nagpur/", gender: "male", contentStyle: "Food", followers: "22K", engagement: "3.3%", image: "-" },
-  { id: 74, name: "Not Just Chapatti", location: "Nagpur", instagramLink: "https://www.instagram.com/not_just_chapatti/", gender: "female", contentStyle: "Food", followers: "4K", engagement: "6.3%", image: "-" },
-  { id: 75, name: "Nagpurcha Patel", location: "Nagpur", instagramLink: "https://www.instagram.com/nagpurcha_patel/", gender: "male", contentStyle: "Lifestyle", followers: "3K", engagement: "9.9%", image: "-" },
-  { id: 76, name: "Jamocu", location: "Nagpur", instagramLink: "https://www.instagram.com/jamocu/", gender: "female", contentStyle: "Beauty", followers: "124K", engagement: "0.7%", image: "-" },
-  { id: 77, name: "Nagpurcha Kartik", location: "Nagpur", instagramLink: "https://www.instagram.com/nagpurchakartik/", gender: "male", contentStyle: "Lifestyle", followers: "164K", engagement: "1.5%", image: "-" },
-  { id: 78, name: "Crushonfood", location: "Nagpur", instagramLink: "https://www.instagram.com/crushonfood/", gender: "male", contentStyle: "Food", followers: "24K", engagement: "95%", image: "-" },
-  { id: 79, name: "Shroodiee", location: "Nagpur", instagramLink: "https://www.instagram.com/shroodiee/", gender: "female", contentStyle: "Food / Lifestyle", followers: "10K", engagement: "1.6%", image: "-" }
+  {
+    id: 101,
+    name: "Aira Shetty",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/aira shetty/aira s (3).png",
+    imageClass: "object-cover object-[center_25%]"
+  },
+  {
+    id: 102,
+    name: "Alandi Bhoyar",
+    location: "Chandrapur/Nagpur/Delhi",
+    instagramLink: "https://www.instagram.com/alandi._b?stkn=MTd1c2Z1NW8xbDhkeA==",
+    gender: "female",
+    contentStyle: "Beauty•lifestyle•fashion•ugc creator,Model",
+    followers: "9K",
+    engagement: "-",
+    image: "/influencers pic/alandi bhoyar/alandi b (1).png",
+    imageClass: "object-cover object-[center_20%]"
+  },
+  {
+    id: 103,
+    name: "Angel Peter",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/angelpeterr_?stkn=MXQ1eXh2ODJsOHFvdw==",
+    gender: "female",
+    contentStyle: "Lifestyle | Food | Travel | Fashion",
+    followers: "181K",
+    engagement: "-",
+    image: "/influencers pic/angel peter/angel p (1).png",
+    imageClass: "object-cover object-[center_70%] !scale-110 group-hover:!scale-[1.15]"
+  },
+  {
+    id: 104,
+    name: "Ankita Sampat",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/ankita sampat/ankita (1).png",
+    imageClass: "object-cover object-top"
+  },
+  {
+    id: 105,
+    name: "Divya Suryavanshi",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/divya suryavanshi/divya s (5).png",
+    imageClass: "object-cover object-[center_30%]"
+  },
+  {
+    id: 106,
+    name: "Diya",
+    location: "nagpur",
+    instagramLink: "https://www.instagram.com/diyaaaaaaaaa___/",
+    gender: "female",
+    contentStyle: "digital creator",
+    followers: "157k",
+    engagement: "-",
+    image: "/influencers pic/diya/diya (4).png"
+  },
+  {
+    id: 107,
+    name: "Himanshi Gosawi",
+    location: "nagpur / mumbai",
+    instagramLink: "https://www.instagram.com/himanshigosavi/",
+    gender: "female",
+    contentStyle: "fashion model",
+    followers: "1635",
+    engagement: "-",
+    image: "/influencers pic/Himanshi Gosawi/himanshi g (3).png"
+  },
+  {
+    id: 108,
+    name: "Himanshi jagyasi",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/himani_jagyasi08?stkn=MWFocGtqeXhjc2l6cg==",
+    gender: "female",
+    contentStyle: "Digital portfolio",
+    followers: "6K",
+    engagement: "-",
+    image: "/influencers pic/Himanshi jagyasi/himanshi j (3).png"
+  },
+  {
+    id: 109,
+    name: "Ishita",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/ishita/ishita (2).png"
+  },
+  {
+    id: 110,
+    name: "Jheel",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/withlovejheel_/",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "9134",
+    engagement: "-",
+    image: "/influencers pic/jheel/sanvi sing (4).png"
+  },
+  {
+    id: 111,
+    name: "Jiya Rajput",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/jiya rajput/jiya (4).png"
+  },
+  {
+    id: 112,
+    name: "Kartik",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/nagpurchakartik?stkn=MWR5eGR1cnY1Zmp6Yg==",
+    gender: "male",
+    contentStyle: "Digital creator",
+    followers: "187K",
+    engagement: "-",
+    image: "/influencers pic/kartik/karktik (1).png"
+  },
+  {
+    id: 113,
+    name: "Krutika ramteke",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/krutika.ramteke_?stkn=MXduMzdpYzk4ZmE4dg==",
+    gender: "female",
+    contentStyle: "Dance | Fashion | lifestyle | entertainment | Travel",
+    followers: "50.8K",
+    engagement: "-",
+    image: "/influencers pic/krutika r/krutika ramteke (1).png"
+  },
+  {
+    id: 114,
+    name: "Lachi Yadav",
+    location: "Nagpur/Chandrapur",
+    instagramLink: "https://www.instagram.com/lachi.yadao?stkn=YmQyNW1kanAzands",
+    gender: "female",
+    contentStyle: "Digital creator",
+    followers: "11.6K",
+    engagement: "-",
+    image: "/influencers pic/lachi yadav/lachi y (3).png"
+  },
+  {
+    id: 115,
+    name: "Muskan Sachdev",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/musskan.sachdev/",
+    gender: "female",
+    contentStyle: "Model",
+    followers: "3081",
+    engagement: "-",
+    image: "/influencers pic/Muskan Sachdev/muskan sac (5).png"
+  },
+  {
+    id: 116,
+    name: "Muskan Sharma",
+    location: "delhi",
+    instagramLink: "https://www.instagram.com/sharma_muskan_?stkn=dWZ1ZW5xZzJpMmI3",
+    gender: "female",
+    contentStyle: "digital creator",
+    followers: "16.3K",
+    engagement: "-",
+    image: "/influencers pic/muskan sharma/muskan (3).png"
+  },
+  {
+    id: 117,
+    name: "Parul m_23_",
+    location: "nagpur",
+    instagramLink: "https://www.instagram.com/parulm_23?stkn=MWwzenVyaTNyeHVucw==",
+    gender: "female",
+    contentStyle: "Beauty • Fashion • Lifestyle",
+    followers: "26.1K",
+    engagement: "-",
+    image: "/influencers pic/parul m/parul (1).png"
+  },
+  {
+    id: 118,
+    name: "Payal Biswa",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/payal biswa/payal (1).png"
+  },
+  {
+    id: 119,
+    name: "Pragya chabra",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/pragyachhabra_?stkn=OWVpdWNwdHBtcnRk",
+    gender: "female",
+    contentStyle: "Anchor | Content writer/creator | VO artist",
+    followers: "15.7K",
+    engagement: "-",
+    image: "/influencers pic/pragya chabra/pragya (3).png"
+  },
+  {
+    id: 120,
+    name: "Priyal Giri",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/priyal_giri?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==",
+    gender: "female",
+    contentStyle: "ʟɪғᴇsᴛʏʟᴇ | ᴛʀᴀᴠᴇʟ | ғᴀsʜɪᴏɴ | ғᴏᴏᴅ🦋",
+    followers: "20.3K",
+    engagement: "-",
+    image: "/influencers pic/priyal giri/priyal g (4).png"
+  },
+  {
+    id: 121,
+    name: "Ragini",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/ragini/ragini kaikade (3).png"
+  },
+  {
+    id: 122,
+    name: "Ria Kirplani",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/ria kirplani/ria (5).png"
+  },
+  {
+    id: 123,
+    name: "Saiee Masakalkar",
+    location: "Nagpur",
+    instagramLink: "https://www.instagram.com/saieee_m?stkn=MXR1YW02emxobjJraA==",
+    gender: "female",
+    contentStyle: "digital creator",
+    followers: "47K",
+    engagement: "-",
+    image: "/influencers pic/saiee/saiee (2).png"
+  },
+  {
+    id: 124,
+    name: "Saumya",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/saumya (mia)/saumya (mia) (5).png"
+  },
+  {
+    id: 125,
+    name: "Saumya",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/saumyakodan/saumya k (2).png"
+  },
+  {
+    id: 126,
+    name: "sejal malkani",
+    location: "nagpur",
+    instagramLink: "https://www.instagram.com/sejal_malkani000/",
+    gender: "female",
+    contentStyle: "Digital creator •Fasion •Lifestyle •beauty",
+    followers: "5252",
+    engagement: "-",
+    image: "/influencers pic/sejal malkani/sejal (6).png"
+  },
+  {
+    id: 127,
+    name: "Shraddha Lalwan",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/shraddha lalwan/shraddha lalwani (4).png"
+  },
+  {
+    id: 128,
+    name: "Shreya Singh",
+    location: "Nagpur",
+    instagramLink: "#",
+    gender: "female",
+    contentStyle: "Lifestyle",
+    followers: "-",
+    engagement: "-",
+    image: "/influencers pic/shreya singh/shre_Ay (3).png",
+    imageClass: "object-cover object-top"
+  },
+  {
+    id: 129,
+    name: "Simran",
+    location: "nagpur",
+    instagramLink: "https://www.instagram.com/chimlann_/",
+    gender: "female",
+    contentStyle: "Artist • Dance | Fashion | Lifestyle",
+    followers: "2800",
+    engagement: "-",
+    image: "/influencers pic/simran/simran (2).png",
+    imageClass: "object-cover object-top"
+  },
+  {
+    id: 130,
+    name: "Tricha sakharkar",
+    location: "Nagpur/Bhopal",
+    instagramLink: "https://www.instagram.com/trishaaa._s?stkn=cWplbHQxeTByM2F5",
+    gender: "female",
+    contentStyle: "digital creator",
+    followers: "10.8K",
+    engagement: "-",
+    image: "/influencers pic/tricha/tricha (2).png"
+  },
+  {
+    id: 131,
+    name: "vaishnavi lanjewar",
+    location: "nagpur",
+    instagramLink: "https://www.instagram.com/vaishnaviiii.____/",
+    gender: "female",
+    contentStyle: "travel - fashion",
+    followers: "13.6k",
+    engagement: "-",
+    image: "/influencers pic/vaishnavi lanjewar/vaishnavi (3).png"
+  },
+  {
+    id: 132,
+    name: "Vanshika",
+    location: "delhi / nagpur",
+    instagramLink: "https://www.instagram.com/vanshikkaahh/",
+    gender: "female",
+    contentStyle: "journalist and a VO artist",
+    followers: "7541",
+    engagement: "-",
+    image: "/influencers pic/Vanshika/vanshika (2).png"
+  }
 ];
 
 /* ------------------- REST OF YOUR ORIGINAL DATA (UNCHANGED) ------------------- */
