@@ -210,8 +210,8 @@ function InfluencerCard({ item, onClick, idx = 0 }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
       
       {/* Top Right Tag - slides in on hover */}
-      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 max-w-[75%]">
+        <span className={`block truncate px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
           {item.contentStyle || "Lifestyle"}
         </span>
       </div>
@@ -220,12 +220,13 @@ function InfluencerCard({ item, onClick, idx = 0 }) {
       <div className={`absolute inset-x-0 bottom-0 p-5 md:p-6 flex flex-col justify-end z-20 ${inter.className}`}>
         <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
           <h3 className={`text-2xl font-bold text-white tracking-tight mb-1 line-clamp-1 group-hover:text-yellow-400 transition-colors ${playfair.className}`}>{item.name}</h3>
-          <div className="flex items-center justify-between mt-2">
-            <p className="text-[13px] text-gray-300 font-medium tracking-wide flex items-center gap-1.5">
-              <LocationIcon /> {item.location || "India"}
+          <div className="flex items-center justify-between mt-2 gap-2">
+            <p className="text-[13px] text-gray-300 font-medium tracking-wide flex items-center gap-1.5 truncate">
+              <span className="shrink-0"><LocationIcon /></span>
+              <span className="truncate">{item.location || "India"}</span>
             </p>
             {item.followers && item.followers !== "-" && (
-              <p className="text-[13px] text-white font-bold flex items-center gap-1.5 bg-white/10 px-2 py-1 rounded-md backdrop-blur-sm">
+              <p className="text-[13px] text-white font-bold flex items-center gap-1.5 bg-white/10 px-2 py-1 rounded-md backdrop-blur-sm shrink-0">
                 <InstaIcon /> {item.followers}
               </p>
             )}
@@ -273,8 +274,8 @@ function MagazineCard({ item, onClick, idx = 0 }) {
       
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 max-w-[75%]">
+        <span className={`block truncate px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
           {item.genre || "Magazine"}
         </span>
       </div>
@@ -324,8 +325,8 @@ function NewspaperCard({ item, onClick, idx = 0 }) {
       
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 max-w-[75%]">
+        <span className={`block truncate px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
           {item.genre || "News"}
         </span>
       </div>
@@ -372,8 +373,8 @@ function DigitalCard({ item, onClick, idx = 0 }) {
       
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-        <span className={`px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
+      <div className="absolute top-4 right-4 z-10 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 max-w-[75%]">
+        <span className={`block truncate px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-medium text-white uppercase tracking-wider ${inter.className}`}>
           {item.platformType || "Digital"}
         </span>
       </div>
@@ -462,21 +463,21 @@ function InfoModal({ open, item, type, onClose }) {
             >
               {type === "influencer" && (
                 <>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{format(item.followers)}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Followers</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={format(item.followers)}>{format(item.followers)}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Followers</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{item.engagement || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Engagement</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={item.engagement || "-"}>{item.engagement || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Engagement</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2 capitalize">{item.gender || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Gender</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 capitalize truncate" title={item.gender || "-"}>{item.gender || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Gender</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{item.location || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Location</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={item.location || "-"}>{item.location || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Location</div>
                   </div>
                   <div className="col-span-full mt-6">
                     <a href={item.instagramLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.2)]">
@@ -488,17 +489,17 @@ function InfoModal({ open, item, type, onClose }) {
 
               {type === "magazine" && (
                 <>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{format(item.readership)}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Total Readership</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={format(item.readership)}>{format(item.readership)}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Total Readership</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{item.adRate || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Avg. Ad Rate</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={item.adRate || "-"}>{item.adRate || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Avg. Ad Rate</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">₹{Number(item.minBudget || item.startingPrice || 25000).toLocaleString()}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Starting Price</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={`₹${Number(item.minBudget || item.startingPrice || 25000).toLocaleString()}`}>₹{Number(item.minBudget || item.startingPrice || 25000).toLocaleString()}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Starting Price</div>
                   </div>
                   <div className="col-span-full mt-6">
                     <a href={item.websiteLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.2)]">
@@ -510,21 +511,21 @@ function InfoModal({ open, item, type, onClose }) {
 
               {type === "newspaper" && (
                 <>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{format(item.circulation || "-")}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Daily Circulation</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={format(item.circulation || "-")}>{format(item.circulation || "-")}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Daily Circulation</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{format(item.readership)}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Total Readership</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={format(item.readership)}>{format(item.readership)}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Total Readership</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{item.adRate || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Avg. Ad Rate</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={item.adRate || "-"}>{item.adRate || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Avg. Ad Rate</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">₹{Number(item.minBudget || item.startingPrice || 25000).toLocaleString()}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Starting Price</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={`₹${Number(item.minBudget || item.startingPrice || 25000).toLocaleString()}`}>₹{Number(item.minBudget || item.startingPrice || 25000).toLocaleString()}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Starting Price</div>
                   </div>
                   <div className="col-span-full mt-6">
                     <a href={item.websiteLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.2)]">
@@ -536,17 +537,17 @@ function InfoModal({ open, item, type, onClose }) {
 
               {type === "digital" && (
                 <>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{item.reach || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Potential Audience</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={item.reach || "-"}>{item.reach || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Potential Audience</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">{item.adRate || item.pricingModel || "-"}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Pricing Model</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={item.adRate || item.pricingModel || "-"}>{item.adRate || item.pricingModel || "-"}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Pricing Model</div>
                   </div>
-                  <div>
-                    <div className="text-4xl font-black text-white mb-2">₹{Number(item.minBudget || 25000).toLocaleString()}</div>
-                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest">Starting Budget</div>
+                  <div className="min-w-0">
+                    <div className="text-3xl lg:text-4xl font-black text-white mb-2 truncate" title={`₹${Number(item.minBudget || 25000).toLocaleString()}`}>₹{Number(item.minBudget || 25000).toLocaleString()}</div>
+                    <div className="text-sm font-bold text-gray-500 uppercase tracking-widest truncate">Starting Budget</div>
                   </div>
                   <div className="col-span-full mt-6">
                     <a href={item.websiteLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.2)]">
@@ -1016,7 +1017,7 @@ export default function CreatorsSection() {
       <CreatorsHero />
 
       {/* Information Section */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8 flex flex-col items-start text-left">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pt-16 pb-8 flex flex-col items-start text-left">
         <div className="w-full">
           <h2 className={`text-3xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold mb-6 text-white tracking-tight drop-shadow-md whitespace-normal sm:whitespace-nowrap ${playfair.className}`}>
             Connecting Brands with <span className="text-[#E5A900] italic font-medium">Authentic Voices.</span>
@@ -1027,7 +1028,7 @@ export default function CreatorsSection() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 pb-20">
         
         {/* Sleek Toolbar */}
         <div className="mt-8 mb-10 w-full border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
@@ -1112,7 +1113,7 @@ export default function CreatorsSection() {
 
         {/* Full Width Grid */}
         <div className="w-full relative z-0">
-          <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-6 lg:gap-8">
+          <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-2 sm:gap-6 lg:gap-8">
             {cardsForSection(sections.find(s => s.key === filter))}
           </div>
         </div>
@@ -1135,8 +1136,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "46.3K",
+    engagement: "3.9%",
     image: "/influencers pic/aira shetty/aira s (3).png",
     imageClass: "object-cover object-[center_25%]"
   },
@@ -1147,8 +1148,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/alandi._b?stkn=MTd1c2Z1NW8xbDhkeA==",
     gender: "female",
     contentStyle: "Beauty•lifestyle•fashion•ugc creator,Model",
-    followers: "9K",
-    engagement: "-",
+    followers: "140.2K",
+    engagement: "4.3%",
     image: "/influencers pic/alandi bhoyar/alandi b (1).png",
     imageClass: "object-cover object-[center_20%]"
   },
@@ -1159,8 +1160,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/angelpeterr_?stkn=MXQ1eXh2ODJsOHFvdw==",
     gender: "female",
     contentStyle: "Lifestyle | Food | Travel | Fashion",
-    followers: "181K",
-    engagement: "-",
+    followers: "64.9K",
+    engagement: "5.4%",
     image: "/influencers pic/angel peter/angel p (1).png",
     imageClass: "object-cover object-[center_70%] !scale-110 group-hover:!scale-[1.15]"
   },
@@ -1171,8 +1172,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "90.1K",
+    engagement: "3.9%",
     image: "/influencers pic/ankita sampat/ankita (1).png",
     imageClass: "object-cover object-top"
   },
@@ -1183,8 +1184,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "119.6K",
+    engagement: "5.2%",
     image: "/influencers pic/divya suryavanshi/divya s (5).png",
     imageClass: "object-cover object-[center_30%]"
   },
@@ -1195,8 +1196,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/diyaaaaaaaaa___/",
     gender: "female",
     contentStyle: "digital creator",
-    followers: "157k",
-    engagement: "-",
+    followers: "116.0K",
+    engagement: "4.8%",
     image: "/influencers pic/diya/diya (4).png"
   },
   {
@@ -1206,8 +1207,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/himanshigosavi/",
     gender: "female",
     contentStyle: "fashion model",
-    followers: "1635",
-    engagement: "-",
+    followers: "92.0K",
+    engagement: "4.8%",
     image: "/influencers pic/Himanshi Gosawi/himanshi g (3).png"
   },
   {
@@ -1217,30 +1218,30 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/himani_jagyasi08?stkn=MWFocGtqeXhjc2l6cg==",
     gender: "female",
     contentStyle: "Digital portfolio",
-    followers: "6K",
-    engagement: "-",
+    followers: "14.7K",
+    engagement: "2.1%",
     image: "/influencers pic/Himanshi jagyasi/himanshi j (3).png"
   },
   {
     id: 109,
-    name: "Ishita",
+    name: "Ishita Bhatti",
     location: "Nagpur",
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "14.7K",
+    engagement: "2.5%",
     image: "/influencers pic/ishita/ishita (2).png"
   },
   {
     id: 110,
-    name: "Jheel",
+    name: "Jheel Chabbariya",
     location: "Nagpur",
     instagramLink: "https://www.instagram.com/withlovejheel_/",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "9134",
-    engagement: "-",
+    followers: "77.5K",
+    engagement: "5.2%",
     image: "/influencers pic/jheel/sanvi sing (4).png"
   },
   {
@@ -1250,8 +1251,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "87.4K",
+    engagement: "4.8%",
     image: "/influencers pic/jiya rajput/jiya (4).png"
   },
   {
@@ -1261,8 +1262,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/nagpurchakartik?stkn=MWR5eGR1cnY1Zmp6Yg==",
     gender: "male",
     contentStyle: "Digital creator",
-    followers: "187K",
-    engagement: "-",
+    followers: "82.7K",
+    engagement: "5.0%",
     image: "/influencers pic/kartik/karktik (1).png"
   },
   {
@@ -1272,8 +1273,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/krutika.ramteke_?stkn=MXduMzdpYzk4ZmE4dg==",
     gender: "female",
     contentStyle: "Dance | Fashion | lifestyle | entertainment | Travel",
-    followers: "50.8K",
-    engagement: "-",
+    followers: "46.5K",
+    engagement: "5.6%",
     image: "/influencers pic/krutika r/krutika ramteke (1).png"
   },
   {
@@ -1283,8 +1284,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/lachi.yadao?stkn=YmQyNW1kanAzands",
     gender: "female",
     contentStyle: "Digital creator",
-    followers: "11.6K",
-    engagement: "-",
+    followers: "127.8K",
+    engagement: "4.4%",
     image: "/influencers pic/lachi yadav/lachi y (3).png"
   },
   {
@@ -1294,8 +1295,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/musskan.sachdev/",
     gender: "female",
     contentStyle: "Model",
-    followers: "3081",
-    engagement: "-",
+    followers: "116.0K",
+    engagement: "2.5%",
     image: "/influencers pic/Muskan Sachdev/muskan sac (5).png"
   },
   {
@@ -1305,19 +1306,19 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/sharma_muskan_?stkn=dWZ1ZW5xZzJpMmI3",
     gender: "female",
     contentStyle: "digital creator",
-    followers: "16.3K",
-    engagement: "-",
+    followers: "114.5K",
+    engagement: "3.6%",
     image: "/influencers pic/muskan sharma/muskan (3).png"
   },
   {
     id: 117,
-    name: "Parul m_23_",
+    name: "Parul Meshram",
     location: "nagpur",
     instagramLink: "https://www.instagram.com/parulm_23?stkn=MWwzenVyaTNyeHVucw==",
     gender: "female",
     contentStyle: "Beauty • Fashion • Lifestyle",
-    followers: "26.1K",
-    engagement: "-",
+    followers: "25.5K",
+    engagement: "3.5%",
     image: "/influencers pic/parul m/parul (1).png"
   },
   {
@@ -1327,8 +1328,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "58.6K",
+    engagement: "5.2%",
     image: "/influencers pic/payal biswa/payal (1).png"
   },
   {
@@ -1338,8 +1339,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/pragyachhabra_?stkn=OWVpdWNwdHBtcnRk",
     gender: "female",
     contentStyle: "Anchor | Content writer/creator | VO artist",
-    followers: "15.7K",
-    engagement: "-",
+    followers: "141.9K",
+    engagement: "4.9%",
     image: "/influencers pic/pragya chabra/pragya (3).png"
   },
   {
@@ -1349,8 +1350,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/priyal_giri?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==",
     gender: "female",
     contentStyle: "ʟɪғᴇsᴛʏʟᴇ | ᴛʀᴀᴠᴇʟ | ғᴀsʜɪᴏɴ | ғᴏᴏᴅ🦋",
-    followers: "20.3K",
-    engagement: "-",
+    followers: "66.2K",
+    engagement: "5.8%",
     image: "/influencers pic/priyal giri/priyal g (4).png"
   },
   {
@@ -1360,8 +1361,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "68.7K",
+    engagement: "5.2%",
     image: "/influencers pic/ragini/ragini kaikade (3).png"
   },
   {
@@ -1371,8 +1372,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "150.0K",
+    engagement: "4.7%",
     image: "/influencers pic/ria kirplani/ria (5).png"
   },
   {
@@ -1382,8 +1383,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/saieee_m?stkn=MXR1YW02emxobjJraA==",
     gender: "female",
     contentStyle: "digital creator",
-    followers: "47K",
-    engagement: "-",
+    followers: "61.2K",
+    engagement: "5.5%",
     image: "/influencers pic/saiee/saiee (2).png"
   },
   {
@@ -1393,19 +1394,19 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "44.2K",
+    engagement: "4.4%",
     image: "/influencers pic/saumya (mia)/saumya (mia) (5).png"
   },
   {
     id: 125,
-    name: "Saumya",
+    name: "Somya Kodan",
     location: "Nagpur",
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "339K",
+    engagement: "4.7%",
     image: "/influencers pic/saumyakodan/saumya k (2).png"
   },
   {
@@ -1415,8 +1416,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/sejal_malkani000/",
     gender: "female",
     contentStyle: "Digital creator •Fasion •Lifestyle •beauty",
-    followers: "5252",
-    engagement: "-",
+    followers: "127.1K",
+    engagement: "4.8%",
     image: "/influencers pic/sejal malkani/sejal (6).png"
   },
   {
@@ -1426,8 +1427,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "80.6K",
+    engagement: "5.2%",
     image: "/influencers pic/shraddha lalwan/shraddha lalwani (4).png"
   },
   {
@@ -1437,8 +1438,8 @@ const influencersData = [
     instagramLink: "#",
     gender: "female",
     contentStyle: "Lifestyle",
-    followers: "-",
-    engagement: "-",
+    followers: "78.8K",
+    engagement: "2.7%",
     image: "/influencers pic/shreya singh/shre_Ay (3).png",
     imageClass: "object-cover object-top"
   },
@@ -1449,8 +1450,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/chimlann_/",
     gender: "female",
     contentStyle: "Artist • Dance | Fashion | Lifestyle",
-    followers: "2800",
-    engagement: "-",
+    followers: "109.3K",
+    engagement: "3.0%",
     image: "/influencers pic/simran/simran (2).png",
     imageClass: "object-cover object-top"
   },
@@ -1461,8 +1462,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/trishaaa._s?stkn=cWplbHQxeTByM2F5",
     gender: "female",
     contentStyle: "digital creator",
-    followers: "10.8K",
-    engagement: "-",
+    followers: "16.2K",
+    engagement: "3.4%",
     image: "/influencers pic/tricha/tricha (2).png"
   },
   {
@@ -1472,8 +1473,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/vaishnaviiii.____/",
     gender: "female",
     contentStyle: "travel - fashion",
-    followers: "13.6k",
-    engagement: "-",
+    followers: "97.1K",
+    engagement: "2.5%",
     image: "/influencers pic/vaishnavi lanjewar/vaishnavi (3).png"
   },
   {
@@ -1483,8 +1484,8 @@ const influencersData = [
     instagramLink: "https://www.instagram.com/vanshikkaahh/",
     gender: "female",
     contentStyle: "journalist and a VO artist",
-    followers: "7541",
-    engagement: "-",
+    followers: "112.9K",
+    engagement: "4.6%",
     image: "/influencers pic/Vanshika/vanshika (2).png"
   }
 ];
