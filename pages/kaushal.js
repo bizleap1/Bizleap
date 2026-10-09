@@ -160,8 +160,8 @@ export default function KaushalProfile() {
               },
               "url": "https://bizleap.in/kaushal",
               "sameAs": [
-                "https://www.linkedin.com/in/kaushal-banginwar/",
-                "https://www.instagram.com/kaushal_banginwar/"
+                "https://www.linkedin.com/in/kaushalbanginwar",
+                "https://www.instagram.com/kaushalbanginwar.in"
               ],
               "knowsAbout": [
                 "Digital Marketing",
@@ -253,12 +253,24 @@ export default function KaushalProfile() {
                 View Work
               </Link>
               <div className="flex gap-2 ml-auto lg:ml-4">
-                <div className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 backdrop-blur-sm cursor-default">
+                <a
+                  href="https://www.linkedin.com/in/kaushalbanginwar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent hover:border-brand-accent/40 backdrop-blur-sm transition-all cursor-pointer"
+                  aria-label="Kaushal Banginwar LinkedIn"
+                >
                   <Linkedin className="w-5 h-5" />
-                </div>
-                <div className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 backdrop-blur-sm cursor-default">
+                </a>
+                <a
+                  href="https://www.instagram.com/kaushalbanginwar.in?stkn=YnN5dXVpYWo2b2c4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent hover:border-brand-accent/40 backdrop-blur-sm transition-all cursor-pointer"
+                  aria-label="Kaushal Banginwar Instagram"
+                >
                   <Instagram className="w-5 h-5" />
-                </div>
+                </a>
               </div>
             </motion.div>
           </div>

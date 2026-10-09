@@ -12,7 +12,7 @@ export const AUTHORS_DATA = [
     bio: "Kaushal is a growth marketer and AI specialist with a deep understanding of enterprise-scale automation. He helps brands transform their operations through advanced technology.",
     image: "/kaushal banginwar.JPEG",
     socials: {
-      linkedin: "https://linkedin.com/in/",
+      linkedin: "https://www.linkedin.com/in/kaushalbanginwar",
       twitter: "https://twitter.com/"
     }
   },
@@ -23,7 +23,7 @@ export const AUTHORS_DATA = [
     bio: "Akshat merges premium visual design with psychological conversion strategies to craft B2B experiences that drive measurable impact.",
     image: "/team/akshat soni.jpg",
     socials: {
-      linkedin: "https://linkedin.com/in/",
+      linkedin: "https://www.linkedin.com/in/theakshatsoni/",
       twitter: "https://twitter.com/"
     }
   },

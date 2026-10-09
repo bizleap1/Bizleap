@@ -87,8 +87,8 @@ export default function AkshatProfile() {
               },
               "url": "https://bizleap.in/akshat",
               "sameAs": [
-                "https://www.linkedin.com/in/akshat-soni-664879208/",
-                "https://www.instagram.com/akshat.sonii/"
+                "https://www.linkedin.com/in/theakshatsoni/",
+                "https://www.instagram.com/akshatsoni.in"
               ]
             })
           }}
@@ -160,12 +160,24 @@ export default function AkshatProfile() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 group-hover:rotate-45 transition-transform" />
               </Link>
               <div className="flex gap-2 ml-auto lg:ml-4">
-                <Link href="#" className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent transition-all">
+                <a
+                  href="https://www.linkedin.com/in/theakshatsoni/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent hover:border-brand-accent/40 transition-all cursor-pointer"
+                  aria-label="Akshat Soni LinkedIn"
+                >
                   <Linkedin className="w-5 h-5" />
-                </Link>
-                <Link href="#" className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent transition-all">
+                </a>
+                <a
+                  href="https://www.instagram.com/akshatsoni.in?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-brand-accent hover:border-brand-accent/40 transition-all cursor-pointer"
+                  aria-label="Akshat Soni Instagram"
+                >
                   <Instagram className="w-5 h-5" />
-                </Link>
+                </a>
               </div>
             </motion.div>
           </div>

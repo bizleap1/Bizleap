@@ -24,7 +24,7 @@ const SERVICES_LIST = [
   {
     name: "Development services",
     tags: ["Figma", "Wireframing", "Prototyping"],
-    img: "/ui ux & website.png",
+    img: "/development-workspace.png",
     url: "https://www.bizdevelopment.in/",
     description: "We don't just design screens—we design moments."
   },
@@ -45,60 +45,78 @@ const SERVICES_LIST = [
   {
     name: "SEO & Website Audits",
     tags: ["Technical SEO", "On-Page Optimization"],
-    img: "/seo.png",
+    img: "/seo-audit-work.png",
     url: "/seowebsite",
     description: "We fix what's broken, polish what's dull."
   },
   {
     name: "AI Services",
     tags: ["AI Automation", "ChatBot Integration"],
-    img: "/ai services.png",
+    img: "/ai-automation-hand.png",
     url: "/aiservices",
     description: "We integrate cutting-edge AI into your business workflows."
   },
-  {
-    name: "Staffing Services",
-    tags: ["Recruitment", "Talent Acquisition"],
-    img: "/staffing services.png",
-    url: "/staffing",
-    description: "End-to-end staffing solutions to help you build your dream team."
-  },
-
 ];
 
 export default function ServicesSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   const length = SERVICES_LIST.length;
 
   const handleNext = () => setCurrentIndex((prev) => (prev + 1) % length);
   const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + length) % length);
 
+  const minSwipeDistance = 45;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      handleNext();
+    } else if (distance < -minSwipeDistance) {
+      handlePrev();
+    }
+  };
+
   // Auto scroll
   useEffect(() => {
-    const interval = setInterval(handleNext, 3000);
+    const interval = setInterval(handleNext, 3500);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-24 md:py-32 bg-black text-white overflow-hidden relative" id="services">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="py-16 sm:py-24 md:py-32 bg-black text-white overflow-hidden relative" id="services">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl space-y-6 mb-16 text-left"
+          className="max-w-4xl space-y-4 sm:space-y-6 mb-10 sm:mb-16 text-left"
         >
           <div className="flex items-center justify-start gap-3">
             <div className="w-6 h-[1px] bg-white/30"></div>
             <span className="text-white/60 text-[10px] font-bold tracking-[0.3em] uppercase">Our Services</span>
           </div>
-          <h2 className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] ${playfair.className}`}>
+          <h2 className={`text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] ${playfair.className}`}>
             Experience our digital <span className="text-[#E5A900] italic font-medium">solutions.</span>
           </h2>
         </motion.div>
 
-        <div className="relative h-[450px] md:h-[550px] w-full flex justify-center items-center">
+        <div 
+          className="relative h-[430px] sm:h-[480px] md:h-[550px] w-full flex justify-center items-center touch-pan-y"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <AnimatePresence initial={false}>
             {SERVICES_LIST.map((service, index) => {
               const relativeOffset = (index - currentIndex + length) % length;
@@ -115,37 +133,41 @@ export default function ServicesSection() {
                     x: `${normalizedOffset * 65}%`,
                     scale: isCenter ? 1 : 0.85,
                     zIndex: isCenter ? 10 : 5,
-                    opacity: isVisible ? (isCenter ? 1 : 0.4) : 0,
+                    opacity: isVisible ? (isCenter ? 1 : 0.3) : 0,
                     filter: isCenter ? "blur(0px)" : "blur(4px)"
                   }}
                   transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-                  className="absolute w-[90%] max-w-[450px] md:max-w-[600px] h-[400px] md:h-[480px] rounded-3xl overflow-hidden cursor-pointer shadow-2xl"
+                  className="absolute w-[92%] sm:w-[86%] max-w-[420px] md:max-w-[600px] h-[390px] sm:h-[440px] md:h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer shadow-2xl select-none"
                   onClick={() => {
                      if (!isCenter) {
                         setCurrentIndex(index);
                      }
-                  }}
-                >
-                  <Link href={service.url} className={`block w-full h-full relative group ${!isCenter ? 'pointer-events-none' : ''}`}>
+                  }}>
+                  <Link
+                    href={service.url}
+                    target={service.url.startsWith("http") ? "_blank" : undefined}
+                    rel={service.url.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className={`block w-full h-full relative group ${!isCenter ? 'pointer-events-none' : ''}`}
+                  >
                     <Image
                       src={service.img}
                       alt={service.name}
                       fill
-                      sizes="500px"
+                      sizes="(max-width: 768px) 90vw, 500px"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/65 to-transparent opacity-95" />
                     
-                    <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
-                      <h3 className={`text-3xl md:text-4xl font-medium tracking-tight mb-4 text-white group-hover:text-[#E5A900] transition-colors duration-300 ${playfair.className}`}>
+                    <div className="absolute inset-0 p-5 sm:p-8 md:p-10 flex flex-col justify-end">
+                      <h3 className={`text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight mb-2.5 sm:mb-4 text-white group-hover:text-[#E5A900] transition-colors duration-300 ${playfair.className}`}>
                         {service.name}
                       </h3>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2.5 sm:mb-4">
                         {service.tags.map((tag, idx) => (
-                          <Badge key={idx} variant="outline" className="border-white/20 text-white/70 bg-transparent hover:bg-white/10 hover:text-white backdrop-blur-sm px-4 py-1.5 rounded-full text-[10px] uppercase tracking-[0.15em]">{tag}</Badge>
+                          <Badge key={idx} variant="outline" className="border-white/20 text-white/70 bg-black/40 hover:bg-white/10 hover:text-white backdrop-blur-sm px-3 py-1 rounded-full text-[9px] sm:text-[10px] uppercase tracking-[0.15em]">{tag}</Badge>
                         ))}
                       </div>
-                      <p className={`text-white/60 text-sm leading-relaxed line-clamp-2 font-light ${inter.className}`}>
+                      <p className={`text-white/70 text-xs sm:text-sm leading-relaxed line-clamp-2 font-light ${inter.className}`}>
                         {service.description}
                       </p>
                     </div>
@@ -155,19 +177,53 @@ export default function ServicesSection() {
             })}
           </AnimatePresence>
 
-          {/* Navigation Arrows */}
+          {/* Desktop Navigation Arrows (hidden on mobile) */}
           <button
             onClick={handlePrev}
-            className="absolute left-2 md:-left-4 lg:-left-8 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/40 border border-white/10 backdrop-blur-md text-white flex justify-center items-center hover:bg-[#E5A900] hover:text-black hover:border-[#E5A900] transition-all duration-300 shadow-2xl group"
+            className="hidden md:flex absolute left-2 md:-left-4 lg:-left-8 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/40 border border-white/10 backdrop-blur-md text-white justify-center items-center hover:bg-[#E5A900] hover:text-black hover:border-[#E5A900] transition-all duration-300 shadow-2xl group"
+            aria-label="Previous slide"
           >
             <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 group-hover:-translate-x-1 transition-transform" />
           </button>
           
           <button
             onClick={handleNext}
-            className="absolute right-2 md:-right-4 lg:-right-8 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/40 border border-white/10 backdrop-blur-md text-white flex justify-center items-center hover:bg-[#E5A900] hover:text-black hover:border-[#E5A900] transition-all duration-300 shadow-2xl group"
+            className="hidden md:flex absolute right-2 md:-right-4 lg:-right-8 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/40 border border-white/10 backdrop-blur-md text-white justify-center items-center hover:bg-[#E5A900] hover:text-black hover:border-[#E5A900] transition-all duration-300 shadow-2xl group"
+            aria-label="Next slide"
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Mobile Navigation Controls: Dots + Subtle Arrows */}
+        <div className="flex md:hidden items-center justify-between max-w-[280px] mx-auto mt-6 px-2">
+          <button
+            onClick={handlePrev}
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white active:bg-[#E5A900] active:text-black transition-all"
+            aria-label="Previous service"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {SERVICES_LIST.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? "w-6 bg-[#E5A900]" : "w-1.5 bg-white/20"
+                }`}
+                aria-label={`Slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={handleNext}
+            className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white active:bg-[#E5A900] active:text-black transition-all"
+            aria-label="Next service"
+          >
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       </div>
