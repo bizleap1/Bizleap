@@ -1,16 +1,44 @@
 "use client";
 import { useState } from "react";
 import Head from "next/head";
-import { FiMapPin, FiPhone, FiMail, FiArrowRight, FiBriefcase, FiMessageSquare } from "react-icons/fi";
+import { FiMapPin, FiPhone, FiMail, FiArrowRight, FiBriefcase, FiMessageSquare, FiExternalLink } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { Playfair_Display, Inter } from "next/font/google";
 
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600"] });
 
+const BRANCHES = [
+  {
+    id: "nagpur",
+    city: "Nagpur",
+    subtitle: "Headquarters",
+    address: "2, Wardha Rd, Near Sai Mandir, Sawarkar Nagar, Gajanan Nagar, Nagpur, Maharashtra 440015",
+    mapEmbedUrl: "https://www.google.com/maps?q=2,+Wardha+Rd,+Near+Sai+Mandir,+Sawarkar+Nagar,+Gajanan+Nagar,+Nagpur,+Maharashtra+440015&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=2,+Wardha+Rd,+Near+Sai+Mandir,+Sawarkar+Nagar,+Gajanan+Nagar,+Nagpur,+Maharashtra+440015",
+  },
+  {
+    id: "pune",
+    city: "Pune",
+    subtitle: "Branch Office",
+    address: "Swastik Society, Model Colony, Shivajinagar, Pune, Maharashtra 411016",
+    mapEmbedUrl: "https://www.google.com/maps?q=Swastik+Society,+Model+Colony,+Shivajinagar,+Pune,+Maharashtra+411016&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Swastik+Society,+Model+Colony,+Shivajinagar,+Pune,+Maharashtra+411016",
+  },
+  {
+    id: "mumbai",
+    city: "Mumbai",
+    subtitle: "Bizleap Brand & Media",
+    address: "Tulsi Vihar, Bandra East, Worli, Mumbai, Maharashtra 400018",
+    mapEmbedUrl: "https://www.google.com/maps?q=Tulsi+Vihar,+Bandra+East,+Worli,+Mumbai,+Maharashtra+400018&output=embed",
+    directionsUrl: "https://www.google.com/maps/search/?api=1&query=Tulsi+Vihar,+Bandra+East,+Worli,+Mumbai,+Maharashtra+400018",
+  },
+];
+
 export default function ContactPage() {
   const [formType, setFormType] = useState("project"); // 'project' or 'career'
   const [status, setStatus] = useState("idle"); // 'idle', 'submitting', 'submitted'
+  const [selectedBranch, setSelectedBranch] = useState(BRANCHES[0]);
 
   const handleSubmit = async (e, type) => {
     e.preventDefault();
@@ -70,12 +98,12 @@ export default function ContactPage() {
             </p>
           </motion.div>
 
-          {/* 3 Info Cards Grid */}
+          {/* Email & Phone Cards Grid */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
           >
             {/* Email Card */}
             <div className="p-8 rounded-[32px] bg-[#0a0a0a] border border-white/5 hover:border-yellow-500/30 hover:bg-[#0f0f0f] transition-all duration-300 group flex flex-col h-full">
@@ -99,26 +127,85 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-xl font-medium">Call Us</h3>
               </div>
-              <p className="text-gray-400 text-sm mb-6 flex-1 pl-16">Mon-Sat from 8am to 10pm.</p>
+              <p className="text-gray-400 text-sm mb-6 flex-1 pl-16">Open 24 hours, 7 days a week.</p>
               <div className="flex flex-col gap-1 pl-16">
                 <a href="tel:+917097095152" className="text-white font-medium hover:text-yellow-500 transition-colors w-fit">+91 70970 95152</a>
                 <a href="tel:+919307198119" className="text-white font-medium hover:text-yellow-500 transition-colors w-fit">+91 93071 98119</a>
               </div>
             </div>
+          </motion.div>
 
-            {/* Visit Card */}
-            <div className="p-8 rounded-[32px] bg-[#0a0a0a] border border-white/5 hover:border-yellow-500/30 hover:bg-[#0f0f0f] transition-all duration-300 group flex flex-col h-full">
-              <div className="flex items-center gap-4 mb-4">
+          {/* Visit Us / Branches Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="mb-12"
+          >
+            <div className="p-8 md:p-10 rounded-[32px] bg-[#0a0a0a] border border-white/5 hover:border-yellow-500/30 transition-colors duration-300 group">
+              <div className="flex items-center gap-4 mb-2">
                 <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-yellow-500 group-hover:border-yellow-500 transition-colors shrink-0">
                   <FiMapPin className="text-xl text-white group-hover:text-black transition-colors" />
                 </div>
-                <h3 className="text-xl font-medium">Visit Us</h3>
+                <div>
+                  <h3 className="text-xl font-medium">Visit Us</h3>
+                  <p className="text-gray-400 text-sm">Come say hello at our offices.</p>
+                </div>
               </div>
-              <p className="text-gray-400 text-sm mb-6 flex-1 pl-16">Come say hello at our office HQ.</p>
-              <div className="pl-16">
-                <p className="text-white text-sm font-medium leading-relaxed">
-                  2, Wardha Rd, Near Sai Mandir, Sawarkar Nagar, Gajanan Nagar, Nagpur, Maharashtra 440015
-                </p>
+
+              <div className="mt-8 pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                {BRANCHES.map((branch, index) => {
+                  const isSelected = selectedBranch.id === branch.id;
+                  return (
+                    <div
+                      key={branch.id}
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setSelectedBranch(branch)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setSelectedBranch(branch);
+                        }
+                      }}
+                      className={`cursor-pointer flex flex-col justify-between text-left transition-colors duration-200 ${
+                        index === 0
+                          ? "pb-6 md:pb-0 md:pr-8"
+                          : index === BRANCHES.length - 1
+                          ? "pt-6 md:pt-0 md:pl-8"
+                          : "py-6 md:py-0 md:px-8"
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-baseline gap-2.5 mb-2">
+                          <h4
+                            className={`text-lg font-medium transition-colors duration-200 ${
+                              isSelected ? "text-yellow-500" : "text-white hover:text-yellow-500/80"
+                            }`}
+                          >
+                            {branch.city}
+                          </h4>
+                          <span className="text-xs text-gray-500">{branch.subtitle}</span>
+                        </div>
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          {branch.address}
+                        </p>
+                      </div>
+
+                      <div className="mt-5">
+                        <a
+                          href={branch.directionsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-yellow-500 transition-colors"
+                        >
+                          Get Directions <FiExternalLink className="text-xs" />
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
@@ -265,11 +352,28 @@ export default function ContactPage() {
             </div>
 
             {/* Map Section */}
-            <div className="rounded-[32px] bg-[#0a0a0a] border border-white/5 overflow-hidden min-h-[400px] relative group p-2">
-              <div className="w-full h-full rounded-[24px] overflow-hidden relative">
+            <div className="rounded-[32px] bg-[#0a0a0a] border border-white/5 overflow-hidden min-h-[460px] p-3 flex flex-col gap-3">
+              <div className="flex items-center gap-2 px-3 pt-2 pb-1">
+                {BRANCHES.map((branch) => (
+                  <button
+                    key={branch.id}
+                    type="button"
+                    onClick={() => setSelectedBranch(branch)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors duration-200 ${
+                      selectedBranch.id === branch.id
+                        ? "bg-yellow-500 text-black"
+                        : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {branch.city}
+                  </button>
+                ))}
+              </div>
+              <div className="w-full flex-1 min-h-[380px] rounded-[24px] overflow-hidden relative">
                 <iframe
-                  title="BizLeap Location"
-                  src="https://www.google.com/maps?q=2,+Wardha+Rd,+Near+Sai+Mandir,+Sawarkar+Nagar,+Gajanan+Nagar,+Nagpur,+Maharashtra+440015&output=embed"
+                  key={selectedBranch.id}
+                  title={`BizLeap ${selectedBranch.city} Location`}
+                  src={selectedBranch.mapEmbedUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
