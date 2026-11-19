@@ -1,5 +1,4 @@
-import { getExcelFileBuffer, getExcelFilePath } from "../../lib/seoAudit/excelStore";
-import fs from "fs";
+import { getExcelFileBuffer } from "../../lib/seoAudit/excelStore";
 
 export const config = {
   api: {
@@ -10,13 +9,12 @@ export const config = {
 export default function handler(req, res) {
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.setHeader("Allow", ["GET", "HEAD"]);
-    return res.status(405).json({ error: "Method not allowed. Use GET to download." });
+    res.status(405).json({ error: "Method not allowed. Use GET to download." });
+    return;
   }
 
   try {
     const buffer = getExcelFileBuffer();
-    const filePath = getExcelFilePath();
-    const stats = fs.existsSync(filePath) ? fs.statSync(filePath) : null;
 
     res.setHeader(
       "Content-Type",
@@ -29,8 +27,8 @@ export default function handler(req, res) {
     res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
-    if (stats?.size) {
-      res.setHeader("Content-Length", stats.size);
+    if (buffer && buffer.length) {
+      res.setHeader("Content-Length", buffer.length);
     }
 
     if (req.method === "HEAD") {
