@@ -7,7 +7,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { FiDownload, FiChevronDown } from "react-icons/fi"
 
-export default function Navbar() {
+export default function Navbar({ topOffset = false }) {
   const router = useRouter()
   const isCreatorsPage = router.pathname === "/creators"
   
@@ -81,7 +81,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 shadow-md transition-colors duration-500 ${
+      className={`fixed left-0 right-0 w-full z-50 shadow-md transition-all duration-300 print:hidden ${
+        topOffset ? "top-10" : "top-0"
+      } ${
         scrolled ? "bg-black text-white border-b border-white/10" : "bg-transparent text-white"
       }`}
     >

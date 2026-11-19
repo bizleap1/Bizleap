@@ -31,7 +31,7 @@ const Footer = () => {
   const isContactPage = router.pathname === '/contact';
 
   return (
-    <footer className="relative bg-[#050505] text-gray-400 overflow-hidden">
+    <footer className="relative bg-[#050505] text-gray-400 overflow-hidden print:hidden">
       {/* Top yellow glow accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />

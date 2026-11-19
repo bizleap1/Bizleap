@@ -56,3 +56,82 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Announcement bar arrow subtle pulse/shimmer */
+@keyframes announcementArrowPulse {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 0.72;
+  }
+}
+
+.announcement-arrow-pulse {
+  animation: announcementArrowPulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-arrow-pulse {
+    animation: none;
+  }
+}
+
+/* Print stylesheet for A4 SEO Audit Report PDF export */
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #171717 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  nav,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .seo-audit-page-shell {
+    background: #ffffff !important;
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+
+  .seo-report-paper {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  .seo-report-section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .seo-report-section + .seo-report-section {
+    page-break-before: auto;
+    margin-top: 24px !important;
+  }
+
+  .seo-report-card,
+  .break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

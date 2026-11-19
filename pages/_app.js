@@ -1,13 +1,16 @@
 import Head from "next/head";
 import { Playfair_Display, Inter } from "next/font/google";
 import "../styles/globals.css";
+import AnnouncementBar from "../components/AnnouncementBar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FloatingButtons from "../components/FloatingButtons";
 import GlobalSchema from "../components/GlobalSchema";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Lenis from "lenis";
 import { useRouter } from "next/router";
+
+const ANNOUNCEMENT_STORAGE_KEY = "bizleap_seo_bar_dismissed";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -21,6 +24,26 @@ const inter = Inter({
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+  const [showAnnouncement, setShowAnnouncement] = useState(true);
+
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem(ANNOUNCEMENT_STORAGE_KEY) === "1") {
+        setShowAnnouncement(false);
+      }
+    } catch {
+      // Ignore storage access errors (e.g. private mode)
+    }
+  }, []);
+
+  const handleDismissAnnouncement = () => {
+    setShowAnnouncement(false);
+    try {
+      window.sessionStorage.setItem(ANNOUNCEMENT_STORAGE_KEY, "1");
+    } catch {
+      // Ignore storage access errors
+    }
+  };
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -56,7 +79,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         {/* Primary SEO */}
         <title key="title">Bizleap - The best digital marketing company in Nagpur</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Driven by Design. Backed by Results. Bizleap creates thoughtful design and digital experiences that help businesses grow." key="description" />
 
         {/* International & Geographic Targeting (USA, UK, UAE) */}
@@ -105,7 +128,11 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* Layout */}
-      <Navbar />
+      <AnnouncementBar
+        visible={showAnnouncement}
+        onDismiss={handleDismissAnnouncement}
+      />
+      <Navbar topOffset={showAnnouncement} />
       <main className="min-h-screen">
         <Component {...pageProps} />
       </main>
