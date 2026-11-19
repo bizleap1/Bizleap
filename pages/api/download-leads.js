@@ -6,7 +6,7 @@ export const config = {
   },
 };
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.setHeader("Allow", ["GET", "HEAD"]);
     res.status(405).json({ error: "Method not allowed. Use GET to download." });
@@ -14,7 +14,7 @@ export default function handler(req, res) {
   }
 
   try {
-    const buffer = getExcelFileBuffer();
+    const buffer = await getExcelFileBuffer();
 
     res.setHeader(
       "Content-Type",
