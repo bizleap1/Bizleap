@@ -78,6 +78,33 @@ async function saveLeadToWebhook({ name, email, phone, website, seoScore = null,
   }
 }
 
+async function sendEmailNotification({ name, email, phone, website, seoScore = null, perfScore = null }) {
+  try {
+    const payload = {
+      _subject: `🎯 New Free SEO Audit Lead: ${name} (${website})`,
+      _captcha: "false",
+      "Full Name": name,
+      "Email Address": email,
+      "Phone Number": `+91 ${phone}`,
+      "Website Audited": website,
+      "SEO Score": typeof seoScore === "number" ? `${seoScore}/100` : "Pending/Failed",
+      "Performance Score": typeof perfScore === "number" ? `${perfScore}/100` : "Pending/Failed",
+      "Submitted At (IST)": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+    };
+
+    await fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.error("[SEO Audit] Error sending email notification:", err?.message || err);
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -158,6 +185,15 @@ export default async function handler(req, res) {
       status: "Manual Audit Required",
     });
 
+    sendEmailNotification({
+      name,
+      email,
+      phone,
+      website: finalUrl,
+      seoScore: null,
+      perfScore: null,
+    }).catch(() => {});
+
     await saveLeadToWebhook({
       name,
       email,
@@ -187,6 +223,15 @@ export default async function handler(req, res) {
       perfScore: null,
       status: "Manual Audit Required",
     });
+
+    sendEmailNotification({
+      name,
+      email,
+      phone,
+      website: finalUrl,
+      seoScore: null,
+      perfScore: null,
+    }).catch(() => {});
 
     await saveLeadToWebhook({
       name,
@@ -253,6 +298,16 @@ export default async function handler(req, res) {
     perfScore: headlineScores.performance,
     status: "Completed",
   });
+
+  // Send email alert to bizleapinc@gmail.com
+  sendEmailNotification({
+    name,
+    email,
+    phone,
+    website: finalUrl,
+    seoScore: headlineScores.seo,
+    perfScore: headlineScores.performance,
+  }).catch(() => {});
 
   // Save lead with audit scores BEFORE returning response (single clean webhook POST)
   const leadSaved = await saveLeadToWebhook({

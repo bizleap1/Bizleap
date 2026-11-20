@@ -15,10 +15,6 @@ dist
 .env.test.local
 .env.production.local
 
-# lead data exports
-*.xlsx
-data/*.xlsx
-
 # logs
 npm-debug.log*
 yarn-debug.log*
