@@ -3,6 +3,7 @@ import { checkRateLimit, getClientIp } from "../../lib/seoAudit/rateLimit";
 import { runOnPageAudit } from "../../lib/seoAudit/onPageAnalyzer";
 import { runPageSpeedAudit } from "../../lib/seoAudit/lighthouseMapper";
 import { recordLeadInExcel } from "../../lib/seoAudit/excelStore";
+import { saveLeadToSupabase } from "../../lib/seoAudit/supabase";
 
 export const config = {
   api: {
@@ -185,6 +186,16 @@ export default async function handler(req, res) {
       status: "Manual Audit Required",
     });
 
+    saveLeadToSupabase({
+      name,
+      email,
+      phone,
+      website: finalUrl,
+      seoScore: null,
+      perfScore: null,
+      status: "Manual Audit Required",
+    }).catch(() => {});
+
     sendEmailNotification({
       name,
       email,
@@ -223,6 +234,16 @@ export default async function handler(req, res) {
       perfScore: null,
       status: "Manual Audit Required",
     });
+
+    saveLeadToSupabase({
+      name,
+      email,
+      phone,
+      website: finalUrl,
+      seoScore: null,
+      perfScore: null,
+      status: "Manual Audit Required",
+    }).catch(() => {});
 
     sendEmailNotification({
       name,
@@ -298,6 +319,17 @@ export default async function handler(req, res) {
     perfScore: headlineScores.performance,
     status: "Completed",
   });
+
+  // Save to Supabase database (if configured)
+  saveLeadToSupabase({
+    name,
+    email,
+    phone,
+    website: finalUrl,
+    seoScore: headlineScores.seo,
+    perfScore: headlineScores.performance,
+    status: "Completed",
+  }).catch(() => {});
 
   // Send email alert to bizleapinc@gmail.com
   sendEmailNotification({
