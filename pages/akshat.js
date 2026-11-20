@@ -10,6 +10,49 @@ import {
 
 export default function AkshatProfile() {
   const [activeTab, setActiveTab] = useState("all");
+  const [formStatus, setFormStatus] = useState("idle"); // 'idle' | 'submitting' | 'submitted'
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    goal: "",
+  });
+
+  const handleAkshatSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("submitting");
+
+    const payload = {
+      _subject: `🚀 New Growth Inquiry for Akshat: ${formData.name}`,
+      _captcha: "false",
+      _template: "table",
+      _replyto: formData.email,
+      "Lead Source": "Akshat Portfolio (bizleap.in/akshat)",
+      "Full Name": formData.name,
+      "Email Address": formData.email,
+      "Phone Number": formData.phone || "Not provided",
+      "Growth Goal": formData.goal,
+      "Submitted At (IST)": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+    };
+
+    try {
+      await fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      setFormStatus("submitted");
+      setFormData({ name: "", email: "", phone: "", goal: "" });
+      setTimeout(() => setFormStatus("idle"), 6000);
+    } catch (err) {
+      console.error(err);
+      setFormStatus("idle");
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   const stats = [
     { label: "Clients Delivered", value: "50+", icon: <Award className="w-5 h-5 text-brand-accent" /> },
@@ -392,24 +435,66 @@ export default function AkshatProfile() {
             </div>
 
             <motion.div {...fadeUp} className="bg-[#080808] p-10 md:p-14 rounded-[3rem] shadow-2xl border border-white/5 relative z-10 w-full overflow-hidden group text-white">
-              <form className="space-y-8">
+              <form onSubmit={handleAkshatSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Full Name</label>
-                    <input type="text" className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none" placeholder="Akshat Soni" />
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none"
+                      placeholder="Akshat Soni"
+                    />
                   </div>
                   <div className="space-y-3">
                     <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Email Address</label>
-                    <input type="email" className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none" placeholder="akshat@bizleap.in" />
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none"
+                      placeholder="akshat@bizleap.in"
+                    />
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Growth Goal</label>
-                  <textarea className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none h-40 resize-none" placeholder="Tell me about your business goals..."></textarea>
+                  <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Phone Number</label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none"
+                    placeholder="+91 9876543210"
+                  />
                 </div>
-                <button className="w-full py-5 bg-brand-accent text-black rounded-2xl font-bold hover:bg-white transition-all duration-300 shadow-xl flex items-center justify-center gap-3">
-                  Launch Growth <ArrowRight className="w-5 h-5" />
-                </button>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Growth Goal</label>
+                  <textarea
+                    required
+                    value={formData.goal}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, goal: e.target.value }))}
+                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent outline-none h-40 resize-none"
+                    placeholder="Tell me about your business goals..."
+                  ></textarea>
+                </div>
+
+                {formStatus === "submitted" ? (
+                  <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-center font-medium">
+                    ✓ Thank you! Your inquiry has been sent directly to our team. We'll get in touch shortly.
+                  </div>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={formStatus === "submitting"}
+                    className="w-full py-5 bg-brand-accent text-black rounded-2xl font-bold hover:bg-white transition-all duration-300 shadow-xl flex items-center justify-center gap-3 disabled:opacity-50"
+                  >
+                    {formStatus === "submitting" ? "Launching Growth..." : "Launch Growth"}{" "}
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                )}
               </form>
             </motion.div>
           </div>

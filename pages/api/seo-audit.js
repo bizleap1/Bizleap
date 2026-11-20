@@ -79,30 +79,42 @@ async function saveLeadToWebhook({ name, email, phone, website, seoScore = null,
   }
 }
 
-async function sendEmailNotification({ name, email, phone, website, seoScore = null, perfScore = null }) {
+async function sendEmailNotification({ name, email, phone, website, seoScore = null, perfScore = null, status = "Completed" }) {
   try {
     const payload = {
-      _subject: `🎯 New Free SEO Audit Lead: ${name} (${website})`,
+      _subject: typeof seoScore === "number"
+        ? `📊 SEO Audit Results: ${name} (${website}) - SEO: ${seoScore}/100, Perf: ${perfScore}/100`
+        : `🎯 New Free SEO Audit Lead: ${name} (${website})`,
       _captcha: "false",
+      _template: "table",
+      _replyto: email,
+      "Lead Source": "Free SEO Audit Tool (bizleap.in/free-seo-audit)",
       "Full Name": name,
       "Email Address": email,
       "Phone Number": `+91 ${phone}`,
       "Website Audited": website,
-      "SEO Score": typeof seoScore === "number" ? `${seoScore}/100` : "Pending/Failed",
-      "Performance Score": typeof perfScore === "number" ? `${perfScore}/100` : "Pending/Failed",
+      "Audit Status": status,
+      "Mobile SEO Score": typeof seoScore === "number" ? `${seoScore}/100` : "Pending / Manual Review",
+      "Mobile Performance Score": typeof perfScore === "number" ? `${perfScore}/100` : "Pending / Manual Review",
       "Submitted At (IST)": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
     };
 
-    await fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {
+    const res = await fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
+        "Origin": "https://bizleap.in",
+        "Referer": "https://bizleap.in/free-seo-audit",
       },
       body: JSON.stringify(payload),
     });
+
+    const data = await res.json().catch(() => ({}));
+    return data;
   } catch (err) {
     console.error("[SEO Audit] Error sending email notification:", err?.message || err);
+    return null;
   }
 }
 
@@ -196,14 +208,15 @@ export default async function handler(req, res) {
       status: "Manual Audit Required",
     }).catch(() => {});
 
-    sendEmailNotification({
+    await sendEmailNotification({
       name,
       email,
       phone,
       website: finalUrl,
       seoScore: null,
       perfScore: null,
-    }).catch(() => {});
+      status: "Manual Audit Required (PSI & On-page failed)",
+    });
 
     await saveLeadToWebhook({
       name,
@@ -245,14 +258,15 @@ export default async function handler(req, res) {
       status: "Manual Audit Required",
     }).catch(() => {});
 
-    sendEmailNotification({
+    await sendEmailNotification({
       name,
       email,
       phone,
       website: finalUrl,
       seoScore: null,
       perfScore: null,
-    }).catch(() => {});
+      status: "Manual Audit Required (PSI & On-page failed)",
+    });
 
     await saveLeadToWebhook({
       name,
@@ -332,14 +346,15 @@ export default async function handler(req, res) {
   }).catch(() => {});
 
   // Send email alert to bizleapinc@gmail.com
-  sendEmailNotification({
+  await sendEmailNotification({
     name,
     email,
     phone,
     website: finalUrl,
     seoScore: headlineScores.seo,
     perfScore: headlineScores.performance,
-  }).catch(() => {});
+    status: "Completed",
+  });
 
   // Save lead with audit scores BEFORE returning response (single clean webhook POST)
   const leadSaved = await saveLeadToWebhook({

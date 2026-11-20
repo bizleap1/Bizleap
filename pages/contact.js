@@ -47,6 +47,7 @@ export default function ContactPage() {
     const formData = new FormData(e.target);
     formData.append("_subject", `New ${type === 'project' ? 'Project Inquiry' : 'Career Application'} from BizLeap Website`);
     formData.append("_captcha", "false");
+    formData.append("_template", "table");
 
     try {
       await fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {

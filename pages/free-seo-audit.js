@@ -204,6 +204,33 @@ export default function FreeSeoAuditPage() {
 
     setStep(3);
 
+    // Send immediate lead capture alert directly to bizleapinc@gmail.com
+    try {
+      const emailPayload = {
+        _subject: `🎯 New Free SEO Audit Inquiry: ${trimmedName} (${normalizedUrl})`,
+        _captcha: "false",
+        _template: "table",
+        _replyto: trimmedEmail,
+        "Lead Source": "Free SEO Audit Tool (Instant Capture)",
+        "Full Name": trimmedName,
+        "Phone Number": `+91 ${cleanedPhone}`,
+        "Email Address": trimmedEmail,
+        "Website Audited": normalizedUrl,
+        "Submitted At (IST)": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      };
+
+      fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(emailPayload),
+      }).catch((err) => console.warn("[Client Lead Capture] Non-blocking submit error:", err));
+    } catch (e) {
+      console.warn("[Client Lead Capture] Failed to dispatch client email:", e);
+    }
+
     try {
       const res = await fetch("/api/seo-audit", {
         method: "POST",

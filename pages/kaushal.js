@@ -12,6 +12,50 @@ import {
 
 export default function KaushalProfile() {
   const [activeTab, setActiveTab] = useState("all");
+  const [formStatus, setFormStatus] = useState("idle"); // 'idle' | 'submitting' | 'submitted'
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    inquiry: "",
+  });
+
+  const handleKaushalSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("submitting");
+
+    const payload = {
+      _subject: `💼 New Project Inquiry for Kaushal: ${formData.firstName} ${formData.lastName}`.trim(),
+      _captcha: "false",
+      _template: "table",
+      _replyto: formData.email,
+      "Lead Source": "Kaushal Portfolio (bizleap.in/kaushal)",
+      "Full Name": `${formData.firstName} ${formData.lastName}`.trim(),
+      "Email Address": formData.email,
+      "Phone Number": formData.phone || "Not provided",
+      "Project Inquiry": formData.inquiry,
+      "Submitted At (IST)": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+    };
+
+    try {
+      await fetch("https://formsubmit.co/ajax/bizleapinc@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      setFormStatus("submitted");
+      setFormData({ firstName: "", lastName: "", email: "", phone: "", inquiry: "" });
+      setTimeout(() => setFormStatus("idle"), 6000);
+    } catch (err) {
+      console.error(err);
+      setFormStatus("idle");
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   const stats = [
     { label: "Years of Excellence", value: "6+", icon: <Award className="w-5 h-5 text-brand-accent" /> },
@@ -680,24 +724,78 @@ export default function KaushalProfile() {
 
             <motion.div {...fadeUp} className="bg-[#080808] p-10 md:p-14 rounded-[3rem] shadow-2xl border border-white/5 relative z-10 w-full overflow-hidden group">
               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none transition-opacity opacity-50 group-hover:opacity-100 duration-1000" />
-              <form className="space-y-8 relative z-10">
+              <form onSubmit={handleKaushalSubmit} className="space-y-8 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">First Name</label>
-                    <input type="text" className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white font-medium" placeholder="John" />
+                    <input
+                      type="text"
+                      required
+                      value={formData.firstName}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, firstName: e.target.value }))}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white font-medium"
+                      placeholder="John"
+                    />
                   </div>
                   <div className="space-y-3">
                     <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Last Name</label>
-                    <input type="text" className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white font-medium" placeholder="Doe" />
+                    <input
+                      type="text"
+                      value={formData.lastName}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, lastName: e.target.value }))}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white font-medium"
+                      placeholder="Doe"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Email Address</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white font-medium"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Phone Number</label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                      className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white font-medium"
+                      placeholder="+91 9876543210"
+                    />
                   </div>
                 </div>
                 <div className="space-y-3">
                   <label className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] ml-2">Project Inquiry</label>
-                  <textarea className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white h-40 resize-none font-medium" placeholder="Tell me about your vision..."></textarea>
+                  <textarea
+                    required
+                    value={formData.inquiry}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, inquiry: e.target.value }))}
+                    className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl focus:border-brand-accent focus:bg-white/10 outline-none transition-all text-white h-40 resize-none font-medium"
+                    placeholder="Tell me about your vision..."
+                  ></textarea>
                 </div>
-                <button className="w-full py-5 bg-brand-accent text-black rounded-2xl font-bold hover:bg-white hover:scale-[1.02] transition-all duration-300 shadow-[0_10px_30px_rgba(234,179,8,0.2)] flex items-center justify-center gap-3">
-                  Submit Inquiry <ArrowRight className="w-5 h-5" />
-                </button>
+
+                {formStatus === "submitted" ? (
+                  <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-center font-medium">
+                    ✓ Thank you! Your inquiry has been sent directly to our team. We'll get in touch shortly.
+                  </div>
+                ) : (
+                  <button
+                    type="submit"
+                    disabled={formStatus === "submitting"}
+                    className="w-full py-5 bg-brand-accent text-black rounded-2xl font-bold hover:bg-white hover:scale-[1.02] transition-all duration-300 shadow-[0_10px_30px_rgba(234,179,8,0.2)] flex items-center justify-center gap-3 disabled:opacity-50"
+                  >
+                    {formStatus === "submitting" ? "Sending Inquiry..." : "Submit Inquiry"}{" "}
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                )}
               </form>
             </motion.div>
           </div>
