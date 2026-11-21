@@ -370,57 +370,67 @@ export default function AIServicesPage() {
           </div>
           
           {/* Bottom Bar: AI Capabilities */}
-          <div className="max-w-7xl mx-auto mt-16 border-t border-b border-gray-800/80 py-6 relative z-10 bg-black/40 backdrop-blur-sm">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-              <div className="text-xs font-bold text-yellow-500 tracking-[0.2em] uppercase shrink-0">AI Capabilities</div>
-              
-              <div className="flex flex-wrap justify-center md:justify-between items-center gap-6 md:gap-8 w-full md:w-auto flex-1 md:pl-12">
-                 {/* Item 1 */}
-                 <div className="flex items-center gap-4">
-                   <div className="p-3 bg-yellow-500/10 rounded-xl">
-                     <FiSettings className="w-6 h-6 text-yellow-500" />
-                   </div>
-                   <div>
-                     <div className="font-semibold text-sm text-white">AI Automation</div>
-                     <div className="text-xs text-gray-500">Reduce effort. Increase speed.</div>
-                   </div>
-                 </div>
-                 <div className="hidden lg:block w-[1px] h-10 bg-gray-800"></div>
+          <div className="max-w-7xl mx-auto mt-16 border-t border-b border-gray-800/80 py-5 sm:py-6 relative z-10 bg-black/40 backdrop-blur-sm">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 px-4 sm:px-6">
+              <div className="flex items-center gap-2.5 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
+                <span className="text-xs font-bold text-yellow-500 tracking-[0.2em] uppercase font-sans">
+                  AI Capabilities
+                </span>
+              </div>
 
-                 {/* Item 2 */}
-                 <div className="flex items-center gap-4">
-                   <div className="p-3 bg-yellow-500/10 rounded-xl">
-                     <FiCpu className="w-6 h-6 text-yellow-500" />
-                   </div>
-                   <div>
-                     <div className="font-semibold text-sm text-white">AI Agents</div>
-                     <div className="text-xs text-gray-500">Your 24/7 digital workforce.</div>
-                   </div>
-                 </div>
-                 <div className="hidden lg:block w-[1px] h-10 bg-gray-800"></div>
+              <div className="hidden lg:block w-px h-8 bg-gray-800/80 shrink-0" />
 
-                 {/* Item 3 */}
-                 <div className="flex items-center gap-4">
-                   <div className="p-3 bg-yellow-500/10 rounded-xl">
-                     <FiBarChart2 className="w-6 h-6 text-yellow-500" />
-                   </div>
-                   <div>
-                     <div className="font-semibold text-sm text-white">Analytics</div>
-                     <div className="text-xs text-gray-500">Smarter data. Better decisions.</div>
-                   </div>
-                 </div>
-                 <div className="hidden lg:block w-[1px] h-10 bg-gray-800"></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:items-center lg:justify-between w-full flex-1 gap-5 lg:gap-4 xl:gap-6">
+                {/* Item 1 */}
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 sm:p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-xl shrink-0">
+                    <FiSettings className="w-5 h-5 text-yellow-500" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-xs sm:text-sm text-white whitespace-nowrap">AI Automation</div>
+                    <div className="text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Reduce effort. Increase speed.</div>
+                  </div>
+                </div>
 
-                 {/* Item 4 */}
-                 <div className="flex items-center gap-4">
-                   <div className="p-3 bg-yellow-500/10 rounded-xl">
-                     <FiZap className="w-6 h-6 text-yellow-500" />
-                   </div>
-                   <div>
-                     <div className="font-semibold text-sm text-white">Integration</div>
-                     <div className="text-xs text-gray-500">Seamless. Scalable. Future-ready.</div>
-                   </div>
-                 </div>
+                <div className="hidden lg:block w-px h-8 bg-gray-800/80 shrink-0" />
+
+                {/* Item 2 */}
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 sm:p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-xl shrink-0">
+                    <FiCpu className="w-5 h-5 text-yellow-500" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-xs sm:text-sm text-white whitespace-nowrap">AI Agents</div>
+                    <div className="text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Your 24/7 digital workforce.</div>
+                  </div>
+                </div>
+
+                <div className="hidden lg:block w-px h-8 bg-gray-800/80 shrink-0" />
+
+                {/* Item 3 */}
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 sm:p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-xl shrink-0">
+                    <FiBarChart2 className="w-5 h-5 text-yellow-500" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-xs sm:text-sm text-white whitespace-nowrap">Analytics</div>
+                    <div className="text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Smarter data. Better decisions.</div>
+                  </div>
+                </div>
+
+                <div className="hidden lg:block w-px h-8 bg-gray-800/80 shrink-0" />
+
+                {/* Item 4 */}
+                <div className="flex items-center gap-3.5">
+                  <div className="p-2.5 sm:p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-xl shrink-0">
+                    <FiZap className="w-5 h-5 text-yellow-500" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-xs sm:text-sm text-white whitespace-nowrap">Integration</div>
+                    <div className="text-[11px] sm:text-xs text-gray-400 whitespace-nowrap">Seamless. Scalable. Future-ready.</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
