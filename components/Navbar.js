@@ -34,16 +34,6 @@ export default function Navbar({ topOffset = false }) {
     { name: "Social Media Marketing", href: "/socialmedia" },
     { name: "SEO & Website Audits", href: "/seowebsite" },
     { name: "AI Services", href: "/aiservices" },
-    { 
-      name: "Staffing Services", 
-      href: "/staffing",
-      subItems: [
-        { name: "Contract Staffing", href: "/contract-staffing" },
-        { name: "Permanent Placement", href: "/permanent-placement" },
-        { name: "Contract To Hire", href: "/contract-to-hire" },
-        { name: "Remote Staffing", href: "/remote-staffing" },
-      ]
-    },
   ]
 
   const teamSubmenu = [
