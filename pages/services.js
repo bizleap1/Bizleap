@@ -289,13 +289,18 @@ export default function ServicesSection() {
             />
           </div>
 
-          <div className="pt-[140px] md:pt-[190px] pb-[70px] md:pb-[120px] max-w-[1360px] mx-auto px-5 md:px-[60px] lg:px-[72px] relative z-10 w-full">
+          <div className="pt-28 sm:pt-36 md:pt-[180px] pb-10 sm:pb-16 md:pb-[110px] max-w-[1360px] mx-auto px-4 sm:px-6 md:px-[60px] lg:px-[72px] relative z-10 w-full">
             <div className="flex flex-col justify-start relative">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-[#FFC000] text-xs font-semibold uppercase tracking-wider mb-4 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFC000] animate-pulse" />
+                Our Services
+              </div>
+
               <motion.h1
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className={`text-[44px] md:text-[72px] lg:text-[84px] font-bold leading-[1.05] tracking-tight text-white max-w-[900px] ${playfair.className}`}
+                className={`text-3xl sm:text-5xl md:text-[68px] lg:text-[80px] font-bold leading-[1.12] md:leading-[1.05] tracking-tight text-white max-w-[900px] ${playfair.className}`}
               >
                 Everything you need<br className="hidden md:block" /> to{" "}
                 <span className="text-[#FFC000] italic font-medium">scale.</span>
@@ -305,9 +310,9 @@ export default function ServicesSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="mt-6 md:mt-8 max-w-xl"
+                className="mt-4 sm:mt-6 md:mt-8 max-w-xl"
               >
-                <p className="text-base md:text-lg text-[#999] font-normal leading-relaxed">
+                <p className="text-sm sm:text-base md:text-lg text-[#999] font-normal leading-relaxed">
                   Engineered for performance and designed for conversion. We provide the complete stack for your digital presence.
                 </p>
               </motion.div>
@@ -316,9 +321,9 @@ export default function ServicesSection() {
         </section>
 
         {/* ====================================================
-            MAIN SERVICES (Exact Alternating Layout Matching Screenshots)
+            MAIN SERVICES (Mobile Optimized + Desktop Alternating)
             ==================================================== */}
-        <div className="max-w-[1360px] mx-auto px-5 md:px-[60px] lg:px-[72px]">
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-6 md:px-[60px] lg:px-[72px]">
           {SERVICES.map((service, index) => {
             const isReversed = index % 2 !== 0;
 
@@ -326,12 +331,12 @@ export default function ServicesSection() {
               <section
                 id={`service-${index}`}
                 key={service.name}
-                className="py-16 md:py-24 border-t border-[#1a1a1a] flex flex-col justify-center scroll-mt-24"
+                className="py-10 sm:py-16 md:py-24 border-t border-[#1a1a1a] flex flex-col justify-center scroll-mt-24"
               >
                 <div
                   className={`flex flex-col ${
                     isReversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                  } items-center justify-between gap-10 lg:gap-16`}
+                  } items-center justify-between gap-6 sm:gap-10 lg:gap-16`}
                 >
                   {/* TEXT COLUMN */}
                   <div className="w-full lg:w-[46%] flex flex-col justify-center">
@@ -342,24 +347,38 @@ export default function ServicesSection() {
                       transition={{ duration: 0.5, ease: "easeOut" }}
                     >
                       {/* Eyebrow */}
-                      <span className="block text-xs md:text-[13px] font-bold uppercase tracking-[0.2em] text-[#FFC000] mb-3">
+                      <span className="block text-xs md:text-[13px] font-bold uppercase tracking-[0.2em] text-[#FFC000] mb-2 sm:mb-3">
                         {service.eyebrow}
                       </span>
 
-                      {/* Title: 2 Lines matching Bizleap brand typography */}
-                      <h2 className={`text-4xl sm:text-5xl lg:text-[50px] xl:text-[54px] font-bold leading-[1.08] mb-5 text-white tracking-tight ${playfair.className}`}>
+                      {/* Title */}
+                      <h2 className={`text-2xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] font-bold leading-[1.12] mb-3 sm:mb-5 text-white tracking-tight ${playfair.className}`}>
                         <span className="block">{service.titleLine1}</span>
                         <span className="block">{service.titleLine2}</span>
                       </h2>
 
                       {/* Description */}
-                      <p className="text-gray-300 text-sm md:text-base font-normal leading-relaxed max-w-lg mb-8">
+                      <p className="text-gray-300 text-sm sm:text-base font-normal leading-relaxed max-w-lg mb-5 sm:mb-8">
                         {service.description}
                       </p>
                     </motion.div>
 
-                    {/* Features list: Dividers between and below items */}
-                    <div className="w-full max-w-lg mb-8 md:mb-10">
+                    {/* MOBILE IMAGE PREVIEW (shows after description on mobile) */}
+                    <div className="block lg:hidden w-full mb-6">
+                      <div className="relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-[#111] shadow-2xl border border-white/10">
+                        <Image
+                          src={service.img}
+                          alt={service.name}
+                          fill
+                          className="object-cover"
+                          sizes="100vw"
+                          priority={index === 0}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Features list */}
+                    <div className="w-full max-w-lg mb-6 sm:mb-8 md:mb-10">
                       {service.features.map((feature, fIndex) => (
                         <motion.div
                           key={feature.name}
@@ -367,25 +386,25 @@ export default function ServicesSection() {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true, margin: "-50px" }}
                           transition={{ duration: 0.4, delay: fIndex * 0.05 }}
-                          className="py-4 md:py-4.5 flex items-center gap-4.5 border-b border-[#222226]"
+                          className="py-3 sm:py-4 flex items-center gap-3.5 sm:gap-4 border-b border-[#222226]"
                         >
-                          <div className="w-8 h-8 flex items-center justify-center shrink-0">
+                          <div className="w-8 h-8 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0">
                             <ServiceIcon type={feature.icon} />
                           </div>
-                          <span className="text-white text-sm md:text-base font-medium">
+                          <span className="text-white text-sm sm:text-base font-medium">
                             {feature.name}
                           </span>
                         </motion.div>
                       ))}
                     </div>
 
-                    {/* Action Button: Exact yellow rounded box "View details →" */}
+                    {/* Action Button */}
                     <div>
                       <Link
                         href={service.url}
                         target={service.url.startsWith("http") ? "_blank" : undefined}
                         rel={service.url.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-lg bg-[#FFC000] hover:bg-[#ffcd33] text-black font-semibold text-sm transition-all duration-300 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/25 hover:scale-[1.02] cursor-pointer"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#FFC000] hover:bg-[#ffcd33] active:scale-[0.98] text-black font-semibold text-sm transition-all duration-300 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/25 cursor-pointer text-center"
                       >
                         <span>View details</span>
                         <span className="text-base font-bold leading-none">→</span>
@@ -393,8 +412,8 @@ export default function ServicesSection() {
                     </div>
                   </div>
 
-                  {/* IMAGE COLUMN */}
-                  <div className="w-full lg:w-[54%] flex items-center justify-center">
+                  {/* DESKTOP IMAGE COLUMN (hidden on mobile, visible on lg) */}
+                  <div className="hidden lg:flex w-full lg:w-[54%] items-center justify-center">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.98 }}
                       whileInView={{ opacity: 1, scale: 1 }}
