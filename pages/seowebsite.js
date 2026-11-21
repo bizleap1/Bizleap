@@ -433,8 +433,36 @@ export default function SEOAuditsService() {
         />
       </Head>
       <main className="bg-black text-white min-h-screen">
+        {/* ========================================================= */}
+        {/* TOP FREE SEO AUDIT ANNOUNCEMENT BAR (BELOW NAVBAR)        */}
+        {/* ========================================================= */}
+        <div className="relative z-30 pt-16 sm:pt-20 bg-gradient-to-r from-[#0d0d0f] via-[#1a170b] to-[#0d0d0f] border-b border-[#FFC000]/25 shadow-md">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-2.5 flex flex-row items-center justify-between gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#FFC000] text-black text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-sm font-sans shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+                FREE AUDIT
+              </span>
+              <p className="font-sans text-[11px] sm:text-xs md:text-sm text-gray-200 font-medium truncate">
+                <span className="hidden sm:inline">Want to know where your website is losing traffic?</span>
+                <span className="sm:hidden">Losing website traffic?</span>
+                <span className="hidden md:inline text-gray-400 ml-1">Get a comprehensive 50+ page manual &amp; technical review.</span>
+              </p>
+            </div>
+
+            <Link
+              href="/free-seo-audit"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 sm:px-5 sm:py-2 bg-[#FFC000] hover:bg-[#ffcd2b] active:scale-[0.98] text-black font-bold text-[11px] sm:text-xs md:text-sm rounded-lg sm:rounded-md transition-all duration-300 shadow-md shadow-yellow-500/20 hover:shadow-yellow-500/35 shrink-0 font-sans whitespace-nowrap"
+            >
+              <span className="hidden sm:inline">Get Free SEO Audit</span>
+              <span className="sm:hidden">Get Audit</span>
+              <FiArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+            </Link>
+          </div>
+        </div>
+
         {/* Hero Section with Charcoal Backdrop and Cream Audit Report */}
-        <section className="relative pt-28 sm:pt-32 lg:pt-36 pb-16 sm:pb-20 px-6 sm:px-8 lg:px-16 overflow-hidden bg-black text-white">
+        <section className="relative pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 px-6 sm:px-8 lg:px-16 overflow-hidden bg-black text-white">
           {/* Full-bleed Background Image with Vertical Offset to Clear Navbar */}
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             <div className="relative w-full h-full translate-y-6 sm:translate-y-8 lg:translate-y-12">
