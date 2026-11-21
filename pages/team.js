@@ -182,8 +182,8 @@ const team = [
   {
     name: "Utkarsh Dahake",
     role: "DevOps Engineer",
-    image: "/team/utkarsh.png",
-    style: { objectPosition: "center 20%", transform: "scale(1.2)" },
+    image: "/team/utkarsh.jpg",
+    style: { objectPosition: "center 20%", transform: "scale(1.08)" },
     size: "h-48 w-48",
     linkedin: "https://www.linkedin.com/in/utkarsh-dahake-526a67323/",
   },

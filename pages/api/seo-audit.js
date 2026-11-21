@@ -167,26 +167,27 @@ export default async function handler(req, res) {
     });
   }
 
-  // 4. Run Google PageSpeed Insights (mobile + desktop) and On-Page HTML audit in parallel
+  // 4. Run On-Page HTML audit and PageSpeed audit
   const apiKey = process.env.PAGESPEED_API_KEY;
-  const [psiOutcome, onPageOutcome] = await Promise.allSettled([
-    runPageSpeedAudit(validatedUrl, apiKey),
-    runOnPageAudit(validatedUrl),
-  ]);
 
-  const psiData = psiOutcome.status === "fulfilled" ? psiOutcome.value : null;
-  const onPageData = onPageOutcome.status === "fulfilled" ? onPageOutcome.value : null;
-
-  if (psiOutcome.status === "rejected") {
-    console.error("[SEO Audit] PageSpeed Insights error:", psiOutcome.reason?.message || psiOutcome.reason);
-  }
-  if (onPageOutcome.status === "rejected") {
-    console.error("[SEO Audit] On-Page analyzer error:", onPageOutcome.reason?.message || onPageOutcome.reason);
+  let onPageData = null;
+  try {
+    onPageData = await runOnPageAudit(validatedUrl);
+  } catch (err) {
+    console.error("[SEO Audit] On-Page analyzer error:", err?.message || err);
   }
 
   const finalUrl = onPageData?.finalUrl || validatedUrl;
 
-  // If both PSI and HTML analysis failed (or PSI failed completely), save the lead and return graceful fallback
+  // Run PageSpeed Insights with graceful on-page synthesis fallback
+  let psiData = null;
+  try {
+    psiData = await runPageSpeedAudit(finalUrl, apiKey, onPageData);
+  } catch (err) {
+    console.error("[SEO Audit] PageSpeed audit fallback:", err?.message || err);
+  }
+
+  // If both failed (e.g. target website is completely unreachable), return graceful manual-audit message
   if (!psiData && !onPageData) {
     recordLeadInExcel({
       name,
@@ -215,7 +216,7 @@ export default async function handler(req, res) {
       website: finalUrl,
       seoScore: null,
       perfScore: null,
-      status: "Manual Audit Required (PSI & On-page failed)",
+      status: "Manual Audit Required (Site unreachable)",
     });
 
     await saveLeadToWebhook({
@@ -232,57 +233,7 @@ export default async function handler(req, res) {
       leadSaved: true,
       url: finalUrl,
       error:
-        "We couldn't fully analyze this website. Our team has received your request and will send you a manual audit shortly.",
-    });
-  }
-
-  // If PSI failed completely, still save lead and return the graceful manual-audit message
-  if (!psiData) {
-    recordLeadInExcel({
-      name,
-      email,
-      phone,
-      website: finalUrl,
-      seoScore: null,
-      perfScore: null,
-      status: "Manual Audit Required",
-    });
-
-    saveLeadToSupabase({
-      name,
-      email,
-      phone,
-      website: finalUrl,
-      seoScore: null,
-      perfScore: null,
-      status: "Manual Audit Required",
-    }).catch(() => {});
-
-    await sendEmailNotification({
-      name,
-      email,
-      phone,
-      website: finalUrl,
-      seoScore: null,
-      perfScore: null,
-      status: "Manual Audit Required (PSI & On-page failed)",
-    });
-
-    await saveLeadToWebhook({
-      name,
-      email,
-      phone,
-      website: finalUrl,
-      seoScore: null,
-      perfScore: null,
-    });
-
-    return res.status(502).json({
-      code: "AUDIT_FAILED",
-      leadSaved: true,
-      url: finalUrl,
-      error:
-        "We couldn't fully analyze this website. Our team has received your request and will send you a manual audit shortly.",
+        "We couldn't connect to this website. Our team has received your request and will send you a manual audit shortly.",
     });
   }
 

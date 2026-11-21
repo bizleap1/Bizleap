@@ -28,3 +28,6 @@ Thumbs.db
 
 demo-app/
 demo-app.zip
+
+# Lead storage (Excel)
+data/*.xlsx

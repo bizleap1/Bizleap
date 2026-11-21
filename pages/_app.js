@@ -14,11 +14,14 @@ const ANNOUNCEMENT_STORAGE_KEY = "bizleap_seo_bar_dismissed";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   variable: "--font-playfair",
 });
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-inter",
 });
 
@@ -79,7 +82,7 @@ export default function App({ Component, pageProps }) {
       <Head>
         {/* Primary SEO */}
         <title key="title">Bizleap - The best digital marketing company in Nagpur</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         <meta name="description" content="Driven by Design. Backed by Results. Bizleap creates thoughtful design and digital experiences that help businesses grow." key="description" />
 
         {/* International & Geographic Targeting (USA, UK, UAE) */}
@@ -128,10 +131,9 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* Layout */}
-      <AnnouncementBar
-        visible={showAnnouncement}
-        onDismiss={handleDismissAnnouncement}
-      />
+      {showAnnouncement && (
+        <AnnouncementBar visible={showAnnouncement} onDismiss={handleDismissAnnouncement} />
+      )}
       <Navbar topOffset={showAnnouncement} />
       <main className="min-h-screen">
         <Component {...pageProps} />
