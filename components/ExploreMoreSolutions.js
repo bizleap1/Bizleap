@@ -1,8 +1,7 @@
 'use client'
 
-import { useRef } from "react"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import { FiArrowRight } from "react-icons/fi"
 
 const SOLUTIONS = [
@@ -38,19 +37,14 @@ const SOLUTIONS = [
   },
 ]
 
-function ScrollReveal({ children, delay = 0 }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { margin: "0px 0px -150px 0px", once: true })
-
+function ScrollReveal({ children, delay = 0, className = "" }) {
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-      animate={
-        inView
-          ? { opacity: 1, y: 0, filter: "blur(0px)", transition: { delay, duration: 0.6 } }
-          : {}
-      }
+      className={className}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -20px 0px" }}
+      transition={{ delay, duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }}
     >
       {children}
     </motion.div>

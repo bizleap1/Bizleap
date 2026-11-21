@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import Head from "next/head"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import ExploreMoreSolutions from "../components/ExploreMoreSolutions"

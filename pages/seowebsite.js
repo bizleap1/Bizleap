@@ -1,12 +1,11 @@
 'use client'
 
-import { useRef } from "react"
 import Head from "next/head";
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import ExploreMoreSolutions from "../components/ExploreMoreSolutions"
-import { FiCheck, FiArrowRight, FiArrowUpRight, FiSearch, FiBarChart2, FiTrendingUp, FiGlobe, FiTool, FiTarget, FiZap, FiShield } from "react-icons/fi"
+import { FiArrowRight, FiArrowUpRight, FiSearch, FiBarChart2, FiTrendingUp, FiGlobe, FiTool, FiTarget, FiZap, FiShield } from "react-icons/fi"
 import { Playfair_Display, Inter } from "next/font/google"
 
 const playfair = Playfair_Display({
@@ -19,17 +18,6 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
 })
-
-// ------------------- Badge Component -------------------
-function Badge({ children, variant = "secondary", className = "" }) {
-  const base = "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 mr-2 mb-2"
-  const colors = {
-    default: "bg-white text-black border-transparent",
-    secondary: "bg-gray-700 text-white border-transparent",
-    outline: "border-gray-400 text-white bg-transparent",
-  }
-  return <span className={`${base} ${colors[variant]} ${className}`}>{children}</span>
-}
 
 // ------------------- InView Scroll Reveal -------------------
 function ScrollReveal({ children, delay = 0, className = "" }) {
@@ -427,7 +415,7 @@ export default function SEOAuditsService() {
           }}
         />
       </Head>
-      <main className="bg-black text-white min-h-screen">
+      <main className={`bg-black text-white min-h-screen ${inter.className}`}>
         {/* Hero Section with Charcoal Backdrop and Cream Audit Report */}
         <section className="relative min-h-[82vh] lg:min-h-[860px] flex items-center pt-32 lg:pt-36 pb-20 px-6 sm:px-8 lg:px-16 overflow-hidden bg-black text-white">
           {/* Full-bleed Background Image */}
@@ -600,9 +588,11 @@ export default function SEOAuditsService() {
 
                 {/* Checklist Graphic */}
                 <div className="w-full max-w-[270px] sm:max-w-[290px] mb-5">
-                  <img
+                  <Image
                     src="/service/Audit report checklist with magnifying glass-1.png"
                     alt="Audit report checklist illustration"
+                    width={290}
+                    height={200}
                     className="w-full h-auto select-none pointer-events-none drop-shadow-md"
                   />
                 </div>
@@ -635,9 +625,11 @@ export default function SEOAuditsService() {
                         {/* Top row: Icon + Number */}
                         <div className="flex items-center justify-between mb-4">
                           <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
-                            <img
+                            <Image
                               src={card.icon}
                               alt={card.title}
+                              width={40}
+                              height={40}
                               className="w-full h-full object-contain select-none"
                             />
                           </div>
