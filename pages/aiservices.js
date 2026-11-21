@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import Head from "next/head";
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Playfair_Display } from "next/font/google"
@@ -63,6 +63,27 @@ function ServiceCard({ icon: Icon, title, description, delay }) {
 }
 
 export default function AIServicesPage() {
+  const roadmapContainerRef = useRef(null)
+  const [roadmapScale, setRoadmapScale] = useState(1)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (roadmapContainerRef.current) {
+        const width = roadmapContainerRef.current.offsetWidth
+        if (width >= 1024) {
+          setRoadmapScale(Math.min(1, (width - 16) / 1380))
+        } else if (width >= 768) {
+          setRoadmapScale(Math.min(1, (width - 16) / 1380))
+        } else {
+          setRoadmapScale(0.82)
+        }
+      }
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const aiFeatures = [
     {
       icon: FiZap,
@@ -470,29 +491,51 @@ export default function AIServicesPage() {
               </div>
             </ScrollReveal>
 
+            {/* Mobile swipe hint */}
+            <div className="lg:hidden flex items-center justify-center gap-2 text-xs text-yellow-500/80 mb-2 font-sans">
+              <span>← Swipe to explore AI roadmap →</span>
+            </div>
+
             {/* Path visualization */}
-            <div className="relative w-full overflow-x-auto pb-20 pt-10 hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
-              <div className="w-[1540px] h-[520px] relative mt-10 mx-auto">
-                
-                {/* SVG Connecting Line */}
-                <svg className="absolute top-0 left-0 w-full h-full pointer-events-none" viewBox="0 0 1540 520" preserveAspectRatio="none">
-                  
-                  {/* Main Winding Path */}
-                  <path 
-                    d="M 0,300 L 120,300 C 180,300 200,410 280,410 C 350,410 370,190 440,190 C 510,190 540,320 660,320 C 740,320 780,320 840,320 C 910,320 940,190 1020,190 C 1090,190 1140,360 1240,360 C 1310,360 1380,300 1540,300"
-                    fill="none" 
-                    stroke="#EAB308" 
-                    strokeWidth="2.5" 
-                  />
+            <div 
+              ref={roadmapContainerRef}
+              className="relative w-full overflow-x-auto pb-14 pt-4 hide-scrollbar" 
+              style={{ scrollbarWidth: 'none' }}
+            >
+              <div 
+                className="relative mx-auto transition-all duration-300"
+                style={{
+                  width: `${1380 * roadmapScale}px`,
+                  height: `${520 * roadmapScale}px`,
+                  minWidth: `${1380 * roadmapScale}px`,
+                }}
+              >
+                <div 
+                  className="w-[1380px] h-[520px] absolute top-0 left-0"
+                  style={{
+                    transform: `scale(${roadmapScale})`,
+                    transformOrigin: 'top left',
+                  }}
+                >
+                  {/* SVG Connecting Line */}
+                  <svg className="absolute top-0 left-0 w-full h-full pointer-events-none" viewBox="0 0 1380 520" preserveAspectRatio="none">
+                    
+                    {/* Main Winding Path */}
+                    <path 
+                      d="M 0,300 L 120,300 C 180,300 200,400 270,400 C 340,400 360,200 420,200 C 480,200 500,320 600,320 C 700,320 720,320 770,320 C 820,320 840,200 890,200 C 960,200 1000,350 1090,350 C 1140,350 1200,300 1380,300"
+                      fill="none" 
+                      stroke="#EAB308" 
+                      strokeWidth="2.5" 
+                    />
                   
                   {/* Node Dots on Path */}
                   <circle cx="120" cy="300" r="3.5" fill="#EAB308" />
-                  <circle cx="280" cy="410" r="3.5" fill="#EAB308" />
-                  <circle cx="440" cy="190" r="3.5" fill="#EAB308" />
-                  <circle cx="660" cy="320" r="3.5" fill="#EAB308" />
-                  <circle cx="840" cy="320" r="3.5" fill="#EAB308" />
-                  <circle cx="1020" cy="190" r="3.5" fill="#EAB308" />
-                  <circle cx="1240" cy="360" r="3.5" fill="#EAB308" />
+                  <circle cx="270" cy="400" r="3.5" fill="#EAB308" />
+                  <circle cx="420" cy="200" r="3.5" fill="#EAB308" />
+                  <circle cx="600" cy="320" r="3.5" fill="#EAB308" />
+                  <circle cx="770" cy="320" r="3.5" fill="#EAB308" />
+                  <circle cx="890" cy="200" r="3.5" fill="#EAB308" />
+                  <circle cx="1090" cy="350" r="3.5" fill="#EAB308" />
                   <circle cx="40" cy="300" r="2.5" fill="#EAB308" />
                 </svg>
 
@@ -503,46 +546,46 @@ export default function AIServicesPage() {
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-1 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
                     <FiZap className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute bottom-[34px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                    <div className="text-[10px] text-gray-500 font-semibold tracking-[0.25em] uppercase mb-1">Content</div>
+                  <div className="absolute bottom-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap">
+                    <div className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-1">Content</div>
                   </div>
-                  <div className="absolute left-[38px] bottom-[10px] w-[220px]">
+                  <div className="absolute left-[36px] bottom-[10px] w-[220px]">
                     <h3 className="font-serif font-bold text-[17px] mb-1 text-white">Generative AI Integration</h3>
                     <p className="text-[11px] text-gray-400 leading-relaxed">Harness the power of LLMs like GPT-4 and Claude to automate content creation and support.</p>
                   </div>
                 </div>
 
                 {/* Node 2 */}
-                <div className="absolute" style={{ left: '280px', top: '410px' }}>
+                <div className="absolute" style={{ left: '270px', top: '400px' }}>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-2 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
                     <FiSettings className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute bottom-[34px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                    <div className="text-[10px] text-gray-500 font-semibold tracking-[0.25em] uppercase mb-1">Operations</div>
+                  <div className="absolute bottom-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap">
+                    <div className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-1">Operations</div>
                   </div>
-                  <div className="absolute left-[38px] top-[-12px] w-[220px]">
+                  <div className="absolute left-[36px] top-[-12px] w-[220px]">
                     <h3 className="font-serif font-bold text-[17px] mb-1 text-white">AI-Powered Automation</h3>
                     <p className="text-[11px] text-gray-400 leading-relaxed">Streamline your business operations with intelligent AI agents that learn and adapt.</p>
                   </div>
                 </div>
 
                 {/* Node 3 */}
-                <div className="absolute" style={{ left: '440px', top: '190px' }}>
-                  <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[2px] h-[55px] bg-yellow-500 z-10"></div>
-                  <div className="absolute left-1/2 bottom-[55px] -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-3 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
+                <div className="absolute" style={{ left: '420px', top: '200px' }}>
+                  <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[2px] h-[60px] bg-yellow-500 z-10"></div>
+                  <div className="absolute left-1/2 bottom-[60px] -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-3 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
                     <FiBarChart2 className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute bottom-[88px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                    <div className="text-[10px] text-gray-500 font-semibold tracking-[0.25em] uppercase mb-1">Data</div>
+                  <div className="absolute bottom-[92px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap">
+                    <div className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-1">Data</div>
                   </div>
-                  <div className="absolute left-[42px] bottom-[38px] w-[220px]">
+                  <div className="absolute left-[24px] bottom-[72px] w-[220px]">
                     <h3 className="font-serif font-bold text-[17px] mb-1 text-white">Predictive Analytics</h3>
                     <p className="text-[11px] text-gray-400 leading-relaxed">Turn your data into foresight. We build models that predict trends and customer behavior.</p>
                   </div>
                 </div>
 
                 {/* Center - Your Business */}
-                <div className="absolute group cursor-pointer" style={{ left: '660px', top: '320px' }}>
+                <div className="absolute group cursor-pointer" style={{ left: '600px', top: '320px' }}>
                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full border border-yellow-500/30 border-dashed flex items-center justify-center p-2 z-10 bg-[#050505] group-hover:scale-105 transition-all duration-500">
                      <div className="w-full h-full rounded-full border border-yellow-500/50 flex items-center justify-center p-1.5">
                        <div className="w-full h-full rounded-full bg-yellow-500 flex items-center justify-center text-center shadow-[0_0_30px_rgba(234,179,8,0.3)] group-hover:shadow-[0_0_60px_rgba(234,179,8,0.8)] transition-all duration-500">
@@ -553,51 +596,51 @@ export default function AIServicesPage() {
                 </div>
 
                 {/* Node 4 */}
-                <div className="absolute" style={{ left: '840px', top: '320px' }}>
+                <div className="absolute" style={{ left: '770px', top: '320px' }}>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-4 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
                     <FiSearch className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute bottom-[34px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                    <div className="text-[10px] text-gray-500 font-semibold tracking-[0.25em] uppercase mb-1">Custom</div>
+                  <div className="absolute bottom-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap">
+                    <div className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-1">Custom</div>
                   </div>
-                  <div className="absolute left-[38px] top-[-12px] w-[220px]">
+                  <div className="absolute left-[36px] top-[-12px] w-[220px]">
                     <h3 className="font-serif font-bold text-[17px] mb-1 text-white">Custom AI Solutions</h3>
                     <p className="text-[11px] text-gray-400 leading-relaxed">From fine-tuning specialized models to building custom neural networks, we tailor AI.</p>
                   </div>
                 </div>
 
                 {/* Node 5 */}
-                <div className="absolute" style={{ left: '1020px', top: '190px' }}>
-                  <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[2px] h-[55px] bg-yellow-500 z-10"></div>
-                  <div className="absolute left-1/2 bottom-[55px] -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-5 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
+                <div className="absolute" style={{ left: '890px', top: '200px' }}>
+                  <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[2px] h-[60px] bg-yellow-500 z-10"></div>
+                  <div className="absolute left-1/2 bottom-[60px] -translate-x-1/2 translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-5 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
                     <FiStar className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute bottom-[88px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                    <div className="text-[10px] text-gray-500 font-semibold tracking-[0.25em] uppercase mb-1">Growth</div>
+                  <div className="absolute bottom-[92px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap">
+                    <div className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-1">Growth</div>
                   </div>
-                  <div className="absolute left-[42px] bottom-[38px] w-[220px]">
+                  <div className="absolute left-[24px] bottom-[72px] w-[220px]">
                     <h3 className="font-serif font-bold text-[17px] mb-1 text-white">AI-Driven Marketing</h3>
                     <p className="text-[11px] text-gray-400 leading-relaxed">Optimize your campaigns with AI that identifies the best audience, timing, and messaging.</p>
                   </div>
                 </div>
 
                 {/* Node 6 */}
-                <div className="absolute" style={{ left: '1240px', top: '360px' }}>
+                <div className="absolute" style={{ left: '1090px', top: '350px' }}>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-2 border-yellow-500 bg-[#050505] flex items-center justify-center z-20 animate-node-glow glow-delay-6 hover:scale-110 hover:bg-yellow-500/20 transition-transform duration-300 cursor-pointer">
                     <FiCpu className="w-5 h-5 text-white" />
                   </div>
-                  <div className="absolute bottom-[34px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap pointer-events-none">
-                    <div className="text-[10px] text-gray-500 font-semibold tracking-[0.25em] uppercase mb-1">Vision</div>
+                  <div className="absolute bottom-[32px] left-1/2 -translate-x-1/2 flex flex-col items-center whitespace-nowrap">
+                    <div className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-1">Vision</div>
                   </div>
-                  <div className="absolute left-[38px] top-[-12px] w-[220px]">
+                  <div className="absolute left-[36px] top-[-12px] w-[210px]">
                     <h3 className="font-serif font-bold text-[17px] mb-1 text-white">Computer Vision</h3>
                     <p className="text-[11px] text-gray-400 leading-relaxed">Implement visual recognition systems for quality control, security, or enhanced UX.</p>
                   </div>
                 </div>
 
               </div>
-
             </div>
+          </div>
           </div>
         </section>
 
